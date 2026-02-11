@@ -1,0 +1,362 @@
+[
+  {
+    "event": "Penalized",
+    "tx_hash": "0x48481357543673aa23aa215de71759cb4705ee5e487c03aaad01dfa9a440ef7e",
+    "block_number": 8486283,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x61e7ef73bfa0162f67c76ab9c1ba750ad7f6d8a8c5053bacd6260bc223eb6224",
+    "block_timestamp": "2026-02-02T13:23:31.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x7889596697f417c093808f0e5799a85ed1b6c2935a2a0819010424e7beb79ffe",
+    "block_number": 8294291,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x8e65e6d818bdf84221797e0ca4bf9b8d0c523066871fc48d0abf29ad8b5ebf2e",
+    "block_timestamp": "2025-12-09T16:35:35.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x4264a14440b45d99116c08c1c9399100a50d10e663f5f0e4ca09064218ee1cf8",
+    "block_number": 8279396,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x4714410563fc1351de604d4c72af83d769b597be314c139fb6026fc16a21214f",
+    "block_timestamp": "2025-12-05T10:50:20.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x09fd738cd72872bdb3cef3dac3bb6ada2f0abce903b73067827c9d1c1af2d6e5",
+    "block_number": 8276830,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x12793a8313183a75dd529eaa8f5ccba31d0cbf6cac17b22f897e1b79cce0574f",
+    "block_timestamp": "2025-12-04T17:14:25.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xf6f363ea7260c282c46ba0e75e675037a9377a0ab66b106287b6cf37e98b5a09",
+    "block_number": 8124824,
+    "lp_address": "0x4202BAC9919C3412fc7C8BE4e678e26279386603",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x2bfc9ddd9abae6d469d9196f438df7f27b6485b2f2d502d6df63ac557de6f133",
+    "block_timestamp": "2025-10-21T22:40:07.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x47a8bdf77325ddb885e8f0dbd4e3aac2c844c4189b5559c89553e9bf11c1fa03",
+    "block_number": 8120585,
+    "lp_address": "0x4202BAC9919C3412fc7C8BE4e678e26279386603",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x5241e2ef6a892f1934e381b8b285a1e5117c916503a907a0f67e6ebced97e881",
+    "block_timestamp": "2025-10-20T16:55:12.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xdfbccef46508c96c7ce06ce5a0c7b4f9cb265873c6094b3a2da401a9b74429b8",
+    "block_number": 8087112,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x464b2cdc0d35f1f48aba5ff8b21ac88025301699e0f86a8c432348779c9c1348",
+    "block_timestamp": "2025-10-11T00:33:47.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xe92fe4a18895e4f27c53a5fb363b9692ce3aebc1266b596ee902c52c95a2cb9b",
+    "block_number": 8073072,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xf4881357aaf90b70519ef8df6b2c0f682db80254bb9625bc7461f18007bfdc8c",
+    "block_timestamp": "2025-10-06T22:54:54.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xbbd325d87aa77ec837e1a8bbfced8ad86f66576c813e38f1922757e473bfad2a",
+    "block_number": 8072367,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xa769559f34fd85fdcca370b579eaf1e3ef0d9d6fff06f9110efe56dcff3481d8",
+    "block_timestamp": "2025-10-06T18:00:56.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xd9d455dc7ec591640141a3e64e7aaae4eea77e670dd38576a056c7881b2ba29a",
+    "block_number": 8007357,
+    "lp_address": "0x4202BAC9919C3412fc7C8BE4e678e26279386603",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xd831d40fa7a5d67d0de7046fcebac36f7ec914da82deed6036b026edbc1f0926",
+    "block_timestamp": "2025-09-17T21:55:16.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x664992e784a0dd966e80366ce1a185cd78c2ebf96e8394711bccb889327f5e4b",
+    "block_number": 7785818,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x30e8240188e2fb77e9b43d01db676bab55b9d2d60d3c56360d927e3a916bf5d3",
+    "block_timestamp": "2025-07-17T03:04:50.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x1e6d2a8bf3d8a9efc20acb3500f598c9f8f30a4796dea1030aceb8dbe851dd50",
+    "block_number": 7687492,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x491a55ad699f95b1cd60c03febeaab885356683bad5a064be8ea602576cd8c9b",
+    "block_timestamp": "2025-06-19T18:49:00.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xdecf4faf2f475b58f7a7c68143e639d0f2571dcdf9e361b607f1beb0d022ba15",
+    "block_number": 7613262,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x5846448ad6be29f9dc20a5a7dba49cc6ea6d2429b806d8faaefc87732ad5c409",
+    "block_timestamp": "2025-05-29T19:46:13.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x030d111818bc76f83b553dd2fdb535963f9b39b04d5ad82aa0e610130e27e16a",
+    "block_number": 7605712,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xd5ecb5b141a744887f24d035de00d93b2452e96d75ab915d3c882a498a0ed9b1",
+    "block_timestamp": "2025-05-27T16:52:04.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x4e44ce2a91a9f9262d68784ffb4b375bed8c479632e1f6d554218ce874ad9f1b",
+    "block_number": 7602860,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xfd007c96159dbda11a6dfdf9ecbc70ff194b9c5c647a51ebfa0dc8016f051272",
+    "block_timestamp": "2025-05-26T21:33:58.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x5b7486e9bdc5b6e3a28e8ba8f78bfec3a63be7327ff739435c754a7a603ae60e",
+    "block_number": 7556232,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x3f3141248e3bfe288bd03bc38a63584df81955334d2ea842186232365a3b94ec",
+    "block_timestamp": "2025-05-13T22:43:15.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x40317993a8e6547356dd345a52a8258a0c54aa61319c8777c524b522253a599a",
+    "block_number": 7515520,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xbd7b9ae05fedb12b53eb502302bfe3714ce470c14bd01d17f078163a32c7b17c",
+    "block_timestamp": "2025-05-02T13:22:56.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xb62f173fd8dc4aee72744338c69e14123318e72bdec2c960381130dd357d8258",
+    "block_number": 7498352,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xe4ee97b172ab093a54cdef54e05851289a2433ebbde9d35ce3fde87cd6d7bde5",
+    "block_timestamp": "2025-04-27T19:58:34.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xbb30de4c803d6bf6143b533382881f2f2c0e3e314756b0da57cff52e623a4c3c",
+    "block_number": 7498342,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x4fdb278165e600b8e98f0680c5d8a9bf1bfb833a6d3965510ec4fdb30b9b2e92",
+    "block_timestamp": "2025-04-27T19:54:56.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x97b527f12edcb4ad38ddf35a4b8f08f8d5af95d0852d6a4dbd3bbd2a4c9be3d5",
+    "block_number": 7494519,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xc19784d0d52b1538dfbe51f8810e81422962858353577f3f08186df16748f18b",
+    "block_timestamp": "2025-04-26T18:49:29.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xf72299d27e5e254731e9c46702449d6f8db310b0d7bac8791e19bb6ceadc67a8",
+    "block_number": 7494510,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x5a4c205209743218160b799413c9d7864ff540229377fef02812759bb92a2256",
+    "block_timestamp": "2025-04-26T18:46:41.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xb1ac8d4ef0e9798e3423d261c61a485fabce4ff9ebda035186621d41ef6dc2a5",
+    "block_number": 7494459,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xdce44d735fa18326c7915415a0be12029b4b285027cf893d140ebeb32874f4a6",
+    "block_timestamp": "2025-04-26T18:26:09.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x9109a6347d2f3c636431d7cbb74f0b307f6644db65bc51765169ee4d9e01064c",
+    "block_number": 7494458,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x850f1cb61ae86c874f684660614cc6e4e106b9af55d6651a7c32a5e90b7e549a",
+    "block_timestamp": "2025-04-26T18:25:32.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x56b97bbfc8ba468deeffa8e92467ae0e38d995f981dfbeffa0479587608a3e5d",
+    "block_number": 7484200,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x35f3761f80346a3df7cac65ae2bec77a6296c3d3ed8dbf3bdd17b0dd2ee5ab0c",
+    "block_timestamp": "2025-04-23T22:58:36.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x8d21e62b0fbe8c6a5099d8c170c66b9cff28445beeb0d623410e490c87d4609a",
+    "block_number": 7447491,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x66308ec8080f7e1d9eae690171b621e77e6cabef0cd1cac6f93d52c06e3694cb",
+    "block_timestamp": "2025-04-13T21:34:50.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x7393ee6cf69b2767dbdf7b2a97612637eddb0be54965fd7189115f4ce61482a6",
+    "block_number": 7415410,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x26e8d7cdfe5ad3ef6a22653374fb124b4212c2ea6cc38fa791fb47edf0bb961c",
+    "block_timestamp": "2025-04-04T22:01:41.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xc7604e4f286efbb89b9c443853f9ea5e0b5dad6fde904055ab9c5dc59a57a9d9",
+    "block_number": 7396955,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x20f4173e265a9c32473e9070ea8841d6d1021cd56f56252a3e7baa7f42fce1e3",
+    "block_timestamp": "2025-03-30T16:13:55.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xcf666773c23cca06fc44c8c692a8299cab751a858998bb59aa05a9c5730aa4d9",
+    "block_number": 7359212,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x92077af463ca0e29072d860b741d9aa9bd234602d7cc9d2fad3a3cd16087150b",
+    "block_timestamp": "2025-03-19T20:59:35.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x6cab78233c12ded787bcc510126da5857eb19595fc4d6d57bdb5b8555a068173",
+    "block_number": 7359211,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x9c52277fca9d06ba21b9d04a2dd11ae0dd293e97d7976b15d00dc4d664706064",
+    "block_timestamp": "2025-03-19T20:58:41.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x93864b87cfc4b8411f867c6f268c232dce18225ea5b9f4f9ef4e4db76ce4869a",
+    "block_number": 7359052,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x57aa6bf1df65cf10fabb137fdbb8c9e8d960d3082a8801d8b73853af9181f1a9",
+    "block_timestamp": "2025-03-19T19:46:16.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xbd9d182396ff4277682c5454cff8250fb1d2dbe80ec57aa6285b04d1652ba4e9",
+    "block_number": 7359051,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xc1a5427d359cd40a818666b82d60622b650ef52cc70068612522713c2f359f55",
+    "block_timestamp": "2025-03-19T19:46:11.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x01aa44c510929847b5ce0c93d53f791f4aafbe94f3ed067a5a58239a523d26fd",
+    "block_number": 7351521,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x656d4c1b1020bcf7e1d15d683c5acfbadb221144c6938a83b66c448b6685e519",
+    "block_timestamp": "2025-03-17T15:00:14.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x021ce76d3455f70ee63b92d3f57186d584b42d056dca5667fbdc4c4092587bdd",
+    "block_number": 7338459,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xbb5f20f854f90803eb9078429ffd7e2935278323860a5edacad7467f84487e5d",
+    "block_timestamp": "2025-03-13T19:29:33.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xd62b3815835ae390fb3dc9002fbd128e4e798252a6b90ec16812d100a508c06b",
+    "block_number": 7282903,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x9f3f9d6ea703ae562fe35eaf8f4710a038578a31071563ee5532dfa6f47c9fd4",
+    "block_timestamp": "2025-02-25T20:07:15.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0x102c7c738e19ec3ef7d5d0a32621b1da313d2914e311256ce76f7b28c560a682",
+    "block_number": 7265198,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0xbf1e5c762ca88281c17e0dced03985b21c6382e7fb54d15780e51b78ce8cea6b",
+    "block_timestamp": "2025-02-20T22:01:17.000000Z"
+  },
+  {
+    "event": "Penalized",
+    "tx_hash": "0xcf839dd664038548289bc57c3d6194281cd5e834e51063d169d34ae5ac04c880",
+    "block_number": 7265197,
+    "lp_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "penalty_wei": "10000000000000",
+    "penalty_rbtc": 1e-05,
+    "quote_hash": "0x93c4a15bf43f7413a947c10e0c54fa70da7bc7ec447941362b82a2698d704cb0",
+    "block_timestamp": "2025-02-20T22:01:06.000000Z"
+  }
+]
