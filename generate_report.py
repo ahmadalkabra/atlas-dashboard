@@ -229,60 +229,90 @@ def generate_html(data: dict) -> str:
   .period-nav button:hover {{ color: var(--text); background: rgba(255,255,255,0.04); }}
   .period-nav button.active {{ background: var(--text); color: #000; font-weight: 600; }}
 
-  /* --- KPI Row --- */
-  .kpi-row {{
+  /* --- Operation Summary --- */
+  .op-summary {{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-bottom: 28px;
   }}
-  .kpi-card {{
+  .op-card {{
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 18px;
     transition: border-color 0.15s;
+    border-top: 3px solid var(--border);
   }}
-  .kpi-card:hover {{ border-color: var(--border-hover); }}
-  .kpi-label {{
-    color: var(--muted);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-bottom: 8px;
-    font-weight: 500;
-  }}
-  .kpi-value {{
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-  }}
-  .kpi-sub {{
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }}
-  .kpi-delta {{
+  .op-card:hover {{ border-color: var(--border-hover); }}
+  .op-card-name {{
     font-size: 12px;
     font-weight: 600;
-    padding: 2px 6px;
-    border-radius: 4px;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
   }}
-  .kpi-delta.up {{ color: var(--green); background: rgba(34,197,94,0.12); }}
-  .kpi-delta.down {{ color: var(--red); background: rgba(239,68,68,0.12); }}
-  .kpi-delta.neutral {{ color: var(--muted); background: rgba(115,115,115,0.12); }}
-  .kpi-card.net-positive .kpi-value {{ color: var(--green); }}
-  .kpi-card.net-negative .kpi-value {{ color: var(--red); }}
+  .op-card-metrics {{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }}
+  .op-metric-label {{
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }}
+  .op-metric-value {{
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }}
+  .op-metric-delta {{
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 4px;
+  }}
+  .op-metric-delta.up {{ color: var(--green); }}
+  .op-metric-delta.down {{ color: var(--red); }}
+  .op-metric-delta.neutral {{ color: var(--muted); }}
+  .op-totals {{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }}
+  .op-total-card {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }}
+  .op-total-label {{
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
+  }}
+  .op-total-value {{
+    font-size: 18px;
+    font-weight: 700;
+  }}
 
   /* --- Chart Panels --- */
   .chart-section {{ margin-bottom: 20px; }}
   .chart-grid {{
     display: grid;
     grid-template-columns: 3fr 2fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }}
+  .chart-grid-2col {{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
     margin-bottom: 20px;
   }}
@@ -326,6 +356,13 @@ def generate_html(data: dict) -> str:
 
   /* --- Table --- */
   .table-section {{ margin-bottom: 28px; }}
+  .table-header {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }}
+  .table-header .section-title {{ margin-bottom: 0; }}
   .section-title {{
     font-size: 13px;
     font-weight: 600;
@@ -356,6 +393,19 @@ def generate_html(data: dict) -> str:
   }}
   th:first-child, td:first-child {{ text-align: left; }}
   tbody tr:hover td {{ background: rgba(255,255,255,0.02); }}
+  .th-group {{
+    text-align: center !important;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    border-bottom: 2px solid var(--border);
+  }}
+  .totals-row td {{
+    font-weight: 700;
+    border-top: 2px solid var(--border);
+    border-bottom: none;
+  }}
   .th-dot {{
     display: inline-block;
     width: 8px;
@@ -364,35 +414,6 @@ def generate_html(data: dict) -> str:
     margin-right: 4px;
     vertical-align: middle;
   }}
-  .badge {{
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-  }}
-  .badge.fo-pegin {{ background: var(--flyover-pegin); color: #000; }}
-  .badge.fo-pegout {{ background: var(--flyover-pegout); color: #000; }}
-  .badge.pp-pegin {{ background: var(--powpeg-pegin); color: #fff; }}
-  .badge.pp-pegout {{ background: var(--powpeg-pegout); color: #000; }}
-  .tx-link {{ color: var(--purple); text-decoration: none; font-weight: 500; }}
-  .tx-link:hover {{ text-decoration: underline; }}
-  .expand-btn {{
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 12px;
-    font-family: inherit;
-    padding: 3px 10px;
-    border-radius: 4px;
-    transition: all 0.15s;
-  }}
-  .expand-btn:hover {{ border-color: var(--purple); color: var(--purple); }}
-  .detail-row {{ display: none; }}
-  .detail-row.open {{ display: table-row; }}
-  .detail-row td {{ background: rgba(0,0,0,0.25) !important; padding: 6px 12px; font-size: 12px; }}
   .page-controls {{
     display: flex;
     align-items: center;
@@ -467,13 +488,17 @@ def generate_html(data: dict) -> str:
   /* --- Responsive --- */
   @media (max-width: 1024px) {{
     .chart-grid {{ grid-template-columns: 1fr; }}
+    .chart-grid-2col {{ grid-template-columns: 1fr; }}
+    .op-summary {{ grid-template-columns: repeat(2, 1fr); }}
+    .op-totals {{ grid-template-columns: repeat(2, 1fr); }}
   }}
   @media (max-width: 768px) {{
-    .kpi-row {{ grid-template-columns: 1fr; }}
     .lp-stats {{ grid-template-columns: repeat(2, 1fr); }}
     header {{ flex-direction: column; align-items: flex-start; }}
   }}
   @media (max-width: 480px) {{
+    .op-summary {{ grid-template-columns: 1fr; }}
+    .op-totals {{ grid-template-columns: 1fr; }}
     .lp-stats {{ grid-template-columns: 1fr; }}
     .dashboard {{ padding: 16px 12px; }}
   }}
@@ -495,10 +520,10 @@ def generate_html(data: dict) -> str:
     </nav>
   </header>
 
-  <section class="kpi-row" id="hero-kpis"></section>
+  <section id="op-summary" class="op-summary"></section>
 
   <section class="chart-section">
-    <div class="chart-panel">
+    <div class="chart-panel" style="margin-bottom:20px">
       <div class="chart-panel-header">
         <div class="chart-panel-title">Volume Over Time</div>
         <div class="chart-toggle" id="vol-chart-toggle">
@@ -508,27 +533,28 @@ def generate_html(data: dict) -> str:
       </div>
       <div id="chart-volume-trend"></div>
     </div>
-  </section>
-
-  <section class="chart-grid">
-    <div class="chart-panel">
-      <div class="chart-panel-header">
-        <div class="chart-panel-title">Transactions</div>
+    <div class="chart-grid-2col">
+      <div class="chart-panel">
+        <div class="chart-panel-header">
+          <div class="chart-panel-title">Volume Share</div>
+        </div>
+        <div id="chart-donut"></div>
       </div>
-      <div id="chart-count"></div>
-    </div>
-    <div class="chart-panel">
-      <div class="chart-panel-header">
-        <div class="chart-panel-title">Volume Share</div>
+      <div class="chart-panel">
+        <div class="chart-panel-header">
+          <div class="chart-panel-title">Transaction Share</div>
+        </div>
+        <div id="chart-tx-donut"></div>
       </div>
-      <div id="chart-donut"></div>
     </div>
   </section>
 
   <section class="lp-section" id="lp-section-wrapper"></section>
 
   <section class="table-section">
-    <div class="section-title">Breakdown</div>
+    <div class="table-header">
+      <div class="section-title">Breakdown</div>
+    </div>
     <div class="table-panel">
       <div id="data-table"></div>
       <div id="table-pagination" class="page-controls"></div>
@@ -598,6 +624,12 @@ function fmtCompact(n) {{
   return n.toFixed(6);
 }}
 
+function fmtRBTC(n) {{
+  if (Math.abs(n) >= 100) return n.toFixed(1);
+  if (Math.abs(n) >= 1) return n.toFixed(2);
+  return n.toFixed(4);
+}}
+
 function shortHash(h) {{
   if (!h) return '';
   return h.slice(0, 10) + '...' + h.slice(-6);
@@ -621,52 +653,59 @@ function getLatestTwo(events, period) {{
   }};
 }}
 
-function deltaHTML(current, previous) {{
-  if (previous === 0 && current === 0) return '<span class="kpi-delta neutral">-</span>';
-  if (previous === 0) return '<span class="kpi-delta up">&uarr; new</span>';
-  const pct = ((current - previous) / Math.abs(previous) * 100).toFixed(0);
-  if (current > previous) return `<span class="kpi-delta up">&uarr; ${{Math.abs(pct)}}%</span>`;
-  if (current < previous) return `<span class="kpi-delta down">&darr; ${{Math.abs(pct)}}%</span>`;
-  return '<span class="kpi-delta neutral">&ndash; 0%</span>';
-}}
-
 // ─── Render ───
 
-function renderHeroKPIs() {{
-  const fp = DATA.flyover_pegins, fo = DATA.flyover_pegouts;
-  const pp = DATA.powpeg_pegins, po = DATA.powpeg_pegouts;
-  const allEvents = [...fp, ...fo, ...pp, ...po];
-  const latest = getLatestTwo(allEvents, currentPeriod);
+function deltaText(current, previous) {{
+  if (previous === 0 && current === 0) return '<span class="op-metric-delta neutral">&ndash;</span>';
+  if (previous === 0) return '<span class="op-metric-delta up">&uarr; new</span>';
+  const pct = ((current - previous) / Math.abs(previous) * 100).toFixed(0);
+  if (current > previous) return `<span class="op-metric-delta up">&uarr; ${{Math.abs(pct)}}%</span>`;
+  if (current < previous) return `<span class="op-metric-delta down">&darr; ${{Math.abs(pct)}}%</span>`;
+  return '<span class="op-metric-delta neutral">&ndash; 0%</span>';
+}}
 
-  const curVol = sumField(latest.current, 'value_rbtc');
-  const prevVol = sumField(latest.previous, 'value_rbtc');
-  const curTxs = latest.current.length;
-  const prevTxs = latest.previous.length;
+function renderSummary() {{
+  const ops = [
+    {{ name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc' }},
+    {{ name: 'Flyover Peg-Out', data: DATA.flyover_pegouts, color: '#F0FF96', field: 'value_rbtc' }},
+    {{ name: 'PowPeg Peg-In', data: DATA.powpeg_pegins, color: '#FF9100', field: 'value_rbtc' }},
+    {{ name: 'PowPeg Peg-Out', data: DATA.powpeg_pegouts, color: '#FED8A7', field: 'value_rbtc' }},
+  ];
 
-  const latestIn = getLatestTwo([...fp, ...pp], currentPeriod);
-  const latestOut = getLatestTwo([...fo, ...po], currentPeriod);
-  const curNet = sumField(latestIn.current, 'value_rbtc') - sumField(latestOut.current, 'value_rbtc');
-  const prevNet = sumField(latestIn.previous, 'value_rbtc') - sumField(latestOut.previous, 'value_rbtc');
-  const netClass = curNet >= 0 ? 'net-positive' : 'net-negative';
-  const pKey = latest.currentKey;
+  const period = currentPeriod;
+  let totalTxs = 0, totalVol = 0;
 
-  document.getElementById('hero-kpis').innerHTML = `
-    <div class="kpi-card">
-      <div class="kpi-label">Volume &middot; ${{pKey}}</div>
-      <div class="kpi-value">${{fmtCompact(curVol)}}</div>
-      <div class="kpi-sub">${{deltaHTML(curVol, prevVol)}} vs prev ${{periodLabel()}}</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Transactions &middot; ${{pKey}}</div>
-      <div class="kpi-value">${{curTxs.toLocaleString()}}</div>
-      <div class="kpi-sub">${{deltaHTML(curTxs, prevTxs)}} vs prev ${{periodLabel()}}</div>
-    </div>
-    <div class="kpi-card ${{netClass}}">
-      <div class="kpi-label">Net Flow &middot; ${{pKey}}</div>
-      <div class="kpi-value">${{curNet >= 0 ? '+' : ''}}${{fmtCompact(curNet)}}</div>
-      <div class="kpi-sub">${{deltaHTML(curNet, prevNet)}} peg-in minus peg-out</div>
-    </div>
-  `;
+  let cards = '';
+  for (const op of ops) {{
+    const latest = getLatestTwo(op.data, period);
+    const curTxs = latest.current.length;
+    const prevTxs = latest.previous.length;
+    const curVol = sumField(latest.current, op.field);
+    const prevVol = sumField(latest.previous, op.field);
+    const darkText = ['#F0FF96', '#FED8A7', '#DEFF19'].includes(op.color);
+    totalTxs += curTxs;
+    totalVol += curVol;
+
+    cards += `
+      <div class="op-card" style="border-top-color:${{op.color}}">
+        <div class="op-card-name" style="color:${{op.color}}">${{op.name}}</div>
+        <div class="op-card-metrics">
+          <div>
+            <div class="op-metric-label">Transactions</div>
+            <div class="op-metric-value">${{curTxs}}</div>
+            ${{deltaText(curTxs, prevTxs)}}
+          </div>
+          <div>
+            <div class="op-metric-label">Volume</div>
+            <div class="op-metric-value">${{fmtRBTC(curVol)}}</div>
+            ${{deltaText(curVol, prevVol)}}
+          </div>
+        </div>
+      </div>`;
+  }}
+
+  const el = document.getElementById('op-summary');
+  el.innerHTML = cards;
 }}
 
 function renderCharts() {{
@@ -699,59 +738,59 @@ function renderCharts() {{
   ])].filter(k => k !== 'unknown').sort();
 
   // Volume chart — toggle between area and bar
+  const mkHover = (label, rbtcArr) => rbtcArr.map(v =>
+    `${{label}}: ${{fmtRBTC(v)}}`);
+
+  const fpV = keys.map(k => sumField(fpG[k] || [], 'value_rbtc'));
+  const foV = keys.map(k => sumField(foG[k] || [], 'value_rbtc'));
+  const ppV = keys.map(k => sumField(ppG[k] || [], 'value_rbtc'));
+  const poV = keys.map(k => sumField(poG[k] || [], 'value_rbtc'));
+
   const volTraces = chartMode === 'area' ? [
-    {{ x: keys, y: keys.map(k => sumField(fpG[k] || [], 'value_rbtc')),
-       name: 'Flyover In', type: 'scatter', stackgroup: 'vol',
+    {{ x: keys, y: fpV, name: 'Flyover In', type: 'scatter', stackgroup: 'vol',
        fillcolor: 'rgba(222,255,25,0.3)', line: {{ color: '#DEFF19', width: 1.5 }},
-       hovertemplate: '%{{x}}<br>Flyover In: %{{y:.4f}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => sumField(foG[k] || [], 'value_rbtc')),
-       name: 'Flyover Out', type: 'scatter', stackgroup: 'vol',
+       text: mkHover('Flyover In', fpV), hoverinfo: 'text' }},
+    {{ x: keys, y: foV, name: 'Flyover Out', type: 'scatter', stackgroup: 'vol',
        fillcolor: 'rgba(240,255,150,0.25)', line: {{ color: '#F0FF96', width: 1.5 }},
-       hovertemplate: '%{{x}}<br>Flyover Out: %{{y:.4f}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => sumField(ppG[k] || [], 'value_rbtc')),
-       name: 'PowPeg In', type: 'scatter', stackgroup: 'vol',
+       text: mkHover('Flyover Out', foV), hoverinfo: 'text' }},
+    {{ x: keys, y: ppV, name: 'PowPeg In', type: 'scatter', stackgroup: 'vol',
        fillcolor: 'rgba(255,145,0,0.3)', line: {{ color: '#FF9100', width: 1.5 }},
-       hovertemplate: '%{{x}}<br>PowPeg In: %{{y:.4f}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => sumField(poG[k] || [], 'value_rbtc')),
-       name: 'PowPeg Out', type: 'scatter', stackgroup: 'vol',
+       text: mkHover('PowPeg In', ppV), hoverinfo: 'text' }},
+    {{ x: keys, y: poV, name: 'PowPeg Out', type: 'scatter', stackgroup: 'vol',
        fillcolor: 'rgba(254,216,167,0.25)', line: {{ color: '#FED8A7', width: 1.5 }},
-       hovertemplate: '%{{x}}<br>PowPeg Out: %{{y:.4f}}<extra></extra>' }},
+       text: mkHover('PowPeg Out', poV), hoverinfo: 'text' }},
   ] : [
-    {{ x: keys, y: keys.map(k => sumField(fpG[k] || [], 'value_rbtc')),
-       name: 'Flyover In', type: 'bar', marker: {{ color: '#DEFF19', line: {{ width: 0 }} }},
-       hovertemplate: '%{{x}}<br>Flyover In: %{{y:.4f}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => sumField(foG[k] || [], 'value_rbtc')),
-       name: 'Flyover Out', type: 'bar', marker: {{ color: '#F0FF96', line: {{ width: 0 }} }},
-       hovertemplate: '%{{x}}<br>Flyover Out: %{{y:.4f}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => sumField(ppG[k] || [], 'value_rbtc')),
-       name: 'PowPeg In', type: 'bar', marker: {{ color: '#FF9100', line: {{ width: 0 }} }},
-       hovertemplate: '%{{x}}<br>PowPeg In: %{{y:.4f}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => sumField(poG[k] || [], 'value_rbtc')),
-       name: 'PowPeg Out', type: 'bar', marker: {{ color: '#FED8A7', line: {{ width: 0 }} }},
-       hovertemplate: '%{{x}}<br>PowPeg Out: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: fpV, name: 'Flyover In', type: 'bar',
+       marker: {{ color: '#DEFF19', line: {{ width: 0 }} }}, textposition: 'none',
+       hovertext: mkHover('Flyover In', fpV), hoverinfo: 'text' }},
+    {{ x: keys, y: foV, name: 'Flyover Out', type: 'bar',
+       marker: {{ color: '#F0FF96', line: {{ width: 0 }} }}, textposition: 'none',
+       hovertext: mkHover('Flyover Out', foV), hoverinfo: 'text' }},
+    {{ x: keys, y: ppV, name: 'PowPeg In', type: 'bar',
+       marker: {{ color: '#FF9100', line: {{ width: 0 }} }}, textposition: 'none',
+       hovertext: mkHover('PowPeg In', ppV), hoverinfo: 'text' }},
+    {{ x: keys, y: poV, name: 'PowPeg Out', type: 'bar',
+       marker: {{ color: '#FED8A7', line: {{ width: 0 }} }}, textposition: 'none',
+       hovertext: mkHover('PowPeg Out', poV), hoverinfo: 'text' }},
   ];
-  const volLayout = chartMode === 'bar'
-    ? {{ ...baseLayout, height: 300, barmode: 'stack' }}
-    : {{ ...baseLayout, height: 300 }};
+  const volLayout = {{
+    ...baseLayout,
+    height: 300,
+    ...(chartMode === 'bar' ? {{ barmode: 'stack' }} : {{}}),
+    hovermode: 'x unified',
+  }};
   Plotly.newPlot('chart-volume-trend', volTraces, volLayout, cfg);
 
-  // Tx count — stacked bar
-  Plotly.newPlot('chart-count', [
-    {{ x: keys, y: keys.map(k => (fpG[k] || []).length), name: 'Flyover In', type: 'bar',
-       marker: {{ color: '#DEFF19', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>Flyover In: %{{y}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => (foG[k] || []).length), name: 'Flyover Out', type: 'bar',
-       marker: {{ color: '#F0FF96', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>Flyover Out: %{{y}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => (ppG[k] || []).length), name: 'PowPeg In', type: 'bar',
-       marker: {{ color: '#FF9100', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>PowPeg In: %{{y}}<extra></extra>' }},
-    {{ x: keys, y: keys.map(k => (poG[k] || []).length), name: 'PowPeg Out', type: 'bar',
-       marker: {{ color: '#FED8A7', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>PowPeg Out: %{{y}}<extra></extra>' }},
-  ], {{ ...baseLayout, barmode: 'stack' }}, cfg);
+  // Volume donut — filtered by period
+  const latestFp = getLatestTwo(DATA.flyover_pegins, period);
+  const latestFo = getLatestTwo(DATA.flyover_pegouts, period);
+  const latestPp = getLatestTwo(DATA.powpeg_pegins, period);
+  const latestPo = getLatestTwo(DATA.powpeg_pegouts, period);
 
-  // Volume donut
-  const fpVol = sumField(DATA.flyover_pegins, 'value_rbtc');
-  const foVol = sumField(DATA.flyover_pegouts, 'value_rbtc');
-  const ppVol = sumField(DATA.powpeg_pegins, 'value_rbtc');
-  const poVol = sumField(DATA.powpeg_pegouts, 'value_rbtc');
+  const fpVol = sumField(latestFp.current, 'value_rbtc');
+  const foVol = sumField(latestFo.current, 'value_rbtc');
+  const ppVol = sumField(latestPp.current, 'value_rbtc');
+  const poVol = sumField(latestPo.current, 'value_rbtc');
   const total = fpVol + foVol + ppVol + poVol;
 
   Plotly.newPlot('chart-donut', [{{
@@ -762,7 +801,8 @@ function renderCharts() {{
     marker: {{ colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] }},
     textinfo: 'percent',
     textfont: {{ color: '#000', size: 11, family: 'Inter, sans-serif' }},
-    hovertemplate: '%{{label}}<br>%{{value:.4f}}<br>%{{percent}}<extra></extra>',
+    text: [fpVol, foVol, ppVol, poVol].map(v => `${{fmtRBTC(v)}}`),
+    hovertemplate: '%{{label}}<br>%{{text}}<br>%{{percent}}<extra></extra>',
     sort: false,
   }}], {{
     ...baseLayout,
@@ -776,10 +816,41 @@ function renderCharts() {{
       x: 0.5, y: 0.5,
     }}],
   }}, cfg);
+
+  // Transaction count donut — filtered by period
+  const fpTx = latestFp.current.length;
+  const foTx = latestFo.current.length;
+  const ppTx = latestPp.current.length;
+  const poTx = latestPo.current.length;
+  const totalTx = fpTx + foTx + ppTx + poTx;
+
+  Plotly.newPlot('chart-tx-donut', [{{
+    values: [fpTx, foTx, ppTx, poTx],
+    labels: ['Flyover In', 'Flyover Out', 'PowPeg In', 'PowPeg Out'],
+    type: 'pie',
+    hole: 0.6,
+    marker: {{ colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] }},
+    textinfo: 'percent',
+    textfont: {{ color: '#000', size: 11, family: 'Inter, sans-serif' }},
+    text: [fpTx, foTx, ppTx, poTx].map(v => `${{v}} txs`),
+    hovertemplate: '%{{label}}<br>%{{text}}<br>%{{percent}}<extra></extra>',
+    sort: false,
+  }}], {{
+    ...baseLayout,
+    margin: {{ l: 10, r: 10, t: 10, b: 10 }},
+    showlegend: true,
+    legend: {{ orientation: 'h', y: -0.05, font: {{ size: 10, color: '#737373' }} }},
+    annotations: [{{
+      text: `${{totalTx}}<br><span style="font-size:11px;color:#737373">txs</span>`,
+      showarrow: false,
+      font: {{ size: 18, color: '#FAFAF5', family: 'Inter, sans-serif' }},
+      x: 0.5, y: 0.5,
+    }}],
+  }}, cfg);
 }}
 
 let tablePage = 0;
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 15;
 
 function renderTable() {{
   const fpG = groupBy(DATA.flyover_pegins, currentPeriod);
@@ -796,54 +867,56 @@ function renderTable() {{
   tablePage = Math.max(0, Math.min(tablePage, totalPages - 1));
   const pageKeys = allKeys.slice(tablePage * PAGE_SIZE, (tablePage + 1) * PAGE_SIZE);
 
+  // Compute totals across ALL keys (not just current page)
+  let totFpTx = 0, totFpVol = 0, totFoTx = 0, totFoVol = 0;
+  let totPpTx = 0, totPpVol = 0, totPoTx = 0, totPoVol = 0;
+  for (const key of allKeys) {{
+    const fp = fpG[key] || [], fo = foG[key] || [];
+    const pp = ppG[key] || [], po = poG[key] || [];
+    totFpTx += fp.length; totFpVol += sumField(fp, 'value_rbtc');
+    totFoTx += fo.length; totFoVol += sumField(fo, 'value_rbtc');
+    totPpTx += pp.length; totPpVol += sumField(pp, 'value_rbtc');
+    totPoTx += po.length; totPoVol += sumField(po, 'value_rbtc');
+  }}
+
   let html = `<table>
-    <thead><tr>
-      <th>Period</th>
-      <th><span class="th-dot" style="background:#DEFF19"></span>FO In</th>
-      <th>Vol</th>
-      <th><span class="th-dot" style="background:#F0FF96"></span>FO Out</th>
-      <th>Vol</th>
-      <th><span class="th-dot" style="background:#FF9100"></span>PP In</th>
-      <th>Vol</th>
-      <th><span class="th-dot" style="background:#FED8A7"></span>PP Out</th>
-      <th>Vol</th>
-      <th></th>
-    </tr></thead><tbody>`;
+    <thead>
+      <tr>
+        <th rowspan="2">Period</th>
+        <th colspan="2" class="th-group" style="color:#DEFF19">Flyover Peg-In</th>
+        <th colspan="2" class="th-group" style="color:#F0FF96">Flyover Peg-Out</th>
+        <th colspan="2" class="th-group" style="color:#FF9100">PowPeg Peg-In</th>
+        <th colspan="2" class="th-group" style="color:#FED8A7">PowPeg Peg-Out</th>
+      </tr>
+      <tr>
+        <th>Txs</th><th>Vol</th>
+        <th>Txs</th><th>Vol</th>
+        <th>Txs</th><th>Vol</th>
+        <th>Txs</th><th>Vol</th>
+      </tr>
+    </thead><tbody>`;
 
   for (const key of pageKeys) {{
     const fp = fpG[key] || [], fo = foG[key] || [];
     const pp = ppG[key] || [], po = poG[key] || [];
-    const rowId = 'row-' + key.replace(/[^a-zA-Z0-9]/g, '');
 
     html += `<tr>
       <td><strong>${{key}}</strong></td>
-      <td>${{fp.length}}</td><td>${{fmt(sumField(fp, 'value_rbtc'))}}</td>
-      <td>${{fo.length}}</td><td>${{fmt(sumField(fo, 'value_rbtc'))}}</td>
-      <td>${{pp.length}}</td><td>${{fmt(sumField(pp, 'value_rbtc'))}}</td>
-      <td>${{po.length}}</td><td>${{fmt(sumField(po, 'value_rbtc'))}}</td>
-      <td><button class="expand-btn" onclick="toggleDetails('${{rowId}}', this)">&darr;</button></td>
+      <td>${{fp.length}}</td><td>${{fmtRBTC(sumField(fp, 'value_rbtc'))}}</td>
+      <td>${{fo.length}}</td><td>${{fmtRBTC(sumField(fo, 'value_rbtc'))}}</td>
+      <td>${{pp.length}}</td><td>${{fmtRBTC(sumField(pp, 'value_rbtc'))}}</td>
+      <td>${{po.length}}</td><td>${{fmtRBTC(sumField(po, 'value_rbtc'))}}</td>
     </tr>`;
-
-    const txs = [
-      ...fp.map(e => ({{ ...e, cat: 'FO In', bc: 'fo-pegin' }})),
-      ...fo.map(e => ({{ ...e, cat: 'FO Out', bc: 'fo-pegout' }})),
-      ...pp.map(e => ({{ ...e, cat: 'PP In', bc: 'pp-pegin' }})),
-      ...po.map(e => ({{ ...e, cat: 'PP Out', bc: 'pp-pegout' }})),
-    ].sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
-
-    for (const tx of txs.slice(0, 20)) {{
-      html += `<tr class="detail-row ${{rowId}}">
-        <td colspan="2"><span class="badge ${{tx.bc}}">${{tx.cat}}</span></td>
-        <td colspan="2"><a class="tx-link" href="https://rootstock.blockscout.com/tx/${{tx.tx_hash}}" target="_blank">${{shortHash(tx.tx_hash)}}</a></td>
-        <td colspan="2">${{fmt(tx.value_rbtc, 6)}}</td>
-        <td colspan="2">${{tx.timestamp ? new Date(tx.timestamp).toLocaleDateString() : 'N/A'}}</td>
-        <td colspan="2">${{shortHash(tx.address)}}</td>
-      </tr>`;
-    }}
-    if (txs.length > 20) {{
-      html += `<tr class="detail-row ${{rowId}}"><td colspan="10" style="text-align:center;color:var(--muted)">... ${{txs.length - 20}} more</td></tr>`;
-    }}
   }}
+
+  // Totals row
+  html += `<tr class="totals-row">
+    <td>Total</td>
+    <td>${{totFpTx}}</td><td>${{fmtRBTC(totFpVol)}}</td>
+    <td>${{totFoTx}}</td><td>${{fmtRBTC(totFoVol)}}</td>
+    <td>${{totPpTx}}</td><td>${{fmtRBTC(totPpVol)}}</td>
+    <td>${{totPoTx}}</td><td>${{fmtRBTC(totPoVol)}}</td>
+  </tr>`;
 
   html += '</tbody></table>';
   document.getElementById('data-table').innerHTML = html;
@@ -858,6 +931,7 @@ function renderTable() {{
 }}
 
 function tableNav(dir) {{ tablePage += dir; renderTable(); }}
+
 
 function renderLPSection() {{
   const lp = DATA.lp_info;
@@ -905,7 +979,7 @@ function renderLPSection() {{
         <div class="lp-stat">
           <div class="lp-stat-label">Peg-Out Liquidity</div>
           <div class="lp-stat-value" style="color:#F0FF96">${{pegoutLiq}}</div>
-          <div class="lp-stat-sub">available</div>
+          <div class="lp-stat-sub">BTC available</div>
         </div>
         <div class="lp-stat">
           <div class="lp-stat-label">Deliveries</div>
@@ -922,13 +996,6 @@ function renderLPSection() {{
   `;
 }}
 
-function toggleDetails(rowId, btn) {{
-  const rows = document.querySelectorAll('.' + rowId);
-  const isOpen = rows.length > 0 && rows[0].classList.contains('open');
-  rows.forEach(el => el.classList.toggle('open'));
-  if (btn) btn.innerHTML = isOpen ? '&darr;' : '&uarr;';
-}}
-
 function setChartMode(mode) {{
   chartMode = mode;
   document.querySelectorAll('#vol-chart-toggle button').forEach(b => b.classList.remove('active'));
@@ -937,7 +1004,7 @@ function setChartMode(mode) {{
 }}
 
 function renderAll() {{
-  renderHeroKPIs();
+  renderSummary();
   renderCharts();
   renderLPSection();
   tablePage = 0;
