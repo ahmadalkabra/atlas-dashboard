@@ -2,9 +2,9 @@
   "lp_name": "TeksCapital",
   "rbtc_wallet": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
   "btc_wallet": "1D2xucTYkxCHvaaZuaKVJTfZQWr4PUjzAy",
-  "pegin_liquidity_wei": "21025382587807950290",
-  "pegin_rbtc": 21.02538258780795,
-  "pegout_liquidity_wei": "16635583900000000000",
-  "pegout_btc": 16.6355839,
-  "fetched_at": "2026-02-11T07:13:01Z"
+  "pegin_liquidity_wei": "21026697998680755467",
+  "pegin_rbtc": 21.026697998680756,
+  "pegout_liquidity_wei": "16447965570000000000",
+  "pegout_btc": 16.447965569999997,
+  "fetched_at": "2026-02-12T18:00:59Z"
 }

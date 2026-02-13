@@ -61,11 +61,9 @@ def build_dashboard_data(
             })
         return result
 
-    # Flyover peg-ins (CallForUser events) — include LP address (from_address)
+    # Flyover peg-ins (CallForUser only — fetcher already filters)
     fp_pegins = []
     for e in flyover_pegins:
-        if e.get("event") != "CallForUser":
-            continue
         ts = parse_timestamp(e.get("block_timestamp", ""))
         fp_pegins.append({
             "tx_hash": e.get("tx_hash", ""),
@@ -76,8 +74,8 @@ def build_dashboard_data(
             "lp_address": e.get("from_address", ""),
         })
 
-    # Flyover peg-outs (PegOutDeposit events)
-    fp_pegouts = extract_events(flyover_pegouts, "amount_rbtc", "sender", "PegOutDeposit")
+    # Flyover peg-outs (PegOutDeposit only — fetcher already filters)
+    fp_pegouts = extract_events(flyover_pegouts, "amount_rbtc", "sender")
 
     # PowPeg peg-ins
     pp_pegins = []
@@ -99,8 +97,8 @@ def build_dashboard_data(
             "tx_hash": e.get("tx_hash", ""),
             "block": e.get("block_number", 0),
             "timestamp": ts.isoformat() if ts else "",
-            "value_rbtc": float(e.get("value_rbtc", 0)),
-            "address": e.get("from_address", ""),
+            "value_rbtc": float(e.get("amount_rbtc") or e.get("value_rbtc") or 0),
+            "address": e.get("rsk_address") or e.get("from_address", ""),
         })
 
     # Penalties
@@ -149,228 +147,406 @@ def generate_html(data: dict) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rootstock Peg Dashboard — Flyover & PowPeg</title>
+<title>Atlas Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.plot.ly/plotly-2.35.0.min.js"></script>
 <style>
   :root {{
-    --bg: #0f1117;
-    --card: #1a1d27;
-    --border: #2a2d3a;
-    --text: #e1e4ea;
-    --muted: #8b8fa3;
-    --accent: #ff6b35;
-    --accent2: #4ecdc4;
-    --accent3: #45b7d1;
-    --accent4: #f7dc6f;
-    --green: #2ecc71;
-    --red: #e74c3c;
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-2: #161616;
+    --border: #1e1e1e;
+    --border-hover: #2a2a2a;
+    --text: #FAFAF5;
+    --muted: #737373;
+    --flyover-pegin: #DEFF19;
+    --flyover-pegout: #F0FF96;
+    --powpeg-pegin: #FF9100;
+    --powpeg-pegout: #FED8A7;
+    --green: #22C55E;
+    --red: #EF4444;
+    --purple: #9E75FF;
+    --radius: 12px;
+    --radius-sm: 8px;
   }}
   * {{ margin: 0; padding: 0; box-sizing: border-box; }}
   body {{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 20px;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }}
-  .header {{
-    text-align: center;
-    margin-bottom: 30px;
+  .dashboard {{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
   }}
-  .header h1 {{
-    font-size: 28px;
-    margin-bottom: 8px;
-  }}
-  .header .subtitle {{
-    color: var(--muted);
-    font-size: 14px;
-  }}
-  .controls {{
+
+  /* --- Header --- */
+  header {{
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
     flex-wrap: wrap;
-  }}
-  .controls button {{
-    background: var(--card);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s;
-  }}
-  .controls button:hover {{ border-color: var(--accent); }}
-  .controls button.active {{
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }}
-  .cards {{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 16px;
-    margin-bottom: 30px;
   }}
-  .card {{
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
+  .title-group h1 {{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #FF9100, #DEFF19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }}
-  .card .label {{
+  .title-group .subtitle {{
     color: var(--muted);
     font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    margin-top: 2px;
   }}
-  .card .value {{
-    font-size: 24px;
-    font-weight: 700;
-  }}
-  .card .sub {{
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 4px;
-  }}
-  .card.flyover .value {{ color: var(--accent); }}
-  .card.powpeg .value {{ color: var(--accent2); }}
-  .card.split .value {{ color: var(--accent3); }}
-  .card.failure .value {{ color: var(--red); }}
-  .charts {{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 30px;
-  }}
-  .chart-container {{
-    background: var(--card);
+  .period-nav {{
+    display: flex;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
+    border-radius: 8px;
+    overflow: hidden;
   }}
-  .chart-container.full-width {{
-    grid-column: 1 / -1;
+  .period-nav button {{
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
   }}
-  .chart-title {{
-    font-size: 16px;
+  .period-nav button:hover {{ color: var(--text); background: rgba(255,255,255,0.04); }}
+  .period-nav button.active {{ background: var(--text); color: #000; font-weight: 600; }}
+
+  /* --- KPI Row --- */
+  .kpi-row {{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }}
+  .kpi-card {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color 0.15s;
+  }}
+  .kpi-card:hover {{ border-color: var(--border-hover); }}
+  .kpi-label {{
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }}
+  .kpi-value {{
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }}
+  .kpi-sub {{
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }}
+  .kpi-delta {{
+    font-size: 12px;
     font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }}
+  .kpi-delta.up {{ color: var(--green); background: rgba(34,197,94,0.12); }}
+  .kpi-delta.down {{ color: var(--red); background: rgba(239,68,68,0.12); }}
+  .kpi-delta.neutral {{ color: var(--muted); background: rgba(115,115,115,0.12); }}
+  .kpi-card.net-positive .kpi-value {{ color: var(--green); }}
+  .kpi-card.net-negative .kpi-value {{ color: var(--red); }}
+
+  /* --- Chart Panels --- */
+  .chart-section {{ margin-bottom: 20px; }}
+  .chart-grid {{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }}
+  .chart-panel {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }}
+  .chart-panel-header {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 12px;
   }}
-  table {{
-    width: 100%;
-    border-collapse: collapse;
+  .chart-panel-title {{
     font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
   }}
-  th, td {{
-    padding: 10px 12px;
-    text-align: right;
-    border-bottom: 1px solid var(--border);
+  .chart-toggle {{
+    display: flex;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }}
+  .chart-toggle button {{
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 4px 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }}
+  .chart-toggle button:hover {{ color: var(--text); }}
+  .chart-toggle button.active {{ background: var(--surface-2); color: var(--text); }}
+
+  /* --- Table --- */
+  .table-section {{ margin-bottom: 28px; }}
+  .section-title {{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+  }}
+  .table-panel {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    overflow-x: auto;
+  }}
+  table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
+  th, td {{ padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--border); }}
   th {{
     color: var(--muted);
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.5px;
     position: sticky;
     top: 0;
-    background: var(--card);
+    background: var(--surface);
+    white-space: nowrap;
   }}
   th:first-child, td:first-child {{ text-align: left; }}
-  tr:hover td {{ background: rgba(255,255,255,0.03); }}
-  .table-container {{
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    overflow-x: auto;
-    margin-bottom: 30px;
+  tbody tr:hover td {{ background: rgba(255,255,255,0.02); }}
+  .th-dot {{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
   }}
-  .table-container .chart-title {{ margin-bottom: 12px; }}
-  .tx-link {{
-    color: var(--accent3);
-    text-decoration: none;
+  .badge {{
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
   }}
+  .badge.fo-pegin {{ background: var(--flyover-pegin); color: #000; }}
+  .badge.fo-pegout {{ background: var(--flyover-pegout); color: #000; }}
+  .badge.pp-pegin {{ background: var(--powpeg-pegin); color: #fff; }}
+  .badge.pp-pegout {{ background: var(--powpeg-pegout); color: #000; }}
+  .tx-link {{ color: var(--purple); text-decoration: none; font-weight: 500; }}
   .tx-link:hover {{ text-decoration: underline; }}
   .expand-btn {{
     background: none;
-    border: none;
-    color: var(--accent3);
+    border: 1px solid var(--border);
+    color: var(--muted);
     cursor: pointer;
     font-size: 12px;
-    padding: 2px 8px;
+    font-family: inherit;
+    padding: 3px 10px;
+    border-radius: 4px;
+    transition: all 0.15s;
   }}
-  .expand-btn:hover {{ text-decoration: underline; }}
+  .expand-btn:hover {{ border-color: var(--purple); color: var(--purple); }}
   .detail-row {{ display: none; }}
   .detail-row.open {{ display: table-row; }}
-  .detail-row td {{
-    background: rgba(0,0,0,0.2);
-    padding: 4px 12px;
+  .detail-row td {{ background: rgba(0,0,0,0.25) !important; padding: 6px 12px; font-size: 12px; }}
+  .page-controls {{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 0 2px;
+  }}
+  .page-btn {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
     font-size: 12px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }}
+  .page-btn:hover:not(:disabled) {{ border-color: var(--purple); color: var(--purple); }}
+  .page-btn:disabled {{ opacity: 0.3; cursor: default; }}
+  .page-info {{ color: var(--muted); font-size: 12px; }}
+
+  /* --- LP Section --- */
+  .lp-section {{ margin-bottom: 28px; }}
+  .lp-panel {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }}
+  .lp-header {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }}
+  .lp-header h3 {{ font-size: 14px; font-weight: 600; }}
+  .lp-name {{ color: var(--flyover-pegin); font-weight: 600; font-size: 13px; }}
+  .lp-stats {{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }}
+  .lp-stat {{
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+  }}
+  .lp-stat-label {{
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }}
+  .lp-stat-value {{ font-size: 18px; font-weight: 700; }}
+  .lp-stat-sub {{ color: var(--muted); font-size: 11px; margin-top: 4px; }}
+
+  /* --- Footer --- */
+  footer {{
+    text-align: center;
+    padding: 20px 0;
+    color: var(--muted);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+  }}
+  footer a {{ color: var(--purple); text-decoration: none; }}
+  footer a:hover {{ text-decoration: underline; }}
+
+  /* --- Responsive --- */
+  @media (max-width: 1024px) {{
+    .chart-grid {{ grid-template-columns: 1fr; }}
   }}
   @media (max-width: 768px) {{
-    .charts {{ grid-template-columns: 1fr; }}
-    .cards {{ grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }}
+    .kpi-row {{ grid-template-columns: 1fr; }}
+    .lp-stats {{ grid-template-columns: repeat(2, 1fr); }}
+    header {{ flex-direction: column; align-items: flex-start; }}
+  }}
+  @media (max-width: 480px) {{
+    .lp-stats {{ grid-template-columns: 1fr; }}
+    .dashboard {{ padding: 16px 12px; }}
   }}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Rootstock Peg Dashboard</h1>
-  <p class="subtitle">Flyover & PowPeg — Transaction counts and volumes</p>
-  <p class="subtitle" id="generated-at"></p>
-</div>
+<div class="dashboard">
+  <header>
+    <div class="title-group">
+      <h1>Atlas Dashboard</h1>
+      <p class="subtitle">Rootstock Bridge Analytics <span id="generated-at"></span></p>
+    </div>
+    <nav class="period-nav">
+      <button onclick="setPeriod('day')" id="btn-day">D</button>
+      <button onclick="setPeriod('week')" id="btn-week">W</button>
+      <button onclick="setPeriod('month')" id="btn-month" class="active">M</button>
+      <button onclick="setPeriod('quarter')" id="btn-quarter">Q</button>
+    </nav>
+  </header>
 
-<div class="controls">
-  <button onclick="setPeriod('year')" id="btn-year">Year</button>
-  <button onclick="setPeriod('quarter')" id="btn-quarter">Quarter</button>
-  <button onclick="setPeriod('month')" id="btn-month" class="active">Month</button>
-  <button onclick="setPeriod('week')" id="btn-week">Week</button>
-  <button onclick="setPeriod('day')" id="btn-day">Day</button>
-</div>
+  <section class="kpi-row" id="hero-kpis"></section>
 
-<div class="cards" id="summary-cards"></div>
+  <section class="chart-section">
+    <div class="chart-panel">
+      <div class="chart-panel-header">
+        <div class="chart-panel-title">Volume Over Time</div>
+        <div class="chart-toggle" id="vol-chart-toggle">
+          <button class="active" onclick="setChartMode('area')">Area</button>
+          <button onclick="setChartMode('bar')">Bar</button>
+        </div>
+      </div>
+      <div id="chart-volume-trend"></div>
+    </div>
+  </section>
 
-<div class="charts">
-  <div class="chart-container">
-    <div class="chart-title">Transaction Count by Period</div>
-    <div id="chart-count"></div>
-  </div>
-  <div class="chart-container">
-    <div class="chart-title">Volume by Period (RBTC)</div>
-    <div id="chart-volume"></div>
-  </div>
-  <div class="chart-container">
-    <div class="chart-title">Cumulative Volume Over Time (RBTC)</div>
-    <div id="chart-cumulative"></div>
-  </div>
-  <div class="chart-container">
-    <div class="chart-title">Flyover vs PowPeg Share</div>
-    <div id="chart-pie"></div>
-  </div>
-</div>
+  <section class="chart-grid">
+    <div class="chart-panel">
+      <div class="chart-panel-header">
+        <div class="chart-panel-title">Transactions</div>
+      </div>
+      <div id="chart-count"></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-panel-header">
+        <div class="chart-panel-title">Volume Share</div>
+      </div>
+      <div id="chart-donut"></div>
+    </div>
+  </section>
 
-<div class="table-container">
-  <div class="chart-title">Aggregated Data by Period</div>
-  <div id="data-table"></div>
-</div>
+  <section class="lp-section" id="lp-section-wrapper"></section>
 
-<div class="table-container">
-  <div class="chart-title">LP Performance (Flyover)</div>
-  <div id="lp-table"></div>
+  <section class="table-section">
+    <div class="section-title">Breakdown</div>
+    <div class="table-panel">
+      <div id="data-table"></div>
+      <div id="table-pagination" class="page-controls"></div>
+    </div>
+  </section>
+
+  <footer>
+    Atlas Dashboard
+  </footer>
 </div>
 
 <script>
 const DATA = {data_json};
 
 let currentPeriod = 'month';
+let chartMode = 'area';
 
-// --- Utility functions ---
+// ─── Utilities ───
 
 function parseTS(ts) {{
   if (!ts) return null;
@@ -384,7 +560,6 @@ function periodKey(date, period) {{
   const m = String(date.getMonth() + 1).padStart(2, '0');
   const d = String(date.getDate()).padStart(2, '0');
   switch (period) {{
-    case 'year': return `${{y}}`;
     case 'quarter': return `${{y}}-Q${{Math.ceil((date.getMonth()+1)/3)}}`;
     case 'month': return `${{y}}-${{m}}`;
     case 'week':
@@ -411,17 +586,16 @@ function sumField(events, field) {{
   return events.reduce((s, e) => s + (e[field] || 0), 0);
 }}
 
-function uniqueAddresses(events, field) {{
-  const addrs = new Set();
-  for (const e of events) {{
-    if (e[field]) addrs.add(e[field].toLowerCase());
-  }}
-  return addrs;
-}}
-
 function fmt(n, decimals = 4) {{
   if (n >= 1000) return n.toLocaleString(undefined, {{ maximumFractionDigits: decimals }});
   return n.toFixed(decimals);
+}}
+
+function fmtCompact(n) {{
+  if (Math.abs(n) >= 1000) return (n / 1000).toFixed(1) + 'k';
+  if (Math.abs(n) >= 1) return n.toFixed(2);
+  if (Math.abs(n) >= 0.01) return n.toFixed(4);
+  return n.toFixed(6);
 }}
 
 function shortHash(h) {{
@@ -429,336 +603,357 @@ function shortHash(h) {{
   return h.slice(0, 10) + '...' + h.slice(-6);
 }}
 
-// --- Rendering ---
+function periodLabel() {{
+  return {{ day: 'day', week: 'week', month: 'month', quarter: 'quarter' }}[currentPeriod] || 'period';
+}}
 
-function renderCards() {{
-  const fp = DATA.flyover_pegins;
-  const fo = DATA.flyover_pegouts;
-  const pp = DATA.powpeg_pegins;
-  const po = DATA.powpeg_pegouts;
+function getLatestTwo(events, period) {{
+  const groups = groupBy(events, period);
+  const keys = Object.keys(groups).filter(k => k !== 'unknown').sort();
+  if (keys.length === 0) return {{ current: [], previous: [], currentKey: '', prevKey: '' }};
+  const currentKey = keys[keys.length - 1];
+  const prevKey = keys.length > 1 ? keys[keys.length - 2] : '';
+  return {{
+    current: groups[currentKey] || [],
+    previous: prevKey ? (groups[prevKey] || []) : [],
+    currentKey,
+    prevKey,
+  }};
+}}
 
-  const fpCount = fp.length;
-  const fpVol = sumField(fp, 'value_rbtc');
-  const foCount = fo.length;
-  const foVol = sumField(fo, 'value_rbtc');
-  const ppCount = pp.length;
-  const ppVol = sumField(pp, 'value_rbtc');
-  const poCount = po.length;
-  const poVol = sumField(po, 'value_rbtc');
+function deltaHTML(current, previous) {{
+  if (previous === 0 && current === 0) return '<span class="kpi-delta neutral">-</span>';
+  if (previous === 0) return '<span class="kpi-delta up">&uarr; new</span>';
+  const pct = ((current - previous) / Math.abs(previous) * 100).toFixed(0);
+  if (current > previous) return `<span class="kpi-delta up">&uarr; ${{Math.abs(pct)}}%</span>`;
+  if (current < previous) return `<span class="kpi-delta down">&darr; ${{Math.abs(pct)}}%</span>`;
+  return '<span class="kpi-delta neutral">&ndash; 0%</span>';
+}}
 
-  const totalFlyover = fpVol + foVol;
-  const totalPowpeg = ppVol + poVol;
-  const total = totalFlyover + totalPowpeg;
-  const flyoverPct = total > 0 ? (totalFlyover / total * 100).toFixed(1) : '0';
-  const powpegPct = total > 0 ? (totalPowpeg / total * 100).toFixed(1) : '0';
+// ─── Render ───
 
-  const penalties = DATA.penalties.length;
-  const refunds = DATA.refunds.length;
-  const totalFlyoverTxs = fpCount + foCount;
-  const failureRate = totalFlyoverTxs > 0 ? ((penalties + refunds) / totalFlyoverTxs * 100).toFixed(1) : '0';
+function renderHeroKPIs() {{
+  const fp = DATA.flyover_pegins, fo = DATA.flyover_pegouts;
+  const pp = DATA.powpeg_pegins, po = DATA.powpeg_pegouts;
+  const allEvents = [...fp, ...fo, ...pp, ...po];
+  const latest = getLatestTwo(allEvents, currentPeriod);
 
-  const allAddrs = new Set();
-  fp.forEach(e => {{ if (e.address) allAddrs.add(e.address.toLowerCase()); }});
-  fo.forEach(e => {{ if (e.address) allAddrs.add(e.address.toLowerCase()); }});
-  pp.forEach(e => {{ if (e.address) allAddrs.add(e.address.toLowerCase()); }});
-  po.forEach(e => {{ if (e.address) allAddrs.add(e.address.toLowerCase()); }});
+  const curVol = sumField(latest.current, 'value_rbtc');
+  const prevVol = sumField(latest.previous, 'value_rbtc');
+  const curTxs = latest.current.length;
+  const prevTxs = latest.previous.length;
 
-  const html = `
-    <div class="card flyover">
-      <div class="label">Flyover Peg-In</div>
-      <div class="value">${{fpCount}} txs</div>
-      <div class="sub">${{fmt(fpVol)}} RBTC</div>
+  const latestIn = getLatestTwo([...fp, ...pp], currentPeriod);
+  const latestOut = getLatestTwo([...fo, ...po], currentPeriod);
+  const curNet = sumField(latestIn.current, 'value_rbtc') - sumField(latestOut.current, 'value_rbtc');
+  const prevNet = sumField(latestIn.previous, 'value_rbtc') - sumField(latestOut.previous, 'value_rbtc');
+  const netClass = curNet >= 0 ? 'net-positive' : 'net-negative';
+  const pKey = latest.currentKey;
+
+  document.getElementById('hero-kpis').innerHTML = `
+    <div class="kpi-card">
+      <div class="kpi-label">Volume &middot; ${{pKey}}</div>
+      <div class="kpi-value">${{fmtCompact(curVol)}}</div>
+      <div class="kpi-sub">${{deltaHTML(curVol, prevVol)}} vs prev ${{periodLabel()}}</div>
     </div>
-    <div class="card flyover">
-      <div class="label">Flyover Peg-Out</div>
-      <div class="value">${{foCount}} txs</div>
-      <div class="sub">${{fmt(foVol)}} RBTC</div>
+    <div class="kpi-card">
+      <div class="kpi-label">Transactions &middot; ${{pKey}}</div>
+      <div class="kpi-value">${{curTxs.toLocaleString()}}</div>
+      <div class="kpi-sub">${{deltaHTML(curTxs, prevTxs)}} vs prev ${{periodLabel()}}</div>
     </div>
-    <div class="card powpeg">
-      <div class="label">PowPeg Peg-In</div>
-      <div class="value">${{ppCount}} txs</div>
-      <div class="sub">${{fmt(ppVol)}} RBTC</div>
-    </div>
-    <div class="card powpeg">
-      <div class="label">PowPeg Peg-Out</div>
-      <div class="value">${{poCount}} txs</div>
-      <div class="sub">${{fmt(poVol)}} RBTC</div>
-    </div>
-    <div class="card split">
-      <div class="label">Flyover vs PowPeg</div>
-      <div class="value">${{flyoverPct}}% / ${{powpegPct}}%</div>
-      <div class="sub">by volume</div>
-    </div>
-    <div class="card failure">
-      <div class="label">Flyover Failure Rate</div>
-      <div class="value">${{failureRate}}%</div>
-      <div class="sub">${{penalties}} penalties, ${{refunds}} refunds</div>
-    </div>
-    <div class="card">
-      <div class="label">Unique Addresses</div>
-      <div class="value">${{allAddrs.size}}</div>
-      <div class="sub">across all events</div>
-    </div>
-    <div class="card">
-      <div class="label">Total Volume</div>
-      <div class="value">${{fmt(total)}} RBTC</div>
-      <div class="sub">all peg-in + peg-out</div>
+    <div class="kpi-card ${{netClass}}">
+      <div class="kpi-label">Net Flow &middot; ${{pKey}}</div>
+      <div class="kpi-value">${{curNet >= 0 ? '+' : ''}}${{fmtCompact(curNet)}}</div>
+      <div class="kpi-sub">${{deltaHTML(curNet, prevNet)}} peg-in minus peg-out</div>
     </div>
   `;
-
-  // Add LP liquidity cards if available
-  const lp = DATA.lp_info;
-  if (lp && lp.lp_name) {{
-    html += `
-    <div class="card flyover">
-      <div class="label">LP Peg-In Liquidity</div>
-      <div class="value">${{fmt(lp.pegin_rbtc || 0)}} RBTC</div>
-      <div class="sub">${{lp.lp_name}} — <a class="tx-link" href="https://rootstock.blockscout.com/address/${{lp.rbtc_wallet}}" target="_blank">${{lp.rbtc_wallet ? lp.rbtc_wallet.slice(0,10)+'...' : ''}}</a></div>
-    </div>
-    <div class="card flyover">
-      <div class="label">LP Peg-Out Liquidity</div>
-      <div class="value">${{fmt(lp.pegout_btc || 0)}} BTC</div>
-      <div class="sub">${{lp.lp_name}} — <a class="tx-link" href="https://mempool.space/address/${{lp.btc_wallet}}" target="_blank">${{lp.btc_wallet ? lp.btc_wallet.slice(0,12)+'...' : ''}}</a></div>
-    </div>`;
-  }}
-
-  document.getElementById('summary-cards').innerHTML = html;
 }}
 
 function renderCharts() {{
   const period = currentPeriod;
-  const plotlyConfig = {{ displayModeBar: false, responsive: true }};
-  const plotlyLayout = {{
+  const cfg = {{ displayModeBar: false, responsive: true }};
+  const hoverLabel = {{
+    bgcolor: '#1a1a1a', bordercolor: '#2a2a2a',
+    font: {{ family: 'Inter, sans-serif', color: '#FAFAF5', size: 12 }}
+  }};
+  const baseLayout = {{
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
-    font: {{ color: '#8b8fa3', size: 12 }},
-    margin: {{ l: 50, r: 20, t: 10, b: 40 }},
-    xaxis: {{ gridcolor: '#2a2d3a' }},
-    yaxis: {{ gridcolor: '#2a2d3a' }},
-    legend: {{ orientation: 'h', y: -0.2 }},
-    barmode: 'group',
+    font: {{ family: 'Inter, sans-serif', color: '#737373', size: 11 }},
+    margin: {{ l: 50, r: 16, t: 8, b: 36 }},
+    xaxis: {{ gridcolor: '#1a1a1a', linecolor: '#1e1e1e', zeroline: false }},
+    yaxis: {{ gridcolor: '#1a1a1a', linecolor: '#1e1e1e', zeroline: false }},
+    legend: {{ orientation: 'h', y: -0.2, font: {{ size: 10, color: '#737373' }} }},
+    hoverlabel: hoverLabel,
+    height: 280,
   }};
 
-  // Group data by period
-  const fpGroups = groupBy(DATA.flyover_pegins, period);
-  const foGroups = groupBy(DATA.flyover_pegouts, period);
-  const ppGroups = groupBy(DATA.powpeg_pegins, period);
-  const poGroups = groupBy(DATA.powpeg_pegouts, period);
+  const fpG = groupBy(DATA.flyover_pegins, period);
+  const foG = groupBy(DATA.flyover_pegouts, period);
+  const ppG = groupBy(DATA.powpeg_pegins, period);
+  const poG = groupBy(DATA.powpeg_pegouts, period);
 
-  // Get all unique period keys, sorted
-  const allKeys = [...new Set([
-    ...Object.keys(fpGroups),
-    ...Object.keys(foGroups),
-    ...Object.keys(ppGroups),
-    ...Object.keys(poGroups),
+  const keys = [...new Set([
+    ...Object.keys(fpG), ...Object.keys(foG),
+    ...Object.keys(ppG), ...Object.keys(poG),
   ])].filter(k => k !== 'unknown').sort();
 
-  // Count chart
+  // Volume chart — toggle between area and bar
+  const volTraces = chartMode === 'area' ? [
+    {{ x: keys, y: keys.map(k => sumField(fpG[k] || [], 'value_rbtc')),
+       name: 'Flyover In', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(222,255,25,0.3)', line: {{ color: '#DEFF19', width: 1.5 }},
+       hovertemplate: '%{{x}}<br>Flyover In: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => sumField(foG[k] || [], 'value_rbtc')),
+       name: 'Flyover Out', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(240,255,150,0.25)', line: {{ color: '#F0FF96', width: 1.5 }},
+       hovertemplate: '%{{x}}<br>Flyover Out: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => sumField(ppG[k] || [], 'value_rbtc')),
+       name: 'PowPeg In', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(255,145,0,0.3)', line: {{ color: '#FF9100', width: 1.5 }},
+       hovertemplate: '%{{x}}<br>PowPeg In: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => sumField(poG[k] || [], 'value_rbtc')),
+       name: 'PowPeg Out', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(254,216,167,0.25)', line: {{ color: '#FED8A7', width: 1.5 }},
+       hovertemplate: '%{{x}}<br>PowPeg Out: %{{y:.4f}}<extra></extra>' }},
+  ] : [
+    {{ x: keys, y: keys.map(k => sumField(fpG[k] || [], 'value_rbtc')),
+       name: 'Flyover In', type: 'bar', marker: {{ color: '#DEFF19', line: {{ width: 0 }} }},
+       hovertemplate: '%{{x}}<br>Flyover In: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => sumField(foG[k] || [], 'value_rbtc')),
+       name: 'Flyover Out', type: 'bar', marker: {{ color: '#F0FF96', line: {{ width: 0 }} }},
+       hovertemplate: '%{{x}}<br>Flyover Out: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => sumField(ppG[k] || [], 'value_rbtc')),
+       name: 'PowPeg In', type: 'bar', marker: {{ color: '#FF9100', line: {{ width: 0 }} }},
+       hovertemplate: '%{{x}}<br>PowPeg In: %{{y:.4f}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => sumField(poG[k] || [], 'value_rbtc')),
+       name: 'PowPeg Out', type: 'bar', marker: {{ color: '#FED8A7', line: {{ width: 0 }} }},
+       hovertemplate: '%{{x}}<br>PowPeg Out: %{{y:.4f}}<extra></extra>' }},
+  ];
+  const volLayout = chartMode === 'bar'
+    ? {{ ...baseLayout, height: 300, barmode: 'stack' }}
+    : {{ ...baseLayout, height: 300 }};
+  Plotly.newPlot('chart-volume-trend', volTraces, volLayout, cfg);
+
+  // Tx count — stacked bar
   Plotly.newPlot('chart-count', [
-    {{ x: allKeys, y: allKeys.map(k => (fpGroups[k] || []).length), name: 'Flyover Peg-In', type: 'bar', marker: {{ color: '#ff6b35' }} }},
-    {{ x: allKeys, y: allKeys.map(k => (foGroups[k] || []).length), name: 'Flyover Peg-Out', type: 'bar', marker: {{ color: '#ff9a76' }} }},
-    {{ x: allKeys, y: allKeys.map(k => (ppGroups[k] || []).length), name: 'PowPeg Peg-In', type: 'bar', marker: {{ color: '#4ecdc4' }} }},
-    {{ x: allKeys, y: allKeys.map(k => (poGroups[k] || []).length), name: 'PowPeg Peg-Out', type: 'bar', marker: {{ color: '#7eddd6' }} }},
-  ], plotlyLayout, plotlyConfig);
+    {{ x: keys, y: keys.map(k => (fpG[k] || []).length), name: 'Flyover In', type: 'bar',
+       marker: {{ color: '#DEFF19', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>Flyover In: %{{y}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => (foG[k] || []).length), name: 'Flyover Out', type: 'bar',
+       marker: {{ color: '#F0FF96', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>Flyover Out: %{{y}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => (ppG[k] || []).length), name: 'PowPeg In', type: 'bar',
+       marker: {{ color: '#FF9100', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>PowPeg In: %{{y}}<extra></extra>' }},
+    {{ x: keys, y: keys.map(k => (poG[k] || []).length), name: 'PowPeg Out', type: 'bar',
+       marker: {{ color: '#FED8A7', line: {{ width: 0 }} }}, hovertemplate: '%{{x}}<br>PowPeg Out: %{{y}}<extra></extra>' }},
+  ], {{ ...baseLayout, barmode: 'stack' }}, cfg);
 
-  // Volume chart
-  Plotly.newPlot('chart-volume', [
-    {{ x: allKeys, y: allKeys.map(k => sumField(fpGroups[k] || [], 'value_rbtc')), name: 'Flyover Peg-In', type: 'bar', marker: {{ color: '#ff6b35' }} }},
-    {{ x: allKeys, y: allKeys.map(k => sumField(foGroups[k] || [], 'value_rbtc')), name: 'Flyover Peg-Out', type: 'bar', marker: {{ color: '#ff9a76' }} }},
-    {{ x: allKeys, y: allKeys.map(k => sumField(ppGroups[k] || [], 'value_rbtc')), name: 'PowPeg Peg-In', type: 'bar', marker: {{ color: '#4ecdc4' }} }},
-    {{ x: allKeys, y: allKeys.map(k => sumField(poGroups[k] || [], 'value_rbtc')), name: 'PowPeg Peg-Out', type: 'bar', marker: {{ color: '#7eddd6' }} }},
-  ], plotlyLayout, plotlyConfig);
+  // Volume donut
+  const fpVol = sumField(DATA.flyover_pegins, 'value_rbtc');
+  const foVol = sumField(DATA.flyover_pegouts, 'value_rbtc');
+  const ppVol = sumField(DATA.powpeg_pegins, 'value_rbtc');
+  const poVol = sumField(DATA.powpeg_pegouts, 'value_rbtc');
+  const total = fpVol + foVol + ppVol + poVol;
 
-  // Cumulative chart
-  let cumFP = 0, cumFO = 0, cumPP = 0, cumPO = 0;
-  const cumFPData = [], cumFOData = [], cumPPData = [], cumPOData = [];
-  for (const k of allKeys) {{
-    cumFP += sumField(fpGroups[k] || [], 'value_rbtc');
-    cumFO += sumField(foGroups[k] || [], 'value_rbtc');
-    cumPP += sumField(ppGroups[k] || [], 'value_rbtc');
-    cumPO += sumField(poGroups[k] || [], 'value_rbtc');
-    cumFPData.push(cumFP);
-    cumFOData.push(cumFO);
-    cumPPData.push(cumPP);
-    cumPOData.push(cumPO);
-  }}
-  Plotly.newPlot('chart-cumulative', [
-    {{ x: allKeys, y: cumFPData, name: 'Flyover Peg-In', type: 'scatter', mode: 'lines', line: {{ color: '#ff6b35', width: 2 }} }},
-    {{ x: allKeys, y: cumFOData, name: 'Flyover Peg-Out', type: 'scatter', mode: 'lines', line: {{ color: '#ff9a76', width: 2 }} }},
-    {{ x: allKeys, y: cumPPData, name: 'PowPeg Peg-In', type: 'scatter', mode: 'lines', line: {{ color: '#4ecdc4', width: 2 }} }},
-    {{ x: allKeys, y: cumPOData, name: 'PowPeg Peg-Out', type: 'scatter', mode: 'lines', line: {{ color: '#7eddd6', width: 2 }} }},
-  ], {{...plotlyLayout, yaxis: {{ ...plotlyLayout.yaxis, title: 'RBTC' }} }}, plotlyConfig);
-
-  // Pie chart
-  const flyoverTotal = sumField(DATA.flyover_pegins, 'value_rbtc') + sumField(DATA.flyover_pegouts, 'value_rbtc');
-  const powpegTotal = sumField(DATA.powpeg_pegins, 'value_rbtc') + sumField(DATA.powpeg_pegouts, 'value_rbtc');
-  Plotly.newPlot('chart-pie', [{{
-    values: [flyoverTotal, powpegTotal],
-    labels: ['Flyover', 'PowPeg'],
+  Plotly.newPlot('chart-donut', [{{
+    values: [fpVol, foVol, ppVol, poVol],
+    labels: ['Flyover In', 'Flyover Out', 'PowPeg In', 'PowPeg Out'],
     type: 'pie',
-    marker: {{ colors: ['#ff6b35', '#4ecdc4'] }},
-    textinfo: 'label+percent',
-    textfont: {{ color: '#fff' }},
+    hole: 0.6,
+    marker: {{ colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] }},
+    textinfo: 'percent',
+    textfont: {{ color: '#000', size: 11, family: 'Inter, sans-serif' }},
+    hovertemplate: '%{{label}}<br>%{{value:.4f}}<br>%{{percent}}<extra></extra>',
+    sort: false,
   }}], {{
-    ...plotlyLayout,
-    margin: {{ l: 20, r: 20, t: 10, b: 10 }},
-    showlegend: false,
-  }}, plotlyConfig);
+    ...baseLayout,
+    margin: {{ l: 10, r: 10, t: 10, b: 10 }},
+    showlegend: true,
+    legend: {{ orientation: 'h', y: -0.05, font: {{ size: 10, color: '#737373' }} }},
+    annotations: [{{
+      text: `${{fmtCompact(total)}}<br><span style="font-size:11px;color:#737373">total</span>`,
+      showarrow: false,
+      font: {{ size: 18, color: '#FAFAF5', family: 'Inter, sans-serif' }},
+      x: 0.5, y: 0.5,
+    }}],
+  }}, cfg);
 }}
 
+let tablePage = 0;
+const PAGE_SIZE = 10;
+
 function renderTable() {{
-  const period = currentPeriod;
-  const fpGroups = groupBy(DATA.flyover_pegins, period);
-  const foGroups = groupBy(DATA.flyover_pegouts, period);
-  const ppGroups = groupBy(DATA.powpeg_pegins, period);
-  const poGroups = groupBy(DATA.powpeg_pegouts, period);
+  const fpG = groupBy(DATA.flyover_pegins, currentPeriod);
+  const foG = groupBy(DATA.flyover_pegouts, currentPeriod);
+  const ppG = groupBy(DATA.powpeg_pegins, currentPeriod);
+  const poG = groupBy(DATA.powpeg_pegouts, currentPeriod);
 
   const allKeys = [...new Set([
-    ...Object.keys(fpGroups),
-    ...Object.keys(foGroups),
-    ...Object.keys(ppGroups),
-    ...Object.keys(poGroups),
+    ...Object.keys(fpG), ...Object.keys(foG),
+    ...Object.keys(ppG), ...Object.keys(poG),
   ])].filter(k => k !== 'unknown').sort().reverse();
 
-  let html = `<table>
-    <thead>
-      <tr>
-        <th>Period</th>
-        <th>FO Peg-In #</th>
-        <th>FO Peg-In Vol</th>
-        <th>FO Peg-Out #</th>
-        <th>FO Peg-Out Vol</th>
-        <th>PP Peg-In #</th>
-        <th>PP Peg-In Vol</th>
-        <th>PP Peg-Out #</th>
-        <th>PP Peg-Out Vol</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>`;
+  const totalPages = Math.max(1, Math.ceil(allKeys.length / PAGE_SIZE));
+  tablePage = Math.max(0, Math.min(tablePage, totalPages - 1));
+  const pageKeys = allKeys.slice(tablePage * PAGE_SIZE, (tablePage + 1) * PAGE_SIZE);
 
-  for (const key of allKeys) {{
-    const fp = fpGroups[key] || [];
-    const fo = foGroups[key] || [];
-    const pp = ppGroups[key] || [];
-    const po = poGroups[key] || [];
+  let html = `<table>
+    <thead><tr>
+      <th>Period</th>
+      <th><span class="th-dot" style="background:#DEFF19"></span>FO In</th>
+      <th>Vol</th>
+      <th><span class="th-dot" style="background:#F0FF96"></span>FO Out</th>
+      <th>Vol</th>
+      <th><span class="th-dot" style="background:#FF9100"></span>PP In</th>
+      <th>Vol</th>
+      <th><span class="th-dot" style="background:#FED8A7"></span>PP Out</th>
+      <th>Vol</th>
+      <th></th>
+    </tr></thead><tbody>`;
+
+  for (const key of pageKeys) {{
+    const fp = fpG[key] || [], fo = foG[key] || [];
+    const pp = ppG[key] || [], po = poG[key] || [];
     const rowId = 'row-' + key.replace(/[^a-zA-Z0-9]/g, '');
 
-    html += `
-      <tr>
-        <td>${{key}}</td>
-        <td>${{fp.length}}</td>
-        <td>${{fmt(sumField(fp, 'value_rbtc'))}}</td>
-        <td>${{fo.length}}</td>
-        <td>${{fmt(sumField(fo, 'value_rbtc'))}}</td>
-        <td>${{pp.length}}</td>
-        <td>${{fmt(sumField(pp, 'value_rbtc'))}}</td>
-        <td>${{po.length}}</td>
-        <td>${{fmt(sumField(po, 'value_rbtc'))}}</td>
-        <td><button class="expand-btn" onclick="toggleDetails('${{rowId}}')">details</button></td>
-      </tr>`;
+    html += `<tr>
+      <td><strong>${{key}}</strong></td>
+      <td>${{fp.length}}</td><td>${{fmt(sumField(fp, 'value_rbtc'))}}</td>
+      <td>${{fo.length}}</td><td>${{fmt(sumField(fo, 'value_rbtc'))}}</td>
+      <td>${{pp.length}}</td><td>${{fmt(sumField(pp, 'value_rbtc'))}}</td>
+      <td>${{po.length}}</td><td>${{fmt(sumField(po, 'value_rbtc'))}}</td>
+      <td><button class="expand-btn" onclick="toggleDetails('${{rowId}}', this)">&darr;</button></td>
+    </tr>`;
 
-    // Detail rows for individual transactions
-    const allTxs = [
-      ...fp.map(e => ({{ ...e, category: 'FO Peg-In' }})),
-      ...fo.map(e => ({{ ...e, category: 'FO Peg-Out' }})),
-      ...pp.map(e => ({{ ...e, category: 'PP Peg-In' }})),
-      ...po.map(e => ({{ ...e, category: 'PP Peg-Out' }})),
+    const txs = [
+      ...fp.map(e => ({{ ...e, cat: 'FO In', bc: 'fo-pegin' }})),
+      ...fo.map(e => ({{ ...e, cat: 'FO Out', bc: 'fo-pegout' }})),
+      ...pp.map(e => ({{ ...e, cat: 'PP In', bc: 'pp-pegin' }})),
+      ...po.map(e => ({{ ...e, cat: 'PP Out', bc: 'pp-pegout' }})),
     ].sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
 
-    for (const tx of allTxs.slice(0, 20)) {{
-      html += `
-        <tr class="detail-row ${{rowId}}">
-          <td colspan="2">${{tx.category}}</td>
-          <td colspan="2"><a class="tx-link" href="https://rootstock.blockscout.com/tx/${{tx.tx_hash}}" target="_blank">${{shortHash(tx.tx_hash)}}</a></td>
-          <td colspan="2">${{fmt(tx.value_rbtc, 6)}} RBTC</td>
-          <td colspan="2">${{tx.timestamp ? new Date(tx.timestamp).toLocaleDateString() : 'N/A'}}</td>
-          <td colspan="2">${{shortHash(tx.address)}}</td>
-        </tr>`;
+    for (const tx of txs.slice(0, 20)) {{
+      html += `<tr class="detail-row ${{rowId}}">
+        <td colspan="2"><span class="badge ${{tx.bc}}">${{tx.cat}}</span></td>
+        <td colspan="2"><a class="tx-link" href="https://rootstock.blockscout.com/tx/${{tx.tx_hash}}" target="_blank">${{shortHash(tx.tx_hash)}}</a></td>
+        <td colspan="2">${{fmt(tx.value_rbtc, 6)}}</td>
+        <td colspan="2">${{tx.timestamp ? new Date(tx.timestamp).toLocaleDateString() : 'N/A'}}</td>
+        <td colspan="2">${{shortHash(tx.address)}}</td>
+      </tr>`;
     }}
-    if (allTxs.length > 20) {{
-      html += `<tr class="detail-row ${{rowId}}"><td colspan="10" style="text-align:center;color:var(--muted)">... and ${{allTxs.length - 20}} more</td></tr>`;
+    if (txs.length > 20) {{
+      html += `<tr class="detail-row ${{rowId}}"><td colspan="10" style="text-align:center;color:var(--muted)">... ${{txs.length - 20}} more</td></tr>`;
     }}
   }}
 
   html += '</tbody></table>';
   document.getElementById('data-table').innerHTML = html;
+
+  const pag = document.getElementById('table-pagination');
+  if (totalPages <= 1) {{ pag.innerHTML = ''; return; }}
+  pag.innerHTML = `
+    <button class="page-btn" onclick="tableNav(-1)" ${{tablePage === 0 ? 'disabled' : ''}}>&larr; Prev</button>
+    <span class="page-info">${{tablePage + 1}} / ${{totalPages}}</span>
+    <button class="page-btn" onclick="tableNav(1)" ${{tablePage >= totalPages - 1 ? 'disabled' : ''}}>Next &rarr;</button>
+  `;
 }}
 
-function renderLPTable() {{
-  // Group deliveries and penalties by LP address
-  const lpData = {{}};
+function tableNav(dir) {{ tablePage += dir; renderTable(); }}
 
+function renderLPSection() {{
+  const lp = DATA.lp_info;
+  const wrapper = document.getElementById('lp-section-wrapper');
+
+  const lpData = {{}};
   for (const e of DATA.flyover_pegins) {{
     const addr = (e.lp_address || '').toLowerCase();
     if (!addr) continue;
-    if (!lpData[addr]) lpData[addr] = {{ pegins: 0, peginVol: 0, penalties: 0, penaltyVol: 0 }};
+    if (!lpData[addr]) lpData[addr] = {{ pegins: 0, peginVol: 0, penalties: 0 }};
     lpData[addr].pegins++;
     lpData[addr].peginVol += e.value_rbtc || 0;
   }}
-
   for (const e of DATA.penalties) {{
     const addr = (e.lp_address || '').toLowerCase();
     if (!addr) continue;
-    if (!lpData[addr]) lpData[addr] = {{ pegins: 0, peginVol: 0, penalties: 0, penaltyVol: 0 }};
+    if (!lpData[addr]) lpData[addr] = {{ pegins: 0, peginVol: 0, penalties: 0 }};
     lpData[addr].penalties++;
-    lpData[addr].penaltyVol += e.penalty_rbtc || 0;
+  }}
+  const topLP = Object.entries(lpData).sort((a,b) => b[1].peginVol - a[1].peginVol)[0];
+
+  if (!lp || !lp.lp_name) {{
+    if (!topLP) {{ wrapper.innerHTML = ''; return; }}
   }}
 
-  const entries = Object.entries(lpData).sort((a, b) => b[1].peginVol - a[1].peginVol);
+  const lpName = (lp && lp.lp_name) ? lp.lp_name : (topLP ? shortHash(topLP[0]) : 'Unknown');
+  const peginLiq = (lp && lp.pegin_rbtc) ? fmt(lp.pegin_rbtc) : 'N/A';
+  const pegoutLiq = (lp && lp.pegout_btc) ? fmt(lp.pegout_btc) : 'N/A';
+  const deliveries = topLP ? topLP[1].pegins : 0;
+  const penaltyCount = topLP ? topLP[1].penalties : 0;
 
-  if (entries.length === 0) {{
-    document.getElementById('lp-table').innerHTML = '<p style="color:var(--muted)">No LP data available</p>';
-    return;
-  }}
-
-  let html = `<table>
-    <thead>
-      <tr>
-        <th>LP Address</th>
-        <th>Deliveries</th>
-        <th>Volume (RBTC)</th>
-        <th>Penalties</th>
-        <th>Penalty Amount (RBTC)</th>
-      </tr>
-    </thead>
-    <tbody>`;
-
-  for (const [addr, d] of entries) {{
-    html += `
-      <tr>
-        <td><a class="tx-link" href="https://rootstock.blockscout.com/address/${{addr}}" target="_blank">${{shortHash(addr)}}</a></td>
-        <td>${{d.pegins}}</td>
-        <td>${{fmt(d.peginVol)}}</td>
-        <td>${{d.penalties}}</td>
-        <td>${{fmt(d.penaltyVol)}}</td>
-      </tr>`;
-  }}
-
-  html += '</tbody></table>';
-  document.getElementById('lp-table').innerHTML = html;
+  wrapper.innerHTML = `
+    <div class="section-title">Liquidity Provider</div>
+    <div class="lp-panel">
+      <div class="lp-header">
+        <h3>LP Performance</h3>
+        <span class="lp-name">${{lpName}}</span>
+      </div>
+      <div class="lp-stats">
+        <div class="lp-stat">
+          <div class="lp-stat-label">Peg-In Liquidity</div>
+          <div class="lp-stat-value" style="color:#DEFF19">${{peginLiq}}</div>
+          <div class="lp-stat-sub">available</div>
+        </div>
+        <div class="lp-stat">
+          <div class="lp-stat-label">Peg-Out Liquidity</div>
+          <div class="lp-stat-value" style="color:#F0FF96">${{pegoutLiq}}</div>
+          <div class="lp-stat-sub">available</div>
+        </div>
+        <div class="lp-stat">
+          <div class="lp-stat-label">Deliveries</div>
+          <div class="lp-stat-value">${{deliveries}}</div>
+          <div class="lp-stat-sub">transfers</div>
+        </div>
+        <div class="lp-stat">
+          <div class="lp-stat-label">Penalties</div>
+          <div class="lp-stat-value" style="color:${{penaltyCount > 0 ? 'var(--red)' : 'var(--green)'}}">${{penaltyCount}}</div>
+          <div class="lp-stat-sub">${{penaltyCount === 0 ? 'clean' : 'incurred'}}</div>
+        </div>
+      </div>
+    </div>
+  `;
 }}
 
-function toggleDetails(rowId) {{
-  document.querySelectorAll('.' + rowId).forEach(el => {{
-    el.classList.toggle('open');
-  }});
+function toggleDetails(rowId, btn) {{
+  const rows = document.querySelectorAll('.' + rowId);
+  const isOpen = rows.length > 0 && rows[0].classList.contains('open');
+  rows.forEach(el => el.classList.toggle('open'));
+  if (btn) btn.innerHTML = isOpen ? '&darr;' : '&uarr;';
+}}
+
+function setChartMode(mode) {{
+  chartMode = mode;
+  document.querySelectorAll('#vol-chart-toggle button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderCharts();
+}}
+
+function renderAll() {{
+  renderHeroKPIs();
+  renderCharts();
+  renderLPSection();
+  tablePage = 0;
+  renderTable();
 }}
 
 function setPeriod(p) {{
   currentPeriod = p;
-  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.period-nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('btn-' + p).classList.add('active');
-  renderCharts();
-  renderTable();
+  renderAll();
 }}
 
-// Initialize
-document.getElementById('generated-at').textContent = 'Generated: ' + new Date(DATA.generated_at).toLocaleString();
-try {{ renderCards(); }} catch(e) {{ console.error('renderCards failed:', e); }}
-try {{ renderCharts(); }} catch(e) {{ console.error('renderCharts failed:', e); }}
-try {{ renderTable(); }} catch(e) {{ console.error('renderTable failed:', e); }}
-try {{ renderLPTable(); }} catch(e) {{ console.error('renderLPTable failed:', e); }}
+const genDate = new Date(DATA.generated_at);
+document.getElementById('generated-at').textContent = '\\u00b7 ' + genDate.toLocaleDateString('en-US', {{ year: 'numeric', month: 'short', day: 'numeric' }});
+try {{ renderAll(); }} catch(e) {{ console.error('renderAll failed:', e); }}
 </script>
 
 </body>

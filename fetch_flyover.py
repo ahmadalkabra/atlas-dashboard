@@ -19,8 +19,8 @@ BASE_URL = "https://rootstock.blockscout.com/api/v2"
 LBC_ADDRESS = "0xaa9caf1e3967600578727f975f283446a3da6612"
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
-# Only fetch events from ~1 year ago (block ~7,230,000 ≈ Feb 2025)
-MIN_BLOCK = 7_230_000
+# Fetch events from ~Feb 2025 (full year of data)
+MIN_BLOCK = 7_430_000
 
 # TeksCapital LP (sole active Flyover LP on RSK mainnet)
 TEKSCAPITAL_RBTC_WALLET = "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852"
@@ -330,14 +330,19 @@ def main():
             continue
 
         event_counts[event_name] = event_counts.get(event_name, 0) + 1
+
+        # Skip PegInRegistered and PegOutRefunded — recognized but not saved
+        if event_name in ("PegInRegistered", "PegOutRefunded"):
+            continue
+
         parser = parsers[event_name]
         parsed = parser(log)
 
         all_block_numbers.append(parsed.get("block_number", 0))
 
-        if event_name in ("CallForUser", "PegInRegistered"):
+        if event_name == "CallForUser":
             all_pegins.append(parsed)
-        elif event_name in ("PegOutDeposit", "PegOutRefunded"):
+        elif event_name == "PegOutDeposit":
             all_pegouts.append(parsed)
         elif event_name == "Penalized":
             all_penalties.append(parsed)

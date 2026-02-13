@@ -1,57 +1,16 @@
 [
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x45b3b8659eb74cf7d56caac705e172a540acda1cb29925bda72f75b67de5d9c5",
-    "block_number": 8501375,
-    "quote_hash": "0xa72a5d061f0821432521cae999c7127da5a915e259f7e57f74e3eec9c18f5d6e",
-    "transferred_amount_wei": "10115550000000000",
-    "transferred_amount_rbtc": 0.01011555,
-    "block_timestamp": "2026-02-06T22:01:55.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x11cd8edcbd07ef678281c260bc1efac182fa10a13da34c3d4ae32f9788f755f1",
-    "block_number": 8501082,
-    "quote_hash": "0x48bf28edcb1b59f2152687279cff69281a6b22bf7f17448e878298b4712f4779",
-    "transferred_amount_wei": "5171110000000000",
-    "transferred_amount_rbtc": 0.00517111,
-    "block_timestamp": "2026-02-06T20:02:25.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf4002b6d25727ed3e78595230a50c87ac3774bf46fd22d579ace975732af2925",
-    "block_number": 8500610,
-    "quote_hash": "0xcea9f523f92ea79a2e8209e3a84d6d02ff5e8e24314ec6480d2e2795200c135e",
-    "transferred_amount_wei": "3004600550000000000",
-    "transferred_amount_rbtc": 3.00460055,
-    "block_timestamp": "2026-02-06T17:02:53.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2758a2c35426739f28d035802d0da9c46dc81faba36023ab8f48de54a2531bce",
-    "block_number": 8500609,
-    "quote_hash": "0x7d4069bce80f301570276ed89af544ec4d00d85476af8cc37cf3e47835cdf562",
-    "transferred_amount_wei": "24948200000000000",
-    "transferred_amount_rbtc": 0.0249482,
-    "block_timestamp": "2026-02-06T17:02:17.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1e098d6ee0a4879ffeb7ddaad71dd60c08e1b33678673d25afea7962751b3a0f",
-    "block_number": 8500275,
-    "quote_hash": "0x5cfe6e351584d1ff0c10ac153bd2228b4b0d2754186f5de5184c659bf27d00ed",
-    "transferred_amount_wei": "33150050000000000",
-    "transferred_amount_rbtc": 0.03315005,
-    "block_timestamp": "2026-02-06T14:35:09.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x72af6c6516b56cc9855e21b27a6c089917e7bbee5d4c7bbd3b131b7cafa618f5",
-    "block_number": 8499990,
-    "quote_hash": "0xb101bb63d6467d34f005e0c2edff169448a91abd27383151e9f56aab7fe14dc1",
-    "transferred_amount_wei": "33150050000000000",
-    "transferred_amount_rbtc": 0.03315005,
-    "block_timestamp": "2026-02-06T12:26:02.000000Z"
+    "event": "CallForUser",
+    "tx_hash": "0x3e4793749d445d7c1fa54d7f81ec578060019a89f6bba5f9e73681b8e9d29a94",
+    "block_number": 8517886,
+    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "dest_address": "0x2eEc6327ea640FF23ea31D19895245101672c232",
+    "gas_limit": "21000",
+    "value_wei": "490000000000000000",
+    "value_rbtc": 0.49,
+    "success": "true",
+    "quote_hash": "0xd08186a2fe4ec393a66a440bd0891d43513c67ffdbff4e8c61109c6ffddc98a2",
+    "block_timestamp": "2026-02-11T17:24:56.000000Z"
   },
   {
     "event": "CallForUser",
@@ -65,6 +24,19 @@
     "success": "true",
     "quote_hash": "0xa72a5d061f0821432521cae999c7127da5a915e259f7e57f74e3eec9c18f5d6e",
     "block_timestamp": "2026-02-06T05:06:56.000000Z"
+  },
+  {
+    "event": "CallForUser",
+    "tx_hash": "0xf264c27b1fdf6410f8830b0c65b6aab4afeb22eb0300fafbc29ac993127c0481",
+    "block_number": 8498731,
+    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "dest_address": "0xAA233f082e9bFB81b5256e6a2Be06552DCbD9c16",
+    "gas_limit": "21000",
+    "value_wei": "5061780000000000",
+    "value_rbtc": 0.00506178,
+    "success": "true",
+    "quote_hash": "0x48bf28edcb1b59f2152687279cff69281a6b22bf7f17448e878298b4712f4779",
+    "block_timestamp": "2026-02-06T03:45:08.000000Z"
   },
   {
     "event": "CallForUser",
@@ -119,24 +91,6 @@
     "block_timestamp": "2026-02-05T19:08:06.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6f034d078641aa617487581a29fa9d42070030fe394d544568102fd4ba879070",
-    "block_number": 8496909,
-    "quote_hash": "0x28231e6852f91b7b90bc5a7438d0b6bd410123bd2436691c2e754c3924bbe110",
-    "transferred_amount_wei": "5117060000000000",
-    "transferred_amount_rbtc": 0.00511706,
-    "block_timestamp": "2026-02-05T15:19:18.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x18c4da54e6e79a3a2ab12739e66c039f79c3888d9159e2d5011ce7f3ca573399",
-    "block_number": 8495890,
-    "quote_hash": "0x2e069e4e778960c8e232b6dbe67ce79649ec914d020878cdfbef20e6656995b7",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-02-05T08:10:58.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xa592d48cbbca71c2094ba5556325c9b992711ec23147b8df5133067a58716a46",
     "block_number": 8494289,
@@ -163,33 +117,6 @@
     "block_timestamp": "2026-02-04T13:55:26.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe676db684c190fb9dfeaaf6101c1cdb69bddfba812bf08c56861441310e8a745",
-    "block_number": 8492857,
-    "quote_hash": "0xebe71b9850a430d4229694e7800cfbdaff87cb9cbaa5d4e2327746afc4dfb4e5",
-    "transferred_amount_wei": "1999826720000000000",
-    "transferred_amount_rbtc": 1.99982672,
-    "block_timestamp": "2026-02-04T11:08:07.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf83337d0d2c3cab46a31b91a090847bbe28065dda195f3331a9e8d816f1d9326",
-    "block_number": 8492608,
-    "quote_hash": "0x17fe43c301e82a8308f3bf4196250403a581b88d8f03e5ade6d7ae29039bc6d1",
-    "transferred_amount_wei": "20131200000000000",
-    "transferred_amount_rbtc": 0.0201312,
-    "block_timestamp": "2026-02-04T09:32:03.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x3fd62b26e04520d6e4eeac752e0e64adfea2eafe5017915bd676b8d6cd148342",
-    "block_number": 8490488,
-    "quote_hash": "0xc3fb31f3059f67e168ee7ffb8d7b2c40f1cfe286d7a461331db5cb945d7f6dd8",
-    "transferred_amount_wei": "44883820000000000",
-    "transferred_amount_rbtc": 0.04488382,
-    "block_timestamp": "2026-02-03T18:47:07.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xb372b82bc1ea3806bedb1c884a417166a9dd8fe1af3b4f1e50ba4809ce75d392",
     "block_number": 8490455,
@@ -203,15 +130,6 @@
     "block_timestamp": "2026-02-03T18:35:11.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5e5cb264a15e4d71c4e261e120c1cba5145990faaecfea422c60f0e94b27ce1b",
-    "block_number": 8490425,
-    "quote_hash": "0xc099b55605473208df5dac0bb9d5768e31c69466e13591f6beab786c09c8d0da",
-    "transferred_amount_wei": "5108730000000000",
-    "transferred_amount_rbtc": 0.00510873,
-    "block_timestamp": "2026-02-03T18:20:03.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xb78bf86d8f95d9655f0430feb6620bfab927abec47e2b4f87acb627cc9983665",
     "block_number": 8490408,
@@ -223,15 +141,6 @@
     "success": "true",
     "quote_hash": "0x17fe43c301e82a8308f3bf4196250403a581b88d8f03e5ade6d7ae29039bc6d1",
     "block_timestamp": "2026-02-03T18:12:18.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x61e0ea4a7d09f6eb6b18ad9c72288c696bbac2a941098ae8c45d55a5c11d595c",
-    "block_number": 8489236,
-    "quote_hash": "0xec1d4c41e12de5ce313ab854ee2a8beee88ecd8e4a5efba734b771586115459c",
-    "transferred_amount_wei": "5117060000000000",
-    "transferred_amount_rbtc": 0.00511706,
-    "block_timestamp": "2026-02-03T09:52:24.000000Z"
   },
   {
     "event": "CallForUser",
@@ -260,15 +169,6 @@
     "block_timestamp": "2026-02-02T22:41:00.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x00d76a3a27b51fe73fb7dd8ccd1e3d1a01c76b73c5bb0e3960c2b13f2d672be6",
-    "block_number": 8487304,
-    "quote_hash": "0x909a10407fdd06eb515331057a92eb1a20a314a113f43b2e80ccb842b3a20094",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-02-02T20:07:58.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xaef40c54643ab7a833224f756aed2685bd0aa7e8fee108e2fef7e237befc94e5",
     "block_number": 8486443,
@@ -295,69 +195,6 @@
     "block_timestamp": "2026-02-02T00:15:57.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x92b2321147f3692707ef98422ab9561ef3341e5a5edaf8506634dd9534163010",
-    "block_number": 8479023,
-    "quote_hash": "0x014f92195bbc1c5cd4f371c25f33fd19b6d10e867d684c9525c7d0a6815599c8",
-    "transferred_amount_wei": "5117060000000000",
-    "transferred_amount_rbtc": 0.00511706,
-    "block_timestamp": "2026-01-31T11:23:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4a44ed49c3e2419b2f54ac3d76cba40806c517b94106240cf85390650e99095a",
-    "block_number": 8479021,
-    "quote_hash": "0x88e04127ba8979d907ba8151e8904cc9f3c10d4ec6cfae8f95701e4a58e1d60b",
-    "transferred_amount_wei": "5117060000000000",
-    "transferred_amount_rbtc": 0.00511706,
-    "block_timestamp": "2026-01-31T11:22:30.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0c9f315a686bba6969d7ac43b5fb79839ea99c3a9509837b47175479cf31bb67",
-    "block_number": 8478763,
-    "quote_hash": "0x1ec5d635ca9f4153a5e838d0dd2ff46468f828eb0a67d7e343204b17c246ec69",
-    "transferred_amount_wei": "2546238300000000000",
-    "transferred_amount_rbtc": 2.5462383,
-    "block_timestamp": "2026-01-31T09:38:34.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1741907677d7ea8f7f8571e27a32e1229a7ab5c5cc0cbb099a9bf5efb15c3094",
-    "block_number": 8478487,
-    "quote_hash": "0x11fd064878c79052c50f5782dd64499f2cd396954ff6c6ffbe4c9e170f211cd6",
-    "transferred_amount_wei": "5217380000000000",
-    "transferred_amount_rbtc": 0.00521738,
-    "block_timestamp": "2026-01-31T07:43:26.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdb831c8847bb226b6f92a42b7a848e82a6b14ec43edc79cecc6667f823c6c38c",
-    "block_number": 8477608,
-    "quote_hash": "0x69ae3fa8e17e33bd60581ffe149c6bffda8f92b844c8d152365e3a4bd61994ab",
-    "transferred_amount_wei": "5217380000000000",
-    "transferred_amount_rbtc": 0.00521738,
-    "block_timestamp": "2026-01-31T01:37:26.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x08498d786abdf1596db1fbd7cf0d4bff6e70cbc6fcf99012486d8e893f50a53c",
-    "block_number": 8477378,
-    "quote_hash": "0x1f17b0b43a12e2eac1518f75723455bcc787793b0b8998706d14c628cea9a635",
-    "transferred_amount_wei": "5217380000000000",
-    "transferred_amount_rbtc": 0.00521738,
-    "block_timestamp": "2026-01-31T00:01:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x461336684392853e74fbb81915115e55fb60831cc46317c62cf1b9258cdfc370",
-    "block_number": 8477309,
-    "quote_hash": "0xfae0859286d42254ebfe1ceb5efda4c236be160ebd37fa403e8ac012c18c0217",
-    "transferred_amount_wei": "5217380000000000",
-    "transferred_amount_rbtc": 0.00521738,
-    "block_timestamp": "2026-01-30T23:35:05.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1e705c605d8fb25596980b9a582f65051c249f08eaae22278d53c83842ab9c97",
     "block_number": 8476553,
@@ -382,6 +219,32 @@
     "success": "true",
     "quote_hash": "0x88e04127ba8979d907ba8151e8904cc9f3c10d4ec6cfae8f95701e4a58e1d60b",
     "block_timestamp": "2026-01-30T18:22:13.000000Z"
+  },
+  {
+    "event": "CallForUser",
+    "tx_hash": "0xb90697658b9d56c588db1ae3698d3d9bed4d047029a666b8b7442bf94420d8e7",
+    "block_number": 8476352,
+    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "dest_address": "0xaC31A4bEEdd7EC916b7a48A612230Cb85c1aaf56",
+    "gas_limit": "21000",
+    "value_wei": "2542323070000000000",
+    "value_rbtc": 2.54232307,
+    "success": "true",
+    "quote_hash": "0x1ec5d635ca9f4153a5e838d0dd2ff46468f828eb0a67d7e343204b17c246ec69",
+    "block_timestamp": "2026-01-30T16:58:20.000000Z"
+  },
+  {
+    "event": "CallForUser",
+    "tx_hash": "0x1bf0d990c6eb4b5f8227e72f971cde191188157ac9cec83ed6b2954bf4c55d2c",
+    "block_number": 8475866,
+    "from_address": "0x4202BAC9919C3412fc7C8BE4e678e26279386603",
+    "dest_address": "0x76C6da1B50Afa8b390741a1744cBb951b1216a90",
+    "gas_limit": "21000",
+    "value_wei": "5100000000000000",
+    "value_rbtc": 0.0051,
+    "success": "true",
+    "quote_hash": "0x11fd064878c79052c50f5782dd64499f2cd396954ff6c6ffbe4c9e170f211cd6",
+    "block_timestamp": "2026-01-30T13:52:27.000000Z"
   },
   {
     "event": "CallForUser",
@@ -423,31 +286,17 @@
     "block_timestamp": "2026-01-30T05:03:59.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2f1969c3c3a72411c73d1f513693d21f717b1765929ed95753404d8b7288a6e8",
-    "block_number": 8470368,
+    "event": "CallForUser",
+    "tx_hash": "0x29092cd294667ff3eeb84a8ffaec9f43e3ac689a6ea40a062aeabd5a1a0f95eb",
+    "block_number": 8467195,
+    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
+    "dest_address": "0xDFd9786828D1716D68B8aC7104c48D7E298752E0",
+    "gas_limit": "21000",
+    "value_wei": "45000000000000000",
+    "value_rbtc": 0.045,
+    "success": "true",
     "quote_hash": "0x653d13759edb42724ce3f69a65b558d8ce13d04774c03ebbc4f47c3e39343ce9",
-    "transferred_amount_wei": "45168050000000000",
-    "transferred_amount_rbtc": 0.04516805,
-    "block_timestamp": "2026-01-28T22:40:58.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2af5759e776318a64c34f7cbd384c2b29fec454a7f8c6b5ae4f048d002dc50ee",
-    "block_number": 8469581,
-    "quote_hash": "0xb4ac70b0cd78135659e98b64e4e91e3366dc2d9511eeffa60d2ba49eee44e87b",
-    "transferred_amount_wei": "5217380000000000",
-    "transferred_amount_rbtc": 0.00521738,
-    "block_timestamp": "2026-01-28T17:37:24.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7af6cacfe22128893221aab0a20dea5451b3e9cd285eaf11b1b394f66d5a2100",
-    "block_number": 8469560,
-    "quote_hash": "0xb7dba2da2935e7c837e9d263ecea7e57581c25c2b57692bbbd4af5566e54d376",
-    "transferred_amount_wei": "10116200000000000",
-    "transferred_amount_rbtc": 0.0101162,
-    "block_timestamp": "2026-01-28T17:28:55.000000Z"
+    "block_timestamp": "2026-01-28T01:10:59.000000Z"
   },
   {
     "event": "CallForUser",
@@ -476,24 +325,6 @@
     "block_timestamp": "2026-01-27T19:15:31.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9450a2d6b91da269f40afefd6dda48dbc57af51aa8ff4c99aef84d33b965180f",
-    "block_number": 8461993,
-    "quote_hash": "0x91c52d711915698fffb0ef25e39567f46536fea39cce4eea0cbc1aa99a93963e",
-    "transferred_amount_wei": "80220550000000000",
-    "transferred_amount_rbtc": 0.08022055,
-    "block_timestamp": "2026-01-26T13:29:00.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd28f43627fe6ee527632074e2b8c6341946f8110cb16865e601ea87d2208eb9f",
-    "block_number": 8461475,
-    "quote_hash": "0x534724587ef3abeb954ffe615bd0d8732433bc957254622931effa1f2f08fd50",
-    "transferred_amount_wei": "10116200000000000",
-    "transferred_amount_rbtc": 0.0101162,
-    "block_timestamp": "2026-01-26T10:05:09.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x8357943a949e7a1472ed8882fbfa936104d62ae292cad61eebf204e941c5607c",
     "block_number": 8459062,
@@ -520,15 +351,6 @@
     "block_timestamp": "2026-01-25T13:40:12.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x10014374c96016c46b0e5eadc0bfa8cb374901ccb55be5384edb9024f756ebcc",
-    "block_number": 8451808,
-    "quote_hash": "0x0b3dc521b5a69f3f9fc9e3ee56b9a1143d16f069b6f0c461653ab0956634953a",
-    "transferred_amount_wei": "5108150000000000",
-    "transferred_amount_rbtc": 0.00510815,
-    "block_timestamp": "2026-01-23T14:17:25.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xcb0f5b0854bb0cc46fd5b7ad2f9ea3b2727f0d8abc4f275359a1d3512a8e7d63",
     "block_number": 8449530,
@@ -540,15 +362,6 @@
     "success": "true",
     "quote_hash": "0x0b3dc521b5a69f3f9fc9e3ee56b9a1143d16f069b6f0c461653ab0956634953a",
     "block_timestamp": "2026-01-22T22:42:00.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe57226f6f08363754944e4b7e5b31b57e7416fa6e0119d81b5f7f6a4721861a8",
-    "block_number": 8447422,
-    "quote_hash": "0x1a571add32a1841a37d5d33160a75ff28047b2576743357a4b30af3277918a3f",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-22T08:20:20.000000Z"
   },
   {
     "event": "CallForUser",
@@ -564,15 +377,6 @@
     "block_timestamp": "2026-01-21T16:31:26.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1ed78877f5ecc759b014d70419dc434eca0af08fefa0acd5c52bb556f00f5de5",
-    "block_number": 8444006,
-    "quote_hash": "0x7c6d672b0bb8a40ab634647fec8757cdc47cff8fa0ef4264079fd355f440e4f0",
-    "transferred_amount_wei": "5108150000000000",
-    "transferred_amount_rbtc": 0.00510815,
-    "block_timestamp": "2026-01-21T08:54:25.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x33c54257d2c6a267206c918eca71df7850174bd1e68052c5b4c6d41d38ee262b",
     "block_number": 8441399,
@@ -584,24 +388,6 @@
     "success": "true",
     "quote_hash": "0x7c6d672b0bb8a40ab634647fec8757cdc47cff8fa0ef4264079fd355f440e4f0",
     "block_timestamp": "2026-01-20T14:54:15.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd0f76fb228a476c8fc56a3d5fba459aa032d3a185c22a74f7e3778541bcfcf74",
-    "block_number": 8426388,
-    "quote_hash": "0xafd4a4fc476a623516c93beb0bf0659b1704c202ef7b08f2ca2daaaa145fe130",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-16T08:21:25.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x37490d0dc98f9a1a8946eede4a286c14f1e02734fff24c6bc4a48939a4c268b8",
-    "block_number": 8425696,
-    "quote_hash": "0x014f5f6fcf30c8f592360e63ab30f7672b13257f914ce3d6debbc6a3baa759fb",
-    "transferred_amount_wei": "6120350000000000",
-    "transferred_amount_rbtc": 0.00612035,
-    "block_timestamp": "2026-01-16T03:37:24.000000Z"
   },
   {
     "event": "CallForUser",
@@ -617,24 +403,6 @@
     "block_timestamp": "2026-01-15T14:45:23.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x43a0f190060aabb8e3682bbf9200751fbe55f867bba11a430912ee2d9dff5d15",
-    "block_number": 8423529,
-    "quote_hash": "0xb4400de501db1e8ad982e5d068ac59b5398e9f0a4831bb6bd68d871d34a8d92b",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-15T12:57:11.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xfc66daeb9d6a6236d12b40acc62892f6d5e04d24f614065e1c15f2b969209923",
-    "block_number": 8423521,
-    "quote_hash": "0x9e981f7499ec85024a9850108201602eab4d0323109500dbad014cdb0bab7e5c",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-15T12:54:13.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x6508fdd1f0baedfdd13fb0349b58b4772d66f1e084f34d49691fd2112398ed11",
     "block_number": 8423203,
@@ -646,33 +414,6 @@
     "success": "true",
     "quote_hash": "0x014f5f6fcf30c8f592360e63ab30f7672b13257f914ce3d6debbc6a3baa759fb",
     "block_timestamp": "2026-01-15T10:42:23.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0172be6e131fe808cbc1b3a9522d55f3743aad11bae4dde0f2e237d8859796ce",
-    "block_number": 8423065,
-    "quote_hash": "0x02229f4ab2c0fb0d449a761ad007eb7488eb07760a451ff6cd032c4c39d9e1d0",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-15T09:48:17.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x794c2473f0038ed7bbf7c15a3e8b82e02b6a4183129ae97e9ca279d1775520cd",
-    "block_number": 8422895,
-    "quote_hash": "0xce128ecbfabddbd185c83854f3c7ec13f9604b8cd1d9b48b0e8b75f29dee1e2c",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-15T08:31:03.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb99368d0188aefe06aca7bb4fdb1117bbf599a73556120af3a83a8aaedcc3547",
-    "block_number": 8422893,
-    "quote_hash": "0x0dff34b7b0131b79e6f18715e09c297464fe0302729ddeb5d8c372bfa8dd4d51",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-15T08:30:11.000000Z"
   },
   {
     "event": "CallForUser",
@@ -740,24 +481,6 @@
     "block_timestamp": "2026-01-14T16:14:16.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x42a249394ab937553d53d534f974289e07cb5afd94a70c29a121e3baf45f7c83",
-    "block_number": 8419853,
-    "quote_hash": "0xbde358fdf76067c2d89bba78fb123c4820c3ed9261f71fd6211b68b46e79f14c",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-14T11:45:24.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xadd114035cf675931bc6782ee5ac81dfa9c4cd849ffa4c25a2f707f967fd6d93",
-    "block_number": 8418731,
-    "quote_hash": "0x7ede02de7340654864d7d678c9f9188c3a1e66eb6977723e016ea1ffbd7c5a96",
-    "transferred_amount_wei": "5468080000000000",
-    "transferred_amount_rbtc": 0.00546808,
-    "block_timestamp": "2026-01-14T03:57:44.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x6143f3d7ef5d30275b8e45a0bbcece4d82233c188a4d27e4a5785ab5c3feffc6",
     "block_number": 8417161,
@@ -784,15 +507,6 @@
     "block_timestamp": "2026-01-13T10:38:25.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x10a7a3133d27c961a3782078175e70596628a4fc2bdf3cfa66eb2b23d285ea00",
-    "block_number": 8415871,
-    "quote_hash": "0x9ad1bd17309f8d22caaba4f722261ff3ae5da149e86aca3f1749bc42f75a19a6",
-    "transferred_amount_wei": "9979680000000000",
-    "transferred_amount_rbtc": 0.00997968,
-    "block_timestamp": "2026-01-13T08:18:26.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xa437f02e3461df0b6f0e87c1d1630e7f6521bcb00d8a981917fe2563a37b6c93",
     "block_number": 8413323,
@@ -804,15 +518,6 @@
     "success": "true",
     "quote_hash": "0x9ad1bd17309f8d22caaba4f722261ff3ae5da149e86aca3f1749bc42f75a19a6",
     "block_timestamp": "2026-01-12T14:57:38.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8514918685412e987770b6bba772293d3f049128e1643272ee49f928163a5f93",
-    "block_number": 8405149,
-    "quote_hash": "0x04989ea0bc2ae3cc644a820fc753b69975843da5d5e167d5f7f1a63c8fd13892",
-    "transferred_amount_wei": "5108720000000000",
-    "transferred_amount_rbtc": 0.00510872,
-    "block_timestamp": "2026-01-10T05:36:11.000000Z"
   },
   {
     "event": "CallForUser",
@@ -828,15 +533,6 @@
     "block_timestamp": "2026-01-09T14:43:16.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf829d62c61b85697b44b050dd9b0fe0bee545f83e1d34e53de40e27b657d029b",
-    "block_number": 8394977,
-    "quote_hash": "0xdb51cc0a707185a8b7a2f5a0c686edb5c60b620dc172523ea06c1278c9bcaf32",
-    "transferred_amount_wei": "5108070000000000",
-    "transferred_amount_rbtc": 0.00510807,
-    "block_timestamp": "2026-01-07T08:12:46.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xdbd287f72f0e052ec03ff9a890864cdc323f849a5f6efc7fe0cf6819e5eeb152",
     "block_number": 8392403,
@@ -848,15 +544,6 @@
     "success": "true",
     "quote_hash": "0xdb51cc0a707185a8b7a2f5a0c686edb5c60b620dc172523ea06c1278c9bcaf32",
     "block_timestamp": "2026-01-06T14:45:42.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8af3d1f7ba7a28cf55fb5797eb077840b143bc7e4ff83536cdc93a782e960e44",
-    "block_number": 8329308,
-    "quote_hash": "0xbd8c398dc14ff7fed63b82d02d631c11d983e65a9a52d5e7877f9008cd598d0f",
-    "transferred_amount_wei": "5208200000000000",
-    "transferred_amount_rbtc": 0.0052082,
-    "block_timestamp": "2025-12-19T15:47:03.000000Z"
   },
   {
     "event": "CallForUser",
@@ -872,15 +559,6 @@
     "block_timestamp": "2025-12-18T21:44:22.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6009a78c4fd789752f41b82deb1484c7ee5e9c9a6afa26149559ae06dfbae8e3",
-    "block_number": 8296492,
-    "quote_hash": "0xce3ef81009e0cef62b061501916d4d2c4e8743ddeabf22d719925f92310e63fc",
-    "transferred_amount_wei": "3004600550000000000",
-    "transferred_amount_rbtc": 3.00460055,
-    "block_timestamp": "2025-12-10T07:32:06.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xe9f2180acb3a14c4e44d7bda550fbced5feff2c33c80a0825639ffd3cf32927b",
     "block_number": 8294230,
@@ -892,15 +570,6 @@
     "success": "true",
     "quote_hash": "0xce3ef81009e0cef62b061501916d4d2c4e8743ddeabf22d719925f92310e63fc",
     "block_timestamp": "2025-12-09T16:11:05.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd8cfc378354c627d651de2580f83d1c956084a1fd4e6851e2b397d4bd9dab921",
-    "block_number": 8269331,
-    "quote_hash": "0x473ffa4d362a2f4b78ef9b67f3bb406eda323befd782a422bb4588381dc2bf1d",
-    "transferred_amount_wei": "299549050000000000",
-    "transferred_amount_rbtc": 0.29954905,
-    "block_timestamp": "2025-12-02T13:59:20.000000Z"
   },
   {
     "event": "CallForUser",
@@ -916,15 +585,6 @@
     "block_timestamp": "2025-12-01T19:10:16.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x95b2436dd60feb81c831ae6815fb80745e935d744fd312f569e8d5d6d0c1b64a",
-    "block_number": 8265377,
-    "quote_hash": "0xfb92354e77b8079a001fd4c9d1ee60b066f0d9f93907912a74a6dbfa348d7538",
-    "transferred_amount_wei": "801300550000000000",
-    "transferred_amount_rbtc": 0.80130055,
-    "block_timestamp": "2025-12-01T10:41:07.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x9d74dc90317fba8b63b2c12fd398212e81b66f687300917e82fa03b8ad8fc28c",
     "block_number": 8263092,
@@ -936,15 +596,6 @@
     "success": "true",
     "quote_hash": "0xfb92354e77b8079a001fd4c9d1ee60b066f0d9f93907912a74a6dbfa348d7538",
     "block_timestamp": "2025-11-30T18:40:09.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xaa0b5d69013bb3281408454851535f7c5fd9c361bcbd0f001c2309c59cd36035",
-    "block_number": 8245037,
-    "quote_hash": "0x72cedfc0dd93c432ff6c1a6c7eb0e53d04c6c01ecafc3f42eed98975532355ae",
-    "transferred_amount_wei": "4006100550000000000",
-    "transferred_amount_rbtc": 4.00610055,
-    "block_timestamp": "2025-11-25T15:14:07.000000Z"
   },
   {
     "event": "CallForUser",
@@ -960,15 +611,6 @@
     "block_timestamp": "2025-11-24T19:32:09.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc8dc4203aaa39a042da7dcaa2e83558edc3123e17ce132f5fc35d92337b541a7",
-    "block_number": 8232988,
-    "quote_hash": "0xf179811924f219aab201eb2d02bb38bfba77a5af5253097afb0f2f4e9bb6ff26",
-    "transferred_amount_wei": "363144300000000000",
-    "transferred_amount_rbtc": 0.3631443,
-    "block_timestamp": "2025-11-22T03:12:06.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x4a091fb31e29e2fae862a7fdbe34661aeb20ea5d8342da50749b28039e54243c",
     "block_number": 8230792,
@@ -982,15 +624,6 @@
     "block_timestamp": "2025-11-21T12:15:06.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9cbf7ca629caf3c27383948c95286ac4ba9dfd92c0a2b0fa2c28f2ec6d3d288b",
-    "block_number": 8226705,
-    "quote_hash": "0x4a03b89029e851d869792a418a08ffd52217bdc03d9508d7c17cb67ac3f46caf",
-    "transferred_amount_wei": "5409150000000000",
-    "transferred_amount_rbtc": 0.00540915,
-    "block_timestamp": "2025-11-20T07:44:06.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xb42fdda44c4c2e2bc62cc57c11202e03a0ac568a30ca67824c4fde5f3f45b9b4",
     "block_number": 8224099,
@@ -1002,24 +635,6 @@
     "success": "true",
     "quote_hash": "0x4a03b89029e851d869792a418a08ffd52217bdc03d9508d7c17cb67ac3f46caf",
     "block_timestamp": "2025-11-19T13:46:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6571289583d6b9e3034022303928572675e1fd20010d1006b1ba5918651f8570",
-    "block_number": 8220137,
-    "quote_hash": "0xe3f516e3d2214ec1f26ef080233f9e50a3517153133ec8fbf9ea47fd938ed135",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-11-18T10:32:06.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x60374270825dfac27e4414b69581ea6d6879e5b4f169c705b3adac007a1ec3e7",
-    "block_number": 8219852,
-    "quote_hash": "0x891ea85d877add1d400ba39ad8ed31bbf195bdfc8fb8d747d6f3a48cebb94437",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-11-18T08:38:13.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1048,15 +663,6 @@
     "block_timestamp": "2025-11-17T15:09:24.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x05f65248be94aec899565bdf2607a0af4c3ac87c5cc97a57c6d1b64ba171a799",
-    "block_number": 8214627,
-    "quote_hash": "0x3ae4f25734e6771284ce0a97c487ed010be85ae99981f4feb0028470edae7d5d",
-    "transferred_amount_wei": "19129050000000000",
-    "transferred_amount_rbtc": 0.01912905,
-    "block_timestamp": "2025-11-16T20:35:15.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xe4c2bca47558c9fc471dc3a5b808fed828232ba580bdd332b4c152c0b624e5ae",
     "block_number": 8212119,
@@ -1068,15 +674,6 @@
     "success": "true",
     "quote_hash": "0x3ae4f25734e6771284ce0a97c487ed010be85ae99981f4feb0028470edae7d5d",
     "block_timestamp": "2025-11-16T03:42:19.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4a73cf2b98eeb45001001d0cbe41936ddb930b58084a67b9b7449deb264050b4",
-    "block_number": 8209230,
-    "quote_hash": "0x36d2869b4faceb3cf23a7d32677f233416b56fa9fc09c7979c805748f9b31879",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-11-15T07:44:07.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1092,15 +689,6 @@
     "block_timestamp": "2025-11-14T15:38:06.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xfac98afcd121cc51c04e45308f76f4d3c49709abfca754bccca539c79244f609",
-    "block_number": 8198343,
-    "quote_hash": "0xd8d0608116c5cff01032f2214d95feee3dc318154d91b84a9577a457b027aa88",
-    "transferred_amount_wei": "228843150000000000",
-    "transferred_amount_rbtc": 0.22884315,
-    "block_timestamp": "2025-11-12T04:17:11.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x90478b6c9732cb61be5fe35abbf2a024b38281127a888ccd2c11ff37a5ceb25d",
     "block_number": 8195967,
@@ -1112,15 +700,6 @@
     "success": "true",
     "quote_hash": "0xd8d0608116c5cff01032f2214d95feee3dc318154d91b84a9577a457b027aa88",
     "block_timestamp": "2025-11-11T11:54:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1f8c34bd0c9ea3ba319ce71b5d129e57ad0c55996ee5807395530154785ec169",
-    "block_number": 8195134,
-    "quote_hash": "0xf85959956d48b8829df38ff5ec61cdfd29a9eda8dff82b32e7b5191328356e95",
-    "transferred_amount_wei": "5959330000000000",
-    "transferred_amount_rbtc": 0.00595933,
-    "block_timestamp": "2025-11-11T06:02:22.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1136,33 +715,6 @@
     "block_timestamp": "2025-11-10T15:35:30.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9526468a40b1ae57ec0e00a7d7a7c638680483ca9223a155d27099bc967bfc14",
-    "block_number": 8178273,
-    "quote_hash": "0xe9337200bd8d06ce470db4aaa551f3cd7d0682282cfe7f310eb3cbfe11c7eed9",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-11-06T09:32:17.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd316f7392cc820835253e95b3e35c00aff81834413bde6ae9c4ba2c53ba3eb35",
-    "block_number": 8176455,
-    "quote_hash": "0x86711e8a815ffc3ba8ce631abc40bd0f9d56351aab10f138f9bac1227d6c4086",
-    "transferred_amount_wei": "500850550000000000",
-    "transferred_amount_rbtc": 0.50085055,
-    "block_timestamp": "2025-11-05T21:05:06.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x185e7e2ca36e3ea13656f740ef0b273a11c90525b93e00914eb4d1083ad094e0",
-    "block_number": 8176235,
-    "quote_hash": "0x33126042d7612796c2b650e603ac99b4601e287e1c04ed43b514e128fdfcdec0",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-11-05T19:35:18.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x040d4b60bf97a372c8fe267f509942bdf23cc116ee2f18819e2a0a276bb4be11",
     "block_number": 8176107,
@@ -1174,24 +726,6 @@
     "success": "true",
     "quote_hash": "0xe9337200bd8d06ce470db4aaa551f3cd7d0682282cfe7f310eb3cbfe11c7eed9",
     "block_timestamp": "2025-11-05T18:46:13.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xfe6ec0acc4d72d2974e2c677ebfda8b7d73879988cceb251fe45d80373c9b8a1",
-    "block_number": 8175376,
-    "quote_hash": "0x540a4bccb30941afc02e7fc0c0270a0685fd7d3627a8e57bf470cea11c86ac96",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-11-05T13:40:50.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4c28cf3a761c82d1edd80feab720ff58ba288264018137af1910185b6e46aaf4",
-    "block_number": 8174509,
-    "quote_hash": "0x8d7f73ce0e46655923c3fd2c34271a83744737a6025c81db12d60785507727b5",
-    "transferred_amount_wei": "2448768050000000000",
-    "transferred_amount_rbtc": 2.44876805,
-    "block_timestamp": "2025-11-05T07:47:17.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1233,24 +767,6 @@
     "block_timestamp": "2025-11-04T15:12:10.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x862e0d5011774c3f516ee1a8a0138665f0210cb909b67ec968c1e9b1c7a4ea3d",
-    "block_number": 8153944,
-    "quote_hash": "0xbf091e82de20094dc889705b0d91d505156022949d3585572f1dc59ca5f19b63",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-30T08:48:02.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1ac7b4d8b2e5c2b229ac8c7d0a1e97bba7d4556f59571ec5486ecfa3d242fee7",
-    "block_number": 8153938,
-    "quote_hash": "0xb3fa2e76b85fe41e5946989fe503df7b1c3ebbf6de4662a3b2de4692935fcbb8",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-30T08:44:10.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x230240359418596a2e1554a01a6251fc626609fc5aa09d0c2acd4283ea85532f",
     "block_number": 8151517,
@@ -1277,15 +793,6 @@
     "block_timestamp": "2025-10-29T15:45:07.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x35261f85a14e51ab401345bcb3af218b3eeae19d1fad302294fae135a196bcbe",
-    "block_number": 8145774,
-    "quote_hash": "0x42f2f570ad68d72ea20936cf64098238d603215a0850d7ad6fc62570a0b11a31",
-    "transferred_amount_wei": "2053175550000000000",
-    "transferred_amount_rbtc": 2.05317555,
-    "block_timestamp": "2025-10-28T00:27:57.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x3a0e285818876ebff1b0aac12739f838246f97ec8e4830fd683a3d350bcc5165",
     "block_number": 8143620,
@@ -1297,15 +804,6 @@
     "success": "true",
     "quote_hash": "0x42f2f570ad68d72ea20936cf64098238d603215a0850d7ad6fc62570a0b11a31",
     "block_timestamp": "2025-10-27T09:20:45.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x568a95acfd4218b4c92e77b22b4c4108f7b4690cc399a69b4e90fac768ac9205",
-    "block_number": 8138097,
-    "quote_hash": "0x829fa8bf02f95abab4c3b05702345aa28e532bcd50882f951514fb5f362fdc5a",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-25T18:50:07.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1321,24 +819,6 @@
     "block_timestamp": "2025-10-25T03:17:08.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdfb92b36f0d48f938dcbe30624fa43a0d84ae478b4db4bb7539b3ec9a514e31b",
-    "block_number": 8134086,
-    "quote_hash": "0x909890f0d6dd37a18068e0f83c5ed2849950f01fcb183646f9a89c1b3daa3d1b",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-10-24T14:56:30.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x03a99e4ea311f45a9d67c1092a89b3f1bff6148a5a7dc6e73548d5d3c26c3884",
-    "block_number": 8130201,
-    "quote_hash": "0xe7e7b10997d27ced3db156cff79b707735ae040d7fadaa1d9fc5a084e47a355a",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-23T12:05:05.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xe79d8a28ff277b8feeba0d153a02f998549f1a3b02ad375a355a2c13aa3092b2",
     "block_number": 8127704,
@@ -1352,15 +832,6 @@
     "block_timestamp": "2025-10-22T18:38:54.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc2eef93abddc641cb6a7507435b3d36ba8b88b58cee22cb495b2c5224449231c",
-    "block_number": 8127429,
-    "quote_hash": "0x5913b235ce5c209a24d08386be88c132bcc3bf43440b51b1f7788ea662c15d26",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-10-22T16:49:03.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1b721a4df6217c38858d1919534896ec8965a74ab136f7ae3c054f2cdca85bc0",
     "block_number": 8125218,
@@ -1372,24 +843,6 @@
     "success": "true",
     "quote_hash": "0x5913b235ce5c209a24d08386be88c132bcc3bf43440b51b1f7788ea662c15d26",
     "block_timestamp": "2025-10-22T01:28:05.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf7c1cf07e7a580667f5a4fa3980f6319014ba5d6cc4f7da4552cf79306832d2b",
-    "block_number": 8122986,
-    "quote_hash": "0x3ff4ef4849c1e688f4f3e797c812f6b2b660c7290babad70da94e3ecc6144a78",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-21T09:30:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe4f30026f26709e3220367953e180d4e96d81b812ce1aee4aaefb7a38fb45eeb",
-    "block_number": 8122862,
-    "quote_hash": "0x9a72dbfd781bd3c778acf3acee2b9cc892b9f275e9697f42b8c1fbf0166fe4a2",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-10-21T08:40:27.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1418,33 +871,6 @@
     "block_timestamp": "2025-10-20T19:05:12.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd3a528d87b3ec2aacc61df9b8b726c4cca1b400c60ca6ea759bec0db5ee4d7e7",
-    "block_number": 8113397,
-    "quote_hash": "0x63fc5aef4d186a340454b41e14964aca437def1c97c7046fcb590a97bd41f179",
-    "transferred_amount_wei": "331597050000000000",
-    "transferred_amount_rbtc": 0.33159705,
-    "block_timestamp": "2025-10-18T14:42:39.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x3c40c90dbdea51ff7a21d98201e0f376f1c10c9f613ea9530122854778cc8436",
-    "block_number": 8112413,
-    "quote_hash": "0xad274f15ab3eb6ba904abd7f81a2182e4b6999a45d8429ef6ee8b6c8de13c97b",
-    "transferred_amount_wei": "89234050000000000",
-    "transferred_amount_rbtc": 0.08923405,
-    "block_timestamp": "2025-10-18T07:45:41.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xde189a86e9888726da84fb254b97409ad59032fa956e35a8ed1241e78c85518a",
-    "block_number": 8111457,
-    "quote_hash": "0x86dd66f55dac866ea812c64d2297c1a7544ab0c92776bdcc706a4580d8441094",
-    "transferred_amount_wei": "100250550000000000",
-    "transferred_amount_rbtc": 0.10025055,
-    "block_timestamp": "2025-10-18T01:15:43.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x7e923e110e3046edb9c7ba3ba2079aed1139789ba8bbf91968664ec752d3badc",
     "block_number": 8111097,
@@ -1456,15 +882,6 @@
     "success": "true",
     "quote_hash": "0x63fc5aef4d186a340454b41e14964aca437def1c97c7046fcb590a97bd41f179",
     "block_timestamp": "2025-10-17T22:57:03.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x17053c152e31eafd19411f6d41e4da2684d90205d3a3f084dda13b53503fe0d2",
-    "block_number": 8110996,
-    "quote_hash": "0x4b3be1c17cf8c8503075ebeadb674cf74315acae212051b188857a7358ec59ce",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-17T22:14:41.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1493,24 +910,6 @@
     "block_timestamp": "2025-10-17T08:30:42.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x36a90b28161a0658f7289854328d9243129f4f4853fb6df38bc006412d6a6b30",
-    "block_number": 8105743,
-    "quote_hash": "0x7ee462f3f36a9e2497446b7f4419b4a011f4510122197aa4369aaa61e9df54b7",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-10-16T09:34:15.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9668983b0a51ec211920b0bcf49605de69f7fac7d92e83d775590c3bac541a08",
-    "block_number": 8105676,
-    "quote_hash": "0xc7c40c979e0ecb720d9cf98eab80b0786d82ecbc8532991f3ea0b563db002f5e",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-10-16T09:01:27.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xe54513185f4c72a458957bbcb3811d6705cc7fe591ab93617a869e03f5c888ef",
     "block_number": 8103340,
@@ -1537,15 +936,6 @@
     "block_timestamp": "2025-10-15T16:11:12.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc040f6e16f9bafce55ebed954fdd87d2dc7d6579aaf9ed44a706394906220996",
-    "block_number": 8102793,
-    "quote_hash": "0x169e84ddd4cebfa1518b2c813f932facc2fe3340c68400dd5ef5c0d6ddf2cea7",
-    "transferred_amount_wei": "20130550000000000",
-    "transferred_amount_rbtc": 0.02013055,
-    "block_timestamp": "2025-10-15T13:21:33.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x614d7915f128d3c6174226d636a4a4d0f23da24d158ed04396c23c36a782961a",
     "block_number": 8100724,
@@ -1557,24 +947,6 @@
     "success": "true",
     "quote_hash": "0x169e84ddd4cebfa1518b2c813f932facc2fe3340c68400dd5ef5c0d6ddf2cea7",
     "block_timestamp": "2025-10-14T22:54:15.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4d23c01277e0c1fefdf70f0282ad221d8f5c494a17e15e8619d44a78dcaba445",
-    "block_number": 8097562,
-    "quote_hash": "0x1f2aac41e784fcef39db25bcf597a43ff066ff6cf10218afd601e8d79665cbb3",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-14T00:54:40.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd8370d56e70412a62bd7f6b7bdb64b7e8e7a3ba70e70322311b1801360958829",
-    "block_number": 8095530,
-    "quote_hash": "0xca7338d7f40ab786b6b74cc849d90e8833277b34edcbe4973acbf9e3f0769590",
-    "transferred_amount_wei": "914470050000000000",
-    "transferred_amount_rbtc": 0.91447005,
-    "block_timestamp": "2025-10-13T10:51:55.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1603,24 +975,6 @@
     "block_timestamp": "2025-10-12T17:03:44.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7e2be05afb5411f680d3bda2ecd27454f65ac119e06c01b6ba14adf226a24983",
-    "block_number": 8085345,
-    "quote_hash": "0x0b0cc6c41daa9d9c52d5a7534cfe9ed892b19e280b4ff0baa0d2e7ffdcc1de9b",
-    "transferred_amount_wei": "10115550000000000",
-    "transferred_amount_rbtc": 0.01011555,
-    "block_timestamp": "2025-10-10T12:21:47.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0715484e306545c195c865920d985c16feefc9c616cb76298907c0926718c36a",
-    "block_number": 8085179,
-    "quote_hash": "0x41fc7516e3022431205e196c83f7552fe8af0cde3859f64facae476052e7e45b",
-    "transferred_amount_wei": "10115550000000000",
-    "transferred_amount_rbtc": 0.01011555,
-    "block_timestamp": "2025-10-10T11:01:24.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x74404f9181586e7e732961d37ce5b17a659f0702044973ed3a9f1fb8f0b385e8",
     "block_number": 8082879,
@@ -1647,15 +1001,6 @@
     "block_timestamp": "2025-10-09T17:22:53.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf55ff916e20cd8b2b41ecf35a8b7d3ef0a6cd133330c3bec76ef5b07eecb5fbd",
-    "block_number": 8070947,
-    "quote_hash": "0x020aa7b3c19aca4e65ef0636c0f324a1d97bd1346b5868ebc0be2ed1f1ade38a",
-    "transferred_amount_wei": "1459286050000000000",
-    "transferred_amount_rbtc": 1.45928605,
-    "block_timestamp": "2025-10-06T08:10:34.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x328b3bf1631eaa0382a3cad1f2e9eae9959301bb4226dccb2c4c1ef73625fd4c",
     "block_number": 8068822,
@@ -1669,15 +1014,6 @@
     "block_timestamp": "2025-10-05T17:13:50.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xfefc1014f1194dbedbbe3135149815f77c1ac07bfee9c66c8d095b3c036961c7",
-    "block_number": 8062989,
-    "quote_hash": "0x7b42ee2c81da2152de3e3dd353f7263fce253178653e1352f76f160e6f48cf97",
-    "transferred_amount_wei": "946518050000000000",
-    "transferred_amount_rbtc": 0.94651805,
-    "block_timestamp": "2025-10-04T00:30:33.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x9b976433a9523726fa2a0d52406792ec06be0a51df04596e087b5da4ddf25f0b",
     "block_number": 8059981,
@@ -1689,24 +1025,6 @@
     "success": "true",
     "quote_hash": "0x7b42ee2c81da2152de3e3dd353f7263fce253178653e1352f76f160e6f48cf97",
     "block_timestamp": "2025-10-03T03:51:38.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x964eb66e8a6bea423d212055f83fe7ea2dbbecad385afce19c0c2f16454dae2d",
-    "block_number": 8059004,
-    "quote_hash": "0x64c76dd7526e240ef13640d87b22c0be05bd3daf2448d8f1270d3ae64cd98af1",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-02T21:15:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc1b26967be61425e328b41a83fdc3a791e1f4c54168bcf47a59b9ead6529fa2e",
-    "block_number": 8058040,
-    "quote_hash": "0x64cf86f75873673c85444ca065a731b49e6e8f4a735610b69d8cef9b497c9a94",
-    "transferred_amount_wei": "44166550000000000",
-    "transferred_amount_rbtc": 0.04416655,
-    "block_timestamp": "2025-10-02T14:33:33.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1733,51 +1051,6 @@
     "success": "true",
     "quote_hash": "0x64cf86f75873673c85444ca065a731b49e6e8f4a735610b69d8cef9b497c9a94",
     "block_timestamp": "2025-10-01T20:39:34.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8e74f6f44195bf1ae9e11a7e3c360d48359a67ce222b244220cf04415098afe1",
-    "block_number": 8054370,
-    "quote_hash": "0x3a316ac0d4611259f924063f834c2d764ea42241a7a85eac5e841a187218f147",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-10-01T12:58:23.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0aebc2733345a1d854ce623f8166097234fcaff2f7ec638d28b166e910582073",
-    "block_number": 8053449,
-    "quote_hash": "0x9cdae4c38a557b25e81315fbb631e2f563397711f517262848f593b4e850b95d",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-10-01T06:46:23.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xabcb719642638637fedb06f8b5a2ab0f0018382211de744a11cb8249a103a499",
-    "block_number": 8053376,
-    "quote_hash": "0x3dbba49bf4e0d21062e81dff493db4d5bc2ebfb01a8b8790d7491b0348a94353",
-    "transferred_amount_wei": "5235140000000000",
-    "transferred_amount_rbtc": 0.00523514,
-    "block_timestamp": "2025-10-01T06:17:16.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9139255cf3d5f81bfde31e0bda5cbb9bc03cac9cdecaf7785c49b9012e6d1803",
-    "block_number": 8052593,
-    "quote_hash": "0xd2a55df00751add5a1bb572ea4c403f4f6f7a24f1e96c7d3c38bc8fdb7e48873",
-    "transferred_amount_wei": "171357050000000000",
-    "transferred_amount_rbtc": 0.17135705,
-    "block_timestamp": "2025-10-01T00:51:35.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8370b86ffcb8442479e2fcf18e823639e7467473f9ecbae9f2f3bbef170f5999",
-    "block_number": 8052476,
-    "quote_hash": "0x2761f4e82c15c097e15cf0b55741e732b4d10759b5cf76e852ffa450b92c2d4e",
-    "transferred_amount_wei": "5108700000000000",
-    "transferred_amount_rbtc": 0.0051087,
-    "block_timestamp": "2025-10-01T00:00:49.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1845,15 +1118,6 @@
     "block_timestamp": "2025-09-30T10:17:43.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xedb3e0a958425a5fea963e323f11c98b5202f828959a459ab7da7b11c95e7339",
-    "block_number": 8048653,
-    "quote_hash": "0x15cf14cc9be37f015651895988d11ea8ab7ab280eba2499f37b51642a0d366ec",
-    "transferred_amount_wei": "572257500000000000",
-    "transferred_amount_rbtc": 0.5722575,
-    "block_timestamp": "2025-09-29T21:24:55.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xab25fe23bafeca693abdcb3834954d00957437645dfe2ba593ebe3133f361c99",
     "block_number": 8046310,
@@ -1865,33 +1129,6 @@
     "success": "true",
     "quote_hash": "0x15cf14cc9be37f015651895988d11ea8ab7ab280eba2499f37b51642a0d366ec",
     "block_timestamp": "2025-09-29T04:57:38.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdb242fc53a5b60991a62942fe096701d86949ef08a1075134edde5d9e1bcce70",
-    "block_number": 8039728,
-    "quote_hash": "0x11f84adc573a9e470d26e61622d4a1d55abff905f375c7e5c38f61db1ee00fc5",
-    "transferred_amount_wei": "25138050000000000",
-    "transferred_amount_rbtc": 0.02513805,
-    "block_timestamp": "2025-09-27T07:24:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc18729ab9ce4eeac245315b1559a581dd16b81fe5696e557ec8d57f46ecc2864",
-    "block_number": 8038836,
-    "quote_hash": "0x1fb5e9e60e441c400366b634ee908df470d3976d1c919436d923a63a083d5d39",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-27T01:22:06.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc6bc375de72f1501ffa05cec0f810a4a0f7b30044bfe260277402a4dd189bcde",
-    "block_number": 8037980,
-    "quote_hash": "0x093378e7c0a97c4e3e647ed1899996e00840553826bad6f68523c978e85bec22",
-    "transferred_amount_wei": "5108700000000000",
-    "transferred_amount_rbtc": 0.0051087,
-    "block_timestamp": "2025-09-26T19:24:49.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1933,15 +1170,6 @@
     "block_timestamp": "2025-09-26T01:42:33.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf63a0ccaf7cd26c3b3df811c74b065791209d7dbcdb8abcdd2601cb476fc28e8",
-    "block_number": 8033003,
-    "quote_hash": "0xc122addbcf4b649d22c23487bfed307dbaf8cad8b94f470d71e0c9bd1997dc04",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-09-25T08:49:43.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x275bf778ed3415d835fe973a5697b4c369cc63fea15b99405820167b72400caa",
     "block_number": 8030609,
@@ -1953,24 +1181,6 @@
     "success": "true",
     "quote_hash": "0xc122addbcf4b649d22c23487bfed307dbaf8cad8b94f470d71e0c9bd1997dc04",
     "block_timestamp": "2025-09-24T16:26:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x00818a29ac8a166d691094398533499dd6498c273ea49ff42f81b40f921f4e99",
-    "block_number": 8029154,
-    "quote_hash": "0x35655a70f57cd3eb87fdcd12b2dcb9a92584906094471b2ee9607562319dcb6f",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-24T06:24:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdd6babfc8cb0727fa0d2304eb3c641325b310d390d65bb4ece18621096026914",
-    "block_number": 8028435,
-    "quote_hash": "0x3e7de912236817df79650792c77ab47924545bbcfe155be105998c23c54b19ac",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-24T01:21:38.000000Z"
   },
   {
     "event": "CallForUser",
@@ -1999,15 +1209,6 @@
     "block_timestamp": "2025-09-23T09:50:44.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x400500fb66d915ba970f693c14d3780c9975a1f31801be693594bc4b9a445f96",
-    "block_number": 8015443,
-    "quote_hash": "0xe83fb1f4f003440f32c047df194a9f8f6c3f9bcd347a90f0a8d3a2c496f176c8",
-    "transferred_amount_wei": "10115550000000000",
-    "transferred_amount_rbtc": 0.01011555,
-    "block_timestamp": "2025-09-20T06:01:05.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xe5ad428fa5eb97ca36d4f927a8412d6306bf9183f9efe1a30ced91a8fbb78aae",
     "block_number": 8013597,
@@ -2019,15 +1220,6 @@
     "success": "true",
     "quote_hash": "0xe83fb1f4f003440f32c047df194a9f8f6c3f9bcd347a90f0a8d3a2c496f176c8",
     "block_timestamp": "2025-09-19T17:21:48.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5707d6cf159ec5d7c72979500c15c4a505bad1dc1471d7d96601b7d1b878e92f",
-    "block_number": 8009565,
-    "quote_hash": "0x2d463739bd82925969ae6ef4ef39cec83018add52783c938dc277d719588c610",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-09-18T13:10:46.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2043,15 +1235,6 @@
     "block_timestamp": "2025-09-17T21:30:12.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x874c30d8bd32eed35e35008abf411056c072f5d2be32dc013b412b6ca7fc67ea",
-    "block_number": 8005839,
-    "quote_hash": "0x2242e56b484acd1d2a9b523e7a2053e879bd21a5825920390c2f5b0d6764d1e0",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-09-17T11:16:16.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xa9dc87513b3f89ddf5ba73df9ad6da025124444bdc4d4629cdb069347e460220",
     "block_number": 8003507,
@@ -2063,15 +1246,6 @@
     "success": "true",
     "quote_hash": "0x2242e56b484acd1d2a9b523e7a2053e879bd21a5825920390c2f5b0d6764d1e0",
     "block_timestamp": "2025-09-16T19:11:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x892160957eb9702b1cbcbeb70d295c2e35ec07b7f55e63bd798dde9d980b8450",
-    "block_number": 8001693,
-    "quote_hash": "0xef6723014de63442a3fe68673d6a33dfc6b8a9a96c886fe1950ec7b76a213516",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-16T06:58:31.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2087,15 +1261,6 @@
     "block_timestamp": "2025-09-15T15:13:56.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6f84aa0bae51f6ac4d5b685051aa2ceb0d50006540e36227c631c99ee904f1a5",
-    "block_number": 7989605,
-    "quote_hash": "0xe25517f5adfed5f13469ddee09c5d5967dd8c2fbaefb15b9e1320a75e6d69cc3",
-    "transferred_amount_wei": "136504850000000000",
-    "transferred_amount_rbtc": 0.13650485,
-    "block_timestamp": "2025-09-12T20:12:48.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x568f23a361a881407d0f4e022b6823168c92d1ed1cb951e746e2d22e7dc3ad60",
     "block_number": 7987239,
@@ -2107,15 +1272,6 @@
     "success": "true",
     "quote_hash": "0xe25517f5adfed5f13469ddee09c5d5967dd8c2fbaefb15b9e1320a75e6d69cc3",
     "block_timestamp": "2025-09-12T03:47:46.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2d4282c0769ec5f89d8227beff9217f900d9b3f08fd009e7781c1b6e83824ec1",
-    "block_number": 7980478,
-    "quote_hash": "0x63c2b0ffa9cc756fa950781a4f936b47489a91aeba81119a4e17119c2abdf8c4",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-10T04:40:04.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2131,15 +1287,6 @@
     "block_timestamp": "2025-09-09T15:16:08.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x045233c5b9ce2e1ace13425dd6ec0b17986a0aa92d333dbbdd20037b66e429ba",
-    "block_number": 7977911,
-    "quote_hash": "0xddb2094edac2fa46ceed71d96150e0cff0201ac03db00d6f470a1c579eea8f1d",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-09-09T11:22:45.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x2243d5769c6f526318b2148350bad53aec267b00fc4c26bf9e526cca216d2c44",
     "block_number": 7975623,
@@ -2151,15 +1298,6 @@
     "success": "true",
     "quote_hash": "0xddb2094edac2fa46ceed71d96150e0cff0201ac03db00d6f470a1c579eea8f1d",
     "block_timestamp": "2025-09-08T20:00:23.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x75b255c16ba1648217733a02331f3149cc1c5f5503dddf367b37eeee9cf3aa1a",
-    "block_number": 7971619,
-    "quote_hash": "0xa555cb4ec4cfe009c5f8d05e86347e6a9eebd44798854ca03eb302fdd13b54fb",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-07T17:09:33.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2175,15 +1313,6 @@
     "block_timestamp": "2025-09-07T01:28:04.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa8fcebc6376a6a1329d6d7fba586fc3acf2023b30a5591c1aebfe7f0706e5e23",
-    "block_number": 7958913,
-    "quote_hash": "0x60a8e4f6b8b4173351b2df20ff4717f06417128a9135ca074a7a5edef2dac445",
-    "transferred_amount_wei": "848055480000000000",
-    "transferred_amount_rbtc": 0.84805548,
-    "block_timestamp": "2025-09-04T02:40:32.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xb76a6a28fa745748296020f0d950b3bf2eab07568787eba91aa70f16b977d7a9",
     "block_number": 7956381,
@@ -2195,24 +1324,6 @@
     "success": "true",
     "quote_hash": "0x60a8e4f6b8b4173351b2df20ff4717f06417128a9135ca074a7a5edef2dac445",
     "block_timestamp": "2025-09-03T09:05:14.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9495f7cba4db05744883411dd0c273bfb72987f06bb832863f5b3f7cc5e87bea",
-    "block_number": 7953453,
-    "quote_hash": "0x5735f07d4e965e60a7920264af507bf90fc240a3f1a641a4e6855d7ee78033d2",
-    "transferred_amount_wei": "10116200000000000",
-    "transferred_amount_rbtc": 0.0101162,
-    "block_timestamp": "2025-09-02T13:30:43.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xcd58186c24301761a593a7a8c72438bf28cc6f93d2dc277a216150e3379dcfb4",
-    "block_number": 7952090,
-    "quote_hash": "0x349bb3d90410c5119fc092a379862e6768ee55a703b3eae11a89db8723df29dd",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-09-02T04:21:33.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2239,33 +1350,6 @@
     "success": "true",
     "quote_hash": "0x349bb3d90410c5119fc092a379862e6768ee55a703b3eae11a89db8723df29dd",
     "block_timestamp": "2025-09-01T14:16:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x780339e53481a3bef07f8a0648b45e1e8793092f088a944b4ba3a05cda1592ea",
-    "block_number": 7943244,
-    "quote_hash": "0x0a05bcf27ead34302c55bc69178d33d27bbb7567fe7fe5318b1c80ba81e041f8",
-    "transferred_amount_wei": "105254020000000000",
-    "transferred_amount_rbtc": 0.10525402,
-    "block_timestamp": "2025-08-30T16:21:56.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb3f608a7a2bd3cd29c0bcd845d816f9a8cdaca36735ffe6eaa5c0936a7033f97",
-    "block_number": 7943182,
-    "quote_hash": "0xa3492044cbb9b94e27eee70a87628cab506a7056222e2bb14c5ac78d371af3fb",
-    "transferred_amount_wei": "70205550000000000",
-    "transferred_amount_rbtc": 0.07020555,
-    "block_timestamp": "2025-08-30T15:57:44.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xaa74b1e451485f7fe0cc454f667a13384cbb29cd4b963786fcdc3fe5593551ef",
-    "block_number": 7942855,
-    "quote_hash": "0x992167d4d223f9b2343bdf39d1c46240aa8aa5144eff8e65414245918286a2f8",
-    "transferred_amount_wei": "5108050000000000",
-    "transferred_amount_rbtc": 0.00510805,
-    "block_timestamp": "2025-08-30T13:49:06.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2307,15 +1391,6 @@
     "block_timestamp": "2025-08-29T22:06:42.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc6076e2ca353d58420e331dfa97843e99ff6ec384d77ede985765f6c3ba14d88",
-    "block_number": 7929673,
-    "quote_hash": "0xa9db89507e7bda467734774b323e2694e8a230241a2c25dec037670c59f80d4d",
-    "transferred_amount_wei": "5208200000000000",
-    "transferred_amount_rbtc": 0.0052082,
-    "block_timestamp": "2025-08-26T18:56:09.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1e1163af880f77c0a8a58ea85715dd77d5ad0ca5b887b03260856fd48815ed7b",
     "block_number": 7927337,
@@ -2327,24 +1402,6 @@
     "success": "true",
     "quote_hash": "0xa9db89507e7bda467734774b323e2694e8a230241a2c25dec037670c59f80d4d",
     "block_timestamp": "2025-08-26T02:57:53.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1aecac7ae9b93dff959acad59bd28b0a1f9c9d11b9a4ff2cd4e37f39b550072a",
-    "block_number": 7914591,
-    "quote_hash": "0xbc3f7d9abf116b97600b870687863ee4bd69660d4852031b4b1dc291d83d535b",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-08-22T11:18:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x01696366dc1c5c5e2c0bae92fd923bea907511621b064a422e51ea4635ca9544",
-    "block_number": 7912589,
-    "quote_hash": "0x759462949e4c28160c17d397a42519ba981791341550dfb75ec429bc440dd9ca",
-    "transferred_amount_wei": "10133550000000000",
-    "transferred_amount_rbtc": 0.01013355,
-    "block_timestamp": "2025-08-21T21:21:33.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2373,15 +1430,6 @@
     "block_timestamp": "2025-08-21T04:54:44.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe86c65e5b085b8a2e7a2bae966d344080a75bb2f321c7387ae77fc24bfa2e0aa",
-    "block_number": 7909660,
-    "quote_hash": "0x2c683bda25ed2676be3a2eb1b3ba1e04468954f75f528ba0e4d9f869510fcba0",
-    "transferred_amount_wei": "580589870000000000",
-    "transferred_amount_rbtc": 0.58058987,
-    "block_timestamp": "2025-08-21T01:03:38.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xfce5b4aa6344bd43290d3173be2eb02cae8050744084b8971499267606af4aae",
     "block_number": 7907516,
@@ -2395,15 +1443,6 @@
     "block_timestamp": "2025-08-20T09:58:44.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1e8d6da2d4975e28cd3eec2e70a978731fb3a44dc69c7c69f789e6715ddb57cb",
-    "block_number": 7896536,
-    "quote_hash": "0xff81ef8e3d1a56abfac24efd5fecdcabc654d8310ebf4b8f1d3fef2e302583ef",
-    "transferred_amount_wei": "419179670000000000",
-    "transferred_amount_rbtc": 0.41917967,
-    "block_timestamp": "2025-08-17T06:22:01.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xd55f8b56a9f07aa39b2fafc7c938e833f0056fda967aa2461cf297530746591e",
     "block_number": 7894352,
@@ -2413,16 +1452,8 @@
     "value_wei": "417700700000000000",
     "value_rbtc": 0.4177007,
     "success": "true",
-    "quote_hash": "0xff81ef8e3d1a56abfac24efd5fecdcabc654d8310ebf4b8f1d3fef2e302583ef"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x34825af2601a9204d0d270752c2248783c47474b4aad375fcf21e19679a5864d",
-    "block_number": 7889068,
-    "quote_hash": "0x79dd49fec91fb34da9b42f289445554a8fdd77de92bdf5985ab13873a66e6a20",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-08-15T04:00:33.000000Z"
+    "quote_hash": "0xff81ef8e3d1a56abfac24efd5fecdcabc654d8310ebf4b8f1d3fef2e302583ef",
+    "block_timestamp": "2025-08-16T15:20:01.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2436,51 +1467,6 @@
     "success": "true",
     "quote_hash": "0x79dd49fec91fb34da9b42f289445554a8fdd77de92bdf5985ab13873a66e6a20",
     "block_timestamp": "2025-08-14T10:35:35.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdf525c20fe228a484e8977974182c0597a15afad4bb2f008682427802479fd9f",
-    "block_number": 7884137,
-    "quote_hash": "0x5f9f1e89cff236d8e59f2c8a413b0ee34f620545c21f058996b710e689025c14",
-    "transferred_amount_wei": "600073950000000000",
-    "transferred_amount_rbtc": 0.60007395,
-    "block_timestamp": "2025-08-13T18:06:39.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x272f270caa3c8163c97d21918b9cdfbfb57d3e41428cc2a9f9c9c26133f979a6",
-    "block_number": 7882818,
-    "quote_hash": "0x87c8ce8b29bb2832afa72fa5e640aef4d43fd212517499891bf51e8616c2e9b7",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-08-13T08:55:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6aad926ef5fe59b0a5a5dc9cd08cfd44e92f052a0b7359937827697df9512bbc",
-    "block_number": 7882566,
-    "quote_hash": "0x08bb445b306b6e120f67ec30899d54bee7e73bb10beeafebb1d48bf93c17c645",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-08-13T07:16:45.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdd728c5de6c9f3cacbc6ea2460f1d8506a1c3741a96e2741f23bbac829f31f14",
-    "block_number": 7882564,
-    "quote_hash": "0xbf7015575f31857c91f61e49bf8f2f363dec7c0471a526d0c0c996b0ecb40991",
-    "transferred_amount_wei": "5117050000000000",
-    "transferred_amount_rbtc": 0.00511705,
-    "block_timestamp": "2025-08-13T07:16:28.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xba4a305b7105a85e06d5e5d0136eb8d195ce04df76c4871260cdd11879cffb8d",
-    "block_number": 7882186,
-    "quote_hash": "0xbc9359bb843e03f2503fb78097c74e8eb0a0ce989beb5b666454da50676364e8",
-    "transferred_amount_wei": "1442117410000000000",
-    "transferred_amount_rbtc": 1.44211741,
-    "block_timestamp": "2025-08-13T04:48:34.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2548,24 +1534,6 @@
     "block_timestamp": "2025-08-12T13:58:01.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x874b5dfba851ee2490db07d4d6d700b5073935d571dd2e65ca1d340a0ff463a1",
-    "block_number": 7874630,
-    "quote_hash": "0x0c525eb1347c3cbdf21c8effb5298ddbd869adfe24862daa2b31cda9f6922759",
-    "transferred_amount_wei": "999979030000000000",
-    "transferred_amount_rbtc": 0.99997903,
-    "block_timestamp": "2025-08-11T01:01:50.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x801e846bf07bba781d7942afeb668b8ea2c541c829dad80fb8ed25f2de2ffd09",
-    "block_number": 7873551,
-    "quote_hash": "0xee501eceb379bf6dc97d8a175e48d6e8b231840d44613a1392f7298bae88b5d8",
-    "transferred_amount_wei": "304600550000000000",
-    "transferred_amount_rbtc": 0.30460055,
-    "block_timestamp": "2025-08-10T17:50:01.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xfbbeb2ee96f99e53bac9ba4ee5eb107f9e1dfa5c95dad6d9ba10b72fc253ca3f",
     "block_number": 7871930,
@@ -2579,24 +1547,6 @@
     "block_timestamp": "2025-08-10T06:44:04.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x58f2a052ba962417d02e4611c1f511bd1103c9b0a5def3fc74b0596678a54143",
-    "block_number": 7871091,
-    "quote_hash": "0xae12fbacef00e2e5dd530615e09aaa2efb82e096120c4e2757803766d49425f2",
-    "transferred_amount_wei": "422300550000000000",
-    "transferred_amount_rbtc": 0.42230055,
-    "block_timestamp": "2025-08-10T01:04:56.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc1b5afdfacbad112cd6496564ae5aaf82ecc93e4798f8e77b09e71f04c11b467",
-    "block_number": 7871078,
-    "quote_hash": "0xf49603ca7997e85994547bafefb701ff86f86bf50d4195047290de9bc1988a0b",
-    "transferred_amount_wei": "185600550000000000",
-    "transferred_amount_rbtc": 0.18560055,
-    "block_timestamp": "2025-08-10T00:58:50.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x87bb089ceb9510dc5b77cdfd71bbadff790befbcdadf9307be1f63365e0ab861",
     "block_number": 7871032,
@@ -2608,24 +1558,6 @@
     "success": "true",
     "quote_hash": "0xee501eceb379bf6dc97d8a175e48d6e8b231840d44613a1392f7298bae88b5d8",
     "block_timestamp": "2025-08-10T00:41:00.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5c89726311c891b33da53e1ece6cef95ddcd5ac90ea9d3858a3b1fe6078940e5",
-    "block_number": 7870073,
-    "quote_hash": "0x2be50212a6cb1801fe48627ca7f5b1981f6ecac472fa098618223a673e2ca6a3",
-    "transferred_amount_wei": "3302053240000000000",
-    "transferred_amount_rbtc": 3.30205324,
-    "block_timestamp": "2025-08-09T17:59:14.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc5942a4546f6f04b1732bce36e3a21782f4ed89c89140cc5efa37ec78afbcdb1",
-    "block_number": 7870071,
-    "quote_hash": "0x4850973813a32b79ddbddd0e3aed70f3cc239fdc9308beb248790186b058977e",
-    "transferred_amount_wei": "459869030000000000",
-    "transferred_amount_rbtc": 0.45986903,
-    "block_timestamp": "2025-08-09T17:58:50.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2680,42 +1612,6 @@
     "block_timestamp": "2025-08-08T17:12:47.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa39e92494a19cbce3423ec28f56e604a1c9dad190494c32f95b360d790b07c1d",
-    "block_number": 7865864,
-    "quote_hash": "0xd0ad215019b0eff5a821c6fc41120842cf2544b41385f59729d88b8ea641b370",
-    "transferred_amount_wei": "219869030000000000",
-    "transferred_amount_rbtc": 0.21986903,
-    "block_timestamp": "2025-08-08T13:25:49.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb51f00d54ec4443f1e1301838eebc26b51e67b4b14308841f2a6e74eb62d734b",
-    "block_number": 7865791,
-    "quote_hash": "0x79710eb1152f88b0db1e0b2a86822eddadd7584bc6499dea23708c1aea78ffff",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-08-08T12:55:52.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4c0d5a82b9f2e94868eeff43e1da80328e93befe82809800d88109bf97dfc538",
-    "block_number": 7865473,
-    "quote_hash": "0x12bfa3b7ae9ef153c549bf43b585797f28336b9bcca7c4be4894e9fd555f6e58",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-08-08T10:41:21.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0b2948a0dc287095d1c5c79e7c57366fefa0a72155e001068c985e1c64d28824",
-    "block_number": 7865101,
-    "quote_hash": "0xe1786b197a185d1e40eb502e7f180b6f92f62c3b16a4c56d22693d0e76f76988",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-08-08T08:08:10.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xd11762bc5345c6a1d45bb62447c206505000152b1628f076422aa571d72c2fc3",
     "block_number": 7863479,
@@ -2768,33 +1664,6 @@
     "block_timestamp": "2025-08-07T16:30:47.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9ab1ef44849ee56c146afe2f61ba4b52a7664ff263836257a81756fc7af616de",
-    "block_number": 7857598,
-    "quote_hash": "0x1452a7ebadd2c02f7a55e81610163c79cb20e00f30fb15c6cb3d22c322547d71",
-    "transferred_amount_wei": "374900550000000000",
-    "transferred_amount_rbtc": 0.37490055,
-    "block_timestamp": "2025-08-06T04:50:00.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8fcf6513f221b9358ce7f702bb8bf5183b4ec022578d3e5ec2ee36c77061692e",
-    "block_number": 7857296,
-    "quote_hash": "0xd11f192d8ce134abf117c4069eb92229cfdf2b8cc4012f13bfd3aba7d1450ca5",
-    "transferred_amount_wei": "248150550000000000",
-    "transferred_amount_rbtc": 0.24815055,
-    "block_timestamp": "2025-08-06T02:46:51.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe9e3f0b18bfaf7bf54097147c735020609549c00d04e2564675bfccc840f4405",
-    "block_number": 7855765,
-    "quote_hash": "0x640bdffea4d49b85eead074719465a1a48628876a88e7e494ddad43d4bafbd76",
-    "transferred_amount_wei": "282100550000000000",
-    "transferred_amount_rbtc": 0.28210055,
-    "block_timestamp": "2025-08-05T16:23:16.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xa385b4e470c97110a3a046cf065c5ba2a8d805c3c51e95db0f58d9759a64a0ba",
     "block_number": 7855065,
@@ -2819,24 +1688,6 @@
     "success": "true",
     "quote_hash": "0xd11f192d8ce134abf117c4069eb92229cfdf2b8cc4012f13bfd3aba7d1450ca5",
     "block_timestamp": "2025-08-05T08:57:59.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x10ac41e63f296ca7fcd64e2a44cc427fe06e6d1853e71f2e87aa4d77c242824d",
-    "block_number": 7853437,
-    "quote_hash": "0xfa1837410fbbfd10349a7b4129f3b432af297e4020bf027275daef909f213be1",
-    "transferred_amount_wei": "313101200000000000",
-    "transferred_amount_rbtc": 0.3131012,
-    "block_timestamp": "2025-08-05T00:53:28.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xbf9c725c2af32ce13d8f210845618d8c1e0a660fc991571cb0bdfb023d4cb1a7",
-    "block_number": 7853342,
-    "quote_hash": "0x9edfcc57e6bf294e396c865ce7ba2edb4a52aa76f434d38b2a06f96d06869dfc",
-    "transferred_amount_wei": "200120550000000000",
-    "transferred_amount_rbtc": 0.20012055,
-    "block_timestamp": "2025-08-05T00:14:00.000000Z"
   },
   {
     "event": "CallForUser",
@@ -2878,60 +1729,6 @@
     "block_timestamp": "2025-08-04T11:49:02.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa818d2082d36d214bc19e76e97c6eb1c24929bf4d8548666510fa5b4853d672f",
-    "block_number": 7847913,
-    "quote_hash": "0x0fc1ab88b3ca9700dce5e4683019bd27c39056499a9a566a19b60e4dbcb2ae2c",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-08-03T11:08:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7058583c7792bd7ff350b62f00e3cdf7fd7b7e5d742608d3338fa01162ac43ee",
-    "block_number": 7847912,
-    "quote_hash": "0xa81ff3c8fb7cc5f4f0e129a7a14fc14f8c93347da4bb11a8633dc49168201160",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-08-03T11:08:24.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x36a83b415c9de33af7fd24be0fe855b6d5d2a0528ad32430807a7a3976946067",
-    "block_number": 7847910,
-    "quote_hash": "0xefd3cbbc5223a6acfe298e3aba9ba73c3d6a23a449bde5e7a4a08a6007b0b7a7",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-08-03T11:08:06.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x59e3efa147aaf1fec586ea6a8580afb46583828a027cd9c4e9501d339d655c19",
-    "block_number": 7846917,
-    "quote_hash": "0xcaebbd7eaa9ac84706119a15026893f3289b0859ca90f1293e3384fa1fee4d53",
-    "transferred_amount_wei": "9844470000000000",
-    "transferred_amount_rbtc": 0.00984447,
-    "block_timestamp": "2025-08-03T04:11:13.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2a0313fb4ec14bc688c763fbcb41e30cda85668561c5eb7a1f793ba5d94971a8",
-    "block_number": 7846868,
-    "quote_hash": "0x14cb383af8807357c1f8a58850551fadb74f3eec4e45ef561de759e9c63df047",
-    "transferred_amount_wei": "169400550000000000",
-    "transferred_amount_rbtc": 0.16940055,
-    "block_timestamp": "2025-08-03T03:47:40.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x98cd3995770179f763d94186f395cd45f539ddb9ce845b91076ec1d5c387eedf",
-    "block_number": 7846177,
-    "quote_hash": "0x4ff45d4968e161b56fbe8d6826071b1a679fb0b29579bc8f39a6f3729ba7f7ab",
-    "transferred_amount_wei": "1000101200000000000",
-    "transferred_amount_rbtc": 1.0001012,
-    "block_timestamp": "2025-08-02T23:16:48.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1a921374f1e0197ab5c1f8bd31c3c98a475a48aef0781efb115a7b70e89103d3",
     "block_number": 7845434,
@@ -2971,24 +1768,6 @@
     "block_timestamp": "2025-08-02T18:22:58.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xded92bce5f287af8b811d02b963dd418d378dab7b14fa73e89211564bd0b09f9",
-    "block_number": 7845239,
-    "quote_hash": "0x1c759b9138391a78e6d421e3e023dad066ee77f012276ea32bb4fdf135a1901a",
-    "transferred_amount_wei": "318960600000000000",
-    "transferred_amount_rbtc": 0.3189606,
-    "block_timestamp": "2025-08-02T17:02:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x853402c045ce5f29eee0774f46669df65a4f5ee23adc0d58eb6a2a13107458d5",
-    "block_number": 7844976,
-    "quote_hash": "0xfd2cef531d87ec205033d52c4ade8cb72f5d397af29d4f2b5d2a5171b32304c2",
-    "transferred_amount_wei": "352000550000000000",
-    "transferred_amount_rbtc": 0.35200055,
-    "block_timestamp": "2025-08-02T15:26:07.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x175607a10cfa42a646b11e94a435fbf5d1987576785ad900ef6b2e834bca2feb",
     "block_number": 7844754,
@@ -3015,15 +1794,6 @@
     "block_timestamp": "2025-08-02T13:34:49.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5d1470e23a8e735158ce5a0fe2fecbb4ea623a26abb07f22d06ecf0afd152052",
-    "block_number": 7843771,
-    "quote_hash": "0x00184433c04dda30789399f00fc8534644c860f174666a62fe45111efd37003a",
-    "transferred_amount_wei": "214084270000000000",
-    "transferred_amount_rbtc": 0.21408427,
-    "block_timestamp": "2025-08-02T07:21:11.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x10ae1b65a09bee7527dc729c596ea521ba99765cd7c2f5378f6ef04a3bf44c19",
     "block_number": 7843769,
@@ -3035,33 +1805,6 @@
     "success": "true",
     "quote_hash": "0x4ff45d4968e161b56fbe8d6826071b1a679fb0b29579bc8f39a6f3729ba7f7ab",
     "block_timestamp": "2025-08-02T07:20:26.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6addb581288ea080fbade77c0250eefd288cc7c9091278ca6a338b09392f472e",
-    "block_number": 7843677,
-    "quote_hash": "0x0c1708b4b346d0ff04acc6f46d3f0c673118e956e8bd3e87f3e698af28ee3867",
-    "transferred_amount_wei": "94600550000000000",
-    "transferred_amount_rbtc": 0.09460055,
-    "block_timestamp": "2025-08-02T06:37:59.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x12c60d89a1aad617bed0c590d7f46e2b6af9ac762d1a7347e09a40dbbeca728b",
-    "block_number": 7843585,
-    "quote_hash": "0x45838a8913964c8955257143298de64451945a98b669e10d431089a7e0fe60a0",
-    "transferred_amount_wei": "573541560000000000",
-    "transferred_amount_rbtc": 0.57354156,
-    "block_timestamp": "2025-08-02T05:59:00.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe33fe708a9342e4281d35248909efe58ed411df7331d8a21edb66659ec313e64",
-    "block_number": 7843556,
-    "quote_hash": "0x794d700e468e0f723979da319bfac4cb76b18cdba57df63be29c418e13d40cbb",
-    "transferred_amount_wei": "233979030000000000",
-    "transferred_amount_rbtc": 0.23397903,
-    "block_timestamp": "2025-08-02T05:47:00.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3142,42 +1885,6 @@
     "block_timestamp": "2025-08-01T14:15:18.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb2c80a97c45dda9775a7f40913fa5fadf479fb3f82237b204fc5420e36d0d76b",
-    "block_number": 7840409,
-    "quote_hash": "0xb18ea3551db169de2c93db5a25dc9b5e7bb31a3377d8a7a5fd57dd8c902930b5",
-    "transferred_amount_wei": "600354260000000000",
-    "transferred_amount_rbtc": 0.60035426,
-    "block_timestamp": "2025-08-01T08:47:49.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x3cb0cecd2c7353599fc7bbbfcb0840cb42fc1af54afeeb4c3c855c3bd9168e33",
-    "block_number": 7839229,
-    "quote_hash": "0xdd199549f2dfce3fdd91ca1e09060b505b141df96f5d4f8cf196a8d3f5b5a2a3",
-    "transferred_amount_wei": "999941880000000000",
-    "transferred_amount_rbtc": 0.99994188,
-    "block_timestamp": "2025-08-01T01:01:48.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x01b2b3e69fa7946ccb4d1173987c32e1cabd1e88f2089ec719df3fa56ff862fa",
-    "block_number": 7839184,
-    "quote_hash": "0x26cc664f95dce7aaaf006e76157d3fb83caddb84c6093f17dbf1a3b8ce1fc02a",
-    "transferred_amount_wei": "289900550000000000",
-    "transferred_amount_rbtc": 0.28990055,
-    "block_timestamp": "2025-08-01T00:44:25.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x785fd391dab5113972679ac7dc841f379ffbc01c34b2a84b2336bebd051da560",
-    "block_number": 7838872,
-    "quote_hash": "0x0eeaf9bc706d3dd19d6c0e85dbd840ec60edc3253ad78c5ecbbbab23ba08db23",
-    "transferred_amount_wei": "214600550000000000",
-    "transferred_amount_rbtc": 0.21460055,
-    "block_timestamp": "2025-07-31T22:29:23.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x40454d0430dc4b393b1a6033857dbf55a87c37c929322af2cfcfc66fff0a43f5",
     "block_number": 7838197,
@@ -3189,15 +1896,6 @@
     "success": "true",
     "quote_hash": "0xb18ea3551db169de2c93db5a25dc9b5e7bb31a3377d8a7a5fd57dd8c902930b5",
     "block_timestamp": "2025-07-31T17:50:47.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x98f278df63c1350963ccc1abccd73eb9438cf1d9c9ca488a3f7e1875e7d87b4d",
-    "block_number": 7837869,
-    "quote_hash": "0x36a57bfbfd7fbe1807d77d509214202618296ffc0004b10de901a314998cf933",
-    "transferred_amount_wei": "276690550000000000",
-    "transferred_amount_rbtc": 0.27669055,
-    "block_timestamp": "2025-07-31T15:34:48.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3239,15 +1937,6 @@
     "block_timestamp": "2025-07-31T07:01:47.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x65a9576968fe5ac3381e34ad04ba45cecca80e7a3bcffe8793295457a86ec9d7",
-    "block_number": 7835912,
-    "quote_hash": "0xa14aaff60a276be3cbab8ebaa1c66ba050d4f38124ce68a2a4f2d0fa197dafaa",
-    "transferred_amount_wei": "1089770550000000000",
-    "transferred_amount_rbtc": 1.08977055,
-    "block_timestamp": "2025-07-31T02:49:55.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xb2ea87d1b94701fc3d1e4d58e6a4670509faa95c38374ac29b741cd1325b8be0",
     "block_number": 7835226,
@@ -3259,33 +1948,6 @@
     "success": "true",
     "quote_hash": "0x36a57bfbfd7fbe1807d77d509214202618296ffc0004b10de901a314998cf933",
     "block_timestamp": "2025-07-30T22:18:01.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x41a35b5a33966a59482afb40b4b9ea1d2d2ebcceeb5aa7b1aa5b381203a5d471",
-    "block_number": 7835208,
-    "quote_hash": "0xdf066d8c46b72ae4b393b2f3e451dbdca0d5c010e6cbafc7001402f19b97eac6",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-07-30T22:08:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x26c2d18df0874e6536a7b184defc269ee5985dee7e235c7bfe28a23cea70af5b",
-    "block_number": 7834940,
-    "quote_hash": "0x53539de91c9fce79a20cd4bc78b7e1bddcbed3320e0d90c309e8700ea8e42b4d",
-    "transferred_amount_wei": "6101200000000000",
-    "transferred_amount_rbtc": 0.0061012,
-    "block_timestamp": "2025-07-30T20:11:01.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xab8a63e0c1814df2a828bccc0252979650fb83a061d67afac41a9ab3afe6cdfc",
-    "block_number": 7833514,
-    "quote_hash": "0x1f8268012b44d891f37680023fbaf7267cf7ce9ad694f02d3b331025968794b9",
-    "transferred_amount_wei": "6100550000000000",
-    "transferred_amount_rbtc": 0.00610055,
-    "block_timestamp": "2025-07-30T10:25:48.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3338,51 +2000,6 @@
     "success": "true",
     "quote_hash": "0x1f8268012b44d891f37680023fbaf7267cf7ce9ad694f02d3b331025968794b9",
     "block_timestamp": "2025-07-29T16:35:47.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9a0c7be9fd6489dcdc25bfbb0fdda7c496f6211301cb7b30ba73eb7fd3799801",
-    "block_number": 7828214,
-    "quote_hash": "0xfeaf21dd169a6a2294d917c58c7159d7a649af9a2afd584294f6108594b0393b",
-    "transferred_amount_wei": "249700550000000000",
-    "transferred_amount_rbtc": 0.24970055,
-    "block_timestamp": "2025-07-28T22:43:58.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8b6ef8593a61ff2ebd6fede756a02ca870c28b19a37325aacc34578a63281713",
-    "block_number": 7826140,
-    "quote_hash": "0x6b0616f3759e7f800f9f8c4a15e6827c38c775beb0721b8bc0c72581a069d0cf",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-07-28T08:17:52.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x93dcf5f7ff728c15590cc1767868c1b2253b3727499ede23d498c355850facb9",
-    "block_number": 7826139,
-    "quote_hash": "0x501c4b74a073d07c9d30f68e79ae15b6dacc28d98f5e13269e80ebae21fce5e1",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-07-28T08:17:27.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x707601b931f921f8ed04bad0c5659ae620ef99d2bb7c32b753927327c3010837",
-    "block_number": 7826137,
-    "quote_hash": "0x6dda29721726945c33e470a78e30b977e3fb9f6fb266b4b78c22535414ad3032",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-07-28T08:17:17.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x30b770e3056b54219768ef107db386edc091c7bc01e2fa0e18537a85f6fde4a7",
-    "block_number": 7826117,
-    "quote_hash": "0xd7ca1997cda60487d40405970422dcfe2eb06a813ea85de3c6abc350942d0f98",
-    "transferred_amount_wei": "100100550000000000",
-    "transferred_amount_rbtc": 0.10010055,
-    "block_timestamp": "2025-07-28T08:11:01.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3450,24 +2067,6 @@
     "block_timestamp": "2025-07-27T18:01:54.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x66c83ea137b831001eb333143a965331dd2fb38a05841821a258c4736a65042f",
-    "block_number": 7823005,
-    "quote_hash": "0x84cf914a9aa45bbcc30b1d876d85410352057fe780484edb0450914164b1de43",
-    "transferred_amount_wei": "236206990000000000",
-    "transferred_amount_rbtc": 0.23620699,
-    "block_timestamp": "2025-07-27T11:16:51.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb2def2f73f13cfd2d93955e5f156f92d40d2f2b2944bf89e3992cb7dba0584de",
-    "block_number": 7822909,
-    "quote_hash": "0x98870239a834194b0a3dd99c13442289684b8c4d257d19bdd39832ede8d6adff",
-    "transferred_amount_wei": "5101200000000000",
-    "transferred_amount_rbtc": 0.0051012,
-    "block_timestamp": "2025-07-27T10:38:42.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x3b8532ffb66a55c010dbec4c1502560281ec2106fc54543472dca1aab7dcaf5e",
     "block_number": 7820476,
@@ -3494,15 +2093,6 @@
     "block_timestamp": "2025-07-26T17:49:50.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x100a9a1cf1a629e47ba078b4dd2e1a391ccf0bdf826ad4a355fd1d96ac528530",
-    "block_number": 7819308,
-    "quote_hash": "0xc30640378516470a4526b599d90e20e12a3a5c78d30e8b897bcfd7206c3034f3",
-    "transferred_amount_wei": "223949680000000000",
-    "transferred_amount_rbtc": 0.22394968,
-    "block_timestamp": "2025-07-26T10:26:09.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x3b696016249deee6b9c7a913a221c4e06bb7f04919ecbe0cf3b1bdc18c57a617",
     "block_number": 7817029,
@@ -3514,15 +2104,6 @@
     "success": "true",
     "quote_hash": "0xc30640378516470a4526b599d90e20e12a3a5c78d30e8b897bcfd7206c3034f3",
     "block_timestamp": "2025-07-25T19:06:47.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x375b5c6b39d150f14f3a42c73dd89e39048403eec082e76ba2c46ec7514a5c66",
-    "block_number": 7805969,
-    "quote_hash": "0xfe1ed8383baabf2330f69bb9f3119e38f151953e404ebb929a628547cbcdda8b",
-    "transferred_amount_wei": "150100550000000000",
-    "transferred_amount_rbtc": 0.15010055,
-    "block_timestamp": "2025-07-22T16:49:55.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3538,15 +2119,6 @@
     "block_timestamp": "2025-07-22T03:00:47.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x03d6feba8c705f1ed13c37c1dfe4c64e06e420ba8ec686bb787859ee53002319",
-    "block_number": 7802307,
-    "quote_hash": "0x75719fd3ea79ae37d181b83ee86de3b481717ba003045cb774a9077191efdf62",
-    "transferred_amount_wei": "231100550000000000",
-    "transferred_amount_rbtc": 0.23110055,
-    "block_timestamp": "2025-07-21T16:17:00.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x352b47b8c3a86ec49073290db56c560579da3f117d5767b5960f5b22a68983ff",
     "block_number": 7800003,
@@ -3558,15 +2130,6 @@
     "success": "true",
     "quote_hash": "0x75719fd3ea79ae37d181b83ee86de3b481717ba003045cb774a9077191efdf62",
     "block_timestamp": "2025-07-21T01:10:49.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x09b7dfe520cfb6fc9d448e510d22acc2ef12f027fbaecea47c51e5e0796e035a",
-    "block_number": 7796953,
-    "quote_hash": "0xd0e12dbd9891e73dfd6c4bfe513234d35f70d2a2c322112fdd5bdd7f41824cec",
-    "transferred_amount_wei": "190979680000000000",
-    "transferred_amount_rbtc": 0.19097968,
-    "block_timestamp": "2025-07-20T04:53:17.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3582,15 +2145,6 @@
     "block_timestamp": "2025-07-19T11:19:22.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5d866b8678452d95a4e6c5fd4dfd9fb22c3f1cb7ea253fd031568ce2f0e535dd",
-    "block_number": 7791979,
-    "quote_hash": "0x8de1f9c0a1e13033124b8cfbae236c86af419bed89204dfd7eaa3d3f68383a57",
-    "transferred_amount_wei": "613100550000000000",
-    "transferred_amount_rbtc": 0.61310055,
-    "block_timestamp": "2025-07-18T19:47:12.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x27fd2085a5ed80485a2e4121f248e0263e05325209437880ab78528c8e835dcb",
     "block_number": 7789521,
@@ -3604,15 +2158,6 @@
     "block_timestamp": "2025-07-18T03:21:35.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x592dfe9bcad0685abaad9a0a848acc721897a3244574889c3f720778d1d01d18",
-    "block_number": 7789372,
-    "quote_hash": "0x4b9e7c28670b4452e3d92e9e6d54d875a373ad99969f9afd3767600608dff383",
-    "transferred_amount_wei": "985315720000000000",
-    "transferred_amount_rbtc": 0.98531572,
-    "block_timestamp": "2025-07-18T02:32:10.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1ad3a9bf8dcaa0af38c67be8b10e1b07345aa9e5238c1856e7271f8bcfb5e5cf",
     "block_number": 7786655,
@@ -3624,24 +2169,6 @@
     "success": "true",
     "quote_hash": "0x4b9e7c28670b4452e3d92e9e6d54d875a373ad99969f9afd3767600608dff383",
     "block_timestamp": "2025-07-17T08:32:24.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x82457edcc82f91d6689b61f4308e190476f566aa88d9a6746bae40b8bb073654",
-    "block_number": 7762312,
-    "quote_hash": "0xe0e929aabc21ae3cfc81d53531c5a803cd75f4df7f09c22ac38c811dcab66223",
-    "transferred_amount_wei": "8211680000000000",
-    "transferred_amount_rbtc": 0.00821168,
-    "block_timestamp": "2025-07-10T13:55:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7dc0c0f576d68bcf48c5838b09be67b9925678402d0a1c9846aac799ff4b4c93",
-    "block_number": 7761308,
-    "quote_hash": "0xaa3e7d1e652154525a318a13043e1a6a66953a08198b9fd16da8a9efc845ccea",
-    "transferred_amount_wei": "8539040000000000",
-    "transferred_amount_rbtc": 0.00853904,
-    "block_timestamp": "2025-07-10T07:10:36.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3670,15 +2197,6 @@
     "block_timestamp": "2025-07-09T16:08:35.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x669db86f15aa69382a682c7d447c9df330865feda2ba09277dd88ef5b371ba1e",
-    "block_number": 7758359,
-    "quote_hash": "0xe311db2a289cfb64038805c8d2ad45095b46c252710d2f4720c61147ea7dd1d2",
-    "transferred_amount_wei": "5166370000000000",
-    "transferred_amount_rbtc": 0.00516637,
-    "block_timestamp": "2025-07-09T11:37:43.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x8506840e0767f963db5dae23de693cf9134a71f8ed0c1b8a2e01030dfc3aa184",
     "block_number": 7756228,
@@ -3690,24 +2208,6 @@
     "success": "true",
     "quote_hash": "0xe311db2a289cfb64038805c8d2ad45095b46c252710d2f4720c61147ea7dd1d2",
     "block_timestamp": "2025-07-08T21:15:01.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x162046bbc20beff5370351e97d4fdbda45e09d78e212207dd9d73cdc2f0547fc",
-    "block_number": 7736284,
-    "quote_hash": "0x556a39bc8961ce2c6579183a8dafa7ecfb918172d1b07d2bb45762bcfa783a3d",
-    "transferred_amount_wei": "5179680000000000",
-    "transferred_amount_rbtc": 0.00517968,
-    "block_timestamp": "2025-07-03T08:34:35.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6e6831f014a321d267d3f11d96ca1536ec586799f0ef0b6153eec6bdca01d163",
-    "block_number": 7735894,
-    "quote_hash": "0x8839c379f1ec47d419bf8d713e97f4d7d6f1e597f3ec3b294282b9aeaa1c885b",
-    "transferred_amount_wei": "5179030000000000",
-    "transferred_amount_rbtc": 0.00517903,
-    "block_timestamp": "2025-07-03T06:07:25.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3736,15 +2236,6 @@
     "block_timestamp": "2025-07-02T15:27:27.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2c78749f71d5f1e870397eaf401c3683ca752577a7a2fcbf64e3eb2091c817dd",
-    "block_number": 7692199,
-    "quote_hash": "0xc9dffd38b14139b2fb49ed67bc1a221d3f84e119a638bb424511ba4cd43e4c5e",
-    "transferred_amount_wei": "1496100550000000000",
-    "transferred_amount_rbtc": 1.49610055,
-    "block_timestamp": "2025-06-21T01:51:58.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xaf86cb4858df41c91f840061cde3be47979b71b93d37e96f231e9d99e3b16a52",
     "block_number": 7689718,
@@ -3758,15 +2249,6 @@
     "block_timestamp": "2025-06-20T09:32:15.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe20a88cf1e5739a7eb441a2ca9ce1f2c0ad7b24bfbaf696e9d2e1003e182618e",
-    "block_number": 7669808,
-    "quote_hash": "0xd7a7d356bb0d68ed38a6101921134a34e46416635bf569c7a5c5125fcac1eb80",
-    "transferred_amount_wei": "4999963920000000000",
-    "transferred_amount_rbtc": 4.99996392,
-    "block_timestamp": "2025-06-14T20:28:31.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xa5ee85e6ee356cc7b8d14d31aca08ef3775f6555e5810592a75b6211033e7f66",
     "block_number": 7667417,
@@ -3778,24 +2260,6 @@
     "success": "true",
     "quote_hash": "0xd7a7d356bb0d68ed38a6101921134a34e46416635bf569c7a5c5125fcac1eb80",
     "block_timestamp": "2025-06-14T04:08:27.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x583724c2ca32fddb516a70d9e3baa5d059ca3648bd19e2b43653c7798665fe2f",
-    "block_number": 7666949,
-    "quote_hash": "0x71b9ca03a6abb934def8b4a4566a1ea4eae6bbf6a9ea74598ec551905604cd34",
-    "transferred_amount_wei": "400100550000000000",
-    "transferred_amount_rbtc": 0.40010055,
-    "block_timestamp": "2025-06-14T01:01:04.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1b47fa73b21c4c37e1634180c4204e2004a5477eabf449ff789ddec5d44b0710",
-    "block_number": 7666925,
-    "quote_hash": "0xac792a2d6150f6fc90496c11a9d0f841588ed9f4446c47770b98c0e15ecc5c42",
-    "transferred_amount_wei": "6101200000000000",
-    "transferred_amount_rbtc": 0.0061012,
-    "block_timestamp": "2025-06-14T00:52:00.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3824,15 +2288,6 @@
     "block_timestamp": "2025-06-13T07:30:20.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xcaf2e5e9c82e24a1f7eeea0ee407ae1608b201dc0c2f1ea39521cd5b454096bf",
-    "block_number": 7664246,
-    "quote_hash": "0xad07b52a1a69399666079b27129233a7e7c02985f9ae1385155fe09662311db9",
-    "transferred_amount_wei": "1439400550000000000",
-    "transferred_amount_rbtc": 1.43940055,
-    "block_timestamp": "2025-06-13T06:40:05.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x199d76075878cb201fdb1d2ce31cc9505aeb029251cbf6d46caacd537f7c89a7",
     "block_number": 7661880,
@@ -3846,15 +2301,6 @@
     "block_timestamp": "2025-06-12T14:42:02.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5606635ff3db926035cbf83d74df032738dc0e07f108476c0e69538c0a7bda37",
-    "block_number": 7653889,
-    "quote_hash": "0x7e2669c2e4f613e3dbd97f0afa7d51cbe9ab14a0f86ea6168bb42a77d60f50b3",
-    "transferred_amount_wei": "89300550000000000",
-    "transferred_amount_rbtc": 0.08930055,
-    "block_timestamp": "2025-06-10T08:43:20.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x5c789bc61782709becd230cacf6cddc93f403de6850c97645127d785d061ae35",
     "block_number": 7651405,
@@ -3866,42 +2312,6 @@
     "success": "true",
     "quote_hash": "0x7e2669c2e4f613e3dbd97f0afa7d51cbe9ab14a0f86ea6168bb42a77d60f50b3",
     "block_timestamp": "2025-06-09T15:52:38.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x44df46acf15a63ba129623dbaba121a71a1e2b68e7daf1836363bf18b31d8cac",
-    "block_number": 7645266,
-    "quote_hash": "0x3fbda7a33936db9debafc97efccd00bfadc5f660cc3e58e021b81eb1a1985085",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-06-07T22:01:06.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd8694f82d270cafa20ac7dc2c453d4bf7d9364ead192d2d2048d7a8d2e5e58ae",
-    "block_number": 7645117,
-    "quote_hash": "0x53640fdfba0a01b9f57b80f422a326000b29bf9699ad677a87a55d8ae06b9b6b",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-06-07T20:55:54.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf0a30d2a2a76f088493d36037f8853e3874180482921223719940f6d69c7deee",
-    "block_number": 7644866,
-    "quote_hash": "0xe9fdc159ac41c254ace637f5b5e27b2578624e2e0007285fe0b669125c1d37c6",
-    "transferred_amount_wei": "800100550000000000",
-    "transferred_amount_rbtc": 0.80010055,
-    "block_timestamp": "2025-06-07T19:01:53.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7c0e373aa2bfed49964c99ae7a523b65e4d5e65bb50a557669fa1b3121dfba26",
-    "block_number": 7644864,
-    "quote_hash": "0xb1f8295410f3a67416ef0e232103d13191833b124288335bc2dc2a193b77241f",
-    "transferred_amount_wei": "95100550000000000",
-    "transferred_amount_rbtc": 0.09510055,
-    "block_timestamp": "2025-06-07T19:01:13.000000Z"
   },
   {
     "event": "CallForUser",
@@ -3956,15 +2366,6 @@
     "block_timestamp": "2025-06-07T02:56:36.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x3e576e7206e659bd3d192013729bca222829614df1aa7aa5618d9d4a89c01eff",
-    "block_number": 7640463,
-    "quote_hash": "0x056aa5ccec197295084ff7c8c877107ee8536b58372fafc3394a94ad7194e7a9",
-    "transferred_amount_wei": "96101200000000000",
-    "transferred_amount_rbtc": 0.0961012,
-    "block_timestamp": "2025-06-06T12:37:14.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xb16e8f600f2915c1995480cc2d13ff23fceb091612dd237714198ec59878ca4b",
     "block_number": 7638023,
@@ -3976,15 +2377,6 @@
     "success": "true",
     "quote_hash": "0x056aa5ccec197295084ff7c8c877107ee8536b58372fafc3394a94ad7194e7a9",
     "block_timestamp": "2025-06-05T20:03:45.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x75141735d30c79697f7c92ce2db407aceb76ab130afea5cb440dc2dbfb7356eb",
-    "block_number": 7637266,
-    "quote_hash": "0xc0000839c125401c2a910cdf4790801fd5b7b5c32f0d1c5cc24134ef2cd4f8a7",
-    "transferred_amount_wei": "600101200000000000",
-    "transferred_amount_rbtc": 0.6001012,
-    "block_timestamp": "2025-06-05T14:49:14.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4000,15 +2392,6 @@
     "block_timestamp": "2025-06-04T21:51:34.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8fb3a5acecae2aaeb1cb41a98dff1d4f18da7f2d503ec24d79cd9629de3dd1f4",
-    "block_number": 7634293,
-    "quote_hash": "0xfae6ce117f13df5192f48b69ff03f0dc9b818853e0576a568af3920d68f9947b",
-    "transferred_amount_wei": "950100550000000000",
-    "transferred_amount_rbtc": 0.95010055,
-    "block_timestamp": "2025-06-04T18:44:07.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x286a6fc9062afc188973a7dde16555dcd0153a1a5b8f9180e4dd9b726276dadc",
     "block_number": 7631462,
@@ -4020,15 +2403,6 @@
     "success": "true",
     "quote_hash": "0xfae6ce117f13df5192f48b69ff03f0dc9b818853e0576a568af3920d68f9947b",
     "block_timestamp": "2025-06-03T23:38:34.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x67ac839c0d92c7f170a6485995974327bf5d141ce88df0b3041580b319b08d09",
-    "block_number": 7611625,
-    "quote_hash": "0xbedd504747bea837ea43d09899a2bb5467833999442eb593c7ec8104633dace8",
-    "transferred_amount_wei": "1310100550000000000",
-    "transferred_amount_rbtc": 1.31010055,
-    "block_timestamp": "2025-05-29T08:55:13.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4044,15 +2418,6 @@
     "block_timestamp": "2025-05-28T18:25:17.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xae47df9c6dac8cc49b6a6021121782e04b03d05a78ef1f12033106c0d11337c7",
-    "block_number": 7608463,
-    "quote_hash": "0xd2d5343789b019b5533c3f77b1afd4458e43f9fcf83da29f43c0b427ac3c446c",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-05-28T11:07:26.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1e26dfdab0afc3010cb0a5abaf6518523052861993c1bc1b9a03e16a80b9479e",
     "block_number": 7605868,
@@ -4066,15 +2431,6 @@
     "block_timestamp": "2025-05-27T17:54:12.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xccb2735f6b86fafe117cb81de093ab2efdde3f7618a7a06863e66be5354501dc",
-    "block_number": 7604421,
-    "quote_hash": "0x954ef4d20552bf8d5acfebed8bd9638c47ef54e351ac7bfd2bc1354d2343b2a1",
-    "transferred_amount_wei": "340100550000000000",
-    "transferred_amount_rbtc": 0.34010055,
-    "block_timestamp": "2025-05-27T08:16:53.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0xfdb57d488d57b06b9cda19981e34e0770b2dc77fdc0871d5546c8f245d0c946d",
     "block_number": 7602187,
@@ -4086,24 +2442,6 @@
     "success": "true",
     "quote_hash": "0x954ef4d20552bf8d5acfebed8bd9638c47ef54e351ac7bfd2bc1354d2343b2a1",
     "block_timestamp": "2025-05-26T16:50:09.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x00680e4cfd45b3c5a8b6e0eaada8de16484433b65a3290daf090c8ddaf72fa96",
-    "block_number": 7590833,
-    "quote_hash": "0x26e1ba1db99985481a0e5099ff565190d8f4e7cae701a9271ff4be21b88d1b11",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-23T13:36:53.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5cef9d4afc11a10c81ec24d30899b52678fb76ba746fb0bb1eba348a0e10a081",
-    "block_number": 7589836,
-    "quote_hash": "0x8d22ecba3056f5d6a9136c41d846714d8c9807d3c648eff71b9c8b3b5ef89163",
-    "transferred_amount_wei": "328100550000000000",
-    "transferred_amount_rbtc": 0.32810055,
-    "block_timestamp": "2025-05-23T07:03:16.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4132,24 +2470,6 @@
     "block_timestamp": "2025-05-22T16:12:34.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x06790b7af9ab8f062bf332790c8a5d1cc08fb85a3507bf7440e46445ac03ccbc",
-    "block_number": 7586446,
-    "quote_hash": "0x346005339b237ea448ab4a26eba9114acb6d2b20f4e7480ff6825e0630221eae",
-    "transferred_amount_wei": "950100550000000000",
-    "transferred_amount_rbtc": 0.95010055,
-    "block_timestamp": "2025-05-22T08:39:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x3c51e798fdc1e9ed0d0f6ea2d5b7d5dbd5d800b6ffab8da7da77000fd7f12ed5",
-    "block_number": 7585384,
-    "quote_hash": "0xdc55e0e74188270c82ca0db0217f20e68fb4f8b597c917ae80ad80c71f102c2f",
-    "transferred_amount_wei": "12101200000000000",
-    "transferred_amount_rbtc": 0.0121012,
-    "block_timestamp": "2025-05-22T01:36:16.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x8a709e9f8eede702feaf6355c29a077f57ce3e96f22ae6eecee593c04bd45452",
     "block_number": 7584134,
@@ -4176,42 +2496,6 @@
     "block_timestamp": "2025-05-21T10:57:32.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd3a5d12ffd44c42120e351d0e26aa1170df592a73cb8a4d80fd2f1af8f6d939d",
-    "block_number": 7563125,
-    "quote_hash": "0x249e59bf1a92a867629f111222fa63946370640030faaa5fdb79744fd0539f81",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-05-15T21:03:09.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x50697c9f4a4a0f9fad2803f5935afa7ebfdd1f6065d5827285cf29f776b7e8d3",
-    "block_number": 7560983,
-    "quote_hash": "0xd11c0728727b4a165da41b1275a940fe5a104403616db7054083c789641ba6f1",
-    "transferred_amount_wei": "5130550000000000",
-    "transferred_amount_rbtc": 0.00513055,
-    "block_timestamp": "2025-05-15T06:27:32.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb67e0ea1fe15e258a07ffc67047231aa349c81d85a1c3b858e8a838f76ad6b7b",
-    "block_number": 7559042,
-    "quote_hash": "0x6b04b47a04fe02fd635a6529718145541c243b04895871ad5afe6f5730540a9c",
-    "transferred_amount_wei": "831700550000000000",
-    "transferred_amount_rbtc": 0.83170055,
-    "block_timestamp": "2025-05-14T17:27:47.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb81c738f424f6a6383465028816aefe71287260373d59521d0dbf8e84a76c644",
-    "block_number": 7558939,
-    "quote_hash": "0x1c0672f86c9a03357595826bbc8381f3f4e74256e093959e2e6a4909b043cf93",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-14T16:45:32.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x1b7e1b7e515963cad8bda784021489303b26d53eb81244caf0df2973d73ebfa5",
     "block_number": 7558840,
@@ -4223,24 +2507,6 @@
     "success": "true",
     "quote_hash": "0xd11c0728727b4a165da41b1275a940fe5a104403616db7054083c789641ba6f1",
     "block_timestamp": "2025-05-14T16:03:37.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7656d394fc6ee294d1e608934a61481e91a543c3a07b801748825161db284f6c",
-    "block_number": 7557550,
-    "quote_hash": "0x0b53f2f1918e713410a82122efb58d562ec4b501fe6e173592b462864b2c54a9",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-14T07:15:55.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x983f1b24b28e1417b71503b02569bb6e13ffe16ae6f8cd54f5921b24b2893567",
-    "block_number": 7557430,
-    "quote_hash": "0xa4fbcfe91d203512c38feaaa6ffc47a4f9c885cdc03180e0ca16f0f564d56220",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-14T06:27:45.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4267,42 +2533,6 @@
     "success": "true",
     "quote_hash": "0x1c0672f86c9a03357595826bbc8381f3f4e74256e093959e2e6a4909b043cf93",
     "block_timestamp": "2025-05-13T23:19:40.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x92acd96d12028dad1c028ca12fbd1fc0ca28d9e8077530b75f3e016e2bdbb7d3",
-    "block_number": 7555508,
-    "quote_hash": "0x41c20b16378f7536da76340ae67c2947445dc57fff55dbeb7ac843d85783f1b0",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-13T17:27:51.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xea9dec4a7866b872b9486e4112753261887b65b520bba73011cff0a857e3f7ef",
-    "block_number": 7555453,
-    "quote_hash": "0x9759472467a51fdc5a12200dfd7835cc59be2733ef3e1df4e1800803156f391f",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-13T17:07:15.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xb5558fd341a68efb168654d6fac65e0d86e0ef58a7c90802e59673927d34598d",
-    "block_number": 7555249,
-    "quote_hash": "0x38ae48b14ef1dcaefe4809b0b116cea26535252fbda2e29a088c0004b8a3f7a9",
-    "transferred_amount_wei": "1000100550000000000",
-    "transferred_amount_rbtc": 1.00010055,
-    "block_timestamp": "2025-05-13T15:39:49.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe7d6bd0a3c5bb95b29b4381b4295b82c376b5e9fbbfdece097d9a3b4e6826912",
-    "block_number": 7555049,
-    "quote_hash": "0x372061ad19487c02d841bc8e7f5a527c54ba669157e1364d0120a24fc5daec19",
-    "transferred_amount_wei": "6601200000000000",
-    "transferred_amount_rbtc": 0.0066012,
-    "block_timestamp": "2025-05-13T14:15:42.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4383,15 +2613,6 @@
     "block_timestamp": "2025-05-12T21:54:40.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8bfd9abaafa7c52dce0f164a3711850af4ec7ac6fd9ce5335881d43beab724a9",
-    "block_number": 7529158,
-    "quote_hash": "0xdac8c232c71319dd68bec6a66177ea92454478c77e89c835fee275014a7301bb",
-    "transferred_amount_wei": "1000101200000000000",
-    "transferred_amount_rbtc": 1.0001012,
-    "block_timestamp": "2025-05-06T08:19:31.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x16cd19e3b69eea1781d49f292fed53f323383e60f56f03d887f8c3782a034d1b",
     "block_number": 7526993,
@@ -4403,24 +2624,6 @@
     "success": "true",
     "quote_hash": "0xdac8c232c71319dd68bec6a66177ea92454478c77e89c835fee275014a7301bb",
     "block_timestamp": "2025-05-05T18:05:41.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xfd776ba1450f2ff38f55dd09d39b72051c8e388e09cf9046eafd83625a6ab81b",
-    "block_number": 7518382,
-    "quote_hash": "0xd252581a3e044b852426d926a0a0505fa5403d7b01857a50e1989b9817d56e3b",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-05-03T08:47:02.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd709dec776fbe1039980817b09ac7611e549d74850947dec11feed4fe7f94a8c",
-    "block_number": 7518381,
-    "quote_hash": "0xf8ed26e5377964062129631a52388bf26ac5d05550f8b440a830da8a81df8396",
-    "transferred_amount_wei": "5230550000000000",
-    "transferred_amount_rbtc": 0.00523055,
-    "block_timestamp": "2025-05-03T08:46:24.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4449,15 +2652,6 @@
     "block_timestamp": "2025-05-02T17:17:33.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0x19e4d7949da8d6782536aea1de87144a0b34e606d67c209e21cf7223c676c5f6",
-    "block_number": 7511367,
-    "quote_hash": "0xe9bb04b80986d663c00d2c8e9a18706b3edcf5af00b1463233651d57ab47a44f",
-    "transferred_amount_wei": "6100550000000000",
-    "transferred_amount_rbtc": 0.00610055,
-    "block_timestamp": "2025-05-01T09:52:26.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x32828490bc04badbb50c0990676a49bf4c7171d592d7778c91a68fb5720a44fe",
     "block_number": 7508936,
@@ -4469,24 +2663,6 @@
     "success": "true",
     "quote_hash": "0xe9bb04b80986d663c00d2c8e9a18706b3edcf5af00b1463233651d57ab47a44f",
     "block_timestamp": "2025-04-30T17:44:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0be632db2e1bcc1bd83c0e96f8e412cddfe05d21e4756e3a5ef29db87e0d2de0",
-    "block_number": 7482235,
-    "quote_hash": "0xaa0f747ee37429d71682489614f328acb1ec617130254bb4f166c44bb007b5fa",
-    "transferred_amount_wei": "5110550000000000",
-    "transferred_amount_rbtc": 0.00511055,
-    "block_timestamp": "2025-04-23T10:16:37.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0cb48b63b7d2f9ff7343e7fb88c3a0445bbf11fa48fdc61e2def15136cf559c0",
-    "block_number": 7480823,
-    "quote_hash": "0x45d5cb517364a42cdfc1857883a13f58adaffba93253d73bfe23747d8edc3cd3",
-    "transferred_amount_wei": "13101200000000000",
-    "transferred_amount_rbtc": 0.0131012,
-    "block_timestamp": "2025-04-23T00:52:30.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4513,33 +2689,6 @@
     "success": "true",
     "quote_hash": "0x45d5cb517364a42cdfc1857883a13f58adaffba93253d73bfe23747d8edc3cd3",
     "block_timestamp": "2025-04-22T10:23:29.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x972164276d790f562f8e1415c4e97a3b1bc598d22c91c28c422b97ded5fbbc04",
-    "block_number": 7475713,
-    "quote_hash": "0xaa72c936c4438b947e19b09848987d8e62166f6c8c0e455f0fddbae75d5d94c0",
-    "transferred_amount_wei": "499774040000000000",
-    "transferred_amount_rbtc": 0.49977404,
-    "block_timestamp": "2025-04-21T16:02:46.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x418c18b6ac85766e742a76e5e0868f9fbc30da2ba1d24bdc9fafc27be46b62d2",
-    "block_number": 7475712,
-    "quote_hash": "0xa78179221fe691387eedc8aaf8af0be09813a7df542bd97aa87cf01e7d91bf03",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-04-21T16:02:29.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdfd76ff76c50cc1653004e68132ac547d14b23db366002540ed3143a47388c57",
-    "block_number": 7475711,
-    "quote_hash": "0x84a7ae344849ba529e07948bb2c709e07293596e99e81df1e4a6d6df7965ba49",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-04-21T16:02:04.000000Z"
   },
   {
     "event": "CallForUser",
@@ -4581,15 +2730,6 @@
     "block_timestamp": "2025-04-20T21:27:29.000000Z"
   },
   {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa88fb8d10f9106e74e75cf668e7efc104fe5b14b7b4cd3ab789f89d0835ea3f9",
-    "block_number": 7449542,
-    "quote_hash": "0xabbee0e817398e26e37dec884e675d8d939e8d7dd43cbf1e2eed829bb6dcfde7",
-    "transferred_amount_wei": "39984170000000000",
-    "transferred_amount_rbtc": 0.03998417,
-    "block_timestamp": "2025-04-14T11:23:19.000000Z"
-  },
-  {
     "event": "CallForUser",
     "tx_hash": "0x27e18939959136dec225f3eea12150641cf406491561ffb5843ce2fdb3a340d0",
     "block_number": 7447127,
@@ -4601,1171 +2741,5 @@
     "success": "true",
     "quote_hash": "0xabbee0e817398e26e37dec884e675d8d939e8d7dd43cbf1e2eed829bb6dcfde7",
     "block_timestamp": "2025-04-13T19:02:42.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xd70253c317d1483976510792cf037c2f972c7a6dc719f10eeb8b645684a40f3e",
-    "block_number": 7425261,
-    "quote_hash": "0x45b6d174538394f18c2c1da72e7e650c06c4cf168f9ec07fc89f372059722408",
-    "transferred_amount_wei": "499686150000000000",
-    "transferred_amount_rbtc": 0.49968615,
-    "block_timestamp": "2025-04-07T17:28:27.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x8e2ce1ee1f0fc82e9462af318b7935f7e526b29f67416746b2c883b307241028",
-    "block_number": 7425126,
-    "quote_hash": "0x43f74fd495d069024b18e559edcdeda41df381739bb24c9ddc97e398cbe53aef",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-04-07T16:30:28.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4214cf5b38d16fa69ef58a82a4f6742873d2559dd36cdd800e9284a71c5bf65f",
-    "block_number": 7425124,
-    "quote_hash": "0x8bcc6a4e57c4d53d424dd95ae16cf09cb9eb6af6e1577cda2a583a90cde5a10a",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-04-07T16:29:41.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x871b05bd10435185c7bcb86e5de413f16d0eb8105d0c6fd9595976f91c8a18b7",
-    "block_number": 7425123,
-    "quote_hash": "0xc9ff11a63e6fd069cc68fd3fa60229ab846b92c86524616e4954a9af6aa8e2c3",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-04-07T16:28:43.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xa490c62f89cdb1a398bce1b99a5ee94e4f53535453cdda352abc67e6e83c4326",
-    "block_number": 7422640,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499585600000000000",
-    "value_rbtc": 0.4995856,
-    "success": "true",
-    "quote_hash": "0x45b6d174538394f18c2c1da72e7e650c06c4cf168f9ec07fc89f372059722408",
-    "block_timestamp": "2025-04-06T23:45:29.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x44a733075fd1f4ad8c589eee36679f0c95121f2bfccf6ac7dd919b7b9e2e675f",
-    "block_number": 7422617,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x43f74fd495d069024b18e559edcdeda41df381739bb24c9ddc97e398cbe53aef",
-    "block_timestamp": "2025-04-06T23:37:44.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xc36e1498a092f97c876bf0949735ae948cd1ce304246bcd60c34bb525e88a70a",
-    "block_number": 7422602,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x8bcc6a4e57c4d53d424dd95ae16cf09cb9eb6af6e1577cda2a583a90cde5a10a",
-    "block_timestamp": "2025-04-06T23:33:06.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xf9738eb3caacd64cc7117850a79f3a549735327b51e69678b73cec30a25c2e71",
-    "block_number": 7422601,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0xc9ff11a63e6fd069cc68fd3fa60229ab846b92c86524616e4954a9af6aa8e2c3",
-    "block_timestamp": "2025-04-06T23:32:42.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x996201ce58b6295710972c4b360c2f0d01805e9bfbfd71c1e923a3ddd49de15d",
-    "block_number": 7413656,
-    "quote_hash": "0x3f44fbe0b4340c6a745cd43f6b08e6ce0c2ae5b9e9d3d8bdf9065595fce57ef1",
-    "transferred_amount_wei": "5110550000000000",
-    "transferred_amount_rbtc": 0.00511055,
-    "block_timestamp": "2025-04-04T10:13:30.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xdac19e7e852a0211b235db27a1b7e5c5c671a107f00195660d96804b6c15a662",
-    "block_number": 7411816,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x8CE42d74CE75Bb4e77142dDf49E8AD07FD540497",
-    "gas_limit": "21000",
-    "value_wei": "5010000000000000",
-    "value_rbtc": 0.00501,
-    "success": "true",
-    "quote_hash": "0x3f44fbe0b4340c6a745cd43f6b08e6ce0c2ae5b9e9d3d8bdf9065595fce57ef1",
-    "block_timestamp": "2025-04-03T21:41:27.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc2cfeed5da1bbda2f64ce3d42c06152451ca7ce4595f7084589191982b30c4d7",
-    "block_number": 7345083,
-    "quote_hash": "0x2847e5c9ba36cae7e43c674014bbc2710096c7ca90ebc5b2f3fdad723c2b9271",
-    "transferred_amount_wei": "5100560000000000",
-    "transferred_amount_rbtc": 0.00510056,
-    "block_timestamp": "2025-03-15T17:49:42.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x23b8e847fa6fb4e4755f0b1660a772ffa852e5cea5e6f2267bd052e8f3f34c8d",
-    "block_number": 7343945,
-    "quote_hash": "0x3eb5d8bcf66e66a7e40a2bea3686368b3703246bfbdb6049a886694a1ab38c3b",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-03-15T09:49:52.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xf708680ecd707d2570eb63df3653ae5490274ef6b86bd24bba78884db0075304",
-    "block_number": 7342241,
-    "from_address": "0x4202BAC9919C3412fc7C8BE4e678e26279386603",
-    "dest_address": "0xEC068f31fa194D9036ed3c61C3546111ac3c8902",
-    "gas_limit": "21000",
-    "value_wei": "5000000000000000",
-    "value_rbtc": 0.005,
-    "success": "true",
-    "quote_hash": "0x2847e5c9ba36cae7e43c674014bbc2710096c7ca90ebc5b2f3fdad723c2b9271",
-    "block_timestamp": "2025-03-14T22:00:49.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x893561bf644972749d0deae1866668af6c75f7e1d5c302525bde77e37d3f9878",
-    "block_number": 7341544,
-    "from_address": "0x4202BAC9919C3412fc7C8BE4e678e26279386603",
-    "dest_address": "0xEC068f31fa194D9036ed3c61C3546111ac3c8902",
-    "gas_limit": "21000",
-    "value_wei": "5000000000000000",
-    "value_rbtc": 0.005,
-    "success": "true",
-    "quote_hash": "0x3eb5d8bcf66e66a7e40a2bea3686368b3703246bfbdb6049a886694a1ab38c3b",
-    "block_timestamp": "2025-03-14T17:00:44.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x05bc010bf3fb2e653a80ba4d41f2f7fcef9e666dcab213a25d0df397ef15197e",
-    "block_number": 7340823,
-    "quote_hash": "0xe3b8eea12349c9d8719d82d28793809900b1460086046dd0faf60b9a05584ed2",
-    "transferred_amount_wei": "5130550000000000",
-    "transferred_amount_rbtc": 0.00513055,
-    "block_timestamp": "2025-03-14T12:08:26.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xecec5250cee37c0c53c965e1c33280be34138c03a5d8e11928e889cb857082d0",
-    "block_number": 7340809,
-    "quote_hash": "0xcc947164864fd23628931ba3758cfe419bab93a35ab8b749195109371a1f0601",
-    "transferred_amount_wei": "499878130000000000",
-    "transferred_amount_rbtc": 0.49987813,
-    "block_timestamp": "2025-03-14T12:03:36.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x04af3d87af5b3fb5f163a6a016864ddf48a48d590ad462a6898fc4bf54a571b9",
-    "block_number": 7340755,
-    "quote_hash": "0x0fe435e718169a11bd93536b85c7545bf7d9cbf9b3104c8d6bc17e405908f973",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-03-14T11:41:27.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x1116a3757a3acd70c08071e85afde31d3b6f1605f12df48a35e6448c9711b689",
-    "block_number": 7338637,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x4D22D374aEDA4D35FC4BBDEbeC8de6B6E63450a2",
-    "gas_limit": "21000",
-    "value_wei": "5030000000000000",
-    "value_rbtc": 0.00503,
-    "success": "true",
-    "quote_hash": "0xe3b8eea12349c9d8719d82d28793809900b1460086046dd0faf60b9a05584ed2",
-    "block_timestamp": "2025-03-13T20:50:58.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x0d6109f01b3914df5ce36093d26b0d8b46e0aa09f76e5bc514b4930a6e988f67",
-    "block_number": 7338635,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499777580000000000",
-    "value_rbtc": 0.49977758,
-    "success": "true",
-    "quote_hash": "0xcc947164864fd23628931ba3758cfe419bab93a35ab8b749195109371a1f0601",
-    "block_timestamp": "2025-03-13T20:50:31.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x400d49ae4a63250eaf0d716de8ed83096ee8b26a7f3ac64b635c57803dee0f01",
-    "block_number": 7338566,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x0fe435e718169a11bd93536b85c7545bf7d9cbf9b3104c8d6bc17e405908f973",
-    "block_timestamp": "2025-03-13T20:16:29.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x537e3b8ae6319cf2e4c8d68b88b11fb1aecb246996c726bb14fce72d250e143f",
-    "block_number": 7329550,
-    "quote_hash": "0x8141069b74f0f584da1310f080ea3a5f7a11f02f998b7629a184656dc089dbd6",
-    "transferred_amount_wei": "499782670000000000",
-    "transferred_amount_rbtc": 0.49978267,
-    "block_timestamp": "2025-03-11T05:27:59.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4815761cf391924f7c902b8142ce3c190f077f386b2a5d58fd7bf7628f98e853",
-    "block_number": 7329548,
-    "quote_hash": "0x85ce1b18b3a5bb4f0c4a41828b3f7d76c7143639814b78e1b4525630c2aaed86",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-03-11T05:27:05.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa3d9daf1d3caf43bf2c166934d1f6b5132144772fb282c45af5fd7822e5d2f19",
-    "block_number": 7329546,
-    "quote_hash": "0x9731e59999b51ad5691e74a5724fcb265e92a1b26c72571bf08cdfb91a4e31e9",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-03-11T05:26:32.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x7d51a0e21c01eb0821dbf44378bfcc11bb51f893da4c49c40b843c093ad33315",
-    "block_number": 7327452,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499682110000000000",
-    "value_rbtc": 0.49968211,
-    "success": "true",
-    "quote_hash": "0x8141069b74f0f584da1310f080ea3a5f7a11f02f998b7629a184656dc089dbd6",
-    "block_timestamp": "2025-03-10T14:58:42.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x4251a8d682e936c044323fd3d71d86860511046d53d6829e85c3272724cd4470",
-    "block_number": 7327450,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x85ce1b18b3a5bb4f0c4a41828b3f7d76c7143639814b78e1b4525630c2aaed86",
-    "block_timestamp": "2025-03-10T14:57:43.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x07a23d39d3939a8461a1308ec96deb74b84f6a4e35b73205306da83f66ac7a1d",
-    "block_number": 7327449,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x9731e59999b51ad5691e74a5724fcb265e92a1b26c72571bf08cdfb91a4e31e9",
-    "block_timestamp": "2025-03-10T14:57:29.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5ea88e588008b04f45897abd4e62b2efd35db1db2529197fb734fa9a081fe8e4",
-    "block_number": 7327079,
-    "quote_hash": "0x7e5464a3604f5b59da1975dda75938ea63bb0f54a9112101f1e5fcc2cf2f1448",
-    "transferred_amount_wei": "499888270000000000",
-    "transferred_amount_rbtc": 0.49988827,
-    "block_timestamp": "2025-03-10T12:23:30.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x6c85550af020bf7069a1e4c39b149542fd4db8fbc59c24822f1bcf9696fa4ee6",
-    "block_number": 7327060,
-    "quote_hash": "0xaca8c751f9b213e7cd3c5b31d42857a24c9b976480f856063d99053243a40eda",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-03-10T12:14:36.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x23d78b8b0d294e289d8cdea65a32dac96749e7da15cb66b7259c80e0af6446a9",
-    "block_number": 7324482,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499787710000000000",
-    "value_rbtc": 0.49978771,
-    "success": "true",
-    "quote_hash": "0x7e5464a3604f5b59da1975dda75938ea63bb0f54a9112101f1e5fcc2cf2f1448",
-    "block_timestamp": "2025-03-09T18:35:50.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x08b235e5ee5941ed765c56618e57ede3a53b44165cfe7d999ef50e578313b8d8",
-    "block_number": 7324388,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0xaca8c751f9b213e7cd3c5b31d42857a24c9b976480f856063d99053243a40eda",
-    "block_timestamp": "2025-03-09T18:01:36.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x580dafae8c90bd452026633790f2cf973e8382f26baaf5baf4b2efae187120e5",
-    "block_number": 7323971,
-    "quote_hash": "0x0113c788e4ce0b5f319a9a0c12474b8ae8ba2ea94343c07fa696bceb01bee162",
-    "transferred_amount_wei": "499879060000000000",
-    "transferred_amount_rbtc": 0.49987906,
-    "block_timestamp": "2025-03-09T15:06:10.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7e124982d58b993aaee1fa3fc8d7e2ad45612ee6fc0feff00de4f9c4e5a2b118",
-    "block_number": 7323903,
-    "quote_hash": "0x3f62acd6b31bffcedd53b699685f68dd8466698ea828532a805acc46f99a61ca",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-03-09T14:39:14.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x38ff9873d1e39741dcd2e2cdbcac38fecd82333e206a1ff642513ec831655cb3",
-    "block_number": 7322011,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499778500000000000",
-    "value_rbtc": 0.4997785,
-    "success": "true",
-    "quote_hash": "0x0113c788e4ce0b5f319a9a0c12474b8ae8ba2ea94343c07fa696bceb01bee162",
-    "block_timestamp": "2025-03-09T01:24:01.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x2e9525ed0995f26f87e346ae355ddc12beb966b2b3ce2107aef07d9e842d040a",
-    "block_number": 7321811,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x3f62acd6b31bffcedd53b699685f68dd8466698ea828532a805acc46f99a61ca",
-    "block_timestamp": "2025-03-09T00:00:43.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa3e1192f2eac09bad5d329d6ac3979ae327775a7b8350cbbad68563088d970e9",
-    "block_number": 7310971,
-    "quote_hash": "0x0fcf28bea16bafe1edcd152c7ac1daba1937a595404f5658688d8c2ce69ca79f",
-    "transferred_amount_wei": "200150550000000000",
-    "transferred_amount_rbtc": 0.20015055,
-    "block_timestamp": "2025-03-05T20:35:31.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x5f0b518dc844bfd04339041de28b3d74eec05f23db1bbf00f6d3db7e4c60f620",
-    "block_number": 7308329,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0xb3d29057Fbf7CC83f498898fC516bfbdc71A4249",
-    "gas_limit": "21000",
-    "value_wei": "200050000000000000",
-    "value_rbtc": 0.20005,
-    "success": "true",
-    "quote_hash": "0x0fcf28bea16bafe1edcd152c7ac1daba1937a595404f5658688d8c2ce69ca79f",
-    "block_timestamp": "2025-03-05T02:11:21.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9c83bf6833aa9ab77a8e5e4672311acf1c1992c8fac2a1707916ac7d2332a699",
-    "block_number": 7292384,
-    "quote_hash": "0xd1950457abcfd41ec6f884f2d146e9fbfd821d685697f25465b8c61e7159a69d",
-    "transferred_amount_wei": "500100570000000000",
-    "transferred_amount_rbtc": 0.50010057,
-    "block_timestamp": "2025-02-28T11:49:21.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x4a7f70007a8ed476479c7dc80a47931d4482e297413021a578444f139794fd6e",
-    "block_number": 7292307,
-    "quote_hash": "0x2b11f5db7aab47ab066ccc435ecc7de506cad01af21feea46feab112564afd97",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-28T11:19:49.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x3ff3f984a29a1317af06f1a5b151d6e2d17b052f8c907393406f57b778959a88",
-    "block_number": 7290151,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0xd1950457abcfd41ec6f884f2d146e9fbfd821d685697f25465b8c61e7159a69d",
-    "block_timestamp": "2025-02-27T21:07:44.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x4dd5ff0b33ea1b69fec823de76ac0fe6db3d2c9990cc3ea8c1c84d4865132361",
-    "block_number": 7290029,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x2b11f5db7aab47ab066ccc435ecc7de506cad01af21feea46feab112564afd97",
-    "block_timestamp": "2025-02-27T20:11:02.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2fafbb13dae0e8b93f5c837dd61d18c7557951d15a5177a3850196099f8036b9",
-    "block_number": 7289335,
-    "quote_hash": "0x828857c87cfd5234fe7551b3c5c4e56e643aa43ba7ddc3ce1a36dac7e150cae5",
-    "transferred_amount_wei": "499753150000000000",
-    "transferred_amount_rbtc": 0.49975315,
-    "block_timestamp": "2025-02-27T15:31:22.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xc519be865706c9bb481e239176b293976a44e20fe046da4fcb808f34675ed011",
-    "block_number": 7289156,
-    "quote_hash": "0x5c0b1e0cb78e2ba1e5a13f4a1bf8da8bfee83671f9a65231085efb472b869988",
-    "transferred_amount_wei": "500100570000000000",
-    "transferred_amount_rbtc": 0.50010057,
-    "block_timestamp": "2025-02-27T14:16:04.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x70b073de7120931a57bffcf888b3570fa42822aa862b15faa6cef06465431d1d",
-    "block_number": 7288984,
-    "quote_hash": "0x0f88de0be7eaccdd5a071ec7b45923e742dd7d3cc7fef26aa843f66b8da8a1d7",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-02-27T13:07:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0081decf962f2e8fd9300a402028031f64988005b9ea9d284be65ba262cae5aa",
-    "block_number": 7288698,
-    "quote_hash": "0x9b5d74a7c5872d284928396926dae462133dc36e161aa3ba7da5977f3d0f2096",
-    "transferred_amount_wei": "499753160000000000",
-    "transferred_amount_rbtc": 0.49975316,
-    "block_timestamp": "2025-02-27T11:19:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x927c2a942cf4d07d881f530db510b0389e3989454ca8032a1a1ffcc44fedaa34",
-    "block_number": 7288661,
-    "quote_hash": "0x61dc8c3179233a3b56936dd99cde0a71826611a610680978d2e799d3fd3ee235",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-27T11:01:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xeee93857f4590ad2ffb72817e534a47788066d900213017dc200a8f9677afae9",
-    "block_number": 7288558,
-    "quote_hash": "0x101b0ff863ee40a8ae183a7a9cb3c4b9bda21a3eee319bcfe2c18dfd569398ad",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-27T10:19:35.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x93ecc0e2f422106a37aacc361b4dd046735ec88e9fce57d68f59e8868ba67901",
-    "block_number": 7288133,
-    "quote_hash": "0x70fa02ee125a9dc61f9f2a791ce9e45a62b9b247c5646fef404855492ea34410",
-    "transferred_amount_wei": "5130550000000000",
-    "transferred_amount_rbtc": 0.00513055,
-    "block_timestamp": "2025-02-27T07:19:16.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x401f1f5f2a050db9e653225c26acda0dee16ef2f5e8b41cc5297b3c764334059",
-    "block_number": 7288114,
-    "quote_hash": "0x6617dfe6516ab6db6b5fdf6d964c7bf017155fbe62b4663524c00813ec997439",
-    "transferred_amount_wei": "5100550000000000",
-    "transferred_amount_rbtc": 0.00510055,
-    "block_timestamp": "2025-02-27T07:10:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x465262e9b3faaab596924cc2cdeae83812967bdde55d32ea89b5bb322a647136",
-    "block_number": 7288000,
-    "quote_hash": "0x3eda8d4b5dd3d04f336448d20cb8c0c1e4e9591270dfae57c42c7a859bb94844",
-    "transferred_amount_wei": "5130550000000000",
-    "transferred_amount_rbtc": 0.00513055,
-    "block_timestamp": "2025-02-27T06:22:09.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x92a2179f55dfa1702f14326bbad1618e6de90d209fcfc55f1b938754cfd300cc",
-    "block_number": 7287914,
-    "quote_hash": "0xe613e2d28c3d82063074b15b657923d23b0f686be29b996d25c3975684bb4e2c",
-    "transferred_amount_wei": "5150550000000000",
-    "transferred_amount_rbtc": 0.00515055,
-    "block_timestamp": "2025-02-27T05:52:05.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x0c0c3c7f7152983a5c600c4e9b5b0c1b7bfb5812646e8aa7e2be528960d03a17",
-    "block_number": 7287726,
-    "quote_hash": "0x9bba0c1e23d804e9fc2b292e44c9402cb8864d642c6b208007c6197c81468b36",
-    "transferred_amount_wei": "499874050000000000",
-    "transferred_amount_rbtc": 0.49987405,
-    "block_timestamp": "2025-02-27T04:37:56.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x81feec5e3bb1165ec6bdafb1bd869659624d36937eb6efcedb6b484adf173595",
-    "block_number": 7287706,
-    "quote_hash": "0x10407197e340b51af1789e914600b85e63834388e1bd74eaf9e845ebbefe4e5d",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-02-27T04:28:29.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xb51c73815249226958b06b6c1b9ab667207e651f4bcc184bf85c3589aa47e54a",
-    "block_number": 7286977,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499652590000000000",
-    "value_rbtc": 0.49965259,
-    "success": "true",
-    "quote_hash": "0x828857c87cfd5234fe7551b3c5c4e56e643aa43ba7ddc3ce1a36dac7e150cae5",
-    "block_timestamp": "2025-02-26T23:28:36.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xeadac60dd11607748c05993246da05751e994e90301b49f4a6b925016108a076",
-    "block_number": 7286835,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x5c0b1e0cb78e2ba1e5a13f4a1bf8da8bfee83671f9a65231085efb472b869988",
-    "block_timestamp": "2025-02-26T22:32:14.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xf8f44149a87318abfeb8392cfe7db4cf886bf29d9fcf7f1c82a0e3aba91ea0dc",
-    "block_number": 7286763,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x0f88de0be7eaccdd5a071ec7b45923e742dd7d3cc7fef26aa843f66b8da8a1d7",
-    "block_timestamp": "2025-02-26T22:01:07.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x135f1b91f4a5d078c5b1e45410cf2f26c3ca0d9569ed9a1a1b88e0e21d75b6b0",
-    "block_number": 7286498,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499652560000000000",
-    "value_rbtc": 0.49965256,
-    "success": "true",
-    "quote_hash": "0x9b5d74a7c5872d284928396926dae462133dc36e161aa3ba7da5977f3d0f2096",
-    "block_timestamp": "2025-02-26T20:07:14.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xf1e38b98463c6efe345665d95f107bff9c34b09a6b974f0b080bd08641f278a0",
-    "block_number": 7286464,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x61dc8c3179233a3b56936dd99cde0a71826611a610680978d2e799d3fd3ee235",
-    "block_timestamp": "2025-02-26T19:49:27.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x2cc37d09b2ffd7314d4c866402b478d3cd2772bc282a17e617285f9712b5d118",
-    "block_number": 7286390,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x101b0ff863ee40a8ae183a7a9cb3c4b9bda21a3eee319bcfe2c18dfd569398ad",
-    "block_timestamp": "2025-02-26T19:19:05.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x00845b9f2fa4da8e31ca62fa15c9500a0838a1bcdec88ffa2536523d667089d3",
-    "block_number": 7286064,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x48a26e255d6065ABA6E7568B2aC5cCbC5470A8f8",
-    "gas_limit": "21000",
-    "value_wei": "5030000000000000",
-    "value_rbtc": 0.00503,
-    "success": "true",
-    "quote_hash": "0x70fa02ee125a9dc61f9f2a791ce9e45a62b9b247c5646fef404855492ea34410",
-    "block_timestamp": "2025-02-26T17:10:04.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x4fb0c9498c05280f63245a1179f2703d34433761f1601b98d3180e7625fa11b4",
-    "block_number": 7286043,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x02E221a95224F090E492066bc1B7A35B5fd94542",
-    "gas_limit": "21000",
-    "value_wei": "5000000000000000",
-    "value_rbtc": 0.005,
-    "success": "true",
-    "quote_hash": "0x6617dfe6516ab6db6b5fdf6d964c7bf017155fbe62b4663524c00813ec997439",
-    "block_timestamp": "2025-02-26T17:02:05.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x6d5cc590edf81a4a6cd6a18efe45b82d7ddfe8fc8a48017a0d42dd9117a8ebc7",
-    "block_number": 7285909,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x48a26e255d6065ABA6E7568B2aC5cCbC5470A8f8",
-    "gas_limit": "21000",
-    "value_wei": "5030000000000000",
-    "value_rbtc": 0.00503,
-    "success": "true",
-    "quote_hash": "0x3eda8d4b5dd3d04f336448d20cb8c0c1e4e9591270dfae57c42c7a859bb94844",
-    "block_timestamp": "2025-02-26T16:12:26.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x2880202fe5bb1997a6a6bee38d435b22ea9835fac62d484ff0d6e72f1fc9c32a",
-    "block_number": 7285819,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x48a26e255d6065ABA6E7568B2aC5cCbC5470A8f8",
-    "gas_limit": "21000",
-    "value_wei": "5050000000000000",
-    "value_rbtc": 0.00505,
-    "success": "true",
-    "quote_hash": "0xe613e2d28c3d82063074b15b657923d23b0f686be29b996d25c3975684bb4e2c",
-    "block_timestamp": "2025-02-26T15:35:04.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xd899cdcbfd5bb3fa6ffb1b9cd122d6cfa684f5b41849125fc9d46ab58545d832",
-    "block_number": 7285441,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499773500000000000",
-    "value_rbtc": 0.4997735,
-    "success": "true",
-    "quote_hash": "0x9bba0c1e23d804e9fc2b292e44c9402cb8864d642c6b208007c6197c81468b36",
-    "block_timestamp": "2025-02-26T13:19:24.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x0fbfdd531e1358bdc2c5591c6c992010758e6c09055a12b89762c8ccad16e800",
-    "block_number": 7285387,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x10407197e340b51af1789e914600b85e63834388e1bd74eaf9e845ebbefe4e5d",
-    "block_timestamp": "2025-02-26T12:59:11.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x7247ae8c20f413f5a2347eed6214ac7502dec1e118bb8c397180a42eb7d52882",
-    "block_number": 7284861,
-    "quote_hash": "0xf784424f93deb660d1bebbf82632df166c774f1b2ca7a01b9093172051853813",
-    "transferred_amount_wei": "499848560000000000",
-    "transferred_amount_rbtc": 0.49984856,
-    "block_timestamp": "2025-02-26T09:31:07.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x977619a0ab933b9de9802a4fca674a45aafa065db6bfe97118611e386b18ad63",
-    "block_number": 7284783,
-    "quote_hash": "0xb9446792ee0de608d8c3271df7aa136fc55fe49dd8432221876e9824c52fb606",
-    "transferred_amount_wei": "196600560000000000",
-    "transferred_amount_rbtc": 0.19660056,
-    "block_timestamp": "2025-02-26T09:01:30.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xf5d614a3114f352022913cb2eb567759fbe61bcb52bd7b8fa97b8ee578866d05",
-    "block_number": 7284727,
-    "quote_hash": "0x979282a24fd950926791e2122529cc53f1ac37b5252172226c20c01c6bcfe740",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-02-26T08:37:43.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xbd48d0f32a393e7dd12c96b4c08b3da12cf617e3117636eddc3d1d28624e2253",
-    "block_number": 7284635,
-    "quote_hash": "0x5259dad8e2b8915a852c6f36eaac259f2bee2cad37e4a2f30449108c3e342d0e",
-    "transferred_amount_wei": "5121220000000000",
-    "transferred_amount_rbtc": 0.00512122,
-    "block_timestamp": "2025-02-26T08:01:55.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x11981e6fc4d786bf4be9fd3b2f691b76b417aec3f36cd84b135cd30f1b881e8d",
-    "block_number": 7282583,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499748000000000000",
-    "value_rbtc": 0.499748,
-    "success": "true",
-    "quote_hash": "0xf784424f93deb660d1bebbf82632df166c774f1b2ca7a01b9093172051853813",
-    "block_timestamp": "2025-02-25T17:56:16.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x6d1aade333befd700ae5605179c8c11f83f6c34dd81588da012c3b65271fce91",
-    "block_number": 7282478,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0xb3d29057Fbf7CC83f498898fC516bfbdc71A4249",
-    "gas_limit": "21000",
-    "value_wei": "196500000000000000",
-    "value_rbtc": 0.1965,
-    "success": "true",
-    "quote_hash": "0xb9446792ee0de608d8c3271df7aa136fc55fe49dd8432221876e9824c52fb606",
-    "block_timestamp": "2025-02-25T17:10:26.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xccd1b36daaa55fabce3f09ca740c55779bd6c4043e021dbaeb04028d200f6e5b",
-    "block_number": 7282458,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x979282a24fd950926791e2122529cc53f1ac37b5252172226c20c01c6bcfe740",
-    "block_timestamp": "2025-02-25T17:00:18.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xe4c3d95a67b8a734a02c329805ee8a9c8fe62b91f62dff2b6355918bb5987200",
-    "block_number": 7282264,
-    "quote_hash": "0x9a7ccb2bccc4ad16b9037772e8bd7294fb8ce3d1cfe0e4cb51ca8bdd2fce84cb",
-    "transferred_amount_wei": "499722660000000000",
-    "transferred_amount_rbtc": 0.49972266,
-    "block_timestamp": "2025-02-25T15:34:22.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xaf04917ff831cc5bc72861e0441d996c72dcac2f6f057b3403dc73f8ff691d36",
-    "block_number": 7282208,
-    "quote_hash": "0x7b6b2b7efeaff6f57d36515ad6720babb93e6932a720b3c218c5dc4fc03534ba",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-25T15:13:11.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xcc2bc016cbac249ae9350608bbb80a7fd8c2157e76a08428cbda4c415672e12c",
-    "block_number": 7282207,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x8CE42d74CE75Bb4e77142dDf49E8AD07FD540497",
-    "gas_limit": "46000",
-    "value_wei": "5020000000000000",
-    "value_rbtc": 0.00502,
-    "success": "true",
-    "quote_hash": "0x5259dad8e2b8915a852c6f36eaac259f2bee2cad37e4a2f30449108c3e342d0e",
-    "block_timestamp": "2025-02-25T15:12:23.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xfcc8a7b8748875e77c941b329a3e7f09eb38fa15697c2ec5f5ca13bc4313b511",
-    "block_number": 7282086,
-    "quote_hash": "0x2f6433603561f8a72636016324a3c35ccd4cd790879bc06710164f23b0a14d82",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-02-25T14:25:11.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x97c8f0b94bf73ce69c77fa3f1beb451363e94329a05dee234d6ac6a741001f0f",
-    "block_number": 7279952,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499622100000000000",
-    "value_rbtc": 0.4996221,
-    "success": "true",
-    "quote_hash": "0x9a7ccb2bccc4ad16b9037772e8bd7294fb8ce3d1cfe0e4cb51ca8bdd2fce84cb",
-    "block_timestamp": "2025-02-25T00:18:21.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x7477ac9923484448e12a975a29c823369b622b8016c256ce420ba8b54b3168a9",
-    "block_number": 7279829,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x7b6b2b7efeaff6f57d36515ad6720babb93e6932a720b3c218c5dc4fc03534ba",
-    "block_timestamp": "2025-02-24T23:35:22.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xa663bfd5979af189c339b3353b1deabee4b331eb8fcf546362ce78c85a801161",
-    "block_number": 7279729,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x2f6433603561f8a72636016324a3c35ccd4cd790879bc06710164f23b0a14d82",
-    "block_timestamp": "2025-02-24T22:52:24.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x09386a02bcde39794e1468883f7874836e589079201deff590a3bcb0572a5f17",
-    "block_number": 7278304,
-    "quote_hash": "0x5c862903452a27163476307a4032541ac2ed155e6375e1b5547f5ee73508cb2b",
-    "transferred_amount_wei": "499689650000000000",
-    "transferred_amount_rbtc": 0.49968965,
-    "block_timestamp": "2025-02-24T13:19:51.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x9d7126853f3f1aad2bd18358134696b6cbede91488195e1a3dfda58792caaac3",
-    "block_number": 7278211,
-    "quote_hash": "0x8c9ed3c6961a35c7137c957df898f62ff791c7dae5e460b4c7dba485b389aeaf",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-24T12:34:52.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x5d59a62190a1d8b360e8aa5f69afbd0d8be684a53c654dcc93e1452550366c6f",
-    "block_number": 7278166,
-    "quote_hash": "0x8f2ff600a49eeea46b205e3790dc2591e146eb8b66d160ce92cf397d64586028",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-24T12:13:08.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2135301c4e0ff818a17c358a63af0c8e5f5dcf424b3b0187387d542becb3a536",
-    "block_number": 7277790,
-    "quote_hash": "0x815a980e67a089ec47a386f8a81f70beb4220c0de2121ed73ca67913cb2710f7",
-    "transferred_amount_wei": "499730050000000000",
-    "transferred_amount_rbtc": 0.49973005,
-    "block_timestamp": "2025-02-24T09:43:15.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x69c571818780669bd7666e4ed95f2001474171a04e63d89b3edfef74ff748da2",
-    "block_number": 7277636,
-    "quote_hash": "0xf717943103240ccc2a3bc5072c1662b8bf98294676ad5482452c5455ac4f0f17",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-02-24T08:46:12.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x63287ea95b4d10c8ee85b15155e0e5b0d2ac867532c570171321793b07fb728c",
-    "block_number": 7277385,
-    "quote_hash": "0x98beeff00c67558a5c2a5d397e0b8113fed0a9124d4d03b524328ce7ae437f49",
-    "transferred_amount_wei": "500100560000000000",
-    "transferred_amount_rbtc": 0.50010056,
-    "block_timestamp": "2025-02-24T07:01:23.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xacdac69a8f9c3781fe530f1487eb12a1fdaee66d1669714990085cc94e5ad9d8",
-    "block_number": 7275756,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499589100000000000",
-    "value_rbtc": 0.4995891,
-    "success": "true",
-    "quote_hash": "0x5c862903452a27163476307a4032541ac2ed155e6375e1b5547f5ee73508cb2b",
-    "block_timestamp": "2025-02-23T20:17:15.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x263d6a83b19aa5c9da7024a1e590fdd18380ed582e6d315ff476149e79b2d217",
-    "block_number": 7275584,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x8c9ed3c6961a35c7137c957df898f62ff791c7dae5e460b4c7dba485b389aeaf",
-    "block_timestamp": "2025-02-23T19:11:09.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xe7ef4ad4e8e856abc74069fa6d844d610b0eaec417c70c36ca5ae7bcf27268fa",
-    "block_number": 7275477,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x8f2ff600a49eeea46b205e3790dc2591e146eb8b66d160ce92cf397d64586028",
-    "block_timestamp": "2025-02-23T18:26:17.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x0dcf0bd5095b79f43b3325ce00a6a27c7860a0148f617edab272851fccd24668",
-    "block_number": 7275139,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499629500000000000",
-    "value_rbtc": 0.4996295,
-    "success": "true",
-    "quote_hash": "0x815a980e67a089ec47a386f8a81f70beb4220c0de2121ed73ca67913cb2710f7",
-    "block_timestamp": "2025-02-23T16:11:14.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x1b765985e24a7594a6d00d043a216df547398c73da50c09e4495fb604494b9c7",
-    "block_number": 7274978,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0xf717943103240ccc2a3bc5072c1662b8bf98294676ad5482452c5455ac4f0f17",
-    "block_timestamp": "2025-02-23T15:11:35.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x3b00d07991c5f000d71293932e92069c1952037134eeafe9c16e2363b9eb2465",
-    "block_number": 7274748,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x98beeff00c67558a5c2a5d397e0b8113fed0a9124d4d03b524328ce7ae437f49",
-    "block_timestamp": "2025-02-23T13:37:33.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xcef20246149acc5f497a36f9cdd25e08cc9cbbaba0761c4b1ad1078cdfe74e8a",
-    "block_number": 7260629,
-    "quote_hash": "0x5a85884c572fa8894be143f89b26f056a14ffe6503d02602023c072386c5ad8b",
-    "transferred_amount_wei": "499783110000000000",
-    "transferred_amount_rbtc": 0.49978311,
-    "block_timestamp": "2025-02-19T15:49:29.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xdb70df5278321d3d5a55c08be995246e2986923be68e0d1e35fdc27d7c5e85cc",
-    "block_number": 7260490,
-    "quote_hash": "0xaff7333135f41b424bf9a284191d5841e55af2e5f3325c3f82d4bf2f8c529d53",
-    "transferred_amount_wei": "500100570000000000",
-    "transferred_amount_rbtc": 0.50010057,
-    "block_timestamp": "2025-02-19T14:52:18.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x49d124c5359fb59c73a89fc07f97a8e674f83cc9226bb7418935ebfb7ab7fac0",
-    "block_number": 7260147,
-    "quote_hash": "0x745832205f1c40ff7997d5a4a891db01adeb3a1a13f2e8243b1a6be510897006",
-    "transferred_amount_wei": "500100550000000000",
-    "transferred_amount_rbtc": 0.50010055,
-    "block_timestamp": "2025-02-19T12:31:58.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x2fc7a33b39f6c5b7f7155b1a43dd1fa78268eb9959659638d17dbbe65bd468e9",
-    "block_number": 7257828,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499682540000000000",
-    "value_rbtc": 0.49968254,
-    "success": "true",
-    "quote_hash": "0x5a85884c572fa8894be143f89b26f056a14ffe6503d02602023c072386c5ad8b",
-    "block_timestamp": "2025-02-18T21:04:20.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xfdb50afaada85a644f6ed8ef0cf301e9a70fe473006fe96967789582349e5ec8",
-    "block_number": 7257720,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0xaff7333135f41b424bf9a284191d5841e55af2e5f3325c3f82d4bf2f8c529d53",
-    "block_timestamp": "2025-02-18T20:23:17.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0x887861d0336e08e66699d3880b6202b50cf14bf08e823294e0738b4864e98407",
-    "block_number": 7257581,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x745832205f1c40ff7997d5a4a891db01adeb3a1a13f2e8243b1a6be510897006",
-    "block_timestamp": "2025-02-18T19:28:45.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x77fa3fbf2443140fa70e319684a7306dc1cebe2ea50a3fb13ef4c5cddae28669",
-    "block_number": 7256422,
-    "quote_hash": "0xade095fa93f2806fbe8ad48c2a58961c090997e73f0495ae3eaf2dbc90768922",
-    "transferred_amount_wei": "499886410000000000",
-    "transferred_amount_rbtc": 0.49988641,
-    "block_timestamp": "2025-02-18T11:46:16.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x2f286b7d38ccbb207b21bbcbb9a6c40a92f80de6152284d79c66976fd21bc4fb",
-    "block_number": 7256240,
-    "quote_hash": "0x7c6fef4fea705b5b74ec7c325da370aa32697e855dced207e088f90481a634a9",
-    "transferred_amount_wei": "500101360000000000",
-    "transferred_amount_rbtc": 0.50010136,
-    "block_timestamp": "2025-02-18T10:34:35.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xd4fd8fc3fc565a64ca79e7586f5d314f1650e39c742fef167236ade4b323d4f4",
-    "block_number": 7253873,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499785200000000000",
-    "value_rbtc": 0.4997852,
-    "success": "true",
-    "quote_hash": "0xade095fa93f2806fbe8ad48c2a58961c090997e73f0495ae3eaf2dbc90768922",
-    "block_timestamp": "2025-02-17T18:50:26.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xa56b10c888e4160c1a656701e9abf9ec7790e0c85bf9bc6233f13f214ba99f04",
-    "block_number": 7253725,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "500000000000000000",
-    "value_rbtc": 0.5,
-    "success": "true",
-    "quote_hash": "0x7c6fef4fea705b5b74ec7c325da370aa32697e855dced207e088f90481a634a9",
-    "block_timestamp": "2025-02-17T17:49:10.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x1170b458858e9c4da047303b159f1a3576a936d45b119fb88cf802bd203d0369",
-    "block_number": 7235256,
-    "quote_hash": "0xe018360a09d0b0e900320a73fe49d59d4f808831a4ea75684003851839f228e2",
-    "transferred_amount_wei": "499801370000000000",
-    "transferred_amount_rbtc": 0.49980137,
-    "block_timestamp": "2025-02-12T15:13:07.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0x317312978757380f11de4b186e91fd1d6505e4612605143f4ab715db6c4de7b1",
-    "block_number": 7235124,
-    "quote_hash": "0x3ac043d26a62693b413733300d66f815f7dddc7b080ed652691673d7fc817460",
-    "transferred_amount_wei": "494689840000000000",
-    "transferred_amount_rbtc": 0.49468984,
-    "block_timestamp": "2025-02-12T14:16:26.000000Z"
-  },
-  {
-    "event": "PegInRegistered",
-    "tx_hash": "0xa681b60989307506b56a0c3fe271dbec6bd23b9a0c96311343ee7dc974c958b9",
-    "block_number": 7234980,
-    "quote_hash": "0xbe6b563bd3135be39e0eb3d6fbd52c05f1a0497a6252a5b9bb83c235aa3c2681",
-    "transferred_amount_wei": "5101370000000000",
-    "transferred_amount_rbtc": 0.00510137,
-    "block_timestamp": "2025-02-12T13:19:19.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xe5c1b441f43fb6c3cc1c06ce60deffcc4896122b643a306bc891b4dd8ff6367f",
-    "block_number": 7232610,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "499700000000000000",
-    "value_rbtc": 0.4997,
-    "success": "true",
-    "quote_hash": "0xe018360a09d0b0e900320a73fe49d59d4f808831a4ea75684003851839f228e2",
-    "block_timestamp": "2025-02-11T20:35:22.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xf5045f48b3b0b8119108885122f8aa4a56849d3509545a3a8bc20f9db658bfab",
-    "block_number": 7232476,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "494588470000000000",
-    "value_rbtc": 0.49458847,
-    "success": "true",
-    "quote_hash": "0x3ac043d26a62693b413733300d66f815f7dddc7b080ed652691673d7fc817460",
-    "block_timestamp": "2025-02-11T19:42:24.000000Z"
-  },
-  {
-    "event": "CallForUser",
-    "tx_hash": "0xdd0453383a186c5a8f6ce5de170ca05c9cf1d6d617aaa9142c2b395391614b89",
-    "block_number": 7232313,
-    "from_address": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
-    "dest_address": "0x1Bdf482F5da32ef51c20D9A94960385c5be9AaB7",
-    "gas_limit": "21000",
-    "value_wei": "5000000000000000",
-    "value_rbtc": 0.005,
-    "success": "true",
-    "quote_hash": "0xbe6b563bd3135be39e0eb3d6fbd52c05f1a0497a6252a5b9bb83c235aa3c2681",
-    "block_timestamp": "2025-02-11T18:30:31.000000Z"
   }
 ]

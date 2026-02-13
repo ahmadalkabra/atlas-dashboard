@@ -1,1 +1,1514 @@
-[]
+[
+  {
+    "tx_hash": "0x2f6330f309854c8fce65b26fda111cb82d775d957f8e41391ca2b5ef3944cc17",
+    "block_number": 7454556,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.62133152,
+    "block_timestamp": "2025-04-15T21:02:24.000000Z"
+  },
+  {
+    "tx_hash": "0x9257c0bc798b1b6148d2615d9b7697ffabdc24ad83a2764991a3298b756feb4f",
+    "block_number": 7460706,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.02922876,
+    "block_timestamp": "2025-04-17T12:47:37.000000Z"
+  },
+  {
+    "tx_hash": "0x0e9d1259f8c6acce643df9a804d03acdeeec7bef4cb7beeb554099f61590739e",
+    "block_number": 7483832,
+    "from_address": "0xd3304501297972ee11f619c047d1424c833dd683",
+    "value_rbtc": 0.48,
+    "block_timestamp": "2025-04-23T20:39:28.000000Z"
+  },
+  {
+    "tx_hash": "0x31d96798a25328acf77d904270985ee152a7ceefb53b48bca236fd2545d72e98",
+    "block_number": 7487110,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.169,
+    "block_timestamp": "2025-04-24T18:03:30.000000Z"
+  },
+  {
+    "tx_hash": "0x8b8fb918252f0edde5eea9e73004dc298acd1e20b6413d422f07f55928d6c2b5",
+    "block_number": 7488477,
+    "from_address": "0x4e5dabc28e4a0f5e5b19fcb56b28c5a1989352c1",
+    "value_rbtc": 0.595,
+    "block_timestamp": "2025-04-25T03:06:23.000000Z"
+  },
+  {
+    "tx_hash": "0x4a30f8dc2a6af7fd3a917ff3a892b4aa84f42d7214baaa55f9de2b98c0a960fc",
+    "block_number": 7493613,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.20826176,
+    "block_timestamp": "2025-04-26T12:47:30.000000Z"
+  },
+  {
+    "tx_hash": "0x1df75957b16d6975e30b5ae2ee48e30e0e70caac73cf2ce792ccf8d46cdefbba",
+    "block_number": 7493638,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00061757,
+    "block_timestamp": "2025-04-26T12:57:35.000000Z"
+  },
+  {
+    "tx_hash": "0xd0fe4cd6c0d533687f16608ac958a9c78c822472a2d24e7d4bf2e512135482ac",
+    "block_number": 7493646,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 3.00091398,
+    "block_timestamp": "2025-04-26T13:02:30.000000Z"
+  },
+  {
+    "tx_hash": "0xb1ab4d8c7b777c9fb0eda6d23a8b7cd923fa39579f33f49db813fb01cc37ba03",
+    "block_number": 7493687,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00061191,
+    "block_timestamp": "2025-04-26T13:17:24.000000Z"
+  },
+  {
+    "tx_hash": "0x0653ed3fe4ac1f2276730cb718cc3e9b8659b538c8ad3e7dacbe48f3fc5478c7",
+    "block_number": 7493728,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.00152589,
+    "block_timestamp": "2025-04-26T13:32:41.000000Z"
+  },
+  {
+    "tx_hash": "0xbe94847befc8e5ad70ac50ac39a91f126a8ad0996348d13c9d4023e29d819e9d",
+    "block_number": 7494463,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00061249,
+    "block_timestamp": "2025-04-26T18:27:34.000000Z"
+  },
+  {
+    "tx_hash": "0x8076963ce350b9aabd600570aac5daa4a2643faf9a007787aa3890d1907059c2",
+    "block_number": 7494526,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.0006152,
+    "block_timestamp": "2025-04-26T18:52:56.000000Z"
+  },
+  {
+    "tx_hash": "0xc9a4700b5d73919d371c9c6e1b5aa8233d7364fdbc9abfcbc58fc4bb4effa461",
+    "block_number": 7494575,
+    "from_address": "0xaf23bfe09055319f352af6f7664a6b2b4352aa3f",
+    "value_rbtc": 0.0115,
+    "block_timestamp": "2025-04-26T19:10:36.000000Z"
+  },
+  {
+    "tx_hash": "0x500b33363591b5a669303adadb49b908235c4ca800d380103f514b862136cfbf",
+    "block_number": 7498264,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.00155626,
+    "block_timestamp": "2025-04-27T19:22:56.000000Z"
+  },
+  {
+    "tx_hash": "0x81380e558e6c5a96375870e6be76f42e2990bd9ffca18ed6e7c528273ec0843e",
+    "block_number": 7498349,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 6.00187567,
+    "block_timestamp": "2025-04-27T19:57:29.000000Z"
+  },
+  {
+    "tx_hash": "0x31a3f3231c6c8398e077458085ab826f45bdef8787febc1522bc8a2fcabfd71d",
+    "block_number": 7498948,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00061487,
+    "block_timestamp": "2025-04-28T00:02:45.000000Z"
+  },
+  {
+    "tx_hash": "0x4fbb3c7efc9860f209146fccea35b11ea4f199a3c1a2d8917c2f2e6ef68f0023",
+    "block_number": 7498961,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00061199,
+    "block_timestamp": "2025-04-28T00:07:24.000000Z"
+  },
+  {
+    "tx_hash": "0x3fad03343169fea3ecabc161ccb24943b3727e3adf52e2c1e3e54859c263808c",
+    "block_number": 7499035,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00061672,
+    "block_timestamp": "2025-04-28T00:37:26.000000Z"
+  },
+  {
+    "tx_hash": "0x731856238e09e9ca27f4a488e580a032f46e60f6a6fc5e943a01a687802005a4",
+    "block_number": 7504025,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.015,
+    "block_timestamp": "2025-04-29T09:46:31.000000Z"
+  },
+  {
+    "tx_hash": "0x6a0325242e9a8465e5c9ec9b0f33509b9d21f968d6a097ca4687f05c8e30585b",
+    "block_number": 7507679,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.01205721,
+    "block_timestamp": "2025-04-30T09:23:23.000000Z"
+  },
+  {
+    "tx_hash": "0xdaaa7756740139ff88ce9dff963d199035ccdffbe7d59889abda2cfb8a5a7f5e",
+    "block_number": 7508338,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.00062083,
+    "block_timestamp": "2025-04-30T13:42:28.000000Z"
+  },
+  {
+    "tx_hash": "0xb08f491d1d28769e3c7ba4e603efd6a5f374a2249b7aa5f4fadca2c8542d217f",
+    "block_number": 7508392,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 3.00092844,
+    "block_timestamp": "2025-04-30T14:03:31.000000Z"
+  },
+  {
+    "tx_hash": "0xd4c66d0249dff37c64729c2985206f44affdd351c51d1bd0ec27ced1a8570e39",
+    "block_number": 7508398,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.015,
+    "block_timestamp": "2025-04-30T14:07:58.000000Z"
+  },
+  {
+    "tx_hash": "0xac63a52a2aaef2e902dcc09d46b566fe5fd432aab0496b5d725222d97a61c2b0",
+    "block_number": 7509351,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 3.00637357,
+    "block_timestamp": "2025-04-30T20:27:35.000000Z"
+  },
+  {
+    "tx_hash": "0xb5d474ab6693a25063918850a4af9a89b7e2d54a3bb88774bdb39bdfd51d4fa5",
+    "block_number": 7509373,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.0006349,
+    "block_timestamp": "2025-04-30T20:38:04.000000Z"
+  },
+  {
+    "tx_hash": "0xda4a451991aca48bcfdc7f2c623d2ff84a2a90eafc494bb5b8aa5b9c59d37798",
+    "block_number": 7509468,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.28194611,
+    "block_timestamp": "2025-04-30T21:17:24.000000Z"
+  },
+  {
+    "tx_hash": "0x73f26dfaaa838d44b9afa5ae09a54bf6635e5c7cbb75759ff8ed171e5b128611",
+    "block_number": 7515563,
+    "from_address": "0x4bb349b5ff7c764c9d01f562457e1bb2711ba066",
+    "value_rbtc": 0.0147,
+    "block_timestamp": "2025-05-02T13:42:30.000000Z"
+  },
+  {
+    "tx_hash": "0xfd6e9ee52918a4104bdbe27beead24427e56a3198c2b9dfe7dde2bf5fc6de811",
+    "block_number": 7517141,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 2.01914768,
+    "block_timestamp": "2025-05-03T00:42:24.000000Z"
+  },
+  {
+    "tx_hash": "0xfd6f2bbbe9dd20cd5755c21d457f3894356887d70fcec7c32db28a146fdfe8d1",
+    "block_number": 7520160,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.03,
+    "block_timestamp": "2025-05-03T20:33:06.000000Z"
+  },
+  {
+    "tx_hash": "0x9aef976580d5da6beef16a9fcc6e2ad8dabbcec0bea9c96c5709a2f61856cdc0",
+    "block_number": 7525571,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.01,
+    "block_timestamp": "2025-05-05T08:44:38.000000Z"
+  },
+  {
+    "tx_hash": "0x1ba543eaa6780c262d58d683fd1594d0bbab4a3627caf39eab2b7363790ed227",
+    "block_number": 7526212,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.012,
+    "block_timestamp": "2025-05-05T13:08:36.000000Z"
+  },
+  {
+    "tx_hash": "0xe6e2eeca4977cb229c51232db108f4df13eb07bb3194cd7738bb0e66a685f7a2",
+    "block_number": 7534767,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.02,
+    "block_timestamp": "2025-05-07T22:16:10.000000Z"
+  },
+  {
+    "tx_hash": "0x1d3d5ca768b099b23bf27cca0951486739671b9c991e8e9f124e8b40e95c0b43",
+    "block_number": 7550440,
+    "from_address": "0x7b3f01738d19e1d30ff30147832caac18ee37f21",
+    "value_rbtc": 1.0000090331136,
+    "block_timestamp": "2025-05-12T07:45:28.000000Z"
+  },
+  {
+    "tx_hash": "0x48dd9bcaa8aa1a103397e704abc344518d13bb7116e0f5fdfee2a77b366c1f48",
+    "block_number": 7570700,
+    "from_address": "0x3b651c07951033f03b7e6690ca6dc391615d6ceb",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-05-17T23:29:52.000000Z"
+  },
+  {
+    "tx_hash": "0x21f6f2ae050ab0232e88eed90eca926e3a93bab06e807e6c14b9c086892e1559",
+    "block_number": 7584476,
+    "from_address": "0x608704f8ea045bc84c8d3969b7694ec8467c63cf",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-05-21T19:38:39.000000Z"
+  },
+  {
+    "tx_hash": "0xe125d406e69737ae0559fa2f68119db9ec3800e70808096fbe530fb4674c0dc0",
+    "block_number": 7585868,
+    "from_address": "0x3b651c07951033f03b7e6690ca6dc391615d6ceb",
+    "value_rbtc": 50.0,
+    "block_timestamp": "2025-05-22T04:50:15.000000Z"
+  },
+  {
+    "tx_hash": "0x3ef95b3706d0c276b00a73599afc6a27fc9510daed66579c9982d1ea468682d1",
+    "block_number": 7591032,
+    "from_address": "0x608704f8ea045bc84c8d3969b7694ec8467c63cf",
+    "value_rbtc": 50.0,
+    "block_timestamp": "2025-05-23T14:57:46.000000Z"
+  },
+  {
+    "tx_hash": "0x70ab2bd7103b79d533f61f91215e685ee648d2520c76b1cae20130e39af68a69",
+    "block_number": 7609412,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.256,
+    "block_timestamp": "2025-05-28T17:42:10.000000Z"
+  },
+  {
+    "tx_hash": "0xa45cebea3d44a81f2cdf833671c343b5ee79e953633c399c3233805ea9c0a8e3",
+    "block_number": 7615948,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.02,
+    "block_timestamp": "2025-05-30T14:33:00.000000Z"
+  },
+  {
+    "tx_hash": "0x07de2fb1a44c9a19fbdb6501d3790d19a5ae66597fa0195325fa9d2b94e117fa",
+    "block_number": 7622722,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.015,
+    "block_timestamp": "2025-06-01T12:22:23.000000Z"
+  },
+  {
+    "tx_hash": "0x0656050d40e8582953a316230d627f9bb1b5b714c96f2753a553d4a0d37a8b5b",
+    "block_number": 7622824,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.049,
+    "block_timestamp": "2025-06-01T12:59:05.000000Z"
+  },
+  {
+    "tx_hash": "0x4170b0202ffad5bba685e27177b47b52fb5ac7df6a394d8d19462436daaa239c",
+    "block_number": 7660137,
+    "from_address": "0x3b651c07951033f03b7e6690ca6dc391615d6ceb",
+    "value_rbtc": 66.55,
+    "block_timestamp": "2025-06-12T02:52:13.000000Z"
+  },
+  {
+    "tx_hash": "0x063cea1207382f9011b2ec5a32156234d41ec69f201e17d648b7e40a2b5ee005",
+    "block_number": 7669254,
+    "from_address": "0xc5c0d0b9fe63c6824b57f10f12487cd2cf77dda6",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-06-14T16:49:17.000000Z"
+  },
+  {
+    "tx_hash": "0xc09ca74c7f29ffd8aab8f0945bb6ddb3a012ccfae16945bf7c7b3c8f019714c9",
+    "block_number": 7684761,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 15.92422556,
+    "block_timestamp": "2025-06-19T01:00:15.000000Z"
+  },
+  {
+    "tx_hash": "0x2dc22fbbc060dc7d743792c52c76e69dd2262fbae93a75259086216af7f2af8e",
+    "block_number": 7694563,
+    "from_address": "0xc5c0d0b9fe63c6824b57f10f12487cd2cf77dda6",
+    "value_rbtc": 0.01043,
+    "block_timestamp": "2025-06-21T17:18:43.000000Z"
+  },
+  {
+    "tx_hash": "0x355926286a9b4e2ecc711f09d332d8650fda29425e61c4be99176a502ba22ecc",
+    "block_number": 7707438,
+    "from_address": "0x5aee2975e2ed688f231ccb40e20ee6c10a98d507",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-06-25T07:58:38.000000Z"
+  },
+  {
+    "tx_hash": "0x498f7a5015158315a67c22a55683371be5661525e3ed74d787c6fe600897b495",
+    "block_number": 7708077,
+    "from_address": "0x12c5bff9e78eab5b76c4c37378337838d275cb4f",
+    "value_rbtc": 0.14,
+    "block_timestamp": "2025-06-25T12:10:48.000000Z"
+  },
+  {
+    "tx_hash": "0x2f88a455d968c5cc939570db492a5552e864ba189a97390fb11a4f46775b0daa",
+    "block_number": 7708371,
+    "from_address": "0xec63d46159a1249c62f973ee1978c5466ca1ab8e",
+    "value_rbtc": 0.35,
+    "block_timestamp": "2025-06-25T14:14:12.000000Z"
+  },
+  {
+    "tx_hash": "0xa144e47742ff40643a4adee78908887c3a5d8fb65144dab940286f2afdb929c5",
+    "block_number": 7708602,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 0.1,
+    "block_timestamp": "2025-06-25T15:51:56.000000Z"
+  },
+  {
+    "tx_hash": "0xa272c8e0d09d44246eccc11751c0d2cfaaf3adbea8ab20992fdc39a9a0bcc7de",
+    "block_number": 7711383,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 15.0,
+    "block_timestamp": "2025-06-26T10:18:02.000000Z"
+  },
+  {
+    "tx_hash": "0x76dcbcad4488cedfe4004b414adcc79716180b16f620efeec1af0dfd8cfc361e",
+    "block_number": 7712153,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 15.15093626,
+    "block_timestamp": "2025-06-26T15:21:41.000000Z"
+  },
+  {
+    "tx_hash": "0x6adedee2d118ccf3ca034b466814c1140dacc770f40967e29a1ef87a98752d79",
+    "block_number": 7712650,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.166,
+    "block_timestamp": "2025-06-26T18:38:33.000000Z"
+  },
+  {
+    "tx_hash": "0x86efcc0b9176f08b86c4d35f2eab66c1620bb85cc4ed54041d34b171674c01ac",
+    "block_number": 7713899,
+    "from_address": "0x5aee2975e2ed688f231ccb40e20ee6c10a98d507",
+    "value_rbtc": 0.73,
+    "block_timestamp": "2025-06-27T03:02:02.000000Z"
+  },
+  {
+    "tx_hash": "0x52019464408b15ca45d5619534931bc2b276c83ce6541687be5b3e5f80b4eca2",
+    "block_number": 7713906,
+    "from_address": "0x4e5dabc28e4a0f5e5b19fcb56b28c5a1989352c1",
+    "value_rbtc": 0.3,
+    "block_timestamp": "2025-06-27T03:04:35.000000Z"
+  },
+  {
+    "tx_hash": "0xdeff1a3a319a8c02e853a0a7a7b37e2afc661c26e17d3bbef3d318c82e515d34",
+    "block_number": 7714886,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 35.8998456,
+    "block_timestamp": "2025-06-27T09:46:37.000000Z"
+  },
+  {
+    "tx_hash": "0x1e0830ed0e38b690da960340787ab059bec91ed8aa00c49293a3b1b936d0d0c7",
+    "block_number": 7720747,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.01,
+    "block_timestamp": "2025-06-29T00:52:18.000000Z"
+  },
+  {
+    "tx_hash": "0x896d40ab9f3cbc9359af48023089cf43da53b7c457c87241efcbac9d3d7fb60f",
+    "block_number": 7730504,
+    "from_address": "0xcba9a2c9877f87c249158a9bd2840e9219bc8733",
+    "value_rbtc": 0.00492,
+    "block_timestamp": "2025-07-01T18:04:38.000000Z"
+  },
+  {
+    "tx_hash": "0x175e0833d077dba556b061470060da8762eb4de74ed9cfd46570ebb3476bb986",
+    "block_number": 7739980,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.035,
+    "block_timestamp": "2025-07-04T09:16:03.000000Z"
+  },
+  {
+    "tx_hash": "0x199ba6d98a81e1c7b3f75a22fe6ee1fc66cb3ab369a7c29f71748f1561680bf2",
+    "block_number": 7751907,
+    "from_address": "0xfb045bfa0f3f87b63c4d3c262876f1a1883b382a",
+    "value_rbtc": 0.31104,
+    "block_timestamp": "2025-07-07T16:12:25.000000Z"
+  },
+  {
+    "tx_hash": "0x7475a60ac30d4e725912d11d59cdbb9fe01e21e2f2dbffbedbf63c4f0eddf128",
+    "block_number": 7760333,
+    "from_address": "0xb859fd481497ac10a294e1e2d49f15ed130cd2d2",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-07-10T00:49:36.000000Z"
+  },
+  {
+    "tx_hash": "0x08f9bb66441ddec4203559832830a366fd5b6d6d1565c9951836470bb7d30557",
+    "block_number": 7760404,
+    "from_address": "0x8725b946fec06f0b5911e79c5c50094e54fa5504",
+    "value_rbtc": 0.005175615563666532,
+    "block_timestamp": "2025-07-10T01:18:19.000000Z"
+  },
+  {
+    "tx_hash": "0x3a575e23e88ca5cbcab4b38803e03ac91e0b1e3323c40dd03bf33556f6c2ad44",
+    "block_number": 7762418,
+    "from_address": "0xb859fd481497ac10a294e1e2d49f15ed130cd2d2",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-07-10T14:35:34.000000Z"
+  },
+  {
+    "tx_hash": "0x28d9a01b330cdc4467fce63f3b8d22818e38c1be7f5ad803dab2aa64093f5f5d",
+    "block_number": 7764727,
+    "from_address": "0x19e67afcf3f114f822bfbbcffb854b6e3c9b7d9f",
+    "value_rbtc": 0.005658644110154682,
+    "block_timestamp": "2025-07-11T06:16:34.000000Z"
+  },
+  {
+    "tx_hash": "0x20a65b97212778882a2592f92231a6c155704e0b2d48a04c7d831edbc7bba6fc",
+    "block_number": 7771765,
+    "from_address": "0x04e63dfb13162114347318cbc892499560e58db6",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-07-13T05:05:19.000000Z"
+  },
+  {
+    "tx_hash": "0x54111a996ae71d56e8e473c42fe937ddd99b5fedc62ed9947e9e8aae21b217b4",
+    "block_number": 7776649,
+    "from_address": "0x04e63dfb13162114347318cbc892499560e58db6",
+    "value_rbtc": 10.0,
+    "block_timestamp": "2025-07-14T14:07:47.000000Z"
+  },
+  {
+    "tx_hash": "0xe03a3106745e9251a4d469552bc1f056c033bb73eeffad6e143b06c9cbe03b37",
+    "block_number": 7781590,
+    "from_address": "0x04e63dfb13162114347318cbc892499560e58db6",
+    "value_rbtc": 50.0,
+    "block_timestamp": "2025-07-15T23:07:38.000000Z"
+  },
+  {
+    "tx_hash": "0x05673235fce7cf9cff21346f576ce60bf8613378501de9aa2450dd6fac0fdbbe",
+    "block_number": 7784549,
+    "from_address": "0xd6474c019c95894da396fd7a89335a972e93fd3b",
+    "value_rbtc": 3.50038140339338,
+    "block_timestamp": "2025-07-16T18:33:36.000000Z"
+  },
+  {
+    "tx_hash": "0x59a8c1dd260a2465394a36e01e9532d9b3e0a3c8ed5924909a97f64da7d5cff7",
+    "block_number": 7785214,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.02,
+    "block_timestamp": "2025-07-16T23:07:52.000000Z"
+  },
+  {
+    "tx_hash": "0x43c00cc0175d1d0a16a054735272e9e8d3cc1bf0d9e00fc2a0e4c26f3758cc3d",
+    "block_number": 7787074,
+    "from_address": "0xc5b247cd37d71449ad3f5bbfc30882d14638602e",
+    "value_rbtc": 0.0046800831136,
+    "block_timestamp": "2025-07-17T11:21:59.000000Z"
+  },
+  {
+    "tx_hash": "0x20ca43e2f7fe421574888d58387a64aaea3bea4bdef54271df0ae1afb749ae5b",
+    "block_number": 7787088,
+    "from_address": "0x8725b946fec06f0b5911e79c5c50094e54fa5504",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-07-17T11:26:57.000000Z"
+  },
+  {
+    "tx_hash": "0xf1e97f950603afe01f1cf248abcfea2dbec89d73b8f080e50a69d87140dc1663",
+    "block_number": 7787097,
+    "from_address": "0x7752b3c859b2102ac564321d5a7342947fc3ef16",
+    "value_rbtc": 0.0046800831136,
+    "block_timestamp": "2025-07-17T11:29:29.000000Z"
+  },
+  {
+    "tx_hash": "0x88127ba6881de8132070c38cc89d39fbcd60dec20c07ea019191cca4b7fe59e0",
+    "block_number": 7794724,
+    "from_address": "0x8725b946fec06f0b5911e79c5c50094e54fa5504",
+    "value_rbtc": 7.9953034362272,
+    "block_timestamp": "2025-07-19T13:57:01.000000Z"
+  },
+  {
+    "tx_hash": "0xd482eb9bdd4b78ea1754080bef7847dd1a06bdd15b03eea7d738ca07f3a24498",
+    "block_number": 7799323,
+    "from_address": "0x2ae1295594f97272fdfd97f089795f5c46e54db9",
+    "value_rbtc": 0.2771474956839081,
+    "block_timestamp": "2025-07-20T20:41:03.000000Z"
+  },
+  {
+    "tx_hash": "0x70d2a975d67783a11716dd4ace98730a7b25dacc80058bb8c0b6b501f8b1ddd7",
+    "block_number": 7802189,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 16.0,
+    "block_timestamp": "2025-07-21T15:25:23.000000Z"
+  },
+  {
+    "tx_hash": "0x414b56ed742067f70d0df9e380c388c558da13c97dc4df27f5e14164b0238200",
+    "block_number": 7804694,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 51.000008,
+    "block_timestamp": "2025-07-22T08:10:18.000000Z"
+  },
+  {
+    "tx_hash": "0xc174f4e1a9286ac163d0722b44529aacfc71f0a3d5cd6d733afd6f39ce26caee",
+    "block_number": 7809312,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.141,
+    "block_timestamp": "2025-07-23T15:26:33.000000Z"
+  },
+  {
+    "tx_hash": "0xe28c94509a236a3c10c2969806c8972b45603227345af34f42ac05e50a41117b",
+    "block_number": 7827831,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.025,
+    "block_timestamp": "2025-07-28T19:47:14.000000Z"
+  },
+  {
+    "tx_hash": "0x9f50b45918e0b1f20ca0792052c2526a4b912c031da47efc8dfe1beab15de20e",
+    "block_number": 7834262,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.03,
+    "block_timestamp": "2025-07-30T15:20:41.000000Z"
+  },
+  {
+    "tx_hash": "0x3bea2be12b613814010ffbae1408f18aebf20d89528a4c3985e51d38544a4f3c",
+    "block_number": 7835261,
+    "from_address": "0xfcb5ae07d884c21311e224eab47226add17fb4f0",
+    "value_rbtc": 0.01,
+    "block_timestamp": "2025-07-30T22:32:43.000000Z"
+  },
+  {
+    "tx_hash": "0xa9dfe367a3bb3e164476c6ebc856c0d7401e03499a2723590655820222ed28f7",
+    "block_number": 7838434,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.02,
+    "block_timestamp": "2025-07-31T19:25:26.000000Z"
+  },
+  {
+    "tx_hash": "0xf3c9e78d5c02a7fe3b28be3dcf6922600ef8d20f7fe746ceb6f6b9ab9a3b19e3",
+    "block_number": 7852717,
+    "from_address": "0x608704f8ea045bc84c8d3969b7694ec8467c63cf",
+    "value_rbtc": 30.0,
+    "block_timestamp": "2025-08-04T19:53:46.000000Z"
+  },
+  {
+    "tx_hash": "0xc3a83dc79b12d7ea1cf72770418848766968a304785aea94c5f9c7e75c5a2274",
+    "block_number": 7862233,
+    "from_address": "0x4202bac9919c3412fc7c8be4e678e26279386603",
+    "value_rbtc": 0.3877621,
+    "block_timestamp": "2025-08-07T12:39:23.000000Z"
+  },
+  {
+    "tx_hash": "0xcac5c6fa6c20bfebdd1ec0cebb1dfe60ac0d30fa5dd5c6d990529f23fc371ce0",
+    "block_number": 7866951,
+    "from_address": "0x3b47b6a52e2c5bd4ca23ef7295af7c435e63fc92",
+    "value_rbtc": 0.25,
+    "block_timestamp": "2025-08-08T21:15:09.000000Z"
+  },
+  {
+    "tx_hash": "0x86c0b2731c0bfb76019a435ed37e15eac11cb71af54fffdd112f8872ad77aa32",
+    "block_number": 7876812,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 14.792225796075332,
+    "block_timestamp": "2025-08-11T16:05:50.000000Z"
+  },
+  {
+    "tx_hash": "0xaba6df85e61fec08e94a40dd50c76a9c108a9714a9eafda329eeac463e408097",
+    "block_number": 7881447,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.01,
+    "block_timestamp": "2025-08-12T23:35:11.000000Z"
+  },
+  {
+    "tx_hash": "0x4e6ac0577a3104d6ef0250eead49a435df2c5dc445786bfd511269cd240a3566",
+    "block_number": 7882510,
+    "from_address": "0x04e63dfb13162114347318cbc892499560e58db6",
+    "value_rbtc": 155.0,
+    "block_timestamp": "2025-08-13T06:55:30.000000Z"
+  },
+  {
+    "tx_hash": "0x55deb29a58b6596820ee2a6e8ee1a448e60a8597d08c04a3f224aa5e3a028fa1",
+    "block_number": 7886417,
+    "from_address": "0xdd07819cdeb2613fce39f654b6831dc9ccdf1bd8",
+    "value_rbtc": 0.00982,
+    "block_timestamp": "2025-08-14T09:23:05.000000Z"
+  },
+  {
+    "tx_hash": "0x83058b4b23522e724a365143cc52b19d0a82398320d1ddd7a909a6c84f30bc3d",
+    "block_number": 7889978,
+    "from_address": "0xc4be296e59ec5c3ecd78ca995469b3ef060985ed",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-08-15T09:58:38.000000Z"
+  },
+  {
+    "tx_hash": "0x3a8f831279d9b4fedfa4e82b39ea1c815a14591f3d81850b586a9a4a295bee4a",
+    "block_number": 7898116,
+    "from_address": "0x8d3beafcb9e2714828c2d12e863e15cc6250aede",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-08-17T16:52:34.000000Z"
+  },
+  {
+    "tx_hash": "0x0d4a313e4e44d89a372b2722c4413384ce2551275adae7d580d2cc596dc7d698",
+    "block_number": 7903884,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 0.05,
+    "block_timestamp": "2025-08-19T08:40:00.000000Z"
+  },
+  {
+    "tx_hash": "0x8999619696b32572e23848cd4a2858c09a0695771c2bd6e32d4008b83d4f5bcd",
+    "block_number": 7903899,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.7,
+    "block_timestamp": "2025-08-19T08:45:50.000000Z"
+  },
+  {
+    "tx_hash": "0x4bc9880de698c1245620eaae1c00d8240488ad2a18d484085414ecfbabd5d392",
+    "block_number": 7922966,
+    "from_address": "0x3051522f89fc10e61ffc83fde9638bb16a81c40e",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-08-24T20:33:10.000000Z"
+  },
+  {
+    "tx_hash": "0xbf73f3953b67cafd500382edad608e502e5c2ee0d822c3ca1bc33070c1eb99af",
+    "block_number": 7932982,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.201,
+    "block_timestamp": "2025-08-27T17:53:22.000000Z"
+  },
+  {
+    "tx_hash": "0x8195f26bdfa77091973c3251b6291ce386ed8846d3a4b33c6cfa23f294624d61",
+    "block_number": 7934003,
+    "from_address": "0xc5b247cd37d71449ad3f5bbfc30882d14638602e",
+    "value_rbtc": 3.36,
+    "block_timestamp": "2025-08-28T00:58:19.000000Z"
+  },
+  {
+    "tx_hash": "0x6c1b4715b679c6af784e43225a6a17a86552a7e05a63801cc17d48a0ae1161e4",
+    "block_number": 7934010,
+    "from_address": "0x7752b3c859b2102ac564321d5a7342947fc3ef16",
+    "value_rbtc": 1.48,
+    "block_timestamp": "2025-08-28T01:01:00.000000Z"
+  },
+  {
+    "tx_hash": "0xa20b247c75501220af651bfd4ceccb340ee6c7fb6ea24357645dd90fc61aaeaf",
+    "block_number": 7935262,
+    "from_address": "0xec63d46159a1249c62f973ee1978c5466ca1ab8e",
+    "value_rbtc": 0.2,
+    "block_timestamp": "2025-08-28T09:49:55.000000Z"
+  },
+  {
+    "tx_hash": "0x02d8000885027bbe7d05cff557d406b3f35d5730a078039934dad31aece10b7c",
+    "block_number": 7949319,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 35.9998556,
+    "block_timestamp": "2025-09-01T09:32:49.000000Z"
+  },
+  {
+    "tx_hash": "0x3c0324de3aaac232aa6b97451a9e7f9c1d7b39189986cdf80b3b4cddaeca8aeb",
+    "block_number": 7950105,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.04,
+    "block_timestamp": "2025-09-01T14:58:03.000000Z"
+  },
+  {
+    "tx_hash": "0xba313f546299bfdd8afe053a85b9b5c65e6e618d8946721659fa1b44c4db98d9",
+    "block_number": 7968999,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.00885312,
+    "block_timestamp": "2025-09-06T23:11:31.000000Z"
+  },
+  {
+    "tx_hash": "0xae59d59f1e8da2a5cafef35e8f31d31cbb7ba9eae7476f9719bd42d4c9888377",
+    "block_number": 7971525,
+    "from_address": "0x2159f5e2a058d937dbdc5a613167349306651342",
+    "value_rbtc": 4.937,
+    "block_timestamp": "2025-09-07T16:29:31.000000Z"
+  },
+  {
+    "tx_hash": "0x6653b3f6966bd998ff88619bd6c64001eb47b48b7a90a81d940d1d282291d174",
+    "block_number": 7974073,
+    "from_address": "0xa5c073f9e5506615e1ec5d2816477b3f1c54388f",
+    "value_rbtc": 0.9999,
+    "block_timestamp": "2025-09-08T09:35:20.000000Z"
+  },
+  {
+    "tx_hash": "0x5d9a34f44e02852a0c63ae75cbff449e8cfab2e913e9526262529077494af767",
+    "block_number": 7982480,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.1,
+    "block_timestamp": "2025-09-10T18:18:06.000000Z"
+  },
+  {
+    "tx_hash": "0xb67de75cbd84f3691e70cb25e20441fd2a95c6dacfa94dc1060c104b9f8afcd3",
+    "block_number": 7988353,
+    "from_address": "0x8c76eb1ccb824fce5f6b701900a3ed3b14d7a756",
+    "value_rbtc": 0.01155443,
+    "block_timestamp": "2025-09-12T11:29:19.000000Z"
+  },
+  {
+    "tx_hash": "0x72ffe53adbda938d2b6fae8356280f09b5affa90a7a79525a6a0988e2fd08780",
+    "block_number": 7999538,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.1,
+    "block_timestamp": "2025-09-15T16:15:33.000000Z"
+  },
+  {
+    "tx_hash": "0x0f66530e10c41fa860e85a4b1e546b9040a61ef1fc4285f50ee822a0fcebc7cf",
+    "block_number": 8008731,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.2461636170032,
+    "block_timestamp": "2025-09-18T07:15:42.000000Z"
+  },
+  {
+    "tx_hash": "0x51a39b62329e05219a7638b8275378828e07c37f9471675f1b014d9aa7d91864",
+    "block_number": 8021081,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.00405371,
+    "block_timestamp": "2025-09-21T21:53:05.000000Z"
+  },
+  {
+    "tx_hash": "0x955ae430b4d13dc81d256576ff0b4a69e35a24f7760ad8c19434ba9d41851add",
+    "block_number": 8027704,
+    "from_address": "0x31c1bb940b8b44bbf67a1af40aab4eab9268b5f7",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-09-23T20:17:56.000000Z"
+  },
+  {
+    "tx_hash": "0xd3593131c2c2b956af58637822a2d63ccf201b4c2d16a752e3ce4dae88f8b899",
+    "block_number": 8037418,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.106,
+    "block_timestamp": "2025-09-26T15:23:49.000000Z"
+  },
+  {
+    "tx_hash": "0xe1e85f4801669aa387f49c3c69a3fdca3b894eb8289e5921ce1db5452e4456a8",
+    "block_number": 8051816,
+    "from_address": "0x00cc1bc568abfe1ee6c23c721f870c5c07d8faab",
+    "value_rbtc": 0.09595,
+    "block_timestamp": "2025-09-30T19:20:11.000000Z"
+  },
+  {
+    "tx_hash": "0xe6e9f9072c3de21e73309dee71b860886458f53f35e87fe5cffe1025d098dcc7",
+    "block_number": 8052234,
+    "from_address": "0xfcb5ae07d884c21311e224eab47226add17fb4f0",
+    "value_rbtc": 0.00502,
+    "block_timestamp": "2025-09-30T22:18:14.000000Z"
+  },
+  {
+    "tx_hash": "0x98040d0efdbc53fce8f986151ddbf5f2b6e1fcce3c3d1d97c29a339f2468380b",
+    "block_number": 8052290,
+    "from_address": "0x31c1bb940b8b44bbf67a1af40aab4eab9268b5f7",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-09-30T22:40:23.000000Z"
+  },
+  {
+    "tx_hash": "0xffb185931d67d4628296b44e0b719d94b80086f8f78c39d6d27965023a8e5dad",
+    "block_number": 8055027,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.37314102,
+    "block_timestamp": "2025-10-01T17:40:33.000000Z"
+  },
+  {
+    "tx_hash": "0x23a5d4c48b01379dd404b6e67f62cff654b2958796750dbb160158c97077f884",
+    "block_number": 8056458,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.5,
+    "block_timestamp": "2025-10-02T03:31:59.000000Z"
+  },
+  {
+    "tx_hash": "0xf5af9fd0698579f2efbbe57e153fd79ccb03ece39a00d47e76e234c13d53a369",
+    "block_number": 8057730,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.02,
+    "block_timestamp": "2025-10-02T12:18:05.000000Z"
+  },
+  {
+    "tx_hash": "0x34be2c450b9773861e5b8e00c1c47efa71aef81ea324895f2c03a7b77f86d6e4",
+    "block_number": 8062077,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 2.25,
+    "block_timestamp": "2025-10-03T18:09:23.000000Z"
+  },
+  {
+    "tx_hash": "0x8c50ba0bdd64fd04418039a96feeea68006496a19b72e8385d1f812b19787cc9",
+    "block_number": 8063008,
+    "from_address": "0xa5c073f9e5506615e1ec5d2816477b3f1c54388f",
+    "value_rbtc": 1.45,
+    "block_timestamp": "2025-10-04T00:40:31.000000Z"
+  },
+  {
+    "tx_hash": "0xe9eb591d4dfc5ad988df1f07e1115ff827de8b8f8a727171f28ec94f5c4b001a",
+    "block_number": 8072585,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-10-06T19:28:34.000000Z"
+  },
+  {
+    "tx_hash": "0xc4967a969c8da41ef33d90315ba3d6d7c504015f57ec26b458098ac281ae2d42",
+    "block_number": 8078786,
+    "from_address": "0xc980d6846c020791497618ad15a7abf1c812cf59",
+    "value_rbtc": 0.55819599,
+    "block_timestamp": "2025-10-08T14:40:44.000000Z"
+  },
+  {
+    "tx_hash": "0xab8b9bb16edbbf9842c41cdb9c696b9a6a35a8a6526dc4a5b1994bcf6250cb76",
+    "block_number": 8078893,
+    "from_address": "0x853343287642507e6e1190d17fffe3d6cc391d6b",
+    "value_rbtc": 0.33425,
+    "block_timestamp": "2025-10-08T15:28:54.000000Z"
+  },
+  {
+    "tx_hash": "0x1163a4e67225bcc648aacb184720a2b07beba5fa76d8015747ee32f98b32d327",
+    "block_number": 8087260,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 9.2531943455,
+    "block_timestamp": "2025-10-11T01:35:34.000000Z"
+  },
+  {
+    "tx_hash": "0x7a19a95b4840fce6f66ac4755491e091d67266338a8dcaedc629a72db35baccd",
+    "block_number": 8103641,
+    "from_address": "0x31c1bb940b8b44bbf67a1af40aab4eab9268b5f7",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-10-15T19:01:02.000000Z"
+  },
+  {
+    "tx_hash": "0x72fde5d6a9630d4cca2807b53e4df870cedc224788d63da353b4707fe2cc8228",
+    "block_number": 8106815,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.00604964,
+    "block_timestamp": "2025-10-16T16:49:53.000000Z"
+  },
+  {
+    "tx_hash": "0x070b09c898e0dda3683e136958faa9b8001887c26ec1c460cc51f6c6150229ff",
+    "block_number": 8109232,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.0496352712,
+    "block_timestamp": "2025-10-17T09:45:33.000000Z"
+  },
+  {
+    "tx_hash": "0x0df27e20fad02722c1ff364d48e88a39edeb5ffeb57887fc92142f52ce51784b",
+    "block_number": 8109847,
+    "from_address": "0xf47063cee26d2fe10ba07241f54dda35a64af110",
+    "value_rbtc": 0.098026,
+    "block_timestamp": "2025-10-17T14:17:30.000000Z"
+  },
+  {
+    "tx_hash": "0x280b740c5075026958cf8452e6d717ae7142ab260f7f82343385df731c283297",
+    "block_number": 8133681,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 10.0,
+    "block_timestamp": "2025-10-24T12:12:26.000000Z"
+  },
+  {
+    "tx_hash": "0x1bd7682e334160c0a267f68575f6c8e69f7d1476875bc6d66ae2a8b58d876445",
+    "block_number": 8140515,
+    "from_address": "0xbfda9e40c92583df92e29a2adf76cdeab165cc71",
+    "value_rbtc": 0.01,
+    "block_timestamp": "2025-10-26T11:29:28.000000Z"
+  },
+  {
+    "tx_hash": "0xd46650ef0a91c04808c1dcc732df794baabb578d08b1c732383f1148c0c222ee",
+    "block_number": 8140883,
+    "from_address": "0xa5c4c01242a673734469124bf42ea0ba8a893255",
+    "value_rbtc": 0.0157,
+    "block_timestamp": "2025-10-26T13:57:47.000000Z"
+  },
+  {
+    "tx_hash": "0xd54c80036afab7322913f14fc7a8d6b45fdaf32818f95ff4539488e7bacc0ed8",
+    "block_number": 8140998,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.7,
+    "block_timestamp": "2025-10-26T14:48:47.000000Z"
+  },
+  {
+    "tx_hash": "0xb15d8069d72b861e0cb19401efc67d9013d75e7362b0285f967b114fb7335010",
+    "block_number": 8144555,
+    "from_address": "0xe74e5247285b05987a35f708b8acd0e2ac0615b6",
+    "value_rbtc": 0.008,
+    "block_timestamp": "2025-10-27T15:47:19.000000Z"
+  },
+  {
+    "tx_hash": "0xd56db8130184a5bffec0186e1e523ff5013d5b10d464c4f2823193898f886251",
+    "block_number": 8147490,
+    "from_address": "0x31c1bb940b8b44bbf67a1af40aab4eab9268b5f7",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-10-28T12:23:15.000000Z"
+  },
+  {
+    "tx_hash": "0x34bdc274fc82899bc7222cafbf9760c6fda6ab9b826eef0196b8ce7fd2bd6e25",
+    "block_number": 8150082,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.3,
+    "block_timestamp": "2025-10-29T05:56:03.000000Z"
+  },
+  {
+    "tx_hash": "0xa05c2f22839994e488a81cb2b0216774b7759f5a983afb76cac1bdf82a924172",
+    "block_number": 8151273,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.149,
+    "block_timestamp": "2025-10-29T14:15:04.000000Z"
+  },
+  {
+    "tx_hash": "0xbafc834d1fb7f02b3d1865f89e8d2245dc63ac1fd576982b44730f2f479e567a",
+    "block_number": 8157648,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.97871470368,
+    "block_timestamp": "2025-10-31T10:34:17.000000Z"
+  },
+  {
+    "tx_hash": "0xf00d415d863228d2f32a1c3e6ec834cbb5a4447552d325281e1f3d499924afd6",
+    "block_number": 8162458,
+    "from_address": "0x80d010d88bb6989bb0ba1f37d8d83e1ff1e9324d",
+    "value_rbtc": 0.824,
+    "block_timestamp": "2025-11-01T20:09:43.000000Z"
+  },
+  {
+    "tx_hash": "0xb6384d03a0eb432c9f1724a8d1ae355dc5e3c159503acf216e8629c735109ece",
+    "block_number": 8164467,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.015,
+    "block_timestamp": "2025-11-02T10:16:28.000000Z"
+  },
+  {
+    "tx_hash": "0x6d753a88e92c6f99e9e94dc45f408a8a1696db9cf47f34f31b735e7cc3c0d963",
+    "block_number": 8164758,
+    "from_address": "0xbfda9e40c92583df92e29a2adf76cdeab165cc71",
+    "value_rbtc": 0.5,
+    "block_timestamp": "2025-11-02T12:19:17.000000Z"
+  },
+  {
+    "tx_hash": "0x4a3150475ca45484774e285cb728e56da5fb3d9d163d452a3c47c4fda19702a7",
+    "block_number": 8169055,
+    "from_address": "0x774426d35c9189f47165aee9ed5acb888f69bf80",
+    "value_rbtc": 0.0102,
+    "block_timestamp": "2025-11-03T18:10:16.000000Z"
+  },
+  {
+    "tx_hash": "0x4036dd4db00a24122beccacf082c5f582e2aca46a41a49ec234a26917e25c13c",
+    "block_number": 8172049,
+    "from_address": "0x8b7a1fc8c92a46ffedd0204280660f0f8aa237e2",
+    "value_rbtc": 0.70613,
+    "block_timestamp": "2025-11-04T14:53:49.000000Z"
+  },
+  {
+    "tx_hash": "0x33c379d36a120018871ddc0280df8200ff7bb45644ab4ce4ba9610741d6c5ba8",
+    "block_number": 8179938,
+    "from_address": "0xc980d6846c020791497618ad15a7abf1c812cf59",
+    "value_rbtc": 0.3618,
+    "block_timestamp": "2025-11-06T21:12:52.000000Z"
+  },
+  {
+    "tx_hash": "0x6f4f048156625d9d76288c5ad3dcc2fd85c784975ad9f0886feee376e2aad4a2",
+    "block_number": 8190512,
+    "from_address": "0x0d5d9875b2c60444678414ce49dab78fd845cc16",
+    "value_rbtc": 0.007,
+    "block_timestamp": "2025-11-09T22:35:25.000000Z"
+  },
+  {
+    "tx_hash": "0xc0798c24efec88f2ec5bd162aefc9751e8478ea5339cad8ddfcc69d202150af9",
+    "block_number": 8193371,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-11-10T18:13:23.000000Z"
+  },
+  {
+    "tx_hash": "0x875f9b5e08ae3204be722b71ce8f28ce162887e6567ba4735cdc08aeebf77540",
+    "block_number": 8204070,
+    "from_address": "0x2e379a205963822d8959692d0d6e6577bf44b996",
+    "value_rbtc": 0.4399,
+    "block_timestamp": "2025-11-13T20:12:08.000000Z"
+  },
+  {
+    "tx_hash": "0xce3ba880e8f375aa28c15e6c42e393d494b0525bb033eac6ade5827887088ca1",
+    "block_number": 8206994,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.415469275,
+    "block_timestamp": "2025-11-14T16:19:27.000000Z"
+  },
+  {
+    "tx_hash": "0xd73ad70e6299730f841bbceff94a74390d72a31125d20ca75d608edb50ac575e",
+    "block_number": 8215050,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-11-16T23:35:15.000000Z"
+  },
+  {
+    "tx_hash": "0x4d62a8629bdc93c8920355356702219c876ce4dbc7e20da889eeba72232c8f4f",
+    "block_number": 8223892,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.847104476999999,
+    "block_timestamp": "2025-11-19T12:19:14.000000Z"
+  },
+  {
+    "tx_hash": "0x9706e58da6592fd44cd32b106e193bd6f2198c48bc5e08f479cd8f3d29ea5c68",
+    "block_number": 8230532,
+    "from_address": "0x3a48ef2e1619bae486adc487a187239b68740405",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-11-21T10:28:12.000000Z"
+  },
+  {
+    "tx_hash": "0x67e3935980f7b38d4377f66c7b3e5476fb3de37db8608ec44bf6f846ef211bce",
+    "block_number": 8231016,
+    "from_address": "0x5f9c0d6971b3efca2301f49645001fc76ba55b40",
+    "value_rbtc": 0.2,
+    "block_timestamp": "2025-11-21T13:47:49.000000Z"
+  },
+  {
+    "tx_hash": "0x0fc3ab55f7ad24691d59dd83e328cd02184942b6572516386486ba8020216a30",
+    "block_number": 8231741,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 4.13,
+    "block_timestamp": "2025-11-21T18:35:38.000000Z"
+  },
+  {
+    "tx_hash": "0x2f1dea2a12ad2b1b874af88d533690f837006f202975ab817383e43526ead36b",
+    "block_number": 8234241,
+    "from_address": "0xbfda9e40c92583df92e29a2adf76cdeab165cc71",
+    "value_rbtc": 1.024,
+    "block_timestamp": "2025-11-22T12:05:00.000000Z"
+  },
+  {
+    "tx_hash": "0xf7213dc0b8147e69a7911854b733b06d167bcb4bb47fa039e16fe91077603363",
+    "block_number": 8237776,
+    "from_address": "0x3a48ef2e1619bae486adc487a187239b68740405",
+    "value_rbtc": 0.2151267,
+    "block_timestamp": "2025-11-23T13:01:50.000000Z"
+  },
+  {
+    "tx_hash": "0xb3ef2b1a186be8b241fc115b6281fb5f366d84f22679a73f1cebbfc80538c3b4",
+    "block_number": 8242259,
+    "from_address": "0x3a48ef2e1619bae486adc487a187239b68740405",
+    "value_rbtc": 0.25013978,
+    "block_timestamp": "2025-11-24T19:54:06.000000Z"
+  },
+  {
+    "tx_hash": "0xf4f818a47d2da0a8dab63bd1be9af3f4ea2bebaebbe3813f9a4f0e21f9ccf30f",
+    "block_number": 8242409,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.12,
+    "block_timestamp": "2025-11-24T20:56:41.000000Z"
+  },
+  {
+    "tx_hash": "0x40fabcb0f6564d19028e090599a79968f317b5629d09a6b73c447efb778bfbbb",
+    "block_number": 8247582,
+    "from_address": "0xaf21731e27dbf704df287ceb6f5f6a36510cac3d",
+    "value_rbtc": 2.752014,
+    "block_timestamp": "2025-11-26T08:39:41.000000Z"
+  },
+  {
+    "tx_hash": "0xcb91826e1865a7763d977879435dbc230e6ead3830c832c9981f4086830375ca",
+    "block_number": 8247632,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 7.0,
+    "block_timestamp": "2025-11-26T09:00:53.000000Z"
+  },
+  {
+    "tx_hash": "0xde83e83b9a6c39cf3362af21a27a73b7b26aa59ba174621bf1818f9f27ba4696",
+    "block_number": 8250876,
+    "from_address": "0x0bff7dc1e080cad0491deeb4af30df129e30af21",
+    "value_rbtc": 0.0073869,
+    "block_timestamp": "2025-11-27T07:10:39.000000Z"
+  },
+  {
+    "tx_hash": "0xb86064c8edb5853f9fc71a45f3ffd19d145b2cc5931288aa736a29fb629a0eb8",
+    "block_number": 8276267,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.013065880898176,
+    "block_timestamp": "2025-12-04T13:09:19.000000Z"
+  },
+  {
+    "tx_hash": "0x3f4995bb14db6946c20c3328ddd46d989c9f5af6983c20ca4fb7588d4475836a",
+    "block_number": 8276552,
+    "from_address": "0xade2e104a4400b314ed2ab70809475321743ba24",
+    "value_rbtc": 0.006,
+    "block_timestamp": "2025-12-04T15:12:20.000000Z"
+  },
+  {
+    "tx_hash": "0x28f7cbc5d4f4f1f74fd064434594479348dc8af5f9e11bf5aac89eac2f4ed82a",
+    "block_number": 8277391,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 11.999,
+    "block_timestamp": "2025-12-04T21:04:32.000000Z"
+  },
+  {
+    "tx_hash": "0x5fc4c9c7a30f2a58bd58bb9eee4500e1369b95940fbaf6c8cd9c3f79b64fcee4",
+    "block_number": 8279538,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.029,
+    "block_timestamp": "2025-12-05T11:49:20.000000Z"
+  },
+  {
+    "tx_hash": "0x29a79b82dd0d02b7243fd6e6db4c425f09d44e22a4bfae2e39d19c5c4776e4de",
+    "block_number": 8279538,
+    "from_address": "0x3b6c6ef3f3230167219bc233c03ac78fa40833d7",
+    "value_rbtc": 0.00552681,
+    "block_timestamp": "2025-12-05T11:49:20.000000Z"
+  },
+  {
+    "tx_hash": "0x07650975ddba3ab4a64494aa99b76fbbceebcb8f0db80db64f69732261a7b538",
+    "block_number": 8280000,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.027,
+    "block_timestamp": "2025-12-05T14:49:50.000000Z"
+  },
+  {
+    "tx_hash": "0x43ea6f7bec1ce1a8a4e56dd907cb0568495d5f3782f3c9dd667a209a1fef0fdb",
+    "block_number": 8280172,
+    "from_address": "0xfdc75485c0c7b031a477071d59e46e1c6ccf9f87",
+    "value_rbtc": 0.93291,
+    "block_timestamp": "2025-12-05T16:01:25.000000Z"
+  },
+  {
+    "tx_hash": "0x490da71d0dc6a9c7956ca6adcb685fa0751b87f872ba75c258ecf5ff4fc80473",
+    "block_number": 8288972,
+    "from_address": "0xa5c073f9e5506615e1ec5d2816477b3f1c54388f",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-12-08T03:35:54.000000Z"
+  },
+  {
+    "tx_hash": "0x3261fae4b25b918da4f982bbaaf625e78ff405a9def5c17d4b21808624b5adf9",
+    "block_number": 8291188,
+    "from_address": "0x7c2232f6e42e87d478b2bc562c15bdcfcfe5633e",
+    "value_rbtc": 5.0914,
+    "block_timestamp": "2025-12-08T18:54:12.000000Z"
+  },
+  {
+    "tx_hash": "0x51979152d85c9c532a569c3d08b68773af031b6f0ba76da597f611d14fcdfd2a",
+    "block_number": 8297801,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-12-10T16:48:06.000000Z"
+  },
+  {
+    "tx_hash": "0x35bd10569b47500961b038b7e9ebe1ad7cfc090e07bdf9a53a0dd2e6e21127b3",
+    "block_number": 8299005,
+    "from_address": "0x6ad178abff92c2704c5db88bb37878634cc67e00",
+    "value_rbtc": 0.00865406,
+    "block_timestamp": "2025-12-11T00:47:23.000000Z"
+  },
+  {
+    "tx_hash": "0x1e98bd636c37e5e0f8d689c214d11590c9043f00b788febe374a1ddcd53e2c9d",
+    "block_number": 8302335,
+    "from_address": "0x10d755cfca329ce6bbc744614e3a083a01c643e9",
+    "value_rbtc": 1.90849,
+    "block_timestamp": "2025-12-11T23:59:21.000000Z"
+  },
+  {
+    "tx_hash": "0x0d4bdc82d7bca23c8c29bf7dac5ee283fa5f0f3ffc741ab569fcfa7940ee97dd",
+    "block_number": 8310743,
+    "from_address": "0xc75dd3a325d9bcb2a44dc0354e1c40f4c3ba2cca",
+    "value_rbtc": 0.14532,
+    "block_timestamp": "2025-12-14T08:53:40.000000Z"
+  },
+  {
+    "tx_hash": "0xff1ce9ceaa870748202073d5fae22712fcb80b439712722e30294ac787afb606",
+    "block_number": 8311410,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 7.575225999850001,
+    "block_timestamp": "2025-12-14T13:34:17.000000Z"
+  },
+  {
+    "tx_hash": "0xaa89b1b72be238082d8e29f4e9fc4a595d53fc6ce9e69901273b30277a38b213",
+    "block_number": 8312429,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 10.0050892,
+    "block_timestamp": "2025-12-14T20:34:56.000000Z"
+  },
+  {
+    "tx_hash": "0xebf4c803dfec23cf74f2fb6442c02af4967c4db7a1ff5eeb49c72cfe4fba54a0",
+    "block_number": 8323469,
+    "from_address": "0xa5c073f9e5506615e1ec5d2816477b3f1c54388f",
+    "value_rbtc": 1.5,
+    "block_timestamp": "2025-12-18T00:03:16.000000Z"
+  },
+  {
+    "tx_hash": "0x524afe43bb8c7a17dc8992f77c439e3a7d6267273137a09669ce25375c2f7fca",
+    "block_number": 8333728,
+    "from_address": "0xa44b9656ba4163d0c8217467f649ca97c75dc6c7",
+    "value_rbtc": 0.08093,
+    "block_timestamp": "2025-12-20T22:05:00.000000Z"
+  },
+  {
+    "tx_hash": "0x49cece89a8cebac165977a54addb9e021f332c687f742e1610053d5dfcb6b28d",
+    "block_number": 8337055,
+    "from_address": "0x9fb5eb6c01cd6ec92afeeddc7fadc661f047aa09",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-12-21T20:55:23.000000Z"
+  },
+  {
+    "tx_hash": "0xf871767ee95b7a694eb0c0df80b309d7d714b802307b7bc8adbdec6f10e4c0b4",
+    "block_number": 8340317,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.13,
+    "block_timestamp": "2025-12-22T19:05:17.000000Z"
+  },
+  {
+    "tx_hash": "0x0b0fde661478f36e0a79bb11d9df7ab16c75041ee1a05bedf2fc0eef0383dba1",
+    "block_number": 8341344,
+    "from_address": "0x4e5dabc28e4a0f5e5b19fcb56b28c5a1989352c1",
+    "value_rbtc": 0.7,
+    "block_timestamp": "2025-12-23T02:02:53.000000Z"
+  },
+  {
+    "tx_hash": "0x5501af87b84875ef335279c205b76855df4aa055db8588aab6284a8520be7b06",
+    "block_number": 8343630,
+    "from_address": "0x60090335df2550ee20b564965b817ad18e52a09e",
+    "value_rbtc": 0.0115,
+    "block_timestamp": "2025-12-23T17:55:43.000000Z"
+  },
+  {
+    "tx_hash": "0x4e18d449056b16c96b37ddd85593c693e01148299e3bcb002b2737fe01f10637",
+    "block_number": 8346681,
+    "from_address": "0x9fb5eb6c01cd6ec92afeeddc7fadc661f047aa09",
+    "value_rbtc": 1.87945,
+    "block_timestamp": "2025-12-24T14:31:22.000000Z"
+  },
+  {
+    "tx_hash": "0xc47eab04865aa40261b5d2d7da721724b536d647c4be6faa7bb88468bf005171",
+    "block_number": 8350191,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2025-12-25T14:14:41.000000Z"
+  },
+  {
+    "tx_hash": "0xe359a6b95f3a1f858eabea98d90212284ca94060dc2ff350edd10b1808332eff",
+    "block_number": 8358557,
+    "from_address": "0x71b8f34015cfeeb0de05ea23c283c6460dfa3301",
+    "value_rbtc": 0.005,
+    "block_timestamp": "2025-12-27T23:46:11.000000Z"
+  },
+  {
+    "tx_hash": "0x50608c362b661f678261e291f8136417dc7bf9ecb7e702f75f7840fda87c04ba",
+    "block_number": 8361089,
+    "from_address": "0x310acd947e6826a1e3a128a8e3d6644843d9ec8d",
+    "value_rbtc": 0.5,
+    "block_timestamp": "2025-12-28T17:04:58.000000Z"
+  },
+  {
+    "tx_hash": "0xfa6e0b2165f2ffba3215ff4e2a5c494b042695d38b1041ebdfed7a7a11a4a348",
+    "block_number": 8363490,
+    "from_address": "0x6afd53e774eddec304398b2388048d0436f87168",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2025-12-29T09:31:35.000000Z"
+  },
+  {
+    "tx_hash": "0x51678e84b38bc41bb5738572ae326aaac972decdee5e34f6d9d17734d68b6271",
+    "block_number": 8371279,
+    "from_address": "0x310acd947e6826a1e3a128a8e3d6644843d9ec8d",
+    "value_rbtc": 0.7271,
+    "block_timestamp": "2025-12-31T15:03:36.000000Z"
+  },
+  {
+    "tx_hash": "0x9649b94d1d0741632f8bc1a57c45d7c29ea3645b2d182ab97426e9c21d590352",
+    "block_number": 8377784,
+    "from_address": "0x1ae356ca3139839528277adf0875868889bb4710",
+    "value_rbtc": 0.004,
+    "block_timestamp": "2026-01-02T10:47:55.000000Z"
+  },
+  {
+    "tx_hash": "0xb048ae8dd8abc44e10e892cb9b9ef0c4d031d186b5c5395f73be7e3a66aad2f6",
+    "block_number": 8382210,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.09,
+    "block_timestamp": "2026-01-03T17:06:11.000000Z"
+  },
+  {
+    "tx_hash": "0x7bc12590f350afbc5ed58245bbb4d2a6e9f3a324bf4236479678244735b46cc3",
+    "block_number": 8383564,
+    "from_address": "0x6afd53e774eddec304398b2388048d0436f87168",
+    "value_rbtc": 4.83,
+    "block_timestamp": "2026-01-04T02:42:27.000000Z"
+  },
+  {
+    "tx_hash": "0x5a7fc68ed38f7612644a016564c52a83bb84eca8f1a3c67fc03eefd7a6324225",
+    "block_number": 8383619,
+    "from_address": "0x6afd53e774eddec304398b2388048d0436f87168",
+    "value_rbtc": 0.01258,
+    "block_timestamp": "2026-01-04T03:06:49.000000Z"
+  },
+  {
+    "tx_hash": "0x3fe8ed82ec64ad0120881737c4020020fe7e9ff15bc30d984f4056ba0d39ff49",
+    "block_number": 8389473,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.1146513536,
+    "block_timestamp": "2026-01-05T18:51:05.000000Z"
+  },
+  {
+    "tx_hash": "0x4eab55e2fdf66722eeb17d2788d9c33aea1163c4e7d1b99325c9617a796dbf21",
+    "block_number": 8404041,
+    "from_address": "0x1ae356ca3139839528277adf0875868889bb4710",
+    "value_rbtc": 1.97,
+    "block_timestamp": "2026-01-09T21:49:54.000000Z"
+  },
+  {
+    "tx_hash": "0xe24b827254d6b8c25ddc157bc1a34d396850355a2e368639d6dd4698368bf929",
+    "block_number": 8405641,
+    "from_address": "0xd05fb656308be85072fc328232bcce66c79875e0",
+    "value_rbtc": 0.01338325110038935,
+    "block_timestamp": "2026-01-10T09:08:03.000000Z"
+  },
+  {
+    "tx_hash": "0x899cba0c0e4bacdc7f7e6c418fe128a19325d3585aa479b6ac6c18d650cdd0e5",
+    "block_number": 8407617,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.99153182527454,
+    "block_timestamp": "2026-01-10T23:21:08.000000Z"
+  },
+  {
+    "tx_hash": "0xfbf6d5e0dc02274101bb266a0d5e05f62ad25badc5f17b0b3358f6fa3d45e23b",
+    "block_number": 8411049,
+    "from_address": "0x24206bc8c0835514dd286f61db9f25b29a0de682",
+    "value_rbtc": 0.0049787575746112,
+    "block_timestamp": "2026-01-11T22:55:35.000000Z"
+  },
+  {
+    "tx_hash": "0x39fd21be270eabe68badca4db69143d7df6c6b0c466ba000368906515836d6cd",
+    "block_number": 8411565,
+    "from_address": "0x1ae356ca3139839528277adf0875868889bb4710",
+    "value_rbtc": 1.204,
+    "block_timestamp": "2026-01-12T02:33:00.000000Z"
+  },
+  {
+    "tx_hash": "0x4c1b14cbd86e76469848b87f83712d32490dd241fce086623066fac3b3660ab6",
+    "block_number": 8416015,
+    "from_address": "0xa5c073f9e5506615e1ec5d2816477b3f1c54388f",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2026-01-13T09:10:53.000000Z"
+  },
+  {
+    "tx_hash": "0xc649ecdd776d1aaf54f05c4138c6528f7335fc7539e70f9725a5fce013ea8092",
+    "block_number": 8416143,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.9,
+    "block_timestamp": "2026-01-13T10:07:22.000000Z"
+  },
+  {
+    "tx_hash": "0x576558924950c33e991b296f52772481770361f4bd561eb259ffbc79572fad95",
+    "block_number": 8416236,
+    "from_address": "0xac31a4beedd7ec916b7a48a612230cb85c1aaf56",
+    "value_rbtc": 0.1,
+    "block_timestamp": "2026-01-13T10:47:02.000000Z"
+  },
+  {
+    "tx_hash": "0xed177cc24f76cb1e7cd1fc16bb5b6b653af2cc6fff2eb62b4d3948dd9adad1a4",
+    "block_number": 8417158,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 82.0,
+    "block_timestamp": "2026-01-13T17:05:40.000000Z"
+  },
+  {
+    "tx_hash": "0xee58ecf30866c8f6a1e7b6eb5c95408664718c368b5f2c9f1c11fb62d1c37298",
+    "block_number": 8419462,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.3,
+    "block_timestamp": "2026-01-14T08:55:56.000000Z"
+  },
+  {
+    "tx_hash": "0x896864851c8c3681007431e2338d18ead96b7df8695a56ec1b315bbf39ef400a",
+    "block_number": 8423768,
+    "from_address": "0xa5c073f9e5506615e1ec5d2816477b3f1c54388f",
+    "value_rbtc": 1.0,
+    "block_timestamp": "2026-01-15T14:32:31.000000Z"
+  },
+  {
+    "tx_hash": "0x7e6401b0e2db11b72d74addec1ff5555378bf48d09ea857f0abd2ae9dc46459a",
+    "block_number": 8431016,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.8,
+    "block_timestamp": "2026-01-17T16:27:24.000000Z"
+  },
+  {
+    "tx_hash": "0xe1e8818d3b6ac24cf4807a1030b5b5fb252640dd64cde98a827befee7a92da02",
+    "block_number": 8437384,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 99.99993136,
+    "block_timestamp": "2026-01-19T11:42:18.000000Z"
+  },
+  {
+    "tx_hash": "0x908f54830b31cc02d48ba37e0682634c8ea55cc3f6e424e59d89c09809f8223c",
+    "block_number": 8447903,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 6.720622283151418,
+    "block_timestamp": "2026-01-22T11:34:28.000000Z"
+  },
+  {
+    "tx_hash": "0xa50b0a196374fa15fe9636795f7bda368c39ead82f03a4099fac50516e39b5f7",
+    "block_number": 8452990,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 8.694172221241484,
+    "block_timestamp": "2026-01-23T22:31:01.000000Z"
+  },
+  {
+    "tx_hash": "0x2d4057da74999f99545274c79e883dfa231784dd1b61286321ae4ada8840f8e2",
+    "block_number": 8457697,
+    "from_address": "0xd9ecb390a6a32ae651d5c614974c5570c50a5d89",
+    "value_rbtc": 4.420050650562483,
+    "block_timestamp": "2026-01-25T07:53:12.000000Z"
+  },
+  {
+    "tx_hash": "0xa70cadea3f53bb5ff110e83884f3e2e60149d718f6e32843313c054a73a4b757",
+    "block_number": 8469041,
+    "from_address": "0x1bdf482f5da32ef51c20d9a94960385c5be9aab7",
+    "value_rbtc": 1.2,
+    "block_timestamp": "2026-01-28T14:06:03.000000Z"
+  },
+  {
+    "tx_hash": "0x67d87a052b4421be31be2eddc8d2113ffd64640838308c5a11d9b0b34c1f3477",
+    "block_number": 8469049,
+    "from_address": "0x54c85aeca291772fcb7103cbc741396b14e066c3",
+    "value_rbtc": 69.999934,
+    "block_timestamp": "2026-01-28T14:08:32.000000Z"
+  },
+  {
+    "tx_hash": "0x6e3b92b0c072f5d03cb0111d7a67c0cea5d59316754e75904f402cb47161fa41",
+    "block_number": 8469435,
+    "from_address": "0xce7864a8b5bf360b01099502a163810cec845d4a",
+    "value_rbtc": 0.153,
+    "block_timestamp": "2026-01-28T16:40:49.000000Z"
+  },
+  {
+    "tx_hash": "0x14148180d8d9190287b8e517ec2a00d12922d1f6a9e9d06628d8539e015846bc",
+    "block_number": 8475690,
+    "from_address": "0x84ca508ab5b86bb134ae5b3a37fc38ff56819e22",
+    "value_rbtc": 0.05884146642386264,
+    "block_timestamp": "2026-01-30T12:37:47.000000Z"
+  },
+  {
+    "tx_hash": "0x0a1edc95a308c323f9f852cf2c8e0495fffcc5815f8e928e554436c39bb0c433",
+    "block_number": 8482736,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.032,
+    "block_timestamp": "2026-02-01T13:08:26.000000Z"
+  },
+  {
+    "tx_hash": "0xadeb6983c3e1f2ebf6d11abeab9c9304ecd6614a826077704dc1e102fd48547d",
+    "block_number": 8483288,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 5.976820917624444,
+    "block_timestamp": "2026-02-01T16:46:36.000000Z"
+  },
+  {
+    "tx_hash": "0x79406c103b75c3f93ff4239ec563ff2c46de9346972d74a516a474052ee93286",
+    "block_number": 8493152,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 18.48444824546612,
+    "block_timestamp": "2026-02-04T13:15:55.000000Z"
+  },
+  {
+    "tx_hash": "0x32c9776d00293c16cc3df913977f7bcf054302293c8faea60a36c034aadd33dd",
+    "block_number": 8494285,
+    "from_address": "0x0b868a9b26042e9a397f0b221352d9baca0d53f3",
+    "value_rbtc": 0.01114873,
+    "block_timestamp": "2026-02-04T20:55:09.000000Z"
+  },
+  {
+    "tx_hash": "0x23c084651b9def5b90db420700163123d6321d97b015df79108c506ee541ef00",
+    "block_number": 8498483,
+    "from_address": "0x82a06ebdb97776a2da4041df8f2b2ea8d3257852",
+    "value_rbtc": 17.184685809620962,
+    "block_timestamp": "2026-02-06T02:00:55.000000Z"
+  },
+  {
+    "tx_hash": "0xfda21e82ac973975b1c6fa356d684da79357532cdaa80dd56ac2bc7c47e6326d",
+    "block_number": 8502092,
+    "from_address": "0x3b651c07951033f03b7e6690ca6dc391615d6ceb",
+    "value_rbtc": 0.8695703581697971,
+    "block_timestamp": "2026-02-07T03:15:32.000000Z"
+  },
+  {
+    "tx_hash": "0x6bd59df5d202dbcaf9a01c561e16a4cbfede45ca2604a030ff4cf35ff6f208f8",
+    "block_number": 8512444,
+    "from_address": "0x93293a100338f54242f05652e137a52e0acdccf0",
+    "value_rbtc": 1.0105138126971944,
+    "block_timestamp": "2026-02-10T04:09:35.000000Z"
+  },
+  {
+    "tx_hash": "0xa6fb5ecfed415892d7c59b36ad0ed3b90d13b74b305d18dc1d50cf6ea25ef87e",
+    "block_number": 8516694,
+    "from_address": "0xd7d879515f1a9a9bc7c7293c30b5424003da5eea",
+    "value_rbtc": 0.7391703475604168,
+    "block_timestamp": "2026-02-11T09:14:43.000000Z"
+  },
+  {
+    "tx_hash": "0x5e6064699e62921c1ac0c9b301d3dd66276767b69a18237a92912068fe3bfbe9",
+    "block_number": 8518254,
+    "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
+    "value_rbtc": 0.077,
+    "block_timestamp": "2026-02-11T20:04:49.000000Z"
+  }
+]
