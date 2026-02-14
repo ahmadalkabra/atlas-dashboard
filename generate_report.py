@@ -19,7 +19,8 @@ def load_json(filename: str) -> list | dict:
     path = os.path.join(DATA_DIR, filename)
     if not os.path.exists(path):
         print(f"  Warning: {path} not found, returning empty")
-        return [] if filename != "flyover_lp_info.json" else {}
+        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json")
+        return {} if filename in dict_files else []
     with open(path) as f:
         return json.load(f)
 
@@ -43,6 +44,7 @@ def build_dashboard_data(
     powpeg_pegins: list[dict],
     powpeg_pegouts: list[dict],
     lp_info: dict | None = None,
+    btc_locked_stats: dict | None = None,
 ) -> dict:
     """Build the full dashboard dataset for embedding in HTML."""
 
@@ -134,6 +136,7 @@ def build_dashboard_data(
         "penalties": penalties,
         "refunds": refunds,
         "lp_info": lp_info or {},
+        "btc_locked": btc_locked_stats or {},
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -300,6 +303,88 @@ def generate_html(data: dict) -> str:
   .op-total-value {{
     font-size: 18px;
     font-weight: 700;
+  }}
+
+  /* --- BTC Locked Section --- */
+  .btc-locked-section {{
+    margin-bottom: 28px;
+  }}
+  .btc-locked-panel {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }}
+  .btc-locked-header {{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+  }}
+  .btc-locked-stats {{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }}
+  .btc-locked-stat {{
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+  }}
+  .btc-locked-stat-label {{
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }}
+  .btc-locked-stat-value {{
+    font-size: 22px;
+    font-weight: 700;
+    color: #08FFD1;
+    line-height: 1.1;
+  }}
+  .btc-locked-stat-sub {{
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+  }}
+  .btc-locked-bar-wrapper {{
+    position: relative;
+    margin-top: 4px;
+  }}
+  .btc-locked-bar {{
+    height: 10px;
+    background: var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+  }}
+  .btc-locked-bar-fill {{
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #08FFD1, #08FFD1cc);
+    transition: width 0.5s ease;
+  }}
+  .btc-locked-bar-labels {{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+  }}
+  .btc-locked-bar-labels span {{
+    font-size: 10px;
+    color: var(--muted);
+  }}
+  .btc-locked-bar-pct {{
+    position: absolute;
+    right: 0;
+    top: -18px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #08FFD1;
   }}
 
   /* --- Health Section --- */
@@ -641,6 +726,7 @@ def generate_html(data: dict) -> str:
     .op-summary {{ grid-template-columns: repeat(2, 1fr); }}
     .op-totals {{ grid-template-columns: repeat(2, 1fr); }}
     .health-grid {{ grid-template-columns: repeat(2, 1fr); }}
+    .btc-locked-stats {{ grid-template-columns: repeat(3, 1fr); }}
   }}
   @media (max-width: 768px) {{
     .lp-stats {{ grid-template-columns: repeat(2, 1fr); }}
@@ -651,6 +737,7 @@ def generate_html(data: dict) -> str:
     .op-totals {{ grid-template-columns: 1fr; }}
     .lp-stats {{ grid-template-columns: 1fr; }}
     .health-grid {{ grid-template-columns: 1fr; }}
+    .btc-locked-stats {{ grid-template-columns: 1fr; }}
     .dashboard {{ padding: 16px 12px; }}
   }}
 </style>
@@ -672,6 +759,8 @@ def generate_html(data: dict) -> str:
   </header>
 
   <section id="op-summary" class="op-summary"></section>
+
+  <section class="btc-locked-section" id="btc-locked-section"></section>
 
   <section class="health-section" id="health-section-wrapper">
     <div class="section-title">Flyover System Health</div>
@@ -809,6 +898,51 @@ function getLatestTwo(events, period) {{
     currentKey,
     prevKey,
   }};
+}}
+
+// ─── BTC Locked ───
+
+function renderBtcLocked() {{
+  const section = document.getElementById('btc-locked-section');
+  const d = DATA.btc_locked;
+  if (!d || !d.total_bridged_rbtc) {{
+    section.style.display = 'none';
+    return;
+  }}
+  section.style.display = '';
+  const pct = d.pct_locked || 0;
+  section.innerHTML = `
+    <div class="btc-locked-panel">
+      <div class="btc-locked-header">BTC Bridged &amp; Locked</div>
+      <div class="btc-locked-stats">
+        <div class="btc-locked-stat">
+          <div class="btc-locked-stat-label">BTC Bridged</div>
+          <div class="btc-locked-stat-value">${{fmtRBTC(d.total_bridged_rbtc)}}</div>
+          <div class="btc-locked-stat-sub">Total in PowPeg</div>
+        </div>
+        <div class="btc-locked-stat">
+          <div class="btc-locked-stat-label">Locked in Contracts</div>
+          <div class="btc-locked-stat-value">${{fmtRBTC(d.locked_in_contracts_rbtc)}}</div>
+          <div class="btc-locked-stat-sub">${{d.contract_count}} contracts</div>
+        </div>
+        <div class="btc-locked-stat">
+          <div class="btc-locked-stat-label">% Bridged &amp; Locked</div>
+          <div class="btc-locked-stat-value">${{pct.toFixed(1)}}%</div>
+          <div class="btc-locked-stat-sub">held by smart contracts</div>
+        </div>
+      </div>
+      <div class="btc-locked-bar-wrapper">
+        <span class="btc-locked-bar-pct">${{pct.toFixed(1)}}%</span>
+        <div class="btc-locked-bar">
+          <div class="btc-locked-bar-fill" style="width:${{Math.min(100, pct)}}%"></div>
+        </div>
+        <div class="btc-locked-bar-labels">
+          <span>0%</span>
+          <span>100%</span>
+        </div>
+      </div>
+    </div>
+  `;
 }}
 
 // ─── Render ───
@@ -1320,6 +1454,7 @@ function setChartMode(mode) {{
 
 function renderAll() {{
   renderSummary();
+  renderBtcLocked();
   renderHealth();
   renderCharts();
   renderLPSection();
@@ -1352,6 +1487,7 @@ def main():
     powpeg_pegins = load_json("powpeg_pegins.json")
     powpeg_pegouts = load_json("powpeg_pegouts.json")
     lp_info = load_json("flyover_lp_info.json")
+    btc_locked_stats = load_json("btc_locked_stats.json")
 
     print(f"  Flyover peg-ins: {len(flyover_pegins)}")
     print(f"  Flyover peg-outs: {len(flyover_pegouts)}")
@@ -1361,6 +1497,8 @@ def main():
     print(f"  PowPeg peg-outs: {len(powpeg_pegouts)}")
     if lp_info:
         print(f"  LP info: {lp_info.get('lp_name', 'unknown')}")
+    if btc_locked_stats:
+        print(f"  BTC locked: {btc_locked_stats.get('locked_in_contracts_rbtc', 0)} / {btc_locked_stats.get('total_bridged_rbtc', 0)} RBTC")
 
     print("\nBuilding dashboard data...")
     data = build_dashboard_data(
@@ -1368,6 +1506,7 @@ def main():
         flyover_penalties, flyover_refunds,
         powpeg_pegins, powpeg_pegouts,
         lp_info=lp_info if isinstance(lp_info, dict) else {},
+        btc_locked_stats=btc_locked_stats if isinstance(btc_locked_stats, dict) else {},
     )
 
     print("Generating HTML...")

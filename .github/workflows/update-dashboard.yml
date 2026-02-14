@@ -36,6 +36,9 @@ jobs:
       - name: Fetch PowPeg data
         run: python -u fetch_powpeg.py
 
+      - name: Fetch BTC locked stats
+        run: python -u fetch_btc_locked.py
+
       - name: Generate dashboard
         run: python -u generate_report.py
 

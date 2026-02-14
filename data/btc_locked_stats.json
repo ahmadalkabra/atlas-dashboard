@@ -1,0 +1,110 @@
+{
+  "total_bridged_rbtc": 1824.2374,
+  "locked_in_contracts_rbtc": 1344.1091,
+  "pct_locked": 73.68,
+  "contract_count": 20,
+  "top_contracts": [
+    {
+      "hash": "0xf773B590AF754D597770937fa8eA7ABDf2668370",
+      "balance_rbtc": 570.199043,
+      "name": "AdminUpgradeabilityProxy"
+    },
+    {
+      "hash": "0xf294Ea272D6F8feDc08AcF8E93Ff50fE99E1f7e8",
+      "balance_rbtc": 328.486753,
+      "name": ""
+    },
+    {
+      "hash": "0x542FDA317318eBf1d3DeAF76E0B632741a7e677d",
+      "balance_rbtc": 235.312718,
+      "name": "WRBTC"
+    },
+    {
+      "hash": "0x0aEaDb9d4C6a80462a47E87e76e487fa8b9A37d7",
+      "balance_rbtc": 128.77482,
+      "name": "CRBTC"
+    },
+    {
+      "hash": "0x0f04Ae0d8ebF40B2d3DDB51d9DBA279fE9C7f220",
+      "balance_rbtc": 14.0,
+      "name": "TransparentUpgradeableProxy"
+    },
+    {
+      "hash": "0x5cA9FA3E15F0d6841A64e83722898B9A80DF7a1e",
+      "balance_rbtc": 10.370776,
+      "name": "MyNativeOFTAdapter"
+    },
+    {
+      "hash": "0xDCb12179BA4697350f66224C959BdD9C282818dF",
+      "balance_rbtc": 8.819125,
+      "name": "GnosisSafeProxy"
+    },
+    {
+      "hash": "0x5978c6153a06B141Cd0935569F600A83Eb44aeaA",
+      "balance_rbtc": 7.245718,
+      "name": ""
+    },
+    {
+      "hash": "0x310ec7Fe6E4943Da773de8948255E37cC45e34BB",
+      "balance_rbtc": 7.156658,
+      "name": ""
+    },
+    {
+      "hash": "0xBD81feD9589fc5d6de416090CC5CCf3cC52E3862",
+      "balance_rbtc": 7.0,
+      "name": "SafeProxy"
+    },
+    {
+      "hash": "0xAa9caf1e3967600578727f975F283446a3dA6612",
+      "balance_rbtc": 6.207726,
+      "name": "TransparentUpgradeableProxy"
+    },
+    {
+      "hash": "0x48229e5D82a186Aa89a99212D2D59f5674aa5b6C",
+      "balance_rbtc": 3.851629,
+      "name": "GnosisSafeProxy"
+    },
+    {
+      "hash": "0xc61820BFb8F87391d62cD3976DDC1D35E0cF7128",
+      "balance_rbtc": 3.763161,
+      "name": ""
+    },
+    {
+      "hash": "0x3376eBCa0A85fC8d791b1001A571c41FDd61514A",
+      "balance_rbtc": 3.673365,
+      "name": "TransparentUpgradeableProxy"
+    },
+    {
+      "hash": "0x967f8799aF07DF1534d48A95a5C9FEBE92c53ae0",
+      "balance_rbtc": 3.354305,
+      "name": "Wrapped rBTC"
+    },
+    {
+      "hash": "0x267a6073637408b6A1d34d685ff5720A0CbCbD9d",
+      "balance_rbtc": 2.593409,
+      "name": "GnosisSafeProxy"
+    },
+    {
+      "hash": "0x115CAF168c51Ed15Ec535727f64684d33B7B08D1",
+      "balance_rbtc": 1.05891,
+      "name": ""
+    },
+    {
+      "hash": "0xD46C0225D1331b46700d64FF8c906709d15c9202",
+      "balance_rbtc": 1.008589,
+      "name": ""
+    },
+    {
+      "hash": "0x924f5Ad34698fD20C90fe5d5a8A0ABD3b42dC711",
+      "balance_rbtc": 0.7134,
+      "name": "MultiSigWallet"
+    },
+    {
+      "hash": "0xD8Ea2fe062Edd834Ea6577d2d6c0ac920c879a2b",
+      "balance_rbtc": 0.519014,
+      "name": ""
+    }
+  ],
+  "pages_fetched": 100,
+  "fetched_at": "2026-02-14T05:08:38Z"
+}
