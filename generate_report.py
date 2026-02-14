@@ -302,6 +302,155 @@ def generate_html(data: dict) -> str:
     font-weight: 700;
   }}
 
+  /* --- Health Section --- */
+  .health-section {{
+    margin-bottom: 28px;
+  }}
+  .health-panel {{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }}
+  .health-header {{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }}
+  .health-header h3 {{
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }}
+  .health-overall-dot {{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }}
+  .health-overall-dot.pulse {{
+    animation: healthPulse 2s ease-in-out infinite;
+  }}
+  @keyframes healthPulse {{
+    0%, 100% {{ opacity: 1; }}
+    50% {{ opacity: 0.4; }}
+  }}
+  .health-overall-label {{
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }}
+  .health-staleness {{
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }}
+  .health-grid {{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }}
+  .health-indicator {{
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    border-left: 3px solid var(--border);
+  }}
+  .health-indicator.status-healthy {{ border-left-color: var(--green); }}
+  .health-indicator.status-warning {{ border-left-color: #EAB308; }}
+  .health-indicator.status-critical {{ border-left-color: var(--red); }}
+  .health-indicator {{ position: relative; }}
+  .health-info-btn {{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hover);
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    transition: all 0.15s;
+  }}
+  .health-info-btn:hover {{ border-color: var(--purple); color: var(--purple); }}
+  .health-popover {{
+    display: none;
+    position: absolute;
+    top: 32px;
+    right: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--text);
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    line-height: 1.6;
+  }}
+  .health-popover.open {{ display: block; }}
+  .health-popover-row {{ display: flex; align-items: center; gap: 6px; }}
+  .health-popover-dot {{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }}
+  .health-indicator-label {{
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }}
+  .health-indicator-value {{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }}
+  .health-indicator-sub {{
+    color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 8px;
+  }}
+  .health-indicator-status {{
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }}
+  .health-indicator-status.healthy {{ color: var(--green); }}
+  .health-indicator-status.warning {{ color: #EAB308; }}
+  .health-indicator-status.critical {{ color: var(--red); }}
+  .health-bar {{
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 8px 0 4px;
+    overflow: hidden;
+  }}
+  .health-bar-fill {{
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }}
+
   /* --- Chart Panels --- */
   .chart-section {{ margin-bottom: 20px; }}
   .chart-grid {{
@@ -491,6 +640,7 @@ def generate_html(data: dict) -> str:
     .chart-grid-2col {{ grid-template-columns: 1fr; }}
     .op-summary {{ grid-template-columns: repeat(2, 1fr); }}
     .op-totals {{ grid-template-columns: repeat(2, 1fr); }}
+    .health-grid {{ grid-template-columns: repeat(2, 1fr); }}
   }}
   @media (max-width: 768px) {{
     .lp-stats {{ grid-template-columns: repeat(2, 1fr); }}
@@ -500,6 +650,7 @@ def generate_html(data: dict) -> str:
     .op-summary {{ grid-template-columns: 1fr; }}
     .op-totals {{ grid-template-columns: 1fr; }}
     .lp-stats {{ grid-template-columns: 1fr; }}
+    .health-grid {{ grid-template-columns: 1fr; }}
     .dashboard {{ padding: 16px 12px; }}
   }}
 </style>
@@ -521,6 +672,11 @@ def generate_html(data: dict) -> str:
   </header>
 
   <section id="op-summary" class="op-summary"></section>
+
+  <section class="health-section" id="health-section-wrapper">
+    <div class="section-title">Flyover System Health</div>
+    <div id="health-panel" class="health-panel"></div>
+  </section>
 
   <section class="chart-section">
     <div class="chart-panel" style="margin-bottom:20px">
@@ -996,6 +1152,163 @@ function renderLPSection() {{
   `;
 }}
 
+// ─── Health Section ───
+
+const HEALTH_THRESHOLDS = {{
+  peginBalance:  {{ warning: 10, critical: 5 }},
+  pegoutBalance: {{ warning: 10, critical: 5 }},
+}};
+const STALENESS_HOURS = 25;
+
+function assessStatus(value, thresholds) {{
+  if (value <= thresholds.critical) return 'critical';
+  if (value <= thresholds.warning) return 'warning';
+  return 'healthy';
+}}
+
+function renderHealth() {{
+  const panel = document.getElementById('health-panel');
+  const wrapper = document.getElementById('health-section-wrapper');
+  const lp = DATA.lp_info || {{}};
+  const refTime = new Date(DATA.generated_at);
+
+  // If no LP info at all, hide the section
+  if (!lp.lp_name && DATA.flyover_pegins.length === 0) {{
+    wrapper.style.display = 'none';
+    return;
+  }}
+  wrapper.style.display = '';
+
+  // --- 1. Peg-In LP Balance ---
+  const peginBal = lp.pegin_rbtc != null ? parseFloat(lp.pegin_rbtc) : null;
+  const peginStatus = peginBal != null
+    ? assessStatus(peginBal, HEALTH_THRESHOLDS.peginBalance)
+    : 'warning';
+  const peginMax = 50;
+
+  // --- 2. Peg-Out LP Balance ---
+  const pegoutBal = lp.pegout_btc != null ? parseFloat(lp.pegout_btc) : null;
+  const pegoutStatus = pegoutBal != null
+    ? assessStatus(pegoutBal, HEALTH_THRESHOLDS.pegoutBalance)
+    : 'warning';
+  const pegoutMax = 50;
+
+  // --- Last activity timestamps (info only, no health status) ---
+  let lastPeginDate = null;
+  let lastPeginValue = 0;
+  for (const e of DATA.flyover_pegins) {{
+    const d = parseTS(e.timestamp);
+    if (d && (!lastPeginDate || d > lastPeginDate)) {{
+      lastPeginDate = d;
+      lastPeginValue = e.value_rbtc || 0;
+    }}
+  }}
+  const peginHoursAgo = lastPeginDate
+    ? (refTime - lastPeginDate) / (1000 * 60 * 60)
+    : Infinity;
+
+  let lastPegoutDate = null;
+  let lastPegoutValue = 0;
+  for (const e of DATA.flyover_pegouts) {{
+    const d = parseTS(e.timestamp);
+    if (d && (!lastPegoutDate || d > lastPegoutDate)) {{
+      lastPegoutDate = d;
+      lastPegoutValue = e.value_rbtc || 0;
+    }}
+  }}
+  const pegoutHoursAgo = lastPegoutDate
+    ? (refTime - lastPegoutDate) / (1000 * 60 * 60)
+    : Infinity;
+
+  // --- Overall status (worst of all indicators) ---
+  const statuses = [peginStatus, pegoutStatus];
+  let overall = 'healthy';
+  if (statuses.includes('critical')) overall = 'critical';
+  else if (statuses.includes('warning')) overall = 'warning';
+
+  const statusColors = {{ healthy: 'var(--green)', warning: '#EAB308', critical: 'var(--red)' }};
+  const statusLabels = {{ healthy: 'Healthy', warning: 'Warning', critical: 'Critical' }};
+
+  // --- Staleness check ---
+  const dataAgeHours = (Date.now() - refTime.getTime()) / (1000 * 60 * 60);
+  const isStale = dataAgeHours > STALENESS_HOURS;
+
+  // --- Build HTML ---
+  function hoursLabel(hours) {{
+    if (!isFinite(hours)) return 'No data';
+    if (hours < 1) return 'Just now';
+    if (hours < 24) return Math.round(hours) + 'h ago';
+    const days = Math.floor(hours / 24);
+    const rem = Math.round(hours % 24);
+    return days + 'd ' + rem + 'h ago';
+  }}
+
+  function balanceBar(value, max, status) {{
+    if (value == null) return '';
+    const pct = Math.min(100, Math.max(0, (value / max) * 100));
+    return `<div class="health-bar"><div class="health-bar-fill" style="width:${{pct}}%;background:${{statusColors[status]}}"></div></div>`;
+  }}
+
+  let html = `<div class="health-header">
+    <h3>
+      <span class="health-overall-dot ${{overall !== 'healthy' ? 'pulse' : ''}}" style="background:${{statusColors[overall]}}"></span>
+      <span class="health-overall-label" style="color:${{statusColors[overall]}}">${{statusLabels[overall]}}</span>
+    </h3>
+    ${{isStale ? `<span class="health-staleness">Data is ${{Math.round(dataAgeHours)}}h old</span>` : ''}}
+  </div>
+  <div class="health-grid">
+    <div class="health-indicator status-${{peginStatus}}">
+      <button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>
+      <div class="health-popover">
+        <div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 RBTC</div>
+        <div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 RBTC</div>
+      </div>
+      <div class="health-indicator-label">Peg-In LP Balance</div>
+      <div class="health-indicator-value">${{peginBal != null ? fmtRBTC(peginBal) : 'N/A'}}</div>
+      <div class="health-indicator-sub">${{peginBal != null ? 'RBTC available' : 'No LP data'}}</div>
+      ${{balanceBar(peginBal, peginMax, peginStatus)}}
+      <div class="health-indicator-status ${{peginStatus}}">${{statusLabels[peginStatus]}}</div>
+    </div>
+    <div class="health-indicator status-${{pegoutStatus}}">
+      <button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>
+      <div class="health-popover">
+        <div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 BTC</div>
+        <div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 BTC</div>
+      </div>
+      <div class="health-indicator-label">Peg-Out LP Balance</div>
+      <div class="health-indicator-value">${{pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A'}}</div>
+      <div class="health-indicator-sub">${{pegoutBal != null ? 'BTC available' : 'No LP data'}}</div>
+      ${{balanceBar(pegoutBal, pegoutMax, pegoutStatus)}}
+      <div class="health-indicator-status ${{pegoutStatus}}">${{statusLabels[pegoutStatus]}}</div>
+    </div>
+    <div class="health-indicator">
+      <div class="health-indicator-label">Last Peg-In</div>
+      <div class="health-indicator-value">${{hoursLabel(peginHoursAgo)}}</div>
+      <div class="health-indicator-sub">${{lastPeginDate ? fmtRBTC(lastPeginValue) : 'Never'}}</div>
+      <div class="health-indicator-sub">${{lastPeginDate ? lastPeginDate.toLocaleDateString('en-US', {{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}}) : ''}}</div>
+    </div>
+    <div class="health-indicator">
+      <div class="health-indicator-label">Last Peg-Out</div>
+      <div class="health-indicator-value">${{hoursLabel(pegoutHoursAgo)}}</div>
+      <div class="health-indicator-sub">${{lastPegoutDate ? fmtRBTC(lastPegoutValue) : 'Never'}}</div>
+      <div class="health-indicator-sub">${{lastPegoutDate ? lastPegoutDate.toLocaleDateString('en-US', {{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}}) : ''}}</div>
+    </div>
+  </div>`;
+
+  panel.innerHTML = html;
+}}
+
+function toggleHealthPopover(e) {{
+  e.stopPropagation();
+  const popover = e.currentTarget.nextElementSibling;
+  const wasOpen = popover.classList.contains('open');
+  document.querySelectorAll('.health-popover.open').forEach(p => p.classList.remove('open'));
+  if (!wasOpen) popover.classList.add('open');
+}}
+document.addEventListener('click', () => {{
+  document.querySelectorAll('.health-popover.open').forEach(p => p.classList.remove('open'));
+}});
+
 function setChartMode(mode) {{
   chartMode = mode;
   document.querySelectorAll('#vol-chart-toggle button').forEach(b => b.classList.remove('active'));
@@ -1005,6 +1318,7 @@ function setChartMode(mode) {{
 
 function renderAll() {{
   renderSummary();
+  renderHealth();
   renderCharts();
   renderLPSection();
   tablePage = 0;
