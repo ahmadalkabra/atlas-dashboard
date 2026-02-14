@@ -97,8 +97,8 @@ def build_dashboard_data(
             "tx_hash": e.get("tx_hash", ""),
             "block": e.get("block_number", 0),
             "timestamp": ts.isoformat() if ts else "",
-            "value_rbtc": float(e.get("amount_rbtc") or e.get("value_rbtc") or 0),
-            "address": e.get("rsk_address") or e.get("from_address", ""),
+            "value_rbtc": float(e.get("value_rbtc", 0)),
+            "address": e.get("from_address", ""),
         })
 
     # Penalties
@@ -745,9 +745,11 @@ function periodKey(date, period) {{
     case 'quarter': return `${{y}}-Q${{Math.ceil((date.getMonth()+1)/3)}}`;
     case 'month': return `${{y}}-${{m}}`;
     case 'week':
-      const jan1 = new Date(y, 0, 1);
-      const week = Math.ceil(((date - jan1) / 86400000 + jan1.getDay() + 1) / 7);
-      return `${{y}}-W${{String(week).padStart(2,'0')}}`;
+      const thu = new Date(date);
+      thu.setDate(thu.getDate() + 3 - ((thu.getDay() + 6) % 7));
+      const jan4 = new Date(thu.getFullYear(), 0, 4);
+      const week = 1 + Math.round(((thu - jan4) / 86400000 - 3 + ((jan4.getDay() + 6) % 7)) / 7);
+      return `${{thu.getFullYear()}}-W${{String(week).padStart(2,'0')}}`;
     case 'day': return `${{y}}-${{m}}-${{d}}`;
     default: return `${{y}}-${{m}}`;
   }}
