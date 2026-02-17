@@ -10,9 +10,18 @@ Strategy (uses eth_getLogs with topic filtering — fast):
 """
 
 import json
+import logging
 import os
 import time
 import requests
+
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://rootstock.blockscout.com/api/v2"
 BRIDGE_ADDRESS = "0x0000000000000000000000000000000001000006"
@@ -66,11 +75,11 @@ def fetch_pegin_logs() -> list[dict]:
                 if attempt < 2:
                     time.sleep(2 * (attempt + 1))
                 else:
-                    print(f"  Failed at blocks {start}-{to_block}: {e}")
+                    logger.error(f"Failed at blocks {start}-{to_block}: {e}")
                     return events
 
         if "error" in data:
-            print(f"  RPC error at {start}-{to_block}: {data['error']}")
+            logger.error(f"RPC error at {start}-{to_block}: {data['error']}")
             return events
 
         chunk_events = data.get("result", [])
@@ -82,7 +91,7 @@ def fetch_pegin_logs() -> list[dict]:
                 "data": raw["data"],
             })
 
-        print(f"  Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
+        logger.debug(f"Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
         start = to_block + 1
         time.sleep(0.5)
 
@@ -132,7 +141,7 @@ def fetch_pegout_logs() -> list[dict]:
         "jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1,
     }, timeout=30)
     latest = int(resp.json()["result"], 16)
-    print(f"  Latest block: {latest}")
+    logger.debug(f"Latest block: {latest}")
 
     while start <= latest:
         to_block = min(start + CHUNK_SIZE - 1, latest)
@@ -157,11 +166,11 @@ def fetch_pegout_logs() -> list[dict]:
                 if attempt < 2:
                     time.sleep(2 * (attempt + 1))
                 else:
-                    print(f"  Failed at blocks {start}-{to_block}: {e}")
+                    logger.error(f"Failed at blocks {start}-{to_block}: {e}")
                     return events
 
         if "error" in data:
-            print(f"  RPC error at {start}-{to_block}: {data['error']}")
+            logger.error(f"RPC error at {start}-{to_block}: {data['error']}")
             return events
 
         chunk_events = data.get("result", [])
@@ -174,7 +183,7 @@ def fetch_pegout_logs() -> list[dict]:
                 "data": raw["data"],
             })
 
-        print(f"  Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
+        logger.debug(f"Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
         start = to_block + 1
         time.sleep(0.5)
 
@@ -236,13 +245,13 @@ def main():
     os.makedirs(DATA_DIR, exist_ok=True)
 
     # Fetch peg-ins (pegin_btc events via eth_getLogs — fast)
-    print("Fetching PowPeg peg-in events via eth_getLogs...")
+    logger.info("Fetching PowPeg peg-in events via eth_getLogs...")
     pegin_logs = fetch_pegin_logs()
     pegins = [parse_pegin_log(log) for log in pegin_logs]
     pegins = dedup_by_tx_hash(pegins)
 
     # Fetch peg-outs (release_request_received via eth_getLogs — fast)
-    print("\nFetching PowPeg peg-out events via eth_getLogs...")
+    logger.info("Fetching PowPeg peg-out events via eth_getLogs...")
     pegout_logs = fetch_pegout_logs()
     pegouts = [parse_pegout_log(log) for log in pegout_logs]
     pegouts = dedup_by_tx_hash(pegouts)
@@ -250,10 +259,10 @@ def main():
     # Fetch timestamps for all events (eth_getLogs doesn't include them)
     all_records = pegins + pegouts
     if all_records:
-        print(f"\nFetching timestamps for {len(all_records)} transactions...")
+        logger.info(f"Fetching timestamps for {len(all_records)} transactions...")
         for i, rec in enumerate(all_records):
             if i % 20 == 0:
-                print(f"  {i}/{len(all_records)}...")
+                logger.debug(f"{i}/{len(all_records)}...")
             rec["block_timestamp"] = fetch_tx_timestamp(rec["tx_hash"])
             time.sleep(RATE_LIMIT_DELAY)
 
@@ -273,15 +282,15 @@ def main():
     pegin_vol = sum(e["value_rbtc"] for e in pegins)
     pegout_vol = sum(e["value_rbtc"] for e in pegouts)
 
-    print(f"\nSaved {len(pegins)} peg-ins to {pegins_path}")
-    print(f"Saved {len(pegouts)} peg-outs to {pegouts_path}")
-    print(f"\n--- PowPeg Summary ---")
-    print(f"Peg-ins:  {len(pegins)} txs, {pegin_vol:.6f} RBTC")
-    print(f"Peg-outs: {len(pegouts)} txs, {pegout_vol:.6f} RBTC")
+    logger.info(f"Saved {len(pegins)} peg-ins to {pegins_path}")
+    logger.info(f"Saved {len(pegouts)} peg-outs to {pegouts_path}")
+    logger.info("--- PowPeg Summary ---")
+    logger.info(f"Peg-ins:  {len(pegins)} txs, {pegin_vol:.6f} RBTC")
+    logger.info(f"Peg-outs: {len(pegouts)} txs, {pegout_vol:.6f} RBTC")
     if pegins:
-        print(f"Peg-in range:  block {pegins[0]['block_number']} to {pegins[-1]['block_number']}")
+        logger.info(f"Peg-in range:  block {pegins[0]['block_number']} to {pegins[-1]['block_number']}")
     if pegouts:
-        print(f"Peg-out range: block {pegouts[0]['block_number']} to {pegouts[-1]['block_number']}")
+        logger.info(f"Peg-out range: block {pegouts[0]['block_number']} to {pegouts[-1]['block_number']}")
 
 
 if __name__ == "__main__":

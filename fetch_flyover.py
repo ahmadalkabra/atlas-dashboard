@@ -11,9 +11,18 @@ Queries the LiquidityBridgeContractV2 (TransparentUpgradeableProxy) for:
 """
 
 import json
+import logging
 import os
 import time
 import requests
+
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://rootstock.blockscout.com/api/v2"
 LBC_ADDRESS = "0xaa9caf1e3967600578727f975f283446a3da6612"
@@ -70,7 +79,7 @@ def fetch_all_logs() -> list[dict]:
     page = 1
 
     while True:
-        print(f"  Fetching LBC logs page {page}...")
+        logger.debug(f"Fetching LBC logs page {page}...")
         resp = requests.get(url, params=params, timeout=30)
         resp.raise_for_status()
         data = resp.json()
@@ -82,7 +91,7 @@ def fetch_all_logs() -> list[dict]:
 
         if len(filtered) < len(items):
             # We've hit events older than our cutoff
-            print(f"  Reached block cutoff ({MIN_BLOCK}), stopping.")
+            logger.debug(f"Reached block cutoff ({MIN_BLOCK}), stopping.")
             break
 
         next_page = data.get("next_page_params")
@@ -268,11 +277,11 @@ def fetch_block_timestamps(block_numbers: list[int]) -> dict[int, int]:
     """Fetch timestamps for a list of block numbers."""
     timestamps = {}
     unique_blocks = sorted(set(block_numbers))
-    print(f"  Fetching timestamps for {len(unique_blocks)} blocks...")
+    logger.info(f"Fetching timestamps for {len(unique_blocks)} blocks...")
 
     for i, block_num in enumerate(unique_blocks):
         if i > 0 and i % 50 == 0:
-            print(f"    ...{i}/{len(unique_blocks)} blocks")
+            logger.debug(f"...{i}/{len(unique_blocks)} blocks")
         try:
             resp = requests.get(f"{BASE_URL}/blocks/{block_num}", timeout=15)
             resp.raise_for_status()
@@ -282,7 +291,7 @@ def fetch_block_timestamps(block_numbers: list[int]) -> dict[int, int]:
                 timestamps[block_num] = ts
             time.sleep(RATE_LIMIT_DELAY)
         except Exception as e:
-            print(f"    Warning: Failed to fetch block {block_num}: {e}")
+            logger.warning(f"Failed to fetch block {block_num}: {e}")
 
     return timestamps
 
@@ -312,9 +321,9 @@ def main():
     }
 
     # Fetch all logs and classify client-side
-    print("Fetching all LBC events...")
+    logger.info("Fetching all LBC events...")
     all_logs = fetch_all_logs()
-    print(f"  Found {len(all_logs)} total log entries")
+    logger.info(f"Found {len(all_logs)} total log entries")
 
     all_pegins = []
     all_pegouts = []
@@ -349,12 +358,12 @@ def main():
         elif event_name == "PegOutUserRefunded":
             all_refunds.append(parsed)
 
-    print("\n  Event breakdown:")
+    logger.info("Event breakdown:")
     for name, count in sorted(event_counts.items(), key=lambda x: -x[1]):
-        print(f"    {name}: {count}")
+        logger.info(f"  {name}: {count}")
 
     # Fetch block timestamps
-    print("\nFetching block timestamps...")
+    logger.info("Fetching block timestamps...")
     timestamps = fetch_block_timestamps(all_block_numbers)
 
     # Enrich all events with timestamps
@@ -378,32 +387,32 @@ def main():
     with open(refunds_path, "w") as f:
         json.dump(all_refunds, f, indent=2)
 
-    print(f"\nSaved {len(all_pegins)} peg-in events to {pegins_path}")
-    print(f"Saved {len(all_pegouts)} peg-out events to {pegouts_path}")
-    print(f"Saved {len(all_penalties)} penalty events to {penalties_path}")
-    print(f"Saved {len(all_refunds)} refund events to {refunds_path}")
+    logger.info(f"Saved {len(all_pegins)} peg-in events to {pegins_path}")
+    logger.info(f"Saved {len(all_pegouts)} peg-out events to {pegouts_path}")
+    logger.info(f"Saved {len(all_penalties)} penalty events to {penalties_path}")
+    logger.info(f"Saved {len(all_refunds)} refund events to {refunds_path}")
 
     # Fetch TeksCapital LP real-time liquidity
-    print("\nFetching TeksCapital LPS liquidity...")
+    logger.info("Fetching TeksCapital LPS liquidity...")
     lp_liquidity = fetch_lp_liquidity()
 
     # Save LP info
     lp_info_path = os.path.join(DATA_DIR, "flyover_lp_info.json")
     with open(lp_info_path, "w") as f:
         json.dump(lp_liquidity, f, indent=2)
-    print(f"Saved LP liquidity info to {lp_info_path}")
+    logger.info(f"Saved LP liquidity info to {lp_info_path}")
 
     # Summary
     pegin_volume = sum(e.get("value_rbtc", 0) for e in all_pegins if e["event"] == "CallForUser")
     pegout_volume = sum(e.get("amount_rbtc", 0) for e in all_pegouts if e["event"] == "PegOutDeposit")
-    print(f"\n--- Flyover Summary ---")
-    print(f"Peg-in (CallForUser): {sum(1 for e in all_pegins if e['event'] == 'CallForUser')} txs, {pegin_volume:.6f} RBTC")
-    print(f"Peg-out (PegOutDeposit): {sum(1 for e in all_pegouts if e['event'] == 'PegOutDeposit')} txs, {pegout_volume:.6f} RBTC")
-    print(f"Penalties: {len(all_penalties)}")
-    print(f"User refunds: {len(all_refunds)}")
+    logger.info("--- Flyover Summary ---")
+    logger.info(f"Peg-in (CallForUser): {sum(1 for e in all_pegins if e['event'] == 'CallForUser')} txs, {pegin_volume:.6f} RBTC")
+    logger.info(f"Peg-out (PegOutDeposit): {sum(1 for e in all_pegouts if e['event'] == 'PegOutDeposit')} txs, {pegout_volume:.6f} RBTC")
+    logger.info(f"Penalties: {len(all_penalties)}")
+    logger.info(f"User refunds: {len(all_refunds)}")
     if lp_liquidity:
-        print(f"LP peg-in liquidity: {lp_liquidity.get('pegin_rbtc', 0):.6f} RBTC")
-        print(f"LP peg-out liquidity: {lp_liquidity.get('pegout_btc', 0):.6f} BTC")
+        logger.info(f"LP peg-in liquidity: {lp_liquidity.get('pegin_rbtc', 0):.6f} RBTC")
+        logger.info(f"LP peg-out liquidity: {lp_liquidity.get('pegout_btc', 0):.6f} BTC")
 
 
 def fetch_lp_liquidity() -> dict:
@@ -425,7 +434,7 @@ def fetch_lp_liquidity() -> dict:
             "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         }
     except Exception as e:
-        print(f"  Warning: Failed to fetch LP liquidity: {e}")
+        logger.warning(f"Failed to fetch LP liquidity: {e}")
         return {}
 
 

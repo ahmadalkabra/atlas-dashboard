@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - data:/app/data
+    depends_on:
+      - fetcher
+    restart: unless-stopped
+
+  fetcher:
+    build: .
+    volumes:
+      - data:/app/data
+    command: ["/app/fetch_loop.sh"]
+    restart: unless-stopped
+
+volumes:
+  data:
