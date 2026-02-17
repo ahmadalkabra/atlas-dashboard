@@ -7,10 +7,19 @@ Queries:
 """
 
 import json
+import logging
 import os
 import time
 import requests
 from datetime import datetime, timezone
+
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://rootstock.blockscout.com/api/v2"
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
@@ -31,7 +40,7 @@ def fetch_with_retry(url, params=None, timeout=30):
         except Exception as e:
             if attempt < MAX_RETRIES - 1:
                 wait = 2 * (attempt + 1)
-                print(f"  Retry {attempt + 1}/{MAX_RETRIES} after {wait}s: {e}")
+                logger.warning(f"Retry {attempt + 1}/{MAX_RETRIES} after {wait}s: {e}")
                 time.sleep(wait)
             else:
                 raise
@@ -39,33 +48,33 @@ def fetch_with_retry(url, params=None, timeout=30):
 
 def fetch_total_bridged():
     """Fetch total bridged RBTC from /stats endpoint."""
-    print("Fetching total bridged RBTC from /stats...")
+    logger.info("Fetching total bridged RBTC from /stats...")
     data = fetch_with_retry(f"{BASE_URL}/stats")
     raw = data.get("rootstock_locked_btc")
     if raw is None:
-        print("  Warning: rootstock_locked_btc not found in /stats response")
+        logger.warning("rootstock_locked_btc not found in /stats response")
         return None
     # Value is returned as a string in wei — convert to RBTC
     total = int(raw) / 1e18
-    print(f"  Total bridged: {total:.4f} RBTC")
+    logger.info(f"Total bridged: {total:.4f} RBTC")
     return total
 
 
 def fetch_contract_balances():
     """Paginate /addresses, sum coin_balance where is_contract=True."""
-    print("Fetching address balances...")
+    logger.info("Fetching address balances...")
     seen_addresses = set()  # deduplicate across pages
     contracts = {}  # hash -> {balance_rbtc, name}
     pages_fetched = 0
     params = {}
 
     for page_num in range(1, MAX_PAGES + 1):
-        print(f"  Fetching addresses page {page_num}...")
+        logger.debug(f"Fetching addresses page {page_num}...")
         data = fetch_with_retry(f"{BASE_URL}/addresses", params=params)
 
         items = data.get("items", [])
         if not items:
-            print("  No more addresses, stopping.")
+            logger.debug("No more addresses, stopping.")
             break
 
         min_balance_on_page = float("inf")
@@ -90,12 +99,12 @@ def fetch_contract_balances():
 
         # Stop if smallest balance on page is below threshold
         if min_balance_on_page < MIN_BALANCE_RBTC:
-            print(f"  Balance dropped below {MIN_BALANCE_RBTC} RBTC, stopping.")
+            logger.debug(f"Balance dropped below {MIN_BALANCE_RBTC} RBTC, stopping.")
             break
 
         next_page = data.get("next_page_params")
         if not next_page:
-            print("  No more pages available.")
+            logger.debug("No more pages available.")
             break
 
         params = dict(next_page)
@@ -107,8 +116,8 @@ def fetch_contract_balances():
     # Sort top contracts by balance descending, keep top 20
     top_contracts = sorted(contracts.values(), key=lambda c: c["balance_rbtc"], reverse=True)[:20]
 
-    print(f"  Locked in contracts: {total_locked:.4f} RBTC across {contract_count} contracts")
-    print(f"  Pages fetched: {pages_fetched}")
+    logger.info(f"Locked in contracts: {total_locked:.4f} RBTC across {contract_count} contracts")
+    logger.debug(f"Pages fetched: {pages_fetched}")
 
     return total_locked, contract_count, top_contracts, pages_fetched
 
@@ -118,7 +127,7 @@ def main():
 
     total_bridged = fetch_total_bridged()
     if total_bridged is None:
-        print("Failed to fetch total bridged RBTC, aborting.")
+        logger.error("Failed to fetch total bridged RBTC, aborting.")
         return
 
     time.sleep(RATE_LIMIT_DELAY)
@@ -141,13 +150,13 @@ def main():
     with open(output_path, "w") as f:
         json.dump(result, f, indent=2)
 
-    print(f"\nSaved to {output_path}")
-    print(f"\n--- BTC Locked Summary ---")
-    print(f"Total bridged: {total_bridged:.4f} RBTC")
-    print(f"Locked in contracts: {locked_rbtc:.4f} RBTC")
-    print(f"Percentage locked: {pct_locked:.2f}%")
-    print(f"Contract count: {contract_count}")
-    print(f"Pages fetched: {pages_fetched}")
+    logger.info(f"Saved to {output_path}")
+    logger.info("--- BTC Locked Summary ---")
+    logger.info(f"Total bridged: {total_bridged:.4f} RBTC")
+    logger.info(f"Locked in contracts: {locked_rbtc:.4f} RBTC")
+    logger.info(f"Percentage locked: {pct_locked:.2f}%")
+    logger.info(f"Contract count: {contract_count}")
+    logger.debug(f"Pages fetched: {pages_fetched}")
 
 
 if __name__ == "__main__":
