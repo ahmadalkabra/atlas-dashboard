@@ -141,11 +141,10 @@ def build_dashboard_data(
     }
 
 
-def generate_html(data: dict) -> str:
-    """Generate the full HTML dashboard."""
-    data_json = json.dumps(data)
+def generate_html() -> str:
+    """Generate the full HTML dashboard (loads data via fetch at runtime)."""
 
-    return f"""<!DOCTYPE html>
+    return """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -156,7 +155,7 @@ def generate_html(data: dict) -> str:
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.plot.ly/plotly-2.35.0.min.js"></script>
 <style>
-  :root {{
+  :root {
     --bg: #0a0a0a;
     --surface: #111111;
     --surface-2: #161616;
@@ -173,31 +172,31 @@ def generate_html(data: dict) -> str:
     --purple: #9E75FF;
     --radius: 12px;
     --radius-sm: 8px;
-  }}
-  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-  body {{
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
-  }}
-  .dashboard {{
+  }
+  .dashboard {
     max-width: 1200px;
     margin: 0 auto;
     padding: 32px 24px;
-  }}
+  }
 
   /* --- Header --- */
-  header {{
+  header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 32px;
     flex-wrap: wrap;
     gap: 16px;
-  }}
-  .title-group h1 {{
+  }
+  .title-group h1 {
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -205,20 +204,20 @@ def generate_html(data: dict) -> str:
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }}
-  .title-group .subtitle {{
+  }
+  .title-group .subtitle {
     color: var(--muted);
     font-size: 12px;
     margin-top: 2px;
-  }}
-  .period-nav {{
+  }
+  .period-nav {
     display: flex;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
-  }}
-  .period-nav button {{
+  }
+  .period-nav button {
     background: transparent;
     border: none;
     color: var(--muted);
@@ -228,65 +227,65 @@ def generate_html(data: dict) -> str:
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s;
-  }}
-  .period-nav button:hover {{ color: var(--text); background: rgba(255,255,255,0.04); }}
-  .period-nav button.active {{ background: var(--text); color: #000; font-weight: 600; }}
+  }
+  .period-nav button:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+  .period-nav button.active { background: var(--text); color: #000; font-weight: 600; }
 
   /* --- Operation Summary --- */
-  .op-summary {{
+  .op-summary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-bottom: 28px;
-  }}
-  .op-card {{
+  }
+  .op-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 18px;
     transition: border-color 0.15s;
     border-top: 3px solid var(--border);
-  }}
-  .op-card:hover {{ border-color: var(--border-hover); }}
-  .op-card-name {{
+  }
+  .op-card:hover { border-color: var(--border-hover); }
+  .op-card-name {
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 14px;
     letter-spacing: 0.3px;
-  }}
-  .op-card-metrics {{
+  }
+  .op-card-metrics {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-  }}
-  .op-metric-label {{
+  }
+  .op-metric-label {
     color: var(--muted);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 4px;
-  }}
-  .op-metric-value {{
+  }
+  .op-metric-value {
     font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.3px;
     line-height: 1.1;
-  }}
-  .op-metric-delta {{
+  }
+  .op-metric-delta {
     font-size: 11px;
     font-weight: 600;
     margin-top: 4px;
-  }}
-  .op-metric-delta.up {{ color: var(--green); }}
-  .op-metric-delta.down {{ color: var(--red); }}
-  .op-metric-delta.neutral {{ color: var(--muted); }}
-  .op-totals {{
+  }
+  .op-metric-delta.up { color: var(--green); }
+  .op-metric-delta.down { color: var(--red); }
+  .op-metric-delta.neutral { color: var(--muted); }
+  .op-totals {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-bottom: 28px;
-  }}
-  .op-total-card {{
+  }
+  .op-total-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -294,165 +293,165 @@ def generate_html(data: dict) -> str:
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }}
-  .op-total-label {{
+  }
+  .op-total-label {
     color: var(--muted);
     font-size: 11px;
     font-weight: 500;
-  }}
-  .op-total-value {{
+  }
+  .op-total-value {
     font-size: 18px;
     font-weight: 700;
-  }}
+  }
 
   /* --- BTC Locked Section --- */
-  .btc-locked-section {{
+  .btc-locked-section {
     margin-bottom: 28px;
-  }}
-  .btc-locked-panel {{
+  }
+  .btc-locked-panel {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 20px;
-  }}
-  .btc-locked-header {{
+  }
+  .btc-locked-header {
     font-size: 13px;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.8px;
     margin-bottom: 16px;
-  }}
-  .btc-locked-stats {{
+  }
+  .btc-locked-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 16px;
-  }}
-  .btc-locked-stat {{
+  }
+  .btc-locked-stat {
     background: var(--bg);
     border-radius: var(--radius-sm);
     padding: 14px;
     text-align: center;
-  }}
-  .btc-locked-stat-label {{
+  }
+  .btc-locked-stat-label {
     color: var(--muted);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
-  }}
-  .btc-locked-stat-value {{
+  }
+  .btc-locked-stat-value {
     font-size: 22px;
     font-weight: 700;
     color: #08FFD1;
     line-height: 1.1;
-  }}
-  .btc-locked-stat-sub {{
+  }
+  .btc-locked-stat-sub {
     color: var(--muted);
     font-size: 11px;
     margin-top: 4px;
-  }}
-  .btc-locked-bar-wrapper {{
+  }
+  .btc-locked-bar-wrapper {
     position: relative;
     margin-top: 4px;
-  }}
-  .btc-locked-bar {{
+  }
+  .btc-locked-bar {
     height: 10px;
     background: var(--border);
     border-radius: 5px;
     overflow: hidden;
-  }}
-  .btc-locked-bar-fill {{
+  }
+  .btc-locked-bar-fill {
     height: 100%;
     border-radius: 5px;
     background: linear-gradient(90deg, #08FFD1, #08FFD1cc);
     transition: width 0.5s ease;
-  }}
-  .btc-locked-bar-labels {{
+  }
+  .btc-locked-bar-labels {
     display: flex;
     justify-content: space-between;
     margin-top: 4px;
-  }}
-  .btc-locked-bar-labels span {{
+  }
+  .btc-locked-bar-labels span {
     font-size: 10px;
     color: var(--muted);
-  }}
-  .btc-locked-bar-pct {{
+  }
+  .btc-locked-bar-pct {
     position: absolute;
     right: 0;
     top: -18px;
     font-size: 11px;
     font-weight: 600;
     color: #08FFD1;
-  }}
+  }
 
   /* --- Health Section --- */
-  .health-section {{
+  .health-section {
     margin-bottom: 28px;
-  }}
-  .health-panel {{
+  }
+  .health-panel {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 20px;
-  }}
-  .health-header {{
+  }
+  .health-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
-  }}
-  .health-header h3 {{
+  }
+  .health-header h3 {
     font-size: 14px;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 10px;
-  }}
-  .health-overall-dot {{
+  }
+  .health-overall-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     display: inline-block;
-  }}
-  .health-overall-dot.pulse {{
+  }
+  .health-overall-dot.pulse {
     animation: healthPulse 2s ease-in-out infinite;
-  }}
-  @keyframes healthPulse {{
-    0%, 100% {{ opacity: 1; }}
-    50% {{ opacity: 0.4; }}
-  }}
-  .health-overall-label {{
+  }
+  @keyframes healthPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .health-overall-label {
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-  }}
-  .health-staleness {{
+  }
+  .health-staleness {
     font-size: 11px;
     color: var(--muted);
     background: rgba(239,68,68,0.1);
     border: 1px solid rgba(239,68,68,0.25);
     border-radius: 6px;
     padding: 4px 10px;
-  }}
-  .health-grid {{
+  }
+  .health-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-  }}
-  .health-indicator {{
+  }
+  .health-indicator {
     background: var(--bg);
     border-radius: var(--radius-sm);
     padding: 14px;
     border-left: 3px solid var(--border);
-  }}
-  .health-indicator.status-healthy {{ border-left-color: var(--green); }}
-  .health-indicator.status-warning {{ border-left-color: #EAB308; }}
-  .health-indicator.status-critical {{ border-left-color: var(--red); }}
-  .health-indicator {{ position: relative; }}
-  .health-info-btn {{
+  }
+  .health-indicator.status-healthy { border-left-color: var(--green); }
+  .health-indicator.status-warning { border-left-color: #EAB308; }
+  .health-indicator.status-critical { border-left-color: var(--red); }
+  .health-indicator { position: relative; }
+  .health-info-btn {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -469,9 +468,9 @@ def generate_html(data: dict) -> str:
     padding: 0;
     font-family: inherit;
     transition: all 0.15s;
-  }}
-  .health-info-btn:hover {{ border-color: var(--purple); color: var(--purple); }}
-  .health-popover {{
+  }
+  .health-info-btn:hover { border-color: var(--purple); color: var(--purple); }
+  .health-popover {
     display: none;
     position: absolute;
     top: 32px;
@@ -486,95 +485,95 @@ def generate_html(data: dict) -> str:
     white-space: nowrap;
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     line-height: 1.6;
-  }}
-  .health-popover.open {{ display: block; }}
-  .health-popover-row {{ display: flex; align-items: center; gap: 6px; }}
-  .health-popover-dot {{
+  }
+  .health-popover.open { display: block; }
+  .health-popover-row { display: flex; align-items: center; gap: 6px; }
+  .health-popover-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
-  }}
-  .health-indicator-label {{
+  }
+  .health-indicator-label {
     color: var(--muted);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
-  }}
-  .health-indicator-value {{
+  }
+  .health-indicator-value {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 4px;
     line-height: 1.1;
-  }}
-  .health-indicator-sub {{
+  }
+  .health-indicator-sub {
     color: var(--muted);
     font-size: 11px;
     margin-bottom: 8px;
-  }}
-  .health-indicator-status {{
+  }
+  .health-indicator-status {
     font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-  }}
-  .health-indicator-status.healthy {{ color: var(--green); }}
-  .health-indicator-status.warning {{ color: #EAB308; }}
-  .health-indicator-status.critical {{ color: var(--red); }}
-  .health-bar {{
+  }
+  .health-indicator-status.healthy { color: var(--green); }
+  .health-indicator-status.warning { color: #EAB308; }
+  .health-indicator-status.critical { color: var(--red); }
+  .health-bar {
     height: 4px;
     background: var(--border);
     border-radius: 2px;
     margin: 8px 0 4px;
     overflow: hidden;
-  }}
-  .health-bar-fill {{
+  }
+  .health-bar-fill {
     height: 100%;
     border-radius: 2px;
     transition: width 0.3s ease;
-  }}
+  }
 
   /* --- Chart Panels --- */
-  .chart-section {{ margin-bottom: 20px; }}
-  .chart-grid {{
+  .chart-section { margin-bottom: 20px; }
+  .chart-grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 20px;
     margin-bottom: 20px;
-  }}
-  .chart-grid-2col {{
+  }
+  .chart-grid-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     margin-bottom: 20px;
-  }}
-  .chart-panel {{
+  }
+  .chart-panel {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 20px;
-  }}
-  .chart-panel-header {{
+  }
+  .chart-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
-  }}
-  .chart-panel-title {{
+  }
+  .chart-panel-title {
     font-size: 13px;
     font-weight: 600;
     color: var(--text);
-  }}
-  .chart-toggle {{
+  }
+  .chart-toggle {
     display: flex;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 6px;
     overflow: hidden;
-  }}
-  .chart-toggle button {{
+  }
+  .chart-toggle button {
     background: transparent;
     border: none;
     color: var(--muted);
@@ -584,37 +583,37 @@ def generate_html(data: dict) -> str:
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s;
-  }}
-  .chart-toggle button:hover {{ color: var(--text); }}
-  .chart-toggle button.active {{ background: var(--surface-2); color: var(--text); }}
+  }
+  .chart-toggle button:hover { color: var(--text); }
+  .chart-toggle button.active { background: var(--surface-2); color: var(--text); }
 
   /* --- Table --- */
-  .table-section {{ margin-bottom: 28px; }}
-  .table-header {{
+  .table-section { margin-bottom: 28px; }
+  .table-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
-  }}
-  .table-header .section-title {{ margin-bottom: 0; }}
-  .section-title {{
+  }
+  .table-header .section-title { margin-bottom: 0; }
+  .section-title {
     font-size: 13px;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.8px;
     margin-bottom: 12px;
-  }}
-  .table-panel {{
+  }
+  .table-panel {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 16px;
     overflow-x: auto;
-  }}
-  table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
-  th, td {{ padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--border); }}
-  th {{
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--border); }
+  th {
     color: var(--muted);
     font-weight: 600;
     text-transform: uppercase;
@@ -624,38 +623,38 @@ def generate_html(data: dict) -> str:
     top: 0;
     background: var(--surface);
     white-space: nowrap;
-  }}
-  th:first-child, td:first-child {{ text-align: left; }}
-  tbody tr:hover td {{ background: rgba(255,255,255,0.02); }}
-  .th-group {{
+  }
+  th:first-child, td:first-child { text-align: left; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+  .th-group {
     text-align: center !important;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0;
     text-transform: none;
     border-bottom: 2px solid var(--border);
-  }}
-  .totals-row td {{
+  }
+  .totals-row td {
     font-weight: 700;
     border-top: 2px solid var(--border);
     border-bottom: none;
-  }}
-  .th-dot {{
+  }
+  .th-dot {
     display: inline-block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     margin-right: 4px;
     vertical-align: middle;
-  }}
-  .page-controls {{
+  }
+  .page-controls {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     padding: 14px 0 2px;
-  }}
-  .page-btn {{
+  }
+  .page-btn {
     background: var(--surface);
     border: 1px solid var(--border);
     color: var(--muted);
@@ -666,83 +665,101 @@ def generate_html(data: dict) -> str:
     font-size: 12px;
     font-weight: 500;
     transition: all 0.15s;
-  }}
-  .page-btn:hover:not(:disabled) {{ border-color: var(--purple); color: var(--purple); }}
-  .page-btn:disabled {{ opacity: 0.3; cursor: default; }}
-  .page-info {{ color: var(--muted); font-size: 12px; }}
+  }
+  .page-btn:hover:not(:disabled) { border-color: var(--purple); color: var(--purple); }
+  .page-btn:disabled { opacity: 0.3; cursor: default; }
+  .page-info { color: var(--muted); font-size: 12px; }
 
   /* --- LP Section --- */
-  .lp-section {{ margin-bottom: 28px; }}
-  .lp-panel {{
+  .lp-section { margin-bottom: 28px; }
+  .lp-panel {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 20px;
-  }}
-  .lp-header {{
+  }
+  .lp-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
-  }}
-  .lp-header h3 {{ font-size: 14px; font-weight: 600; }}
-  .lp-name {{ color: var(--flyover-pegin); font-weight: 600; font-size: 13px; }}
-  .lp-stats {{
+  }
+  .lp-header h3 { font-size: 14px; font-weight: 600; }
+  .lp-name { color: var(--flyover-pegin); font-weight: 600; font-size: 13px; }
+  .lp-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-  }}
-  .lp-stat {{
+  }
+  .lp-stat {
     background: var(--bg);
     border-radius: var(--radius-sm);
     padding: 14px;
     text-align: center;
-  }}
-  .lp-stat-label {{
+  }
+  .lp-stat-label {
     color: var(--muted);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
-  }}
-  .lp-stat-value {{ font-size: 18px; font-weight: 700; }}
-  .lp-stat-sub {{ color: var(--muted); font-size: 11px; margin-top: 4px; }}
+  }
+  .lp-stat-value { font-size: 18px; font-weight: 700; }
+  .lp-stat-sub { color: var(--muted); font-size: 11px; margin-top: 4px; }
 
   /* --- Footer --- */
-  footer {{
+  footer {
     text-align: center;
     padding: 20px 0;
     color: var(--muted);
     font-size: 11px;
     border-top: 1px solid var(--border);
-  }}
-  footer a {{ color: var(--purple); text-decoration: none; }}
-  footer a:hover {{ text-decoration: underline; }}
+  }
+  footer a { color: var(--purple); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* --- Loading Overlay --- */
+  #loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  #loading-overlay.hidden { display: none; }
 
   /* --- Responsive --- */
-  @media (max-width: 1024px) {{
-    .chart-grid {{ grid-template-columns: 1fr; }}
-    .chart-grid-2col {{ grid-template-columns: 1fr; }}
-    .op-summary {{ grid-template-columns: repeat(2, 1fr); }}
-    .op-totals {{ grid-template-columns: repeat(2, 1fr); }}
-    .health-grid {{ grid-template-columns: repeat(2, 1fr); }}
-    .btc-locked-stats {{ grid-template-columns: repeat(3, 1fr); }}
-  }}
-  @media (max-width: 768px) {{
-    .lp-stats {{ grid-template-columns: repeat(2, 1fr); }}
-    header {{ flex-direction: column; align-items: flex-start; }}
-  }}
-  @media (max-width: 480px) {{
-    .op-summary {{ grid-template-columns: 1fr; }}
-    .op-totals {{ grid-template-columns: 1fr; }}
-    .lp-stats {{ grid-template-columns: 1fr; }}
-    .health-grid {{ grid-template-columns: 1fr; }}
-    .btc-locked-stats {{ grid-template-columns: 1fr; }}
-    .dashboard {{ padding: 16px 12px; }}
-  }}
+  @media (max-width: 1024px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .chart-grid-2col { grid-template-columns: 1fr; }
+    .op-summary { grid-template-columns: repeat(2, 1fr); }
+    .op-totals { grid-template-columns: repeat(2, 1fr); }
+    .health-grid { grid-template-columns: repeat(2, 1fr); }
+    .btc-locked-stats { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .lp-stats { grid-template-columns: repeat(2, 1fr); }
+    header { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .op-summary { grid-template-columns: 1fr; }
+    .op-totals { grid-template-columns: 1fr; }
+    .lp-stats { grid-template-columns: 1fr; }
+    .health-grid { grid-template-columns: 1fr; }
+    .btc-locked-stats { grid-template-columns: 1fr; }
+    .dashboard { padding: 16px 12px; }
+  }
 </style>
 </head>
 <body>
+
+<div id="loading-overlay">Loading dashboard data...</div>
 
 <div class="dashboard">
   <header>
@@ -812,103 +829,103 @@ def generate_html(data: dict) -> str:
 </div>
 
 <script>
-const DATA = {data_json};
+let DATA = null;
 
 let currentPeriod = 'month';
 let chartMode = 'area';
 
 // ─── Utilities ───
 
-function parseTS(ts) {{
+function parseTS(ts) {
   if (!ts) return null;
   const d = new Date(ts);
   return isNaN(d.getTime()) ? null : d;
-}}
+}
 
-function periodKey(date, period) {{
+function periodKey(date, period) {
   if (!date) return 'unknown';
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, '0');
   const d = String(date.getDate()).padStart(2, '0');
-  switch (period) {{
-    case 'quarter': return `${{y}}-Q${{Math.ceil((date.getMonth()+1)/3)}}`;
-    case 'month': return `${{y}}-${{m}}`;
+  switch (period) {
+    case 'quarter': return `${y}-Q${Math.ceil((date.getMonth()+1)/3)}`;
+    case 'month': return `${y}-${m}`;
     case 'week':
       const thu = new Date(date);
       thu.setDate(thu.getDate() + 3 - ((thu.getDay() + 6) % 7));
       const jan4 = new Date(thu.getFullYear(), 0, 4);
       const week = 1 + Math.round(((thu - jan4) / 86400000 - 3 + ((jan4.getDay() + 6) % 7)) / 7);
-      return `${{thu.getFullYear()}}-W${{String(week).padStart(2,'0')}}`;
-    case 'day': return `${{y}}-${{m}}-${{d}}`;
-    default: return `${{y}}-${{m}}`;
-  }}
-}}
+      return `${thu.getFullYear()}-W${String(week).padStart(2,'0')}`;
+    case 'day': return `${y}-${m}-${d}`;
+    default: return `${y}-${m}`;
+  }
+}
 
-function groupBy(events, period) {{
-  const groups = {{}};
-  for (const e of events) {{
+function groupBy(events, period) {
+  const groups = {};
+  for (const e of events) {
     const d = parseTS(e.timestamp);
     const key = periodKey(d, period);
     if (!groups[key]) groups[key] = [];
     groups[key].push(e);
-  }}
+  }
   return groups;
-}}
+}
 
-function sumField(events, field) {{
+function sumField(events, field) {
   return events.reduce((s, e) => s + (e[field] || 0), 0);
-}}
+}
 
-function fmt(n, decimals = 4) {{
-  if (n >= 1000) return n.toLocaleString(undefined, {{ maximumFractionDigits: decimals }});
+function fmt(n, decimals = 4) {
+  if (n >= 1000) return n.toLocaleString(undefined, { maximumFractionDigits: decimals });
   return n.toFixed(decimals);
-}}
+}
 
-function fmtCompact(n) {{
+function fmtCompact(n) {
   if (Math.abs(n) >= 1000) return (n / 1000).toFixed(1) + 'k';
   if (Math.abs(n) >= 1) return n.toFixed(2);
   if (Math.abs(n) >= 0.01) return n.toFixed(4);
   return n.toFixed(6);
-}}
+}
 
-function fmtRBTC(n) {{
+function fmtRBTC(n) {
   if (Math.abs(n) >= 100) return n.toFixed(1);
   if (Math.abs(n) >= 1) return n.toFixed(2);
   return n.toFixed(4);
-}}
+}
 
-function shortHash(h) {{
+function shortHash(h) {
   if (!h) return '';
   return h.slice(0, 10) + '...' + h.slice(-6);
-}}
+}
 
-function periodLabel() {{
-  return {{ day: 'day', week: 'week', month: 'month', quarter: 'quarter' }}[currentPeriod] || 'period';
-}}
+function periodLabel() {
+  return { day: 'day', week: 'week', month: 'month', quarter: 'quarter' }[currentPeriod] || 'period';
+}
 
-function getLatestTwo(events, period) {{
+function getLatestTwo(events, period) {
   const groups = groupBy(events, period);
   const keys = Object.keys(groups).filter(k => k !== 'unknown').sort();
-  if (keys.length === 0) return {{ current: [], previous: [], currentKey: '', prevKey: '' }};
+  if (keys.length === 0) return { current: [], previous: [], currentKey: '', prevKey: '' };
   const currentKey = keys[keys.length - 1];
   const prevKey = keys.length > 1 ? keys[keys.length - 2] : '';
-  return {{
+  return {
     current: groups[currentKey] || [],
     previous: prevKey ? (groups[prevKey] || []) : [],
     currentKey,
     prevKey,
-  }};
-}}
+  };
+}
 
 // ─── BTC Locked ───
 
-function renderBtcLocked() {{
+function renderBtcLocked() {
   const section = document.getElementById('btc-locked-section');
   const d = DATA.btc_locked;
-  if (!d || !d.total_bridged_rbtc) {{
+  if (!d || !d.total_bridged_rbtc) {
     section.style.display = 'none';
     return;
-  }}
+  }
   section.style.display = '';
   const pct = d.pct_locked || 0;
   section.innerHTML = `
@@ -917,24 +934,24 @@ function renderBtcLocked() {{
       <div class="btc-locked-stats">
         <div class="btc-locked-stat">
           <div class="btc-locked-stat-label">BTC Bridged</div>
-          <div class="btc-locked-stat-value">${{fmtRBTC(d.total_bridged_rbtc)}}</div>
+          <div class="btc-locked-stat-value">${fmtRBTC(d.total_bridged_rbtc)}</div>
           <div class="btc-locked-stat-sub">Total in PowPeg</div>
         </div>
         <div class="btc-locked-stat">
           <div class="btc-locked-stat-label">Locked in Contracts</div>
-          <div class="btc-locked-stat-value">${{fmtRBTC(d.locked_in_contracts_rbtc)}}</div>
-          <div class="btc-locked-stat-sub">${{d.contract_count}} contracts</div>
+          <div class="btc-locked-stat-value">${fmtRBTC(d.locked_in_contracts_rbtc)}</div>
+          <div class="btc-locked-stat-sub">${d.contract_count} contracts</div>
         </div>
         <div class="btc-locked-stat">
           <div class="btc-locked-stat-label">% Bridged &amp; Locked</div>
-          <div class="btc-locked-stat-value">${{pct.toFixed(1)}}%</div>
+          <div class="btc-locked-stat-value">${pct.toFixed(1)}%</div>
           <div class="btc-locked-stat-sub">held by smart contracts</div>
         </div>
       </div>
       <div class="btc-locked-bar-wrapper">
-        <span class="btc-locked-bar-pct">${{pct.toFixed(1)}}%</span>
+        <span class="btc-locked-bar-pct">${pct.toFixed(1)}%</span>
         <div class="btc-locked-bar">
-          <div class="btc-locked-bar-fill" style="width:${{Math.min(100, pct)}}%"></div>
+          <div class="btc-locked-bar-fill" style="width:${Math.min(100, pct)}%"></div>
         </div>
         <div class="btc-locked-bar-labels">
           <span>0%</span>
@@ -943,32 +960,32 @@ function renderBtcLocked() {{
       </div>
     </div>
   `;
-}}
+}
 
 // ─── Render ───
 
-function deltaText(current, previous) {{
+function deltaText(current, previous) {
   if (previous === 0 && current === 0) return '<span class="op-metric-delta neutral">&ndash;</span>';
   if (previous === 0) return '<span class="op-metric-delta up">&uarr; new</span>';
   const pct = ((current - previous) / Math.abs(previous) * 100).toFixed(0);
-  if (current > previous) return `<span class="op-metric-delta up">&uarr; ${{Math.abs(pct)}}%</span>`;
-  if (current < previous) return `<span class="op-metric-delta down">&darr; ${{Math.abs(pct)}}%</span>`;
+  if (current > previous) return `<span class="op-metric-delta up">&uarr; ${Math.abs(pct)}%</span>`;
+  if (current < previous) return `<span class="op-metric-delta down">&darr; ${Math.abs(pct)}%</span>`;
   return '<span class="op-metric-delta neutral">&ndash; 0%</span>';
-}}
+}
 
-function renderSummary() {{
+function renderSummary() {
   const ops = [
-    {{ name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc' }},
-    {{ name: 'Flyover Peg-Out', data: DATA.flyover_pegouts, color: '#F0FF96', field: 'value_rbtc' }},
-    {{ name: 'PowPeg Peg-In', data: DATA.powpeg_pegins, color: '#FF9100', field: 'value_rbtc' }},
-    {{ name: 'PowPeg Peg-Out', data: DATA.powpeg_pegouts, color: '#FED8A7', field: 'value_rbtc' }},
+    { name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc' },
+    { name: 'Flyover Peg-Out', data: DATA.flyover_pegouts, color: '#F0FF96', field: 'value_rbtc' },
+    { name: 'PowPeg Peg-In', data: DATA.powpeg_pegins, color: '#FF9100', field: 'value_rbtc' },
+    { name: 'PowPeg Peg-Out', data: DATA.powpeg_pegouts, color: '#FED8A7', field: 'value_rbtc' },
   ];
 
   const period = currentPeriod;
   let totalTxs = 0, totalVol = 0;
 
   let cards = '';
-  for (const op of ops) {{
+  for (const op of ops) {
     const latest = getLatestTwo(op.data, period);
     const curTxs = latest.current.length;
     const prevTxs = latest.previous.length;
@@ -979,45 +996,45 @@ function renderSummary() {{
     totalVol += curVol;
 
     cards += `
-      <div class="op-card" style="border-top-color:${{op.color}}">
-        <div class="op-card-name" style="color:${{op.color}}">${{op.name}}</div>
+      <div class="op-card" style="border-top-color:${op.color}">
+        <div class="op-card-name" style="color:${op.color}">${op.name}</div>
         <div class="op-card-metrics">
           <div>
             <div class="op-metric-label">Transactions</div>
-            <div class="op-metric-value">${{curTxs}}</div>
-            ${{deltaText(curTxs, prevTxs)}}
+            <div class="op-metric-value">${curTxs}</div>
+            ${deltaText(curTxs, prevTxs)}
           </div>
           <div>
             <div class="op-metric-label">Volume</div>
-            <div class="op-metric-value">${{fmtRBTC(curVol)}}</div>
-            ${{deltaText(curVol, prevVol)}}
+            <div class="op-metric-value">${fmtRBTC(curVol)}</div>
+            ${deltaText(curVol, prevVol)}
           </div>
         </div>
       </div>`;
-  }}
+  }
 
   const el = document.getElementById('op-summary');
   el.innerHTML = cards;
-}}
+}
 
-function renderCharts() {{
+function renderCharts() {
   const period = currentPeriod;
-  const cfg = {{ displayModeBar: false, responsive: true }};
-  const hoverLabel = {{
+  const cfg = { displayModeBar: false, responsive: true };
+  const hoverLabel = {
     bgcolor: '#1a1a1a', bordercolor: '#2a2a2a',
-    font: {{ family: 'Inter, sans-serif', color: '#FAFAF5', size: 12 }}
-  }};
-  const baseLayout = {{
+    font: { family: 'Inter, sans-serif', color: '#FAFAF5', size: 12 }
+  };
+  const baseLayout = {
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
-    font: {{ family: 'Inter, sans-serif', color: '#737373', size: 11 }},
-    margin: {{ l: 50, r: 16, t: 8, b: 36 }},
-    xaxis: {{ gridcolor: '#1a1a1a', linecolor: '#1e1e1e', zeroline: false }},
-    yaxis: {{ gridcolor: '#1a1a1a', linecolor: '#1e1e1e', zeroline: false }},
-    legend: {{ orientation: 'h', y: -0.2, font: {{ size: 10, color: '#737373' }} }},
+    font: { family: 'Inter, sans-serif', color: '#737373', size: 11 },
+    margin: { l: 50, r: 16, t: 8, b: 36 },
+    xaxis: { gridcolor: '#1a1a1a', linecolor: '#1e1e1e', zeroline: false },
+    yaxis: { gridcolor: '#1a1a1a', linecolor: '#1e1e1e', zeroline: false },
+    legend: { orientation: 'h', y: -0.2, font: { size: 10, color: '#737373' } },
     hoverlabel: hoverLabel,
     height: 280,
-  }};
+  };
 
   const fpG = groupBy(DATA.flyover_pegins, period);
   const foG = groupBy(DATA.flyover_pegouts, period);
@@ -1031,7 +1048,7 @@ function renderCharts() {{
 
   // Volume chart — toggle between area and bar
   const mkHover = (label, rbtcArr) => rbtcArr.map(v =>
-    `${{label}}: ${{fmtRBTC(v)}}`);
+    `${label}: ${fmtRBTC(v)}`);
 
   const fpV = keys.map(k => sumField(fpG[k] || [], 'value_rbtc'));
   const foV = keys.map(k => sumField(foG[k] || [], 'value_rbtc'));
@@ -1039,38 +1056,38 @@ function renderCharts() {{
   const poV = keys.map(k => sumField(poG[k] || [], 'value_rbtc'));
 
   const volTraces = chartMode === 'area' ? [
-    {{ x: keys, y: fpV, name: 'Flyover In', type: 'scatter', stackgroup: 'vol',
-       fillcolor: 'rgba(222,255,25,0.3)', line: {{ color: '#DEFF19', width: 1.5 }},
-       text: mkHover('Flyover In', fpV), hoverinfo: 'text' }},
-    {{ x: keys, y: foV, name: 'Flyover Out', type: 'scatter', stackgroup: 'vol',
-       fillcolor: 'rgba(240,255,150,0.25)', line: {{ color: '#F0FF96', width: 1.5 }},
-       text: mkHover('Flyover Out', foV), hoverinfo: 'text' }},
-    {{ x: keys, y: ppV, name: 'PowPeg In', type: 'scatter', stackgroup: 'vol',
-       fillcolor: 'rgba(255,145,0,0.3)', line: {{ color: '#FF9100', width: 1.5 }},
-       text: mkHover('PowPeg In', ppV), hoverinfo: 'text' }},
-    {{ x: keys, y: poV, name: 'PowPeg Out', type: 'scatter', stackgroup: 'vol',
-       fillcolor: 'rgba(254,216,167,0.25)', line: {{ color: '#FED8A7', width: 1.5 }},
-       text: mkHover('PowPeg Out', poV), hoverinfo: 'text' }},
+    { x: keys, y: fpV, name: 'Flyover In', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(222,255,25,0.3)', line: { color: '#DEFF19', width: 1.5 },
+       text: mkHover('Flyover In', fpV), hoverinfo: 'text' },
+    { x: keys, y: foV, name: 'Flyover Out', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(240,255,150,0.25)', line: { color: '#F0FF96', width: 1.5 },
+       text: mkHover('Flyover Out', foV), hoverinfo: 'text' },
+    { x: keys, y: ppV, name: 'PowPeg In', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(255,145,0,0.3)', line: { color: '#FF9100', width: 1.5 },
+       text: mkHover('PowPeg In', ppV), hoverinfo: 'text' },
+    { x: keys, y: poV, name: 'PowPeg Out', type: 'scatter', stackgroup: 'vol',
+       fillcolor: 'rgba(254,216,167,0.25)', line: { color: '#FED8A7', width: 1.5 },
+       text: mkHover('PowPeg Out', poV), hoverinfo: 'text' },
   ] : [
-    {{ x: keys, y: fpV, name: 'Flyover In', type: 'bar',
-       marker: {{ color: '#DEFF19', line: {{ width: 0 }} }}, textposition: 'none',
-       hovertext: mkHover('Flyover In', fpV), hoverinfo: 'text' }},
-    {{ x: keys, y: foV, name: 'Flyover Out', type: 'bar',
-       marker: {{ color: '#F0FF96', line: {{ width: 0 }} }}, textposition: 'none',
-       hovertext: mkHover('Flyover Out', foV), hoverinfo: 'text' }},
-    {{ x: keys, y: ppV, name: 'PowPeg In', type: 'bar',
-       marker: {{ color: '#FF9100', line: {{ width: 0 }} }}, textposition: 'none',
-       hovertext: mkHover('PowPeg In', ppV), hoverinfo: 'text' }},
-    {{ x: keys, y: poV, name: 'PowPeg Out', type: 'bar',
-       marker: {{ color: '#FED8A7', line: {{ width: 0 }} }}, textposition: 'none',
-       hovertext: mkHover('PowPeg Out', poV), hoverinfo: 'text' }},
+    { x: keys, y: fpV, name: 'Flyover In', type: 'bar',
+       marker: { color: '#DEFF19', line: { width: 0 } }, textposition: 'none',
+       hovertext: mkHover('Flyover In', fpV), hoverinfo: 'text' },
+    { x: keys, y: foV, name: 'Flyover Out', type: 'bar',
+       marker: { color: '#F0FF96', line: { width: 0 } }, textposition: 'none',
+       hovertext: mkHover('Flyover Out', foV), hoverinfo: 'text' },
+    { x: keys, y: ppV, name: 'PowPeg In', type: 'bar',
+       marker: { color: '#FF9100', line: { width: 0 } }, textposition: 'none',
+       hovertext: mkHover('PowPeg In', ppV), hoverinfo: 'text' },
+    { x: keys, y: poV, name: 'PowPeg Out', type: 'bar',
+       marker: { color: '#FED8A7', line: { width: 0 } }, textposition: 'none',
+       hovertext: mkHover('PowPeg Out', poV), hoverinfo: 'text' },
   ];
-  const volLayout = {{
+  const volLayout = {
     ...baseLayout,
     height: 300,
-    ...(chartMode === 'bar' ? {{ barmode: 'stack' }} : {{}}),
+    ...(chartMode === 'bar' ? { barmode: 'stack' } : {}),
     hovermode: 'x unified',
-  }};
+  };
   Plotly.newPlot('chart-volume-trend', volTraces, volLayout, cfg);
 
   // Volume donut — filtered by period
@@ -1085,29 +1102,29 @@ function renderCharts() {{
   const poVol = sumField(latestPo.current, 'value_rbtc');
   const total = fpVol + foVol + ppVol + poVol;
 
-  Plotly.newPlot('chart-donut', [{{
+  Plotly.newPlot('chart-donut', [{
     values: [fpVol, foVol, ppVol, poVol],
     labels: ['Flyover In', 'Flyover Out', 'PowPeg In', 'PowPeg Out'],
     type: 'pie',
     hole: 0.6,
-    marker: {{ colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] }},
+    marker: { colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] },
     textinfo: 'percent',
-    textfont: {{ color: '#000', size: 11, family: 'Inter, sans-serif' }},
-    text: [fpVol, foVol, ppVol, poVol].map(v => `${{fmtRBTC(v)}}`),
-    hovertemplate: '%{{label}}<br>%{{text}}<br>%{{percent}}<extra></extra>',
+    textfont: { color: '#000', size: 11, family: 'Inter, sans-serif' },
+    text: [fpVol, foVol, ppVol, poVol].map(v => `${fmtRBTC(v)}`),
+    hovertemplate: '%{label}<br>%{text}<br>%{percent}<extra></extra>',
     sort: false,
-  }}], {{
+  }], {
     ...baseLayout,
-    margin: {{ l: 10, r: 10, t: 10, b: 10 }},
+    margin: { l: 10, r: 10, t: 10, b: 10 },
     showlegend: true,
-    legend: {{ orientation: 'h', y: -0.05, font: {{ size: 10, color: '#737373' }} }},
-    annotations: [{{
-      text: `${{fmtCompact(total)}}<br><span style="font-size:11px;color:#737373">total</span>`,
+    legend: { orientation: 'h', y: -0.05, font: { size: 10, color: '#737373' } },
+    annotations: [{
+      text: `${fmtCompact(total)}<br><span style="font-size:11px;color:#737373">total</span>`,
       showarrow: false,
-      font: {{ size: 18, color: '#FAFAF5', family: 'Inter, sans-serif' }},
+      font: { size: 18, color: '#FAFAF5', family: 'Inter, sans-serif' },
       x: 0.5, y: 0.5,
-    }}],
-  }}, cfg);
+    }],
+  }, cfg);
 
   // Transaction count donut — filtered by period
   const fpTx = latestFp.current.length;
@@ -1116,35 +1133,35 @@ function renderCharts() {{
   const poTx = latestPo.current.length;
   const totalTx = fpTx + foTx + ppTx + poTx;
 
-  Plotly.newPlot('chart-tx-donut', [{{
+  Plotly.newPlot('chart-tx-donut', [{
     values: [fpTx, foTx, ppTx, poTx],
     labels: ['Flyover In', 'Flyover Out', 'PowPeg In', 'PowPeg Out'],
     type: 'pie',
     hole: 0.6,
-    marker: {{ colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] }},
+    marker: { colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] },
     textinfo: 'percent',
-    textfont: {{ color: '#000', size: 11, family: 'Inter, sans-serif' }},
-    text: [fpTx, foTx, ppTx, poTx].map(v => `${{v}} txs`),
-    hovertemplate: '%{{label}}<br>%{{text}}<br>%{{percent}}<extra></extra>',
+    textfont: { color: '#000', size: 11, family: 'Inter, sans-serif' },
+    text: [fpTx, foTx, ppTx, poTx].map(v => `${v} txs`),
+    hovertemplate: '%{label}<br>%{text}<br>%{percent}<extra></extra>',
     sort: false,
-  }}], {{
+  }], {
     ...baseLayout,
-    margin: {{ l: 10, r: 10, t: 10, b: 10 }},
+    margin: { l: 10, r: 10, t: 10, b: 10 },
     showlegend: true,
-    legend: {{ orientation: 'h', y: -0.05, font: {{ size: 10, color: '#737373' }} }},
-    annotations: [{{
-      text: `${{totalTx}}<br><span style="font-size:11px;color:#737373">txs</span>`,
+    legend: { orientation: 'h', y: -0.05, font: { size: 10, color: '#737373' } },
+    annotations: [{
+      text: `${totalTx}<br><span style="font-size:11px;color:#737373">txs</span>`,
       showarrow: false,
-      font: {{ size: 18, color: '#FAFAF5', family: 'Inter, sans-serif' }},
+      font: { size: 18, color: '#FAFAF5', family: 'Inter, sans-serif' },
       x: 0.5, y: 0.5,
-    }}],
-  }}, cfg);
-}}
+    }],
+  }, cfg);
+}
 
 let tablePage = 0;
 const PAGE_SIZE = 15;
 
-function renderTable() {{
+function renderTable() {
   const fpG = groupBy(DATA.flyover_pegins, currentPeriod);
   const foG = groupBy(DATA.flyover_pegouts, currentPeriod);
   const ppG = groupBy(DATA.powpeg_pegins, currentPeriod);
@@ -1162,14 +1179,14 @@ function renderTable() {{
   // Compute totals across ALL keys (not just current page)
   let totFpTx = 0, totFpVol = 0, totFoTx = 0, totFoVol = 0;
   let totPpTx = 0, totPpVol = 0, totPoTx = 0, totPoVol = 0;
-  for (const key of allKeys) {{
+  for (const key of allKeys) {
     const fp = fpG[key] || [], fo = foG[key] || [];
     const pp = ppG[key] || [], po = poG[key] || [];
     totFpTx += fp.length; totFpVol += sumField(fp, 'value_rbtc');
     totFoTx += fo.length; totFoVol += sumField(fo, 'value_rbtc');
     totPpTx += pp.length; totPpVol += sumField(pp, 'value_rbtc');
     totPoTx += po.length; totPoVol += sumField(po, 'value_rbtc');
-  }}
+  }
 
   let html = `<table>
     <thead>
@@ -1188,66 +1205,66 @@ function renderTable() {{
       </tr>
     </thead><tbody>`;
 
-  for (const key of pageKeys) {{
+  for (const key of pageKeys) {
     const fp = fpG[key] || [], fo = foG[key] || [];
     const pp = ppG[key] || [], po = poG[key] || [];
 
     html += `<tr>
-      <td><strong>${{key}}</strong></td>
-      <td>${{fp.length}}</td><td>${{fmtRBTC(sumField(fp, 'value_rbtc'))}}</td>
-      <td>${{fo.length}}</td><td>${{fmtRBTC(sumField(fo, 'value_rbtc'))}}</td>
-      <td>${{pp.length}}</td><td>${{fmtRBTC(sumField(pp, 'value_rbtc'))}}</td>
-      <td>${{po.length}}</td><td>${{fmtRBTC(sumField(po, 'value_rbtc'))}}</td>
+      <td><strong>${key}</strong></td>
+      <td>${fp.length}</td><td>${fmtRBTC(sumField(fp, 'value_rbtc'))}</td>
+      <td>${fo.length}</td><td>${fmtRBTC(sumField(fo, 'value_rbtc'))}</td>
+      <td>${pp.length}</td><td>${fmtRBTC(sumField(pp, 'value_rbtc'))}</td>
+      <td>${po.length}</td><td>${fmtRBTC(sumField(po, 'value_rbtc'))}</td>
     </tr>`;
-  }}
+  }
 
   // Totals row
   html += `<tr class="totals-row">
     <td>Total</td>
-    <td>${{totFpTx}}</td><td>${{fmtRBTC(totFpVol)}}</td>
-    <td>${{totFoTx}}</td><td>${{fmtRBTC(totFoVol)}}</td>
-    <td>${{totPpTx}}</td><td>${{fmtRBTC(totPpVol)}}</td>
-    <td>${{totPoTx}}</td><td>${{fmtRBTC(totPoVol)}}</td>
+    <td>${totFpTx}</td><td>${fmtRBTC(totFpVol)}</td>
+    <td>${totFoTx}</td><td>${fmtRBTC(totFoVol)}</td>
+    <td>${totPpTx}</td><td>${fmtRBTC(totPpVol)}</td>
+    <td>${totPoTx}</td><td>${fmtRBTC(totPoVol)}</td>
   </tr>`;
 
   html += '</tbody></table>';
   document.getElementById('data-table').innerHTML = html;
 
   const pag = document.getElementById('table-pagination');
-  if (totalPages <= 1) {{ pag.innerHTML = ''; return; }}
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
   pag.innerHTML = `
-    <button class="page-btn" onclick="tableNav(-1)" ${{tablePage === 0 ? 'disabled' : ''}}>&larr; Prev</button>
-    <span class="page-info">${{tablePage + 1}} / ${{totalPages}}</span>
-    <button class="page-btn" onclick="tableNav(1)" ${{tablePage >= totalPages - 1 ? 'disabled' : ''}}>Next &rarr;</button>
+    <button class="page-btn" onclick="tableNav(-1)" ${tablePage === 0 ? 'disabled' : ''}>&larr; Prev</button>
+    <span class="page-info">${tablePage + 1} / ${totalPages}</span>
+    <button class="page-btn" onclick="tableNav(1)" ${tablePage >= totalPages - 1 ? 'disabled' : ''}>Next &rarr;</button>
   `;
-}}
+}
 
-function tableNav(dir) {{ tablePage += dir; renderTable(); }}
+function tableNav(dir) { tablePage += dir; renderTable(); }
 
 
-function renderLPSection() {{
+function renderLPSection() {
   const lp = DATA.lp_info;
   const wrapper = document.getElementById('lp-section-wrapper');
 
-  const lpData = {{}};
-  for (const e of DATA.flyover_pegins) {{
+  const lpData = {};
+  for (const e of DATA.flyover_pegins) {
     const addr = (e.lp_address || '').toLowerCase();
     if (!addr) continue;
-    if (!lpData[addr]) lpData[addr] = {{ pegins: 0, peginVol: 0, penalties: 0 }};
+    if (!lpData[addr]) lpData[addr] = { pegins: 0, peginVol: 0, penalties: 0 };
     lpData[addr].pegins++;
     lpData[addr].peginVol += e.value_rbtc || 0;
-  }}
-  for (const e of DATA.penalties) {{
+  }
+  for (const e of DATA.penalties) {
     const addr = (e.lp_address || '').toLowerCase();
     if (!addr) continue;
-    if (!lpData[addr]) lpData[addr] = {{ pegins: 0, peginVol: 0, penalties: 0 }};
+    if (!lpData[addr]) lpData[addr] = { pegins: 0, peginVol: 0, penalties: 0 };
     lpData[addr].penalties++;
-  }}
+  }
   const topLP = Object.entries(lpData).sort((a,b) => b[1].peginVol - a[1].peginVol)[0];
 
-  if (!lp || !lp.lp_name) {{
-    if (!topLP) {{ wrapper.innerHTML = ''; return; }}
-  }}
+  if (!lp || !lp.lp_name) {
+    if (!topLP) { wrapper.innerHTML = ''; return; }
+  }
 
   const lpName = (lp && lp.lp_name) ? lp.lp_name : (topLP ? shortHash(topLP[0]) : 'Unknown');
   const peginLiq = (lp && lp.pegin_rbtc) ? fmt(lp.pegin_rbtc) : 'N/A';
@@ -1260,59 +1277,59 @@ function renderLPSection() {{
     <div class="lp-panel">
       <div class="lp-header">
         <h3>LP Performance</h3>
-        <span class="lp-name">${{lpName}}</span>
+        <span class="lp-name">${lpName}</span>
       </div>
       <div class="lp-stats">
         <div class="lp-stat">
           <div class="lp-stat-label">Peg-In Liquidity</div>
-          <div class="lp-stat-value" style="color:#DEFF19">${{peginLiq}}</div>
+          <div class="lp-stat-value" style="color:#DEFF19">${peginLiq}</div>
           <div class="lp-stat-sub">available</div>
         </div>
         <div class="lp-stat">
           <div class="lp-stat-label">Peg-Out Liquidity</div>
-          <div class="lp-stat-value" style="color:#F0FF96">${{pegoutLiq}}</div>
+          <div class="lp-stat-value" style="color:#F0FF96">${pegoutLiq}</div>
           <div class="lp-stat-sub">BTC available</div>
         </div>
         <div class="lp-stat">
           <div class="lp-stat-label">Deliveries</div>
-          <div class="lp-stat-value">${{deliveries}}</div>
+          <div class="lp-stat-value">${deliveries}</div>
           <div class="lp-stat-sub">transfers</div>
         </div>
         <div class="lp-stat">
           <div class="lp-stat-label">Penalties</div>
-          <div class="lp-stat-value" style="color:${{penaltyCount > 0 ? 'var(--red)' : 'var(--green)'}}">${{penaltyCount}}</div>
-          <div class="lp-stat-sub">${{penaltyCount === 0 ? 'clean' : 'incurred'}}</div>
+          <div class="lp-stat-value" style="color:${penaltyCount > 0 ? 'var(--red)' : 'var(--green)'}">${penaltyCount}</div>
+          <div class="lp-stat-sub">${penaltyCount === 0 ? 'clean' : 'incurred'}</div>
         </div>
       </div>
     </div>
   `;
-}}
+}
 
 // ─── Health Section ───
 
-const HEALTH_THRESHOLDS = {{
-  peginBalance:  {{ warning: 10, critical: 5 }},
-  pegoutBalance: {{ warning: 10, critical: 5 }},
-}};
+const HEALTH_THRESHOLDS = {
+  peginBalance:  { warning: 10, critical: 5 },
+  pegoutBalance: { warning: 10, critical: 5 },
+};
 const STALENESS_HOURS = 25;
 
-function assessStatus(value, thresholds) {{
+function assessStatus(value, thresholds) {
   if (value <= thresholds.critical) return 'critical';
   if (value <= thresholds.warning) return 'warning';
   return 'healthy';
-}}
+}
 
-function renderHealth() {{
+function renderHealth() {
   const panel = document.getElementById('health-panel');
   const wrapper = document.getElementById('health-section-wrapper');
-  const lp = DATA.lp_info || {{}};
+  const lp = DATA.lp_info || {};
   const refTime = new Date(DATA.generated_at);
 
   // If no LP info at all, hide the section
-  if (!lp.lp_name && DATA.flyover_pegins.length === 0) {{
+  if (!lp.lp_name && DATA.flyover_pegins.length === 0) {
     wrapper.style.display = 'none';
     return;
-  }}
+  }
   wrapper.style.display = '';
 
   // --- 1. Peg-In LP Balance ---
@@ -1332,26 +1349,26 @@ function renderHealth() {{
   // --- Last activity timestamps (info only, no health status) ---
   let lastPeginDate = null;
   let lastPeginValue = 0;
-  for (const e of DATA.flyover_pegins) {{
+  for (const e of DATA.flyover_pegins) {
     const d = parseTS(e.timestamp);
-    if (d && (!lastPeginDate || d > lastPeginDate)) {{
+    if (d && (!lastPeginDate || d > lastPeginDate)) {
       lastPeginDate = d;
       lastPeginValue = e.value_rbtc || 0;
-    }}
-  }}
+    }
+  }
   const peginHoursAgo = lastPeginDate
     ? (refTime - lastPeginDate) / (1000 * 60 * 60)
     : Infinity;
 
   let lastPegoutDate = null;
   let lastPegoutValue = 0;
-  for (const e of DATA.flyover_pegouts) {{
+  for (const e of DATA.flyover_pegouts) {
     const d = parseTS(e.timestamp);
-    if (d && (!lastPegoutDate || d > lastPegoutDate)) {{
+    if (d && (!lastPegoutDate || d > lastPegoutDate)) {
       lastPegoutDate = d;
       lastPegoutValue = e.value_rbtc || 0;
-    }}
-  }}
+    }
+  }
   const pegoutHoursAgo = lastPegoutDate
     ? (refTime - lastPegoutDate) / (1000 * 60 * 60)
     : Infinity;
@@ -1362,97 +1379,97 @@ function renderHealth() {{
   if (statuses.includes('critical')) overall = 'critical';
   else if (statuses.includes('warning')) overall = 'warning';
 
-  const statusColors = {{ healthy: 'var(--green)', warning: '#EAB308', critical: 'var(--red)' }};
-  const statusLabels = {{ healthy: 'Healthy', warning: 'Warning', critical: 'Critical' }};
+  const statusColors = { healthy: 'var(--green)', warning: '#EAB308', critical: 'var(--red)' };
+  const statusLabels = { healthy: 'Healthy', warning: 'Warning', critical: 'Critical' };
 
   // --- Staleness check ---
   const dataAgeHours = (Date.now() - refTime.getTime()) / (1000 * 60 * 60);
   const isStale = dataAgeHours > STALENESS_HOURS;
 
   // --- Build HTML ---
-  function hoursLabel(hours) {{
+  function hoursLabel(hours) {
     if (!isFinite(hours)) return 'No data';
     if (hours < 1) return 'Just now';
     if (hours < 24) return Math.round(hours) + 'h ago';
     const days = Math.floor(hours / 24);
     const rem = Math.round(hours % 24);
     return days + 'd ' + rem + 'h ago';
-  }}
+  }
 
-  function balanceBar(value, max, status) {{
+  function balanceBar(value, max, status) {
     if (value == null) return '';
     const pct = Math.min(100, Math.max(0, (value / max) * 100));
-    return `<div class="health-bar"><div class="health-bar-fill" style="width:${{pct}}%;background:${{statusColors[status]}}"></div></div>`;
-  }}
+    return `<div class="health-bar"><div class="health-bar-fill" style="width:${pct}%;background:${statusColors[status]}"></div></div>`;
+  }
 
   let html = `<div class="health-header">
     <h3>
-      <span class="health-overall-dot ${{overall !== 'healthy' ? 'pulse' : ''}}" style="background:${{statusColors[overall]}}"></span>
-      <span class="health-overall-label" style="color:${{statusColors[overall]}}">${{statusLabels[overall]}}</span>
+      <span class="health-overall-dot ${overall !== 'healthy' ? 'pulse' : ''}" style="background:${statusColors[overall]}"></span>
+      <span class="health-overall-label" style="color:${statusColors[overall]}">${statusLabels[overall]}</span>
     </h3>
-    ${{isStale ? `<span class="health-staleness">Data is ${{Math.round(dataAgeHours)}}h old</span>` : ''}}
+    ${isStale ? `<span class="health-staleness">Data is ${Math.round(dataAgeHours)}h old</span>` : ''}
   </div>
   <div class="health-grid">
-    <div class="health-indicator status-${{peginStatus}}">
+    <div class="health-indicator status-${peginStatus}">
       <button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>
       <div class="health-popover">
         <div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 RBTC</div>
         <div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 RBTC</div>
       </div>
       <div class="health-indicator-label">Peg-In LP Balance</div>
-      <div class="health-indicator-value">${{peginBal != null ? fmtRBTC(peginBal) : 'N/A'}}</div>
-      <div class="health-indicator-sub">${{peginBal != null ? 'RBTC available' : 'No LP data'}}</div>
-      ${{balanceBar(peginBal, peginMax, peginStatus)}}
-      <div class="health-indicator-status ${{peginStatus}}">${{statusLabels[peginStatus]}}</div>
+      <div class="health-indicator-value">${peginBal != null ? fmtRBTC(peginBal) : 'N/A'}</div>
+      <div class="health-indicator-sub">${peginBal != null ? 'RBTC available' : 'No LP data'}</div>
+      ${balanceBar(peginBal, peginMax, peginStatus)}
+      <div class="health-indicator-status ${peginStatus}">${statusLabels[peginStatus]}</div>
     </div>
-    <div class="health-indicator status-${{pegoutStatus}}">
+    <div class="health-indicator status-${pegoutStatus}">
       <button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>
       <div class="health-popover">
         <div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 BTC</div>
         <div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 BTC</div>
       </div>
       <div class="health-indicator-label">Peg-Out LP Balance</div>
-      <div class="health-indicator-value">${{pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A'}}</div>
-      <div class="health-indicator-sub">${{pegoutBal != null ? 'BTC available' : 'No LP data'}}</div>
-      ${{balanceBar(pegoutBal, pegoutMax, pegoutStatus)}}
-      <div class="health-indicator-status ${{pegoutStatus}}">${{statusLabels[pegoutStatus]}}</div>
+      <div class="health-indicator-value">${pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A'}</div>
+      <div class="health-indicator-sub">${pegoutBal != null ? 'BTC available' : 'No LP data'}</div>
+      ${balanceBar(pegoutBal, pegoutMax, pegoutStatus)}
+      <div class="health-indicator-status ${pegoutStatus}">${statusLabels[pegoutStatus]}</div>
     </div>
     <div class="health-indicator">
       <div class="health-indicator-label">Last Peg-In</div>
-      <div class="health-indicator-value">${{hoursLabel(peginHoursAgo)}}</div>
-      <div class="health-indicator-sub">${{lastPeginDate ? fmtRBTC(lastPeginValue) : 'Never'}}</div>
-      <div class="health-indicator-sub">${{lastPeginDate ? lastPeginDate.toLocaleDateString('en-US', {{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}}) : ''}}</div>
+      <div class="health-indicator-value">${hoursLabel(peginHoursAgo)}</div>
+      <div class="health-indicator-sub">${lastPeginDate ? fmtRBTC(lastPeginValue) : 'Never'}</div>
+      <div class="health-indicator-sub">${lastPeginDate ? lastPeginDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : ''}</div>
     </div>
     <div class="health-indicator">
       <div class="health-indicator-label">Last Peg-Out</div>
-      <div class="health-indicator-value">${{hoursLabel(pegoutHoursAgo)}}</div>
-      <div class="health-indicator-sub">${{lastPegoutDate ? fmtRBTC(lastPegoutValue) : 'Never'}}</div>
-      <div class="health-indicator-sub">${{lastPegoutDate ? lastPegoutDate.toLocaleDateString('en-US', {{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}}) : ''}}</div>
+      <div class="health-indicator-value">${hoursLabel(pegoutHoursAgo)}</div>
+      <div class="health-indicator-sub">${lastPegoutDate ? fmtRBTC(lastPegoutValue) : 'Never'}</div>
+      <div class="health-indicator-sub">${lastPegoutDate ? lastPegoutDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : ''}</div>
     </div>
   </div>`;
 
   panel.innerHTML = html;
-}}
+}
 
-function toggleHealthPopover(e) {{
+function toggleHealthPopover(e) {
   e.stopPropagation();
   const popover = e.currentTarget.nextElementSibling;
   const wasOpen = popover.classList.contains('open');
   document.querySelectorAll('.health-popover.open').forEach(p => p.classList.remove('open'));
   if (!wasOpen) popover.classList.add('open');
-}}
-document.addEventListener('click', () => {{
+}
+document.addEventListener('click', () => {
   document.querySelectorAll('.health-popover.open').forEach(p => p.classList.remove('open'));
-}});
+});
 
-function setChartMode(mode) {{
+function setChartMode(mode) {
   chartMode = mode;
   document.querySelectorAll('#vol-chart-toggle button').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
   renderCharts();
-}}
+}
 
-function renderAll() {{
+function renderAll() {
   renderSummary();
   renderBtcLocked();
   renderHealth();
@@ -1460,18 +1477,32 @@ function renderAll() {{
   renderLPSection();
   tablePage = 0;
   renderTable();
-}}
+}
 
-function setPeriod(p) {{
+function setPeriod(p) {
   currentPeriod = p;
   document.querySelectorAll('.period-nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('btn-' + p).classList.add('active');
   renderAll();
-}}
+}
 
-const genDate = new Date(DATA.generated_at);
-document.getElementById('generated-at').textContent = '\\u00b7 ' + genDate.toLocaleDateString('en-US', {{ year: 'numeric', month: 'short', day: 'numeric' }});
-try {{ renderAll(); }} catch(e) {{ console.error('renderAll failed:', e); }}
+async function loadData() {
+  const overlay = document.getElementById('loading-overlay');
+  try {
+    const resp = await fetch('./data/dashboard.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    DATA = await resp.json();
+    const genDate = new Date(DATA.generated_at);
+    document.getElementById('generated-at').textContent = '\u00b7 ' + genDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    overlay.classList.add('hidden');
+    renderAll();
+  } catch(e) {
+    console.error('Failed to load dashboard data:', e);
+    overlay.textContent = 'Failed to load dashboard data: ' + e.message;
+    overlay.style.color = '#EF4444';
+  }
+}
+loadData();
 </script>
 
 </body>
@@ -1509,15 +1540,23 @@ def main():
         btc_locked_stats=btc_locked_stats if isinstance(btc_locked_stats, dict) else {},
     )
 
+    print("Writing dashboard JSON...")
+    json_dir = os.path.join(PAGES_DIR, "data")
+    os.makedirs(json_dir, exist_ok=True)
+    json_path = os.path.join(json_dir, "dashboard.json")
+    with open(json_path, "w") as f:
+        json.dump(data, f)
+    print(f"  Data written to {json_path}")
+
     print("Generating HTML...")
-    html = generate_html(data)
+    html = generate_html()
 
     os.makedirs(PAGES_DIR, exist_ok=True)
     with open(OUTPUT_PATH, "w") as f:
         f.write(html)
 
-    print(f"\nDashboard written to {OUTPUT_PATH}")
-    print(f"Open in browser: file://{OUTPUT_PATH}")
+    print(f"  HTML written to {OUTPUT_PATH}")
+    print(f"\nServe locally: cd {PAGES_DIR} && python3 -m http.server 8000")
 
 
 if __name__ == "__main__":

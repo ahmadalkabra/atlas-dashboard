@@ -10,22 +10,74 @@ Strategy (uses eth_getLogs with topic filtering — fast):
 """
 
 import json
+import logging
 import os
+import sys
 import time
 import requests
+
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://rootstock.blockscout.com/api/v2"
 BRIDGE_ADDRESS = "0x0000000000000000000000000000000001000006"
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+CURSOR_FILE = os.path.join(DATA_DIR, ".cursor_powpeg.json")
 
 MIN_BLOCK = 7_430_000  # ~Feb 2025 (full year of data)
 RATE_LIMIT_DELAY = 0.15
+
+# Reorg buffer — re-fetch this many blocks before cursor to handle reorgs
+REORG_BUFFER = 10
+
+
+def load_cursor() -> int | None:
+    """Load the last-fetched block number from cursor file."""
+    if os.path.exists(CURSOR_FILE):
+        try:
+            with open(CURSOR_FILE) as f:
+                data = json.load(f)
+            return data.get("last_block")
+        except (json.JSONDecodeError, KeyError):
+            pass
+    return None
+
+
+def save_cursor(block_number: int):
+    """Save the last-fetched block number to cursor file."""
+    with open(CURSOR_FILE, "w") as f:
+        json.dump({"last_block": block_number, "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}, f)
+
+
+def load_existing_json(filename: str) -> list[dict]:
+    """Load existing JSON data file, returning empty list if missing/corrupt."""
+    path = os.path.join(DATA_DIR, filename)
+    if os.path.exists(path):
+        try:
+            with open(path) as f:
+                return json.load(f)
+        except (json.JSONDecodeError, ValueError):
+            pass
+    return []
+
+
+def merge_events(existing: list[dict], new: list[dict], key: str = "tx_hash") -> list[dict]:
+    """Merge new events into existing, deduplicating by key. New events win on conflict."""
+    by_key = {e.get(key): e for e in existing}
+    for e in new:
+        by_key[e.get(key)] = e
+    return list(by_key.values())
 
 
 PEGIN_BTC_TOPIC0 = "0x44cdc782a38244afd68336ab92a0b39f864d6c0b2a50fa1da58cafc93cd2ae5a"
 
 
-def fetch_pegin_logs() -> list[dict]:
+def fetch_pegin_logs(start_block: int = MIN_BLOCK) -> list[dict]:
     """Fetch pegin_btc events via eth_getLogs (fast topic filter).
 
     pegin_btc layout:
@@ -36,7 +88,7 @@ def fetch_pegin_logs() -> list[dict]:
       data word[1]: protocolVersion (int256)
     """
     events = []
-    start = MIN_BLOCK
+    start = start_block
 
     resp = requests.post(ETH_RPC_URL, json={
         "jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1,
@@ -66,11 +118,11 @@ def fetch_pegin_logs() -> list[dict]:
                 if attempt < 2:
                     time.sleep(2 * (attempt + 1))
                 else:
-                    print(f"  Failed at blocks {start}-{to_block}: {e}")
+                    logger.error(f"Failed at blocks {start}-{to_block}: {e}")
                     return events
 
         if "error" in data:
-            print(f"  RPC error at {start}-{to_block}: {data['error']}")
+            logger.error(f"RPC error at {start}-{to_block}: {data['error']}")
             return events
 
         chunk_events = data.get("result", [])
@@ -82,7 +134,7 @@ def fetch_pegin_logs() -> list[dict]:
                 "data": raw["data"],
             })
 
-        print(f"  Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
+        logger.debug(f"Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
         start = to_block + 1
         time.sleep(0.5)
 
@@ -118,21 +170,21 @@ ETH_RPC_URL = f"{BASE_URL.rsplit('/api', 1)[0]}/api/eth-rpc"
 CHUNK_SIZE = 200_000  # blocks per eth_getLogs request
 
 
-def fetch_pegout_logs() -> list[dict]:
+def fetch_pegout_logs(start_block: int = MIN_BLOCK) -> list[dict]:
     """Fetch release_request_received events via eth_getLogs (fast topic filter).
 
     Uses Blockscout's eth-rpc proxy which supports topic filtering even for the
     Bridge precompile. Takes ~10 seconds vs ~30 minutes for full log scan.
     """
     events = []
-    start = MIN_BLOCK
+    start = start_block
 
     # Get latest block
     resp = requests.post(ETH_RPC_URL, json={
         "jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1,
     }, timeout=30)
     latest = int(resp.json()["result"], 16)
-    print(f"  Latest block: {latest}")
+    logger.debug(f"Latest block: {latest}")
 
     while start <= latest:
         to_block = min(start + CHUNK_SIZE - 1, latest)
@@ -157,11 +209,11 @@ def fetch_pegout_logs() -> list[dict]:
                 if attempt < 2:
                     time.sleep(2 * (attempt + 1))
                 else:
-                    print(f"  Failed at blocks {start}-{to_block}: {e}")
+                    logger.error(f"Failed at blocks {start}-{to_block}: {e}")
                     return events
 
         if "error" in data:
-            print(f"  RPC error at {start}-{to_block}: {data['error']}")
+            logger.error(f"RPC error at {start}-{to_block}: {data['error']}")
             return events
 
         chunk_events = data.get("result", [])
@@ -174,7 +226,7 @@ def fetch_pegout_logs() -> list[dict]:
                 "data": raw["data"],
             })
 
-        print(f"  Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
+        logger.debug(f"Blocks {start}-{to_block}: {len(chunk_events)} events (total: {len(events)})")
         start = to_block + 1
         time.sleep(0.5)
 
@@ -234,28 +286,52 @@ def dedup_by_tx_hash(records: list[dict]) -> list[dict]:
 
 def main():
     os.makedirs(DATA_DIR, exist_ok=True)
+    full_mode = "--full" in sys.argv
+
+    # Determine start block
+    cursor_block = load_cursor() if not full_mode else None
+    if cursor_block:
+        start_block = max(cursor_block - REORG_BUFFER, MIN_BLOCK)
+        logger.info(f"Incremental mode: fetching from block {start_block} (cursor={cursor_block}, buffer={REORG_BUFFER})")
+    else:
+        start_block = MIN_BLOCK
+        logger.info(f"Full mode: fetching from block {start_block}")
 
     # Fetch peg-ins (pegin_btc events via eth_getLogs — fast)
-    print("Fetching PowPeg peg-in events via eth_getLogs...")
-    pegin_logs = fetch_pegin_logs()
-    pegins = [parse_pegin_log(log) for log in pegin_logs]
-    pegins = dedup_by_tx_hash(pegins)
+    logger.info("Fetching PowPeg peg-in events via eth_getLogs...")
+    pegin_logs = fetch_pegin_logs(start_block=start_block)
+    new_pegins = [parse_pegin_log(log) for log in pegin_logs]
+    new_pegins = dedup_by_tx_hash(new_pegins)
 
     # Fetch peg-outs (release_request_received via eth_getLogs — fast)
-    print("\nFetching PowPeg peg-out events via eth_getLogs...")
-    pegout_logs = fetch_pegout_logs()
-    pegouts = [parse_pegout_log(log) for log in pegout_logs]
-    pegouts = dedup_by_tx_hash(pegouts)
+    logger.info("Fetching PowPeg peg-out events via eth_getLogs...")
+    pegout_logs = fetch_pegout_logs(start_block=start_block)
+    new_pegouts = [parse_pegout_log(log) for log in pegout_logs]
+    new_pegouts = dedup_by_tx_hash(new_pegouts)
 
-    # Fetch timestamps for all events (eth_getLogs doesn't include them)
-    all_records = pegins + pegouts
-    if all_records:
-        print(f"\nFetching timestamps for {len(all_records)} transactions...")
-        for i, rec in enumerate(all_records):
+    # Track max block for cursor
+    max_block = start_block
+    for rec in new_pegins + new_pegouts:
+        max_block = max(max_block, rec.get("block_number", 0))
+
+    # Fetch timestamps for new events only (eth_getLogs doesn't include them)
+    new_records = new_pegins + new_pegouts
+    if new_records:
+        logger.info(f"Fetching timestamps for {len(new_records)} transactions...")
+        for i, rec in enumerate(new_records):
             if i % 20 == 0:
-                print(f"  {i}/{len(all_records)}...")
+                logger.debug(f"{i}/{len(new_records)}...")
             rec["block_timestamp"] = fetch_tx_timestamp(rec["tx_hash"])
             time.sleep(RATE_LIMIT_DELAY)
+
+    # Merge with existing data (incremental) or use new data only (full)
+    if cursor_block and not full_mode:
+        logger.info("Merging with existing data...")
+        pegins = merge_events(load_existing_json("powpeg_pegins.json"), new_pegins)
+        pegouts = merge_events(load_existing_json("powpeg_pegouts.json"), new_pegouts)
+    else:
+        pegins = new_pegins
+        pegouts = new_pegouts
 
     # Sort by block
     pegins.sort(key=lambda x: x["block_number"])
@@ -270,18 +346,22 @@ def main():
     with open(pegouts_path, "w") as f:
         json.dump(pegouts, f, indent=2)
 
+    # Update cursor
+    save_cursor(max_block)
+
     pegin_vol = sum(e["value_rbtc"] for e in pegins)
     pegout_vol = sum(e["value_rbtc"] for e in pegouts)
 
-    print(f"\nSaved {len(pegins)} peg-ins to {pegins_path}")
-    print(f"Saved {len(pegouts)} peg-outs to {pegouts_path}")
-    print(f"\n--- PowPeg Summary ---")
-    print(f"Peg-ins:  {len(pegins)} txs, {pegin_vol:.6f} RBTC")
-    print(f"Peg-outs: {len(pegouts)} txs, {pegout_vol:.6f} RBTC")
+    logger.info(f"Saved {len(pegins)} peg-ins")
+    logger.info(f"Saved {len(pegouts)} peg-outs")
+    logger.info(f"Cursor updated to block {max_block}")
+    logger.info("--- PowPeg Summary ---")
+    logger.info(f"Peg-ins:  {len(pegins)} txs, {pegin_vol:.6f} RBTC")
+    logger.info(f"Peg-outs: {len(pegouts)} txs, {pegout_vol:.6f} RBTC")
     if pegins:
-        print(f"Peg-in range:  block {pegins[0]['block_number']} to {pegins[-1]['block_number']}")
+        logger.info(f"Peg-in range:  block {pegins[0]['block_number']} to {pegins[-1]['block_number']}")
     if pegouts:
-        print(f"Peg-out range: block {pegouts[0]['block_number']} to {pegouts[-1]['block_number']}")
+        logger.info(f"Peg-out range: block {pegouts[0]['block_number']} to {pegouts[-1]['block_number']}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,7 @@
+data/
+pages/
+__pycache__/
+docker-compose.yml
+Dockerfile
+nginx.conf
+.dockerignore
