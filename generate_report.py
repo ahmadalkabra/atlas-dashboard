@@ -800,6 +800,11 @@ def generate_html() -> str:
     <div id="health-panel" class="health-panel"></div>
   </section>
 
+  <section class="health-section" id="largest-tx-section">
+    <div class="section-title">Largest Transactions</div>
+    <div class="op-summary" id="largest-tx-cards"></div>
+  </section>
+
   <section class="chart-section">
     <div class="chart-panel" style="margin-bottom:20px">
       <div class="chart-panel-header">
@@ -810,6 +815,20 @@ def generate_html() -> str:
         </div>
       </div>
       <div id="chart-volume-trend"></div>
+    </div>
+    <div class="chart-grid-2col" style="margin-bottom:20px">
+      <div class="chart-panel">
+        <div class="chart-panel-header">
+          <div class="chart-panel-title">Net Flow (Peg-In &minus; Peg-Out)</div>
+        </div>
+        <div id="chart-net-flow"></div>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-panel-header">
+          <div class="chart-panel-title">Avg Transaction Size</div>
+        </div>
+        <div id="chart-avg-tx"></div>
+      </div>
     </div>
     <div class="chart-grid-2col">
       <div class="chart-panel">
@@ -1279,6 +1298,51 @@ function renderCharts() {
       x: 0.5, y: 0.5,
     }],
   }, cfg);
+
+  // --- Net Flow chart (Peg-In minus Peg-Out) ---
+  const flyoverNet = keys.map(k =>
+    sumField(fpG[k] || [], 'value_rbtc') - sumField(foG[k] || [], 'value_rbtc'));
+  const powpegNet = keys.map(k =>
+    sumField(ppG[k] || [], 'value_rbtc') - sumField(poG[k] || [], 'value_rbtc'));
+
+  Plotly.newPlot('chart-net-flow', [
+    { x: keys, y: flyoverNet, name: 'Flyover', type: 'bar',
+      marker: { color: flyoverNet.map(v => v >= 0 ? '#DEFF19' : 'rgba(222,255,25,0.35)') },
+      hovertext: flyoverNet.map(v => 'Flyover: ' + (v >= 0 ? '+' : '') + fmtRBTC(v) + ' RBTC'),
+      hoverinfo: 'text' },
+    { x: keys, y: powpegNet, name: 'PowPeg', type: 'bar',
+      marker: { color: powpegNet.map(v => v >= 0 ? '#FF9100' : 'rgba(255,145,0,0.35)') },
+      hovertext: powpegNet.map(v => 'PowPeg: ' + (v >= 0 ? '+' : '') + fmtRBTC(v) + ' RBTC'),
+      hoverinfo: 'text' },
+  ], {
+    ...baseLayout,
+    barmode: 'group',
+    shapes: [{ type: 'line', x0: 0, x1: 1, xref: 'paper', y0: 0, y1: 0,
+      line: { color: '#737373', width: 1, dash: 'dot' } }],
+  }, cfg);
+
+  // --- Avg Transaction Size chart ---
+  const flyoverAvg = keys.map(k => {
+    const evts = [...(fpG[k] || []), ...(foG[k] || [])];
+    return evts.length > 0 ? sumField(evts, 'value_rbtc') / evts.length : 0;
+  });
+  const powpegAvg = keys.map(k => {
+    const evts = [...(ppG[k] || []), ...(poG[k] || [])];
+    return evts.length > 0 ? sumField(evts, 'value_rbtc') / evts.length : 0;
+  });
+
+  Plotly.newPlot('chart-avg-tx', [
+    { x: keys, y: flyoverAvg, name: 'Flyover', type: 'scatter', mode: 'lines+markers',
+      line: { color: '#DEFF19', width: 2 }, marker: { size: 5, color: '#DEFF19' },
+      hovertext: flyoverAvg.map(v => 'Flyover avg: ' + fmtRBTC(v)),
+      hoverinfo: 'text' },
+    { x: keys, y: powpegAvg, name: 'PowPeg', type: 'scatter', mode: 'lines+markers',
+      line: { color: '#FF9100', width: 2 }, marker: { size: 5, color: '#FF9100' },
+      hovertext: powpegAvg.map(v => 'PowPeg avg: ' + fmtRBTC(v)),
+      hoverinfo: 'text' },
+  ], {
+    ...baseLayout,
+  }, cfg);
 }
 
 let tablePage = 0;
@@ -1557,11 +1621,47 @@ function setChartMode(mode) {
   renderCharts();
 }
 
+function renderLargestTx() {
+  const ops = [
+    { name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc', unit: 'RBTC' },
+    { name: 'Flyover Peg-Out', data: DATA.flyover_pegouts, color: '#F0FF96', field: 'value_rbtc', unit: 'RBTC' },
+    { name: 'PowPeg Peg-In', data: DATA.powpeg_pegins, color: '#FF9100', field: 'value_rbtc', unit: 'RBTC' },
+    { name: 'PowPeg Peg-Out', data: DATA.powpeg_pegouts, color: '#FED8A7', field: 'value_rbtc', unit: 'RBTC' },
+  ];
+
+  let html = '';
+  for (const op of ops) {
+    let largest = null;
+    for (const e of op.data) {
+      if (!largest || (e[op.field] || 0) > (largest[op.field] || 0)) largest = e;
+    }
+    const val = largest ? (largest[op.field] || 0) : 0;
+    const date = largest ? parseTS(largest.timestamp) : null;
+    const hash = largest ? largest.tx_hash : '';
+    const darkText = ['#F0FF96', '#FED8A7', '#DEFF19'].includes(op.color);
+    const explorer = 'https://rootstock.blockscout.com/tx/';
+
+    html += '<div class="op-card" style="border-top-color:' + op.color + '">' +
+      '<div class="op-card-name" style="color:' + op.color + '">' + op.name + '</div>' +
+      '<div style="margin-top:8px">' +
+        '<div class="op-metric-value">' + fmtRBTC(val) + '</div>' +
+        '<div style="color:var(--muted);font-size:11px;margin-top:6px">' +
+          (date ? date.toLocaleDateString('en-US', {year:'numeric', month:'short', day:'numeric'}) : '') +
+        '</div>' +
+        (hash ? '<a href="' + explorer + hash + '" target="_blank" rel="noopener" style="color:var(--purple);font-size:11px;text-decoration:none">' + shortHash(hash) + '</a>' : '') +
+      '</div>' +
+    '</div>';
+  }
+
+  document.getElementById('largest-tx-cards').innerHTML = html;
+}
+
 function renderAll() {
   renderSummary();
   renderBtcLocked();
   renderWallets();
   renderHealth();
+  renderLargestTx();
   renderCharts();
   tablePage = 0;
   renderTable();
