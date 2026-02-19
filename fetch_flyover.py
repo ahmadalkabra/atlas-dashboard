@@ -486,27 +486,69 @@ def main():
         logger.info(f"LP peg-out liquidity: {lp_liquidity.get('pegout_btc', 0):.6f} BTC")
 
 
+def fetch_onchain_rbtc_balance(address: str) -> float | None:
+    """Fetch on-chain RBTC balance from Blockscout."""
+    try:
+        resp = requests.get(f"{BASE_URL}/addresses/{address}", timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+        coin_balance = int(data.get("coin_balance", "0"))
+        return coin_balance / 1e18
+    except Exception as e:
+        logger.warning(f"Failed to fetch on-chain balance for {address}: {e}")
+        return None
+
+
+def fetch_onchain_btc_balance(address: str) -> float | None:
+    """Fetch on-chain BTC balance from mempool.space."""
+    try:
+        resp = requests.get(f"https://mempool.space/api/address/{address}", timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+        chain = data.get("chain_stats", {})
+        funded = chain.get("funded_txo_sum", 0)
+        spent = chain.get("spent_txo_sum", 0)
+        return (funded - spent) / 1e8
+    except Exception as e:
+        logger.warning(f"Failed to fetch BTC balance for {address}: {e}")
+        return None
+
+
 def fetch_lp_liquidity() -> dict:
-    """Fetch real-time liquidity from TeksCapital LPS API."""
+    """Fetch LP liquidity from on-chain balances (Blockscout + mempool.space)."""
+    result = {
+        "lp_name": "TeksCapital",
+        "rbtc_wallet": TEKSCAPITAL_RBTC_WALLET,
+        "btc_wallet": TEKSCAPITAL_BTC_WALLET,
+        "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+
+    # On-chain RBTC balance (source of truth for peg-in capacity)
+    rbtc_balance = fetch_onchain_rbtc_balance(TEKSCAPITAL_RBTC_WALLET)
+    if rbtc_balance is not None:
+        result["pegin_rbtc"] = rbtc_balance
+        logger.info(f"LP on-chain RBTC balance: {rbtc_balance:.6f}")
+
+    # On-chain BTC balance (source of truth for peg-out capacity)
+    btc_balance = fetch_onchain_btc_balance(TEKSCAPITAL_BTC_WALLET)
+    if btc_balance is not None:
+        result["pegout_btc"] = btc_balance
+        logger.info(f"LP on-chain BTC balance: {btc_balance:.6f}")
+
+    # LPS API (self-reported, kept for reference only)
     try:
         resp = requests.get(TEKSCAPITAL_LPS_URL, timeout=10)
         resp.raise_for_status()
         data = resp.json()
         pegin_wei = int(data.get("peginLiquidityAmount", 0))
         pegout_wei = int(data.get("pegoutLiquidityAmount", 0))
-        return {
-            "lp_name": "TeksCapital",
-            "rbtc_wallet": TEKSCAPITAL_RBTC_WALLET,
-            "btc_wallet": TEKSCAPITAL_BTC_WALLET,
-            "pegin_liquidity_wei": str(pegin_wei),
-            "pegin_rbtc": pegin_wei / 1e18,
-            "pegout_liquidity_wei": str(pegout_wei),
-            "pegout_btc": pegout_wei / 1e18,
-            "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        }
+        result["lps_pegin_rbtc"] = pegin_wei / 1e18
+        result["lps_pegout_btc"] = pegout_wei / 1e18
+        logger.info(f"LPS API (advertised) peg-in: {pegin_wei / 1e18:.6f}, peg-out: {pegout_wei / 1e18:.6f}")
     except Exception as e:
-        logger.warning(f"Failed to fetch LP liquidity: {e}")
-        return {}
+        logger.warning(f"Failed to fetch LP liquidity from LPS API: {e}")
+
+    return result
 
 
 if __name__ == "__main__":

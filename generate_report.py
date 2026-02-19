@@ -386,6 +386,51 @@ def generate_html() -> str:
     color: #08FFD1;
   }
 
+  /* --- Unique Wallets Section --- */
+  .wallets-section {
+    margin-bottom: 28px;
+  }
+  .wallets-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .wallets-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .wallets-table th,
+  .wallets-table td {
+    padding: 10px 14px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  .wallets-table th {
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    background: var(--surface);
+  }
+  .wallets-table th:first-child,
+  .wallets-table td:first-child {
+    text-align: left;
+  }
+  .wallets-table tbody tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+  .wallets-table td.wallet-num {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.3px;
+  }
+  .wallets-table .col-flyover { color: var(--flyover-pegin); }
+  .wallets-table .col-powpeg { color: var(--powpeg-pegin); }
+  .wallets-table .col-combined { color: var(--purple); }
+
   /* --- Health Section --- */
   .health-section {
     margin-bottom: 28px;
@@ -438,7 +483,7 @@ def generate_html() -> str:
   }
   .health-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
   .health-indicator {
@@ -671,41 +716,7 @@ def generate_html() -> str:
   .page-info { color: var(--muted); font-size: 12px; }
 
   /* --- LP Section --- */
-  .lp-section { margin-bottom: 28px; }
-  .lp-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-  .lp-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .lp-header h3 { font-size: 14px; font-weight: 600; }
   .lp-name { color: var(--flyover-pegin); font-weight: 600; font-size: 13px; }
-  .lp-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-  .lp-stat {
-    background: var(--bg);
-    border-radius: var(--radius-sm);
-    padding: 14px;
-    text-align: center;
-  }
-  .lp-stat-label {
-    color: var(--muted);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-  }
-  .lp-stat-value { font-size: 18px; font-weight: 700; }
-  .lp-stat-sub { color: var(--muted); font-size: 11px; margin-top: 4px; }
 
   /* --- Footer --- */
   footer {
@@ -744,13 +755,11 @@ def generate_html() -> str:
     .btc-locked-stats { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 768px) {
-    .lp-stats { grid-template-columns: repeat(2, 1fr); }
     header { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 480px) {
     .op-summary { grid-template-columns: 1fr; }
     .op-totals { grid-template-columns: 1fr; }
-    .lp-stats { grid-template-columns: 1fr; }
     .health-grid { grid-template-columns: 1fr; }
     .btc-locked-stats { grid-template-columns: 1fr; }
     .dashboard { padding: 16px 12px; }
@@ -779,8 +788,15 @@ def generate_html() -> str:
 
   <section class="btc-locked-section" id="btc-locked-section"></section>
 
+  <section class="wallets-section" id="wallets-section">
+    <div class="section-title">Unique Wallets</div>
+    <div class="wallets-panel">
+      <div id="wallets-content"></div>
+    </div>
+  </section>
+
   <section class="health-section" id="health-section-wrapper">
-    <div class="section-title">Flyover System Health</div>
+    <div class="section-title">Flyover Liquidity Provider</div>
     <div id="health-panel" class="health-panel"></div>
   </section>
 
@@ -810,8 +826,6 @@ def generate_html() -> str:
       </div>
     </div>
   </section>
-
-  <section class="lp-section" id="lp-section-wrapper"></section>
 
   <section class="table-section">
     <div class="table-header">
@@ -960,6 +974,115 @@ function renderBtcLocked() {
       </div>
     </div>
   `;
+}
+
+// ─── Unique Wallets ───
+
+const LP_ADDRESS = '0x82a06ebdb97776a2da4041df8f2b2ea8d3257852';
+
+function getUserAddress(event) {
+  return (event.address || '').toLowerCase();
+}
+
+function isUserAddress(addr) {
+  return addr && addr !== LP_ADDRESS;
+}
+
+function computeWalletStats() {
+  const periods = ['day', 'week', 'month', 'quarter'];
+  const flyoverEvents = [...DATA.flyover_pegins, ...DATA.flyover_pegouts];
+  const powpegEvents = [...DATA.powpeg_pegins, ...DATA.powpeg_pegouts];
+  const stats = {};
+
+  for (const period of periods) {
+    const flyoverGroups = {};
+    const powpegGroups = {};
+    const combinedGroups = {};
+
+    for (const e of flyoverEvents) {
+      const addr = getUserAddress(e);
+      if (!isUserAddress(addr)) continue;
+      const d = parseTS(e.timestamp);
+      const key = periodKey(d, period);
+      if (key === 'unknown') continue;
+      if (!flyoverGroups[key]) flyoverGroups[key] = new Set();
+      if (!combinedGroups[key]) combinedGroups[key] = new Set();
+      flyoverGroups[key].add(addr);
+      combinedGroups[key].add(addr);
+    }
+
+    for (const e of powpegEvents) {
+      const addr = getUserAddress(e);
+      if (!isUserAddress(addr)) continue;
+      const d = parseTS(e.timestamp);
+      const key = periodKey(d, period);
+      if (key === 'unknown') continue;
+      if (!powpegGroups[key]) powpegGroups[key] = new Set();
+      if (!combinedGroups[key]) combinedGroups[key] = new Set();
+      powpegGroups[key].add(addr);
+      combinedGroups[key].add(addr);
+    }
+
+    const fKeys = Object.keys(flyoverGroups);
+    const pKeys = Object.keys(powpegGroups);
+    const cKeys = Object.keys(combinedGroups);
+
+    const avgF = fKeys.length > 0
+      ? fKeys.reduce((s, k) => s + flyoverGroups[k].size, 0) / fKeys.length : 0;
+    const avgP = pKeys.length > 0
+      ? pKeys.reduce((s, k) => s + powpegGroups[k].size, 0) / pKeys.length : 0;
+
+    const allF = new Set();
+    const allP = new Set();
+    for (const k of fKeys) flyoverGroups[k].forEach(a => allF.add(a));
+    for (const k of pKeys) powpegGroups[k].forEach(a => allP.add(a));
+    const allC = new Set([...allF, ...allP]);
+
+    stats[period] = {
+      avgFlyover: Math.round(avgF),
+      avgPowpeg: Math.round(avgP),
+      avgCombined: Math.round(avgF) + Math.round(avgP),
+      totalFlyover: allF.size,
+      totalPowpeg: allP.size,
+      totalCombined: allC.size,
+    };
+  }
+  return stats;
+}
+
+function renderWallets() {
+  const el = document.getElementById('wallets-content');
+  const stats = computeWalletStats();
+
+  const rows = [
+    { label: 'Daily Avg', key: 'day' },
+    { label: 'Weekly Avg', key: 'week' },
+    { label: 'Monthly Avg', key: 'month' },
+    { label: 'Quarterly Avg', key: 'quarter' },
+  ];
+
+  let html = `<table class="wallets-table">
+    <thead>
+      <tr>
+        <th>Period</th>
+        <th><span class="col-flyover">Flyover</span></th>
+        <th><span class="col-powpeg">PowPeg</span></th>
+        <th><span class="col-combined">Combined</span></th>
+      </tr>
+    </thead><tbody>`;
+
+  for (const row of rows) {
+    const s = stats[row.key];
+    html += '<tr>' +
+      '<td>' + row.label + '</td>' +
+      '<td class="wallet-num col-flyover">~' + s.avgFlyover + '</td>' +
+      '<td class="wallet-num col-powpeg">~' + s.avgPowpeg + '</td>' +
+      '<td class="wallet-num col-combined">~' + s.avgCombined + '</td>' +
+    '</tr>';
+  }
+
+  html += '</tbody></table>';
+  el.innerHTML = html;
 }
 
 // ─── Render ───
@@ -1242,70 +1365,7 @@ function renderTable() {
 function tableNav(dir) { tablePage += dir; renderTable(); }
 
 
-function renderLPSection() {
-  const lp = DATA.lp_info;
-  const wrapper = document.getElementById('lp-section-wrapper');
-
-  const lpData = {};
-  for (const e of DATA.flyover_pegins) {
-    const addr = (e.lp_address || '').toLowerCase();
-    if (!addr) continue;
-    if (!lpData[addr]) lpData[addr] = { pegins: 0, peginVol: 0, penalties: 0 };
-    lpData[addr].pegins++;
-    lpData[addr].peginVol += e.value_rbtc || 0;
-  }
-  for (const e of DATA.penalties) {
-    const addr = (e.lp_address || '').toLowerCase();
-    if (!addr) continue;
-    if (!lpData[addr]) lpData[addr] = { pegins: 0, peginVol: 0, penalties: 0 };
-    lpData[addr].penalties++;
-  }
-  const topLP = Object.entries(lpData).sort((a,b) => b[1].peginVol - a[1].peginVol)[0];
-
-  if (!lp || !lp.lp_name) {
-    if (!topLP) { wrapper.innerHTML = ''; return; }
-  }
-
-  const lpName = (lp && lp.lp_name) ? lp.lp_name : (topLP ? shortHash(topLP[0]) : 'Unknown');
-  const peginLiq = (lp && lp.pegin_rbtc) ? fmt(lp.pegin_rbtc) : 'N/A';
-  const pegoutLiq = (lp && lp.pegout_btc) ? fmt(lp.pegout_btc) : 'N/A';
-  const deliveries = topLP ? topLP[1].pegins : 0;
-  const penaltyCount = topLP ? topLP[1].penalties : 0;
-
-  wrapper.innerHTML = `
-    <div class="section-title">Liquidity Provider</div>
-    <div class="lp-panel">
-      <div class="lp-header">
-        <h3>LP Performance</h3>
-        <span class="lp-name">${lpName}</span>
-      </div>
-      <div class="lp-stats">
-        <div class="lp-stat">
-          <div class="lp-stat-label">Peg-In Liquidity</div>
-          <div class="lp-stat-value" style="color:#DEFF19">${peginLiq}</div>
-          <div class="lp-stat-sub">available</div>
-        </div>
-        <div class="lp-stat">
-          <div class="lp-stat-label">Peg-Out Liquidity</div>
-          <div class="lp-stat-value" style="color:#F0FF96">${pegoutLiq}</div>
-          <div class="lp-stat-sub">BTC available</div>
-        </div>
-        <div class="lp-stat">
-          <div class="lp-stat-label">Deliveries</div>
-          <div class="lp-stat-value">${deliveries}</div>
-          <div class="lp-stat-sub">transfers</div>
-        </div>
-        <div class="lp-stat">
-          <div class="lp-stat-label">Penalties</div>
-          <div class="lp-stat-value" style="color:${penaltyCount > 0 ? 'var(--red)' : 'var(--green)'}">${penaltyCount}</div>
-          <div class="lp-stat-sub">${penaltyCount === 0 ? 'clean' : 'incurred'}</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// ─── Health Section ───
+// ─── Flyover Liquidity Provider (merged Health + LP) ───
 
 const HEALTH_THRESHOLDS = {
   peginBalance:  { warning: 10, critical: 5 },
@@ -1325,28 +1385,47 @@ function renderHealth() {
   const lp = DATA.lp_info || {};
   const refTime = new Date(DATA.generated_at);
 
-  // If no LP info at all, hide the section
   if (!lp.lp_name && DATA.flyover_pegins.length === 0) {
     wrapper.style.display = 'none';
     return;
   }
   wrapper.style.display = '';
 
-  // --- 1. Peg-In LP Balance ---
+  // --- LP performance stats ---
+  const lpData = {};
+  for (const e of DATA.flyover_pegins) {
+    const addr = (e.lp_address || '').toLowerCase();
+    if (!addr) continue;
+    if (!lpData[addr]) lpData[addr] = { pegins: 0, peginVol: 0, penalties: 0 };
+    lpData[addr].pegins++;
+    lpData[addr].peginVol += e.value_rbtc || 0;
+  }
+  for (const e of DATA.penalties) {
+    const addr = (e.lp_address || '').toLowerCase();
+    if (!addr) continue;
+    if (!lpData[addr]) lpData[addr] = { pegins: 0, peginVol: 0, penalties: 0 };
+    lpData[addr].penalties++;
+  }
+  const topLP = Object.entries(lpData).sort((a,b) => b[1].peginVol - a[1].peginVol)[0];
+  const lpName = (lp && lp.lp_name) ? lp.lp_name : (topLP ? shortHash(topLP[0]) : 'Unknown');
+  const peginDeliveries = topLP ? topLP[1].pegins : 0;
+  const pegoutDeliveries = DATA.flyover_pegouts.length;
+  const penaltyCount = topLP ? topLP[1].penalties : 0;
+
+  // --- Balances ---
   const peginBal = lp.pegin_rbtc != null ? parseFloat(lp.pegin_rbtc) : null;
   const peginStatus = peginBal != null
     ? assessStatus(peginBal, HEALTH_THRESHOLDS.peginBalance)
     : 'warning';
   const peginMax = 50;
 
-  // --- 2. Peg-Out LP Balance ---
   const pegoutBal = lp.pegout_btc != null ? parseFloat(lp.pegout_btc) : null;
   const pegoutStatus = pegoutBal != null
     ? assessStatus(pegoutBal, HEALTH_THRESHOLDS.pegoutBalance)
     : 'warning';
   const pegoutMax = 50;
 
-  // --- Last activity timestamps (info only, no health status) ---
+  // --- Last activity ---
   let lastPeginDate = null;
   let lastPeginValue = 0;
   for (const e of DATA.flyover_pegins) {
@@ -1373,7 +1452,7 @@ function renderHealth() {
     ? (refTime - lastPegoutDate) / (1000 * 60 * 60)
     : Infinity;
 
-  // --- Overall status (worst of all indicators) ---
+  // --- Overall status ---
   const statuses = [peginStatus, pegoutStatus];
   let overall = 'healthy';
   if (statuses.includes('critical')) overall = 'critical';
@@ -1382,11 +1461,9 @@ function renderHealth() {
   const statusColors = { healthy: 'var(--green)', warning: '#EAB308', critical: 'var(--red)' };
   const statusLabels = { healthy: 'Healthy', warning: 'Warning', critical: 'Critical' };
 
-  // --- Staleness check ---
   const dataAgeHours = (Date.now() - refTime.getTime()) / (1000 * 60 * 60);
   const isStale = dataAgeHours > STALENESS_HOURS;
 
-  // --- Build HTML ---
   function hoursLabel(hours) {
     if (!isFinite(hours)) return 'No data';
     if (hours < 1) return 'Just now';
@@ -1399,54 +1476,65 @@ function renderHealth() {
   function balanceBar(value, max, status) {
     if (value == null) return '';
     const pct = Math.min(100, Math.max(0, (value / max) * 100));
-    return `<div class="health-bar"><div class="health-bar-fill" style="width:${pct}%;background:${statusColors[status]}"></div></div>`;
+    return '<div class="health-bar"><div class="health-bar-fill" style="width:' + pct + '%;background:' + statusColors[status] + '"></div></div>';
   }
 
-  let html = `<div class="health-header">
-    <h3>
-      <span class="health-overall-dot ${overall !== 'healthy' ? 'pulse' : ''}" style="background:${statusColors[overall]}"></span>
-      <span class="health-overall-label" style="color:${statusColors[overall]}">${statusLabels[overall]}</span>
-    </h3>
-    ${isStale ? `<span class="health-staleness">Data is ${Math.round(dataAgeHours)}h old</span>` : ''}
-  </div>
-  <div class="health-grid">
-    <div class="health-indicator status-${peginStatus}">
-      <button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>
-      <div class="health-popover">
-        <div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 RBTC</div>
-        <div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 RBTC</div>
-      </div>
-      <div class="health-indicator-label">Peg-In LP Balance</div>
-      <div class="health-indicator-value">${peginBal != null ? fmtRBTC(peginBal) : 'N/A'}</div>
-      <div class="health-indicator-sub">${peginBal != null ? 'RBTC available' : 'No LP data'}</div>
-      ${balanceBar(peginBal, peginMax, peginStatus)}
-      <div class="health-indicator-status ${peginStatus}">${statusLabels[peginStatus]}</div>
-    </div>
-    <div class="health-indicator status-${pegoutStatus}">
-      <button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>
-      <div class="health-popover">
-        <div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 BTC</div>
-        <div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 BTC</div>
-      </div>
-      <div class="health-indicator-label">Peg-Out LP Balance</div>
-      <div class="health-indicator-value">${pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A'}</div>
-      <div class="health-indicator-sub">${pegoutBal != null ? 'BTC available' : 'No LP data'}</div>
-      ${balanceBar(pegoutBal, pegoutMax, pegoutStatus)}
-      <div class="health-indicator-status ${pegoutStatus}">${statusLabels[pegoutStatus]}</div>
-    </div>
-    <div class="health-indicator">
-      <div class="health-indicator-label">Last Peg-In</div>
-      <div class="health-indicator-value">${hoursLabel(peginHoursAgo)}</div>
-      <div class="health-indicator-sub">${lastPeginDate ? fmtRBTC(lastPeginValue) : 'Never'}</div>
-      <div class="health-indicator-sub">${lastPeginDate ? lastPeginDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : ''}</div>
-    </div>
-    <div class="health-indicator">
-      <div class="health-indicator-label">Last Peg-Out</div>
-      <div class="health-indicator-value">${hoursLabel(pegoutHoursAgo)}</div>
-      <div class="health-indicator-sub">${lastPegoutDate ? fmtRBTC(lastPegoutValue) : 'Never'}</div>
-      <div class="health-indicator-sub">${lastPegoutDate ? lastPegoutDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : ''}</div>
-    </div>
-  </div>`;
+  let html = '<div class="health-header">' +
+    '<h3>' +
+      '<span class="health-overall-dot ' + (overall !== 'healthy' ? 'pulse' : '') + '" style="background:' + statusColors[overall] + '"></span>' +
+      '<span class="health-overall-label" style="color:' + statusColors[overall] + '">' + statusLabels[overall] + '</span>' +
+      '<span class="lp-name" style="margin-left:12px">' + lpName + '</span>' +
+    '</h3>' +
+    (isStale ? '<span class="health-staleness">Data is ' + Math.round(dataAgeHours) + 'h old</span>' : '') +
+  '</div>' +
+  '<div class="health-grid">' +
+    '<div class="health-indicator status-' + peginStatus + '">' +
+      '<button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>' +
+      '<div class="health-popover">' +
+        '<div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 RBTC</div>' +
+        '<div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 RBTC</div>' +
+      '</div>' +
+      '<div class="health-indicator-label">Peg-In Balance</div>' +
+      '<div class="health-indicator-value">' + (peginBal != null ? fmtRBTC(peginBal) : 'N/A') + '</div>' +
+      '<div class="health-indicator-sub">' + (peginBal != null ? 'RBTC on-chain' : 'No LP data') + '</div>' +
+      balanceBar(peginBal, peginMax, peginStatus) +
+      '<div class="health-indicator-status ' + peginStatus + '">' + statusLabels[peginStatus] + '</div>' +
+    '</div>' +
+    '<div class="health-indicator status-' + pegoutStatus + '">' +
+      '<button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>' +
+      '<div class="health-popover">' +
+        '<div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 10 BTC</div>' +
+        '<div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 5 BTC</div>' +
+      '</div>' +
+      '<div class="health-indicator-label">Peg-Out Balance</div>' +
+      '<div class="health-indicator-value">' + (pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A') + '</div>' +
+      '<div class="health-indicator-sub">' + (pegoutBal != null ? 'BTC on-chain' : 'No LP data') + '</div>' +
+      balanceBar(pegoutBal, pegoutMax, pegoutStatus) +
+      '<div class="health-indicator-status ' + pegoutStatus + '">' + statusLabels[pegoutStatus] + '</div>' +
+    '</div>' +
+    '<div class="health-indicator">' +
+      '<div class="health-indicator-label">Deliveries</div>' +
+      '<div class="health-indicator-value">' + (peginDeliveries + pegoutDeliveries) + '</div>' +
+      '<div class="health-indicator-sub">' + peginDeliveries + ' peg-in · ' + pegoutDeliveries + ' peg-out</div>' +
+    '</div>' +
+    '<div class="health-indicator">' +
+      '<div class="health-indicator-label">Last Peg-In</div>' +
+      '<div class="health-indicator-value">' + hoursLabel(peginHoursAgo) + '</div>' +
+      '<div class="health-indicator-sub">' + (lastPeginDate ? fmtRBTC(lastPeginValue) : 'Never') + '</div>' +
+      '<div class="health-indicator-sub">' + (lastPeginDate ? lastPeginDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '') + '</div>' +
+    '</div>' +
+    '<div class="health-indicator">' +
+      '<div class="health-indicator-label">Last Peg-Out</div>' +
+      '<div class="health-indicator-value">' + hoursLabel(pegoutHoursAgo) + '</div>' +
+      '<div class="health-indicator-sub">' + (lastPegoutDate ? fmtRBTC(lastPegoutValue) : 'Never') + '</div>' +
+      '<div class="health-indicator-sub">' + (lastPegoutDate ? lastPegoutDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '') + '</div>' +
+    '</div>' +
+    '<div class="health-indicator">' +
+      '<div class="health-indicator-label">Penalties</div>' +
+      '<div class="health-indicator-value" style="color:' + (penaltyCount > 0 ? 'var(--red)' : 'var(--green)') + '">' + penaltyCount + '</div>' +
+      '<div class="health-indicator-sub">' + (penaltyCount === 0 ? 'clean record' : 'incurred') + '</div>' +
+    '</div>' +
+  '</div>';
 
   panel.innerHTML = html;
 }
@@ -1472,9 +1560,9 @@ function setChartMode(mode) {
 function renderAll() {
   renderSummary();
   renderBtcLocked();
+  renderWallets();
   renderHealth();
   renderCharts();
-  renderLPSection();
   tablePage = 0;
   renderTable();
 }

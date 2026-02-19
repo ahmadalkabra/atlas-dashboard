@@ -2,8 +2,8 @@ name: Update Dashboard
 
 on:
   schedule:
-    # Run daily at 06:00 UTC
-    - cron: '0 6 * * *'
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:
@@ -29,6 +29,15 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Restore cached data
+        id: cache-data
+        uses: actions/cache@v4
+        with:
+          path: data
+          key: dashboard-data-${{ github.run_id }}
+          restore-keys: |
+            dashboard-data-
 
       - name: Fetch Flyover data
         run: python -u fetch_flyover.py

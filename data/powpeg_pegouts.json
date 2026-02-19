@@ -1510,5 +1510,12 @@
     "from_address": "0xe38aaa218fc75d9d59821e7907118e793aa770af",
     "value_rbtc": 0.077,
     "block_timestamp": "2026-02-11T20:04:49.000000Z"
+  },
+  {
+    "tx_hash": "0x50b30447590a7aa33227fec3f85ac240a0e7c6aa43ad633ff285c0b9baffa3b8",
+    "block_number": 8525797,
+    "from_address": "0x70606a0d70bc3915939448d6e61d2d56e749940f",
+    "value_rbtc": 0.04903983748230512,
+    "block_timestamp": "2026-02-14T00:16:24.000000Z"
   }
 ]
