@@ -19,7 +19,7 @@ def load_json(filename: str) -> list | dict:
     path = os.path.join(DATA_DIR, filename)
     if not os.path.exists(path):
         print(f"  Warning: {path} not found, returning empty")
-        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json")
+        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json", "web_analytics.json")
         return {} if filename in dict_files else []
     with open(path) as f:
         return json.load(f)
@@ -45,6 +45,7 @@ def build_dashboard_data(
     powpeg_pegouts: list[dict],
     lp_info: dict | None = None,
     btc_locked_stats: dict | None = None,
+    web_analytics: dict | None = None,
 ) -> dict:
     """Build the full dashboard dataset for embedding in HTML."""
 
@@ -137,6 +138,7 @@ def build_dashboard_data(
         "refunds": refunds,
         "lp_info": lp_info or {},
         "btc_locked": btc_locked_stats or {},
+        "web_analytics": web_analytics or {},
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -580,6 +582,90 @@ def generate_html() -> str:
     transition: width 0.3s ease;
   }
 
+  /* --- Traffic Section --- */
+  .traffic-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .traffic-stat {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+  }
+  .traffic-stat-label {
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .traffic-stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1.1;
+  }
+  .traffic-stat-sub {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .funnel-step-label {
+    width: 120px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .funnel-step-bar-wrapper {
+    flex: 1;
+    position: relative;
+  }
+  .funnel-step-bar {
+    height: 28px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .funnel-step-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--purple), rgba(158,117,255,0.6));
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+  }
+  .funnel-step-bar-text {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .funnel-step-meta {
+    width: 60px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .traffic-source {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 12px;
+  }
+
   /* --- Chart Panels --- */
   .chart-section { margin-bottom: 20px; }
   .chart-grid {
@@ -751,8 +837,10 @@ def generate_html() -> str:
     .chart-grid-2col { grid-template-columns: 1fr; }
     .op-summary { grid-template-columns: repeat(2, 1fr); }
     .op-totals { grid-template-columns: repeat(2, 1fr); }
+
     .health-grid { grid-template-columns: repeat(2, 1fr); }
     .btc-locked-stats { grid-template-columns: repeat(3, 1fr); }
+    .traffic-stats { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 768px) {
     header { flex-direction: column; align-items: flex-start; }
@@ -760,8 +848,11 @@ def generate_html() -> str:
   @media (max-width: 480px) {
     .op-summary { grid-template-columns: 1fr; }
     .op-totals { grid-template-columns: 1fr; }
+
     .health-grid { grid-template-columns: 1fr; }
     .btc-locked-stats { grid-template-columns: 1fr; }
+    .traffic-stats { grid-template-columns: 1fr; }
+    .funnel-step-label { width: 80px; font-size: 11px; }
     .dashboard { padding: 16px 12px; }
   }
 </style>
@@ -936,6 +1027,20 @@ function periodLabel() {
   return { day: 'day', week: 'week', month: 'month', quarter: 'quarter' }[currentPeriod] || 'period';
 }
 
+const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtPeriodKey(key) {
+  // "2025-04" → "Apr 2025", "2025-Q2" → "Q2 2025", "2025-W08" → "W08 2025", "2025-04-10" → "Apr 10, 2025"
+  const mMatch = key.match(/^(\d{4})-(\d{2})$/);
+  if (mMatch) return MONTH_NAMES[parseInt(mMatch[2], 10) - 1] + ' ' + mMatch[1];
+  const qMatch = key.match(/^(\d{4})-(Q\d)$/);
+  if (qMatch) return qMatch[2] + ' ' + qMatch[1];
+  const wMatch = key.match(/^(\d{4})-(W\d{2})$/);
+  if (wMatch) return wMatch[2] + ' ' + wMatch[1];
+  const dMatch = key.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (dMatch) return MONTH_NAMES[parseInt(dMatch[2], 10) - 1] + ' ' + parseInt(dMatch[3], 10) + ', ' + dMatch[1];
+  return key;
+}
+
 function getLatestTwo(events, period) {
   const groups = groupBy(events, period);
   const keys = Object.keys(groups).filter(k => k !== 'unknown').sort();
@@ -1069,9 +1174,51 @@ function computeWalletStats() {
   return stats;
 }
 
+function computeRepeatWallets() {
+  const flyoverAddrs = {};
+  const powpegAddrs = {};
+  const combinedAddrs = {};
+
+  for (const e of [...DATA.flyover_pegins, ...DATA.flyover_pegouts]) {
+    const addr = getUserAddress(e);
+    if (!isUserAddress(addr)) continue;
+    flyoverAddrs[addr] = (flyoverAddrs[addr] || 0) + 1;
+    combinedAddrs[addr] = (combinedAddrs[addr] || 0) + 1;
+  }
+
+  for (const e of [...DATA.powpeg_pegins, ...DATA.powpeg_pegouts]) {
+    const addr = getUserAddress(e);
+    if (!isUserAddress(addr)) continue;
+    powpegAddrs[addr] = (powpegAddrs[addr] || 0) + 1;
+    combinedAddrs[addr] = (combinedAddrs[addr] || 0) + 1;
+  }
+
+  function countRepeat(addrMap) {
+    const total = Object.keys(addrMap).length;
+    const repeat = Object.values(addrMap).filter(c => c > 1).length;
+    return { total, repeat, pct: total > 0 ? (repeat / total * 100) : 0 };
+  }
+
+  // Cross-protocol: wallets that appear in both flyover and powpeg
+  const flyoverSet = new Set(Object.keys(flyoverAddrs));
+  const powpegSet = new Set(Object.keys(powpegAddrs));
+  let crossProtocol = 0;
+  for (const addr of flyoverSet) {
+    if (powpegSet.has(addr)) crossProtocol++;
+  }
+
+  return {
+    flyover: countRepeat(flyoverAddrs),
+    powpeg: countRepeat(powpegAddrs),
+    combined: countRepeat(combinedAddrs),
+    crossProtocol,
+  };
+}
+
 function renderWallets() {
   const el = document.getElementById('wallets-content');
   const stats = computeWalletStats();
+  const repeat = computeRepeatWallets();
 
   const rows = [
     { label: 'Daily Avg', key: 'day' },
@@ -1100,7 +1247,44 @@ function renderWallets() {
     '</tr>';
   }
 
+  // Find earliest event date for the "since" label
+  let earliest = null;
+  const allEvts = [...DATA.flyover_pegins, ...DATA.flyover_pegouts, ...DATA.powpeg_pegins, ...DATA.powpeg_pegouts];
+  for (const e of allEvts) {
+    const d = parseTS(e.timestamp);
+    if (d && (!earliest || d < earliest)) earliest = d;
+  }
+  const sinceLabel = earliest
+    ? 'Since ' + earliest.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    : 'Cumulative';
+
+  // Section subheader
+  html += '<tr><td colspan="4" style="text-align:center;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.8px;padding:14px 0 6px;border-bottom:none;background:var(--surface)">' + sinceLabel + '</td></tr>';
+
+  // Unique wallets row
+  html += '<tr>' +
+    '<td>Unique Wallets</td>' +
+    '<td class="wallet-num col-flyover">' + repeat.flyover.total + '</td>' +
+    '<td class="wallet-num col-powpeg">' + repeat.powpeg.total + '</td>' +
+    '<td class="wallet-num col-combined">' + repeat.combined.total + '</td>' +
+  '</tr>';
+
+  // Repeat wallets row
+  html += '<tr style="background:rgba(158,117,255,0.04)">' +
+    '<td>Repeat Wallets<div style="color:var(--muted);font-size:10px;font-weight:400;margin-top:2px">bridged 2+ times</div></td>' +
+    '<td class="wallet-num col-flyover">' + repeat.flyover.repeat + ' <span style="font-size:12px;font-weight:600">(' + repeat.flyover.pct.toFixed(0) + '%)</span></td>' +
+    '<td class="wallet-num col-powpeg">' + repeat.powpeg.repeat + ' <span style="font-size:12px;font-weight:600">(' + repeat.powpeg.pct.toFixed(0) + '%)</span></td>' +
+    '<td class="wallet-num col-combined">' + repeat.combined.repeat + ' <span style="font-size:12px;font-weight:600">(' + repeat.combined.pct.toFixed(0) + '%)</span></td>' +
+  '</tr>';
+
   html += '</tbody></table>';
+
+  if (repeat.crossProtocol > 0) {
+    html += '<div style="color:var(--muted);font-size:11px;margin-top:10px;text-align:right">' +
+      repeat.crossProtocol + ' wallet' + (repeat.crossProtocol !== 1 ? 's' : '') + ' used both Flyover and PowPeg' +
+    '</div>';
+  }
+
   el.innerHTML = html;
 }
 
@@ -1244,22 +1428,30 @@ function renderCharts() {
   const poVol = sumField(latestPo.current, 'value_rbtc');
   const total = fpVol + foVol + ppVol + poVol;
 
+  const donutLayout = {
+    ...baseLayout,
+    margin: { l: 10, r: 10, t: 10, b: 40 },
+    showlegend: true,
+    legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.1, font: { size: 10, color: '#737373' } },
+    uniformtext: { minsize: 10, mode: 'hide' },
+  };
+
   Plotly.newPlot('chart-donut', [{
     values: [fpVol, foVol, ppVol, poVol],
     labels: ['Flyover In', 'Flyover Out', 'PowPeg In', 'PowPeg Out'],
     type: 'pie',
     hole: 0.6,
+    domain: { x: [0.1, 0.9], y: [0.05, 0.95] },
     marker: { colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] },
     textinfo: 'percent',
+    textposition: 'inside',
+    insidetextorientation: 'horizontal',
     textfont: { color: '#000', size: 11, family: 'Inter, sans-serif' },
     text: [fpVol, foVol, ppVol, poVol].map(v => `${fmtRBTC(v)}`),
     hovertemplate: '%{label}<br>%{text}<br>%{percent}<extra></extra>',
     sort: false,
   }], {
-    ...baseLayout,
-    margin: { l: 10, r: 10, t: 10, b: 10 },
-    showlegend: true,
-    legend: { orientation: 'h', y: -0.05, font: { size: 10, color: '#737373' } },
+    ...donutLayout,
     annotations: [{
       text: `${fmtCompact(total)}<br><span style="font-size:11px;color:#737373">total</span>`,
       showarrow: false,
@@ -1280,17 +1472,17 @@ function renderCharts() {
     labels: ['Flyover In', 'Flyover Out', 'PowPeg In', 'PowPeg Out'],
     type: 'pie',
     hole: 0.6,
+    domain: { x: [0.1, 0.9], y: [0.05, 0.95] },
     marker: { colors: ['#DEFF19', '#F0FF96', '#FF9100', '#FED8A7'] },
     textinfo: 'percent',
+    textposition: 'inside',
+    insidetextorientation: 'horizontal',
     textfont: { color: '#000', size: 11, family: 'Inter, sans-serif' },
     text: [fpTx, foTx, ppTx, poTx].map(v => `${v} txs`),
     hovertemplate: '%{label}<br>%{text}<br>%{percent}<extra></extra>',
     sort: false,
   }], {
-    ...baseLayout,
-    margin: { l: 10, r: 10, t: 10, b: 10 },
-    showlegend: true,
-    legend: { orientation: 'h', y: -0.05, font: { size: 10, color: '#737373' } },
+    ...donutLayout,
     annotations: [{
       text: `${totalTx}<br><span style="font-size:11px;color:#737373">txs</span>`,
       showarrow: false,
@@ -1397,7 +1589,7 @@ function renderTable() {
     const pp = ppG[key] || [], po = poG[key] || [];
 
     html += `<tr>
-      <td><strong>${key}</strong></td>
+      <td><strong>${fmtPeriodKey(key)}</strong></td>
       <td>${fp.length}</td><td>${fmtRBTC(sumField(fp, 'value_rbtc'))}</td>
       <td>${fo.length}</td><td>${fmtRBTC(sumField(fo, 'value_rbtc'))}</td>
       <td>${pp.length}</td><td>${fmtRBTC(sumField(pp, 'value_rbtc'))}</td>
@@ -1621,6 +1813,70 @@ function setChartMode(mode) {
   renderCharts();
 }
 
+function renderTraffic() {
+  const section = document.getElementById('traffic-section');
+  const wa = DATA.web_analytics;
+  if (!wa || !wa.sessions) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+
+  const funnel = wa.funnel || [];
+  const maxSessions = funnel.length > 0 ? funnel[0].sessions : 1;
+
+  let statsHtml = '<div class="traffic-stats">' +
+    '<div class="traffic-stat">' +
+      '<div class="traffic-stat-label">Sessions</div>' +
+      '<div class="traffic-stat-value">' + wa.sessions + '</div>' +
+      '<div class="traffic-stat-sub">' + (wa.date_range || '').replace('_', ' ') + '</div>' +
+    '</div>' +
+    '<div class="traffic-stat">' +
+      '<div class="traffic-stat-label">Unique Users</div>' +
+      '<div class="traffic-stat-value">' + wa.unique_users + '</div>' +
+      '<div class="traffic-stat-sub">' + wa.returning_user_pct + '% returning</div>' +
+    '</div>' +
+    '<div class="traffic-stat">' +
+      '<div class="traffic-stat-label">Pages / Session</div>' +
+      '<div class="traffic-stat-value">' + wa.pages_per_session + '</div>' +
+      '<div class="traffic-stat-sub">avg depth</div>' +
+    '</div>' +
+    '<div class="traffic-stat">' +
+      '<div class="traffic-stat-label">Active Time</div>' +
+      '<div class="traffic-stat-value">' + wa.avg_active_time_min + 'm</div>' +
+      '<div class="traffic-stat-sub">avg per session</div>' +
+    '</div>' +
+  '</div>';
+
+  let funnelHtml = '';
+  if (funnel.length > 0) {
+    funnelHtml = '<div style="margin-top:4px">';
+    for (const step of funnel) {
+      const pct = maxSessions > 0 ? (step.sessions / maxSessions * 100) : 0;
+      const pctLabel = pct === 100 ? '100%' : pct.toFixed(1) + '%';
+      const barWidth = Math.max(pct, 8);
+      funnelHtml += '<div class="funnel-step">' +
+        '<div class="funnel-step-label">' + step.step + '</div>' +
+        '<div class="funnel-step-bar-wrapper">' +
+          '<div class="funnel-step-bar">' +
+            '<div class="funnel-step-bar-fill" style="width:' + barWidth + '%">' +
+              '<span class="funnel-step-bar-text">' + step.sessions + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="funnel-step-meta">' + pctLabel + '</div>' +
+      '</div>';
+    }
+    funnelHtml += '</div>';
+  }
+
+  const sourceNote = wa.updated_at
+    ? '<div class="traffic-source">Source: Microsoft Clarity · Updated ' + wa.updated_at + '</div>'
+    : '';
+
+  document.getElementById('traffic-panel').innerHTML = statsHtml + funnelHtml + sourceNote;
+}
+
 function renderLargestTx() {
   const ops = [
     { name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc', unit: 'RBTC' },
@@ -1707,6 +1963,7 @@ def main():
     powpeg_pegouts = load_json("powpeg_pegouts.json")
     lp_info = load_json("flyover_lp_info.json")
     btc_locked_stats = load_json("btc_locked_stats.json")
+    web_analytics = load_json("web_analytics.json")
 
     print(f"  Flyover peg-ins: {len(flyover_pegins)}")
     print(f"  Flyover peg-outs: {len(flyover_pegouts)}")
@@ -1726,6 +1983,7 @@ def main():
         powpeg_pegins, powpeg_pegouts,
         lp_info=lp_info if isinstance(lp_info, dict) else {},
         btc_locked_stats=btc_locked_stats if isinstance(btc_locked_stats, dict) else {},
+        web_analytics=web_analytics if isinstance(web_analytics, dict) else {},
     )
 
     print("Writing dashboard JSON...")
