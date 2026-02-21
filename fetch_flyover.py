@@ -380,6 +380,7 @@ def main():
 
     new_pegins = []
     new_pegouts = []
+    new_pegout_refunds = []
     new_penalties = []
     new_refunds = []
     new_block_numbers = []
@@ -395,8 +396,8 @@ def main():
         event_counts[event_name] = event_counts.get(event_name, 0) + 1
         max_block = max(max_block, log.get("block_number", 0))
 
-        # Skip PegInRegistered and PegOutRefunded — recognized but not saved
-        if event_name in ("PegInRegistered", "PegOutRefunded"):
+        # Skip PegInRegistered — recognized but not saved
+        if event_name == "PegInRegistered":
             continue
 
         parser = parsers[event_name]
@@ -408,6 +409,8 @@ def main():
             new_pegins.append(parsed)
         elif event_name == "PegOutDeposit":
             new_pegouts.append(parsed)
+        elif event_name == "PegOutRefunded":
+            new_pegout_refunds.append(parsed)
         elif event_name == "Penalized":
             new_penalties.append(parsed)
         elif event_name == "PegOutUserRefunded":
@@ -423,6 +426,7 @@ def main():
         timestamps = fetch_block_timestamps(new_block_numbers)
         new_pegins = enrich_with_timestamps(new_pegins, timestamps)
         new_pegouts = enrich_with_timestamps(new_pegouts, timestamps)
+        new_pegout_refunds = enrich_with_timestamps(new_pegout_refunds, timestamps)
         new_penalties = enrich_with_timestamps(new_penalties, timestamps)
         new_refunds = enrich_with_timestamps(new_refunds, timestamps)
 
@@ -431,17 +435,20 @@ def main():
         logger.info("Merging with existing data...")
         all_pegins = merge_events(load_existing_json("flyover_pegins.json"), new_pegins)
         all_pegouts = merge_events(load_existing_json("flyover_pegouts.json"), new_pegouts)
+        all_pegout_refunds = merge_events(load_existing_json("flyover_pegout_refunds.json"), new_pegout_refunds)
         all_penalties = merge_events(load_existing_json("flyover_penalties.json"), new_penalties)
         all_refunds = merge_events(load_existing_json("flyover_refunds.json"), new_refunds)
     else:
         all_pegins = new_pegins
         all_pegouts = new_pegouts
+        all_pegout_refunds = new_pegout_refunds
         all_penalties = new_penalties
         all_refunds = new_refunds
 
     # Save to JSON
     pegins_path = os.path.join(DATA_DIR, "flyover_pegins.json")
     pegouts_path = os.path.join(DATA_DIR, "flyover_pegouts.json")
+    pegout_refunds_path = os.path.join(DATA_DIR, "flyover_pegout_refunds.json")
     penalties_path = os.path.join(DATA_DIR, "flyover_penalties.json")
     refunds_path = os.path.join(DATA_DIR, "flyover_refunds.json")
 
@@ -449,6 +456,8 @@ def main():
         json.dump(all_pegins, f, indent=2)
     with open(pegouts_path, "w") as f:
         json.dump(all_pegouts, f, indent=2)
+    with open(pegout_refunds_path, "w") as f:
+        json.dump(all_pegout_refunds, f, indent=2)
     with open(penalties_path, "w") as f:
         json.dump(all_penalties, f, indent=2)
     with open(refunds_path, "w") as f:
@@ -459,6 +468,7 @@ def main():
 
     logger.info(f"Saved {len(all_pegins)} peg-in events")
     logger.info(f"Saved {len(all_pegouts)} peg-out events")
+    logger.info(f"Saved {len(all_pegout_refunds)} peg-out refund (LP claimed) events")
     logger.info(f"Saved {len(all_penalties)} penalty events")
     logger.info(f"Saved {len(all_refunds)} refund events")
     logger.info(f"Cursor updated to block {max_block}")
@@ -514,6 +524,58 @@ def fetch_onchain_btc_balance(address: str) -> float | None:
         return None
 
 
+def fetch_btc_utxos(address: str) -> list | None:
+    """Fetch UTXOs for a BTC address from mempool.space."""
+    try:
+        resp = requests.get(f"https://mempool.space/api/address/{address}/utxo", timeout=15)
+        resp.raise_for_status()
+        return resp.json()
+    except Exception as e:
+        logger.warning(f"Failed to fetch UTXOs for {address}: {e}")
+        return None
+
+
+def fetch_btc_mempool_txs(address: str) -> list | None:
+    """Fetch pending (unconfirmed) transactions for a BTC address from mempool.space."""
+    try:
+        resp = requests.get(f"https://mempool.space/api/address/{address}/txs/mempool", timeout=15)
+        resp.raise_for_status()
+        return resp.json()
+    except Exception as e:
+        logger.warning(f"Failed to fetch mempool txs for {address}: {e}")
+        return None
+
+
+RSK_RPC_URL = "https://public-node.rsk.co"
+
+LBC_READ_ABI = [
+    {"inputs": [{"name": "addr", "type": "address"}], "name": "isOperationalForPegout", "outputs": [{"name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"name": "addr", "type": "address"}], "name": "isOperational", "outputs": [{"name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"name": "addr", "type": "address"}], "name": "getPegoutCollateral", "outputs": [{"name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [], "name": "getMinCollateral", "outputs": [{"name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"},
+]
+
+
+def fetch_lbc_state(lp_address: str) -> dict | None:
+    """Query LBC contract for LP operational state."""
+    try:
+        from web3 import Web3
+        w3 = Web3(Web3.HTTPProvider(RSK_RPC_URL, request_kwargs={"timeout": 15}))
+        proxy = Web3.to_checksum_address(LBC_ADDRESS)
+        lp = Web3.to_checksum_address(lp_address)
+        contract = w3.eth.contract(address=proxy, abi=LBC_READ_ABI)
+
+        result = {}
+        result["is_operational_pegin"] = contract.functions.isOperational(lp).call()
+        result["is_operational_pegout"] = contract.functions.isOperationalForPegout(lp).call()
+        result["pegout_collateral"] = contract.functions.getPegoutCollateral(lp).call() / 1e18
+        result["min_collateral"] = contract.functions.getMinCollateral().call() / 1e18
+        return result
+    except Exception as e:
+        logger.warning(f"Failed to query LBC state: {e}")
+        return None
+
+
 def fetch_lp_liquidity() -> dict:
     """Fetch LP liquidity from on-chain balances (Blockscout + mempool.space)."""
     result = {
@@ -534,6 +596,28 @@ def fetch_lp_liquidity() -> dict:
     if btc_balance is not None:
         result["pegout_btc"] = btc_balance
         logger.info(f"LP on-chain BTC balance: {btc_balance:.6f}")
+
+    # BTC UTXOs (peg-out operational health)
+    utxos = fetch_btc_utxos(TEKSCAPITAL_BTC_WALLET)
+    if utxos is not None:
+        result["btc_utxo_count"] = len(utxos)
+        result["btc_utxos"] = [
+            {"value_btc": u["value"] / 1e8, "confirmed": u["status"]["confirmed"]}
+            for u in utxos
+        ]
+        logger.info(f"LP BTC UTXOs: {len(utxos)}")
+
+    # Mempool (pending BTC transactions)
+    mempool_txs = fetch_btc_mempool_txs(TEKSCAPITAL_BTC_WALLET)
+    if mempool_txs is not None:
+        result["btc_mempool_tx_count"] = len(mempool_txs)
+        logger.info(f"LP BTC mempool txs: {len(mempool_txs)}")
+
+    # LBC contract state (operational status, collateral)
+    lbc_state = fetch_lbc_state(TEKSCAPITAL_RBTC_WALLET)
+    if lbc_state:
+        result.update(lbc_state)
+        logger.info(f"LBC state: pegin={lbc_state['is_operational_pegin']}, pegout={lbc_state['is_operational_pegout']}, pegout_collateral={lbc_state['pegout_collateral']:.6f}/{lbc_state['min_collateral']:.6f}")
 
     # LPS API (self-reported, kept for reference only)
     try:

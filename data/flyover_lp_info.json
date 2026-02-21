@@ -2,9 +2,21 @@
   "lp_name": "TeksCapital",
   "rbtc_wallet": "0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852",
   "btc_wallet": "1D2xucTYkxCHvaaZuaKVJTfZQWr4PUjzAy",
-  "fetched_at": "2026-02-19T18:03:43Z",
-  "pegin_rbtc": 18.814012789351143,
-  "pegout_btc": 16.44796557,
-  "lps_pegin_rbtc": 21.027709727849697,
-  "lps_pegout_btc": 16.447965569999997
+  "fetched_at": "2026-02-20T23:44:54Z",
+  "pegin_rbtc": 19.293019818969253,
+  "pegout_btc": 15.96995589,
+  "btc_utxo_count": 1,
+  "btc_utxos": [
+    {
+      "value_btc": 15.96995589,
+      "confirmed": true
+    }
+  ],
+  "btc_mempool_tx_count": 0,
+  "is_operational_pegin": true,
+  "is_operational_pegout": false,
+  "pegout_collateral": 0.02999,
+  "min_collateral": 0.03,
+  "lps_pegin_rbtc": 21.022981597467805,
+  "lps_pegout_btc": 2.00015317217345
 }

@@ -39,6 +39,7 @@ def parse_timestamp(ts: str) -> datetime | None:
 def build_dashboard_data(
     flyover_pegins: list[dict],
     flyover_pegouts: list[dict],
+    flyover_pegout_refunds: list[dict],
     flyover_penalties: list[dict],
     flyover_refunds: list[dict],
     powpeg_pegins: list[dict],
@@ -78,7 +79,17 @@ def build_dashboard_data(
         })
 
     # Flyover peg-outs (PegOutDeposit only — fetcher already filters)
-    fp_pegouts = extract_events(flyover_pegouts, "amount_rbtc", "sender")
+    fp_pegouts = []
+    for e in flyover_pegouts:
+        ts = parse_timestamp(e.get("block_timestamp", ""))
+        fp_pegouts.append({
+            "tx_hash": e.get("tx_hash", ""),
+            "block": e.get("block_number", 0),
+            "timestamp": ts.isoformat() if ts else "",
+            "value_rbtc": float(e.get("amount_rbtc", 0)),
+            "address": e.get("sender", ""),
+            "quote_hash": e.get("quote_hash", ""),
+        })
 
     # PowPeg peg-ins
     pp_pegins = []
@@ -129,9 +140,15 @@ def build_dashboard_data(
             "value_rbtc": float(e.get("value_rbtc", 0)),
         })
 
+    # Peg-out refunds (LP claimed BTC delivery)
+    pegout_refund_hashes = set()
+    for e in flyover_pegout_refunds:
+        pegout_refund_hashes.add(e.get("quote_hash", ""))
+
     return {
         "flyover_pegins": fp_pegins,
         "flyover_pegouts": fp_pegouts,
+        "pegout_refund_hashes": list(pegout_refund_hashes),
         "powpeg_pegins": pp_pegins,
         "powpeg_pegouts": pp_pegouts,
         "penalties": penalties,
@@ -487,12 +504,15 @@ def generate_html() -> str:
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+    align-items: stretch;
   }
   .health-indicator {
     background: var(--bg);
     border-radius: var(--radius-sm);
     padding: 14px;
     border-left: 3px solid var(--border);
+    display: flex;
+    flex-direction: column;
   }
   .health-indicator.status-healthy { border-left-color: var(--green); }
   .health-indicator.status-warning { border-left-color: #EAB308; }
@@ -565,6 +585,7 @@ def generate_html() -> str:
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    margin-top: auto;
   }
   .health-indicator-status.healthy { color: var(--green); }
   .health-indicator-status.warning { color: #EAB308; }
@@ -962,7 +983,9 @@ let chartMode = 'area';
 
 function parseTS(ts) {
   if (!ts) return null;
-  const d = new Date(ts);
+  // Unix seconds (< 1e12) vs milliseconds or ISO string
+  const v = typeof ts === 'number' && ts < 1e12 ? ts * 1000 : ts;
+  const d = new Date(v);
   return isNaN(d.getTime()) ? null : d;
 }
 
@@ -1626,6 +1649,7 @@ function tableNav(dir) { tablePage += dir; renderTable(); }
 const HEALTH_THRESHOLDS = {
   peginBalance:  { warning: 10, critical: 5 },
   pegoutBalance: { warning: 10, critical: 5 },
+  btcUtxos:      { warning: 4, critical: 2 },
 };
 const STALENESS_HOURS = 25;
 
@@ -1673,13 +1697,31 @@ function renderHealth() {
   const peginStatus = peginBal != null
     ? assessStatus(peginBal, HEALTH_THRESHOLDS.peginBalance)
     : 'warning';
-  const peginMax = 50;
 
   const pegoutBal = lp.pegout_btc != null ? parseFloat(lp.pegout_btc) : null;
-  const pegoutStatus = pegoutBal != null
-    ? assessStatus(pegoutBal, HEALTH_THRESHOLDS.pegoutBalance)
+  const pegoutAvailable = lp.lps_pegout_btc != null ? parseFloat(lp.lps_pegout_btc) : pegoutBal;
+  const pegoutStatus = pegoutAvailable != null
+    ? assessStatus(pegoutAvailable, HEALTH_THRESHOLDS.pegoutBalance)
     : 'warning';
-  const pegoutMax = 50;
+
+  // --- In-flight peg-outs (deposited but LP hasn't claimed BTC delivery) ---
+  const refundedHashes = new Set(DATA.pegout_refund_hashes || []);
+  const userRefundedHashes = new Set((DATA.refunds || []).map(r => r.quote_hash).filter(Boolean));
+  let inFlightCount = 0;
+  let inFlightVolume = 0;
+  for (const po of DATA.flyover_pegouts) {
+    const qh = po.quote_hash || '';
+    if (qh && !refundedHashes.has(qh) && !userRefundedHashes.has(qh)) {
+      inFlightCount++;
+      inFlightVolume += po.value_rbtc || po.amount_rbtc || 0;
+    }
+  }
+
+  // --- Mempool (pending BTC txs) ---
+  const mempoolTxCount = lp.btc_mempool_tx_count != null ? parseInt(lp.btc_mempool_tx_count) : null;
+
+  // --- Reserved liquidity (on-chain minus available) ---
+  const reservedBtc = (pegoutBal != null && pegoutAvailable != null && pegoutBal > pegoutAvailable) ? pegoutBal - pegoutAvailable : null;
 
   // --- Last activity ---
   let lastPeginDate = null;
@@ -1708,8 +1750,15 @@ function renderHealth() {
     ? (refTime - lastPegoutDate) / (1000 * 60 * 60)
     : Infinity;
 
+  // --- BTC UTXOs ---
+  const utxoCount = lp.btc_utxo_count != null ? parseInt(lp.btc_utxo_count) : null;
+  const utxoStatus = utxoCount != null
+    ? (utxoCount < HEALTH_THRESHOLDS.btcUtxos.critical ? 'critical'
+       : utxoCount < HEALTH_THRESHOLDS.btcUtxos.warning ? 'warning' : 'healthy')
+    : 'warning';
+
   // --- Overall status ---
-  const statuses = [peginStatus, pegoutStatus];
+  const statuses = [peginStatus, pegoutStatus, utxoStatus];
   let overall = 'healthy';
   if (statuses.includes('critical')) overall = 'critical';
   else if (statuses.includes('warning')) overall = 'warning';
@@ -1744,6 +1793,7 @@ function renderHealth() {
     (isStale ? '<span class="health-staleness">Data is ' + Math.round(dataAgeHours) + 'h old</span>' : '') +
   '</div>' +
   '<div class="health-grid">' +
+    // Row 1, Col 1: Peg-In Balance
     '<div class="health-indicator status-' + peginStatus + '">' +
       '<button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>' +
       '<div class="health-popover">' +
@@ -1753,9 +1803,9 @@ function renderHealth() {
       '<div class="health-indicator-label">Peg-In Balance</div>' +
       '<div class="health-indicator-value">' + (peginBal != null ? fmtRBTC(peginBal) : 'N/A') + '</div>' +
       '<div class="health-indicator-sub">' + (peginBal != null ? 'RBTC on-chain' : 'No LP data') + '</div>' +
-      balanceBar(peginBal, peginMax, peginStatus) +
       '<div class="health-indicator-status ' + peginStatus + '">' + statusLabels[peginStatus] + '</div>' +
     '</div>' +
+    // Row 1, Col 2: Peg-Out Balance
     '<div class="health-indicator status-' + pegoutStatus + '">' +
       '<button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>' +
       '<div class="health-popover">' +
@@ -1765,30 +1815,48 @@ function renderHealth() {
       '<div class="health-indicator-label">Peg-Out Balance</div>' +
       '<div class="health-indicator-value">' + (pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A') + '</div>' +
       '<div class="health-indicator-sub">' + (pegoutBal != null ? 'BTC on-chain' : 'No LP data') + '</div>' +
-      balanceBar(pegoutBal, pegoutMax, pegoutStatus) +
+      (pegoutAvailable != null ? '<div class="health-indicator-sub" style="color:' + statusColors[pegoutStatus] + '">' + fmtRBTC(pegoutAvailable) + ' available</div>' : '') +
+      (reservedBtc != null && reservedBtc > 0.001 ? '<div class="health-indicator-sub">' + fmtRBTC(reservedBtc) + ' reserved</div>' : '') +
       '<div class="health-indicator-status ' + pegoutStatus + '">' + statusLabels[pegoutStatus] + '</div>' +
     '</div>' +
-    '<div class="health-indicator">' +
-      '<div class="health-indicator-label">Deliveries</div>' +
-      '<div class="health-indicator-value">' + (peginDeliveries + pegoutDeliveries) + '</div>' +
-      '<div class="health-indicator-sub">' + peginDeliveries + ' peg-in · ' + pegoutDeliveries + ' peg-out</div>' +
+    // Row 1, Col 3: BTC UTXOs
+    '<div class="health-indicator status-' + utxoStatus + '">' +
+      '<button class="health-info-btn" onclick="toggleHealthPopover(event)">i</button>' +
+      '<div class="health-popover">' +
+        '<div class="health-popover-row"><span class="health-popover-dot" style="background:#EAB308"></span> Warning: &lt; 4 UTXOs</div>' +
+        '<div class="health-popover-row"><span class="health-popover-dot" style="background:var(--red)"></span> Critical: &lt; 2 UTXOs</div>' +
+      '</div>' +
+      '<div class="health-indicator-label">BTC UTXOs</div>' +
+      '<div class="health-indicator-value">' + (utxoCount != null ? utxoCount : 'N/A') + '</div>' +
+      '<div class="health-indicator-sub">' + (utxoCount != null ? (utxoCount === 1 ? '1 spendable output' : utxoCount + ' spendable outputs') : 'No data') + '</div>' +
+      (mempoolTxCount > 0
+        ? '<div class="health-indicator-sub" style="color:#EAB308">' + mempoolTxCount + ' pending tx' + (mempoolTxCount > 1 ? 's' : '') + ' in mempool</div>'
+        : (pegoutAvailable != null && pegoutBal != null && pegoutAvailable < pegoutBal * 0.5
+          ? '<div class="health-indicator-sub" style="color:var(--muted)">Liquidity locked — quote valid up to 2h</div>'
+          : '')) +
+      (inFlightCount > 0 ? '<div class="health-indicator-sub">' + inFlightCount + ' in-flight peg-out' + (inFlightCount > 1 ? 's' : '') + '</div>' : '') +
+      '<div class="health-indicator-status ' + utxoStatus + '">' + statusLabels[utxoStatus] + '</div>' +
     '</div>' +
+    // Row 2, Col 1: Last Peg-In (under Peg-In Balance)
     '<div class="health-indicator">' +
       '<div class="health-indicator-label">Last Peg-In</div>' +
       '<div class="health-indicator-value">' + hoursLabel(peginHoursAgo) + '</div>' +
       '<div class="health-indicator-sub">' + (lastPeginDate ? fmtRBTC(lastPeginValue) : 'Never') + '</div>' +
       '<div class="health-indicator-sub">' + (lastPeginDate ? lastPeginDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '') + '</div>' +
     '</div>' +
+    // Row 2, Col 2: Last Peg-Out (under Peg-Out Balance)
     '<div class="health-indicator">' +
       '<div class="health-indicator-label">Last Peg-Out</div>' +
       '<div class="health-indicator-value">' + hoursLabel(pegoutHoursAgo) + '</div>' +
       '<div class="health-indicator-sub">' + (lastPegoutDate ? fmtRBTC(lastPegoutValue) : 'Never') + '</div>' +
       '<div class="health-indicator-sub">' + (lastPegoutDate ? lastPegoutDate.toLocaleDateString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '') + '</div>' +
     '</div>' +
+    // Row 2, Col 3: Operations (Deliveries + Penalties)
     '<div class="health-indicator">' +
-      '<div class="health-indicator-label">Penalties</div>' +
-      '<div class="health-indicator-value" style="color:' + (penaltyCount > 0 ? 'var(--red)' : 'var(--green)') + '">' + penaltyCount + '</div>' +
-      '<div class="health-indicator-sub">' + (penaltyCount === 0 ? 'clean record' : 'incurred') + '</div>' +
+      '<div class="health-indicator-label">Operations</div>' +
+      '<div class="health-indicator-value">' + (peginDeliveries + pegoutDeliveries) + '</div>' +
+      '<div class="health-indicator-sub">' + peginDeliveries + ' peg-in · ' + pegoutDeliveries + ' peg-out</div>' +
+      '<div class="health-indicator-sub">' + penaltyCount + ' penalt' + (penaltyCount === 1 ? 'y' : 'ies') + '</div>' +
     '</div>' +
   '</div>';
 
@@ -1933,7 +2001,7 @@ function setPeriod(p) {
 async function loadData() {
   const overlay = document.getElementById('loading-overlay');
   try {
-    const resp = await fetch('./data/dashboard.json');
+    const resp = await fetch('./data/dashboard.json?v=' + Date.now());
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     DATA = await resp.json();
     const genDate = new Date(DATA.generated_at);
@@ -1957,6 +2025,7 @@ def main():
     print("Loading data files...")
     flyover_pegins = load_json("flyover_pegins.json")
     flyover_pegouts = load_json("flyover_pegouts.json")
+    flyover_pegout_refunds = load_json("flyover_pegout_refunds.json")
     flyover_penalties = load_json("flyover_penalties.json")
     flyover_refunds = load_json("flyover_refunds.json")
     powpeg_pegins = load_json("powpeg_pegins.json")
@@ -1967,6 +2036,7 @@ def main():
 
     print(f"  Flyover peg-ins: {len(flyover_pegins)}")
     print(f"  Flyover peg-outs: {len(flyover_pegouts)}")
+    print(f"  Flyover peg-out refunds: {len(flyover_pegout_refunds)}")
     print(f"  Flyover penalties: {len(flyover_penalties)}")
     print(f"  Flyover refunds: {len(flyover_refunds)}")
     print(f"  PowPeg peg-ins: {len(powpeg_pegins)}")
@@ -1978,7 +2048,7 @@ def main():
 
     print("\nBuilding dashboard data...")
     data = build_dashboard_data(
-        flyover_pegins, flyover_pegouts,
+        flyover_pegins, flyover_pegouts, flyover_pegout_refunds,
         flyover_penalties, flyover_refunds,
         powpeg_pegins, powpeg_pegouts,
         lp_info=lp_info if isinstance(lp_info, dict) else {},

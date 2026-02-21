@@ -1,6 +1,39 @@
 [
   {
     "event": "PegOutDeposit",
+    "tx_hash": "0x8bca6c24249b49f72c942f1a48c1d2a99e675bff83320aacbe7bc8c9b2af2505",
+    "block_number": 8548532,
+    "quote_hash": "0x81be84ee08bed9a916444e05c4c515d8f5fb10194936dd81586959e1bf56c2d7",
+    "sender": "0xa380682204147122A32573FE369f53b8236C38c7",
+    "amount_wei": "4108880000000000",
+    "amount_rbtc": 0.00410888,
+    "timestamp": 1771598661,
+    "block_timestamp": "2026-02-20T14:44:21.000000Z"
+  },
+  {
+    "event": "PegOutDeposit",
+    "tx_hash": "0x5c868f2be68cec547d5a6a9b31fd6fa4fe6ada99a2c2b04de3e32af19d107d93",
+    "block_number": 8547866,
+    "quote_hash": "0x6a614bb4ddd41c02523c52b50f6cd68ecdbd854b9ecddcf22e54dfa3b5374e42",
+    "sender": "0x004ca129C71DA487aFD603BB123B12398A3C5a23",
+    "amount_wei": "424738660000000000",
+    "amount_rbtc": 0.42473866,
+    "timestamp": 1771582117,
+    "block_timestamp": "2026-02-20T10:08:37.000000Z"
+  },
+  {
+    "event": "PegOutDeposit",
+    "tx_hash": "0x6e9cad8bba0083691578c67b067abcebf88680bdaebab0e848ba644600ebfba6",
+    "block_number": 8547737,
+    "quote_hash": "0x34d8a245643af880ac6aa3579ee7bdd44302d1f1d8d72d9582acbd15c29f3f84",
+    "sender": "0x004ca129C71DA487aFD603BB123B12398A3C5a23",
+    "amount_wei": "50177660000000000",
+    "amount_rbtc": 0.05017766,
+    "timestamp": 1771579048,
+    "block_timestamp": "2026-02-20T09:17:28.000000Z"
+  },
+  {
+    "event": "PegOutDeposit",
     "tx_hash": "0x144056516c92ff815791c286533960ca317d807d3933292fd61b79b424368689",
     "block_number": 8516484,
     "quote_hash": "0xa1223790366df0b29793dd3ba952638179b50fed9d314add7f4a65c604e26f3d",
