@@ -602,6 +602,36 @@ def generate_html() -> str:
     border-radius: 2px;
     transition: width 0.3s ease;
   }
+  .health-panel.flash {
+    animation: healthFlash 0.6s ease;
+  }
+  @keyframes healthFlash {
+    0% { border-color: var(--border); }
+    30% { border-color: var(--green); }
+    100% { border-color: var(--border); }
+  }
+  .live-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--green);
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .health-updated {
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
 
   /* --- Traffic Section --- */
   .traffic-stats {
@@ -1188,7 +1218,8 @@ function computeWalletStats() {
     stats[period] = {
       avgFlyover: Math.round(avgF),
       avgPowpeg: Math.round(avgP),
-      avgCombined: Math.round(avgF) + Math.round(avgP),
+      avgCombined: cKeys.length > 0
+        ? Math.round(cKeys.reduce((s, k) => s + combinedGroups[k].size, 0) / cKeys.length) : 0,
       totalFlyover: allF.size,
       totalPowpeg: allP.size,
       totalCombined: allC.size,
@@ -1340,7 +1371,6 @@ function renderSummary() {
     const prevTxs = latest.previous.length;
     const curVol = sumField(latest.current, op.field);
     const prevVol = sumField(latest.previous, op.field);
-    const darkText = ['#F0FF96', '#FED8A7', '#DEFF19'].includes(op.color);
     totalTxs += curTxs;
     totalVol += curVol;
 
@@ -1733,8 +1763,9 @@ function renderHealth() {
       lastPeginValue = e.value_rbtc || 0;
     }
   }
+  const now = Date.now();
   const peginHoursAgo = lastPeginDate
-    ? (refTime - lastPeginDate) / (1000 * 60 * 60)
+    ? (now - lastPeginDate.getTime()) / (1000 * 60 * 60)
     : Infinity;
 
   let lastPegoutDate = null;
@@ -1747,7 +1778,7 @@ function renderHealth() {
     }
   }
   const pegoutHoursAgo = lastPegoutDate
-    ? (refTime - lastPegoutDate) / (1000 * 60 * 60)
+    ? (now - lastPegoutDate.getTime()) / (1000 * 60 * 60)
     : Infinity;
 
   // --- BTC UTXOs ---
@@ -1773,8 +1804,9 @@ function renderHealth() {
     if (!isFinite(hours)) return 'No data';
     if (hours < 1) return 'Just now';
     if (hours < 24) return Math.round(hours) + 'h ago';
-    const days = Math.floor(hours / 24);
-    const rem = Math.round(hours % 24);
+    const totalHours = Math.round(hours);
+    const days = Math.floor(totalHours / 24);
+    const rem = totalHours % 24;
     return days + 'd ' + rem + 'h ago';
   }
 
@@ -1784,13 +1816,25 @@ function renderHealth() {
     return '<div class="health-bar"><div class="health-bar-fill" style="width:' + pct + '%;background:' + statusColors[status] + '"></div></div>';
   }
 
+  const lpLive = lp._live;
+  const liveUpdatedAt = lp._updated_at ? new Date(lp._updated_at) : null;
+  const liveAgoSec = liveUpdatedAt ? Math.round((Date.now() - liveUpdatedAt.getTime()) / 1000) : null;
+  const liveAgoLabel = liveAgoSec != null
+    ? (liveAgoSec < 5 ? 'just now'
+       : liveAgoSec < 120 ? liveAgoSec + 's ago'
+       : Math.round(liveAgoSec / 60) + 'm ago')
+    : '';
+
   let html = '<div class="health-header">' +
     '<h3>' +
       '<span class="health-overall-dot ' + (overall !== 'healthy' ? 'pulse' : '') + '" style="background:' + statusColors[overall] + '"></span>' +
       '<span class="health-overall-label" style="color:' + statusColors[overall] + '">' + statusLabels[overall] + '</span>' +
       '<span class="lp-name" style="margin-left:12px">' + lpName + '</span>' +
+      (lpLive ? '<span class="live-badge">LIVE</span>' : '') +
     '</h3>' +
-    (isStale ? '<span class="health-staleness">Data is ' + Math.round(dataAgeHours) + 'h old</span>' : '') +
+    (lpLive
+      ? '<span class="health-updated">Updated ' + liveAgoLabel + '</span>'
+      : (isStale ? '<span class="health-staleness">Data is ' + Math.round(dataAgeHours) + 'h old</span>' : '')) +
   '</div>' +
   '<div class="health-grid">' +
     // Row 1, Col 1: Peg-In Balance
@@ -1876,8 +1920,9 @@ document.addEventListener('click', () => {
 
 function setChartMode(mode) {
   chartMode = mode;
-  document.querySelectorAll('#vol-chart-toggle button').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('#vol-chart-toggle button').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase() === mode);
+  });
   renderCharts();
 }
 
@@ -1962,7 +2007,6 @@ function renderLargestTx() {
     const val = largest ? (largest[op.field] || 0) : 0;
     const date = largest ? parseTS(largest.timestamp) : null;
     const hash = largest ? largest.tx_hash : '';
-    const darkText = ['#F0FF96', '#FED8A7', '#DEFF19'].includes(op.color);
     const explorer = 'https://rootstock.blockscout.com/tx/';
 
     html += '<div class="op-card" style="border-top-color:' + op.color + '">' +
@@ -1998,6 +2042,80 @@ function setPeriod(p) {
   renderAll();
 }
 
+// ─── Live LP Data ───
+
+const LP_BTC_WALLET = '1D2xucTYkxCHvaaZuaKVJTfZQWr4PUjzAy';
+const LP_RBTC_WALLET = '0x82A06eBdb97776a2DA4041DF8F2b2Ea8d3257852';
+const LPS_URL = 'https://lps.tekscapital.com/providers/liquidity';
+
+async function fetchLiveLPData() {
+  if (!DATA || !DATA.lp_info) return;
+
+  const results = await Promise.allSettled([
+    fetch(LPS_URL).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+    fetch('https://mempool.space/api/address/' + LP_BTC_WALLET + '/utxo').then(r => r.ok ? r.json() : Promise.reject(r.status)),
+    fetch('https://mempool.space/api/address/' + LP_BTC_WALLET + '/txs/mempool').then(r => r.ok ? r.json() : Promise.reject(r.status)),
+    fetch('https://rootstock.blockscout.com/api/v2/addresses/' + LP_RBTC_WALLET).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+  ]);
+
+  const [lpsResult, utxoResult, mempoolResult, blockscoutResult] = results;
+
+  // LPS API — update advertised liquidity
+  if (lpsResult.status === 'fulfilled') {
+    try {
+      const data = lpsResult.value;
+      const peginWei = parseInt(data.peginLiquidityAmount || '0');
+      const pegoutWei = parseInt(data.pegoutLiquidityAmount || '0');
+      if (peginWei > 0) DATA.lp_info.lps_pegin_rbtc = peginWei / 1e18;
+      if (pegoutWei > 0) DATA.lp_info.lps_pegout_btc = pegoutWei / 1e18;
+    } catch(e) { /* keep static values */ }
+  }
+
+  // mempool.space UTXOs — update BTC balance and UTXO count
+  if (utxoResult.status === 'fulfilled') {
+    try {
+      const utxos = utxoResult.value;
+      if (Array.isArray(utxos)) {
+        DATA.lp_info.btc_utxo_count = utxos.length;
+        DATA.lp_info.btc_utxos = utxos.map(u => ({ value_btc: (u.value || 0) / 1e8, confirmed: u.status && u.status.confirmed }));
+        const totalSats = utxos.reduce((sum, u) => sum + (u.value || 0), 0);
+        DATA.lp_info.pegout_btc = totalSats / 1e8;
+      }
+    } catch(e) { /* keep static values */ }
+  }
+
+  // mempool.space mempool — update pending tx count
+  if (mempoolResult.status === 'fulfilled') {
+    try {
+      const txs = mempoolResult.value;
+      DATA.lp_info.btc_mempool_tx_count = Array.isArray(txs) ? txs.length : 0;
+    } catch(e) { /* keep static values */ }
+  }
+
+  // Blockscout — update RBTC balance
+  if (blockscoutResult.status === 'fulfilled') {
+    try {
+      const addr = blockscoutResult.value;
+      if (addr && addr.coin_balance) {
+        DATA.lp_info.pegin_rbtc = parseFloat(addr.coin_balance) / 1e18;
+      }
+    } catch(e) { /* keep static values */ }
+  }
+
+  const anySucceeded = results.some(r => r.status === 'fulfilled');
+  if (anySucceeded) {
+    DATA.lp_info._live = true;
+    DATA.lp_info._updated_at = new Date().toISOString();
+  }
+
+  // Flash the health panel and re-render
+  const panel = document.getElementById('health-panel');
+  panel.classList.add('flash');
+  setTimeout(() => panel.classList.remove('flash'), 600);
+
+  renderHealth();
+}
+
 async function loadData() {
   const overlay = document.getElementById('loading-overlay');
   try {
@@ -2008,6 +2126,8 @@ async function loadData() {
     document.getElementById('generated-at').textContent = '\u00b7 ' + genDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     overlay.classList.add('hidden');
     renderAll();
+    fetchLiveLPData();
+    setInterval(fetchLiveLPData, 60000);
   } catch(e) {
     console.error('Failed to load dashboard data:', e);
     overlay.textContent = 'Failed to load dashboard data: ' + e.message;
