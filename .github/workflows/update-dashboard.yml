@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    # Run every 6 hours
-    - cron: '0 */6 * * *'
+    # Run every 2 hours
+    - cron: '0 */2 * * *'
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:

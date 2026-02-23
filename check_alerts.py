@@ -230,6 +230,16 @@ def evaluate_rules(thresholds):
             else:
                 alerts.append({"rule": "btc_utxos", "severity": HEALTHY, "message": ""})
 
+        # LPS API unreachable — on-chain data exists but LPS API values missing
+        if lp.get("pegin_rbtc") is not None and lp.get("lps_pegin_rbtc") is None:
+            alerts.append({
+                "rule": "lps_api_unreachable",
+                "severity": WARNING,
+                "message": "LPS API data missing — dashboard falling back to on-chain values",
+            })
+        else:
+            alerts.append({"rule": "lps_api_unreachable", "severity": HEALTHY, "message": ""})
+
         # Operational status — peg-in
         op_pegin = lp.get("is_operational_pegin")
         if op_pegin is not None:
@@ -332,6 +342,132 @@ def send_telegram(token, chat_id, rule, severity, message, dashboard_url, is_rec
     except requests.RequestException as exc:
         log.error("Telegram send failed for %s: %s", rule, exc)
 
+def send_telegram_html(token, chat_id, html):
+    """Send a pre-formatted HTML message to Telegram."""
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {"chat_id": chat_id, "text": html, "parse_mode": "HTML"}
+    try:
+        resp = requests.post(url, json=payload, timeout=10)
+        resp.raise_for_status()
+        log.info("Telegram daily summary sent")
+    except requests.RequestException as exc:
+        log.error("Telegram daily summary send failed: %s", exc)
+
+
+# ---------------------------------------------------------------------------
+# Daily summary
+# ---------------------------------------------------------------------------
+
+def _count_last_24h(records, ts_key="block_timestamp"):
+    """Count transactions and sum RBTC volume from the last 24 hours."""
+    cutoff = datetime.now(timezone.utc).timestamp() - 86400
+    count = 0
+    volume = 0.0
+    for rec in records:
+        ts_str = rec.get(ts_key)
+        if not ts_str:
+            continue
+        try:
+            ts = datetime.fromisoformat(ts_str.replace("Z", "+00:00")).timestamp()
+        except (ValueError, TypeError):
+            continue
+        if ts >= cutoff:
+            count += 1
+            volume += rec.get("value_rbtc") or rec.get("amount_rbtc") or 0.0
+    return count, volume
+
+
+def maybe_send_daily_summary(state, alerts, dashboard_url, tg_token, tg_chat):
+    """
+    Send a daily summary message if 24h have elapsed since the last one.
+    Returns True if a summary was sent/logged.
+    """
+    now_ts = time.time()
+
+    # Check 24h cooldown
+    summary_state = state.get("_daily_summary", {})
+    last_sent = summary_state.get("timestamp", 0)
+    if now_ts - last_sent < 86400:
+        log.info("Daily summary: skipped (last sent %.1fh ago)", (now_ts - last_sent) / 3600)
+        return False
+
+    # Load transaction data
+    flyover_pegins = load_json(DATA_DIR / "flyover_pegins.json") or []
+    flyover_pegouts = load_json(DATA_DIR / "flyover_pegouts.json") or []
+    powpeg_pegins = load_json(DATA_DIR / "powpeg_pegins.json") or []
+    powpeg_pegouts = load_json(DATA_DIR / "powpeg_pegouts.json") or []
+    lp = load_json(DATA_DIR / "flyover_lp_info.json")
+
+    fi_count, fi_vol = _count_last_24h(flyover_pegins)
+    fo_count, fo_vol = _count_last_24h(flyover_pegouts)
+    pi_count, pi_vol = _count_last_24h(powpeg_pegins)
+    po_count, po_vol = _count_last_24h(powpeg_pegouts)
+
+    # LP balances
+    pegin_avail = ""
+    pegout_avail = ""
+    utxo_line = ""
+    if lp:
+        pegin_bal = lp.get("lps_pegin_rbtc") or lp.get("pegin_rbtc")
+        if pegin_bal is not None:
+            pegin_avail = f"Peg-in: {pegin_bal:.2f} RBTC available"
+        pegout_bal = lp.get("lps_pegout_btc") or lp.get("pegout_btc")
+        if pegout_bal is not None:
+            pegout_avail = f"Peg-out: {pegout_bal:.2f} BTC available"
+        utxo = lp.get("btc_utxo_count")
+        if utxo is not None:
+            utxo_line = f"UTXOs: {utxo}"
+
+    # Active warnings/criticals
+    active_warnings = [a for a in alerts if a["severity"] == WARNING]
+    active_criticals = [a for a in alerts if a["severity"] == CRITICAL]
+
+    def _tx_label(count):
+        return "tx" if count == 1 else "txs"
+
+    today = datetime.now(timezone.utc).strftime("%b %d, %Y")
+    lines = [f"\U0001f4ca Daily Summary \u2014 {today}", ""]
+
+    lines.append("Flyover (24h)")
+    lines.append(f"Peg-in: {fi_count} {_tx_label(fi_count)}, {fi_vol:.2f} RBTC")
+    lines.append(f"Peg-out: {fo_count} {_tx_label(fo_count)}, {fo_vol:.2f} RBTC")
+    lines.append("")
+
+    lines.append("PowPeg (24h)")
+    lines.append(f"Peg-in: {pi_count} {_tx_label(pi_count)}, {pi_vol:.2f} RBTC")
+    lines.append(f"Peg-out: {po_count} {_tx_label(po_count)}, {po_vol:.2f} RBTC")
+    lines.append("")
+
+    if pegin_avail or pegout_avail or utxo_line:
+        lines.append("LP Balances")
+        if pegin_avail:
+            lines.append(pegin_avail)
+        if pegout_avail:
+            lines.append(pegout_avail)
+        if utxo_line:
+            lines.append(utxo_line)
+        lines.append("")
+
+    if active_criticals:
+        lines.append(f"\U0001f534 {len(active_criticals)} active critical{'s' if len(active_criticals) != 1 else ''}")
+    if active_warnings:
+        lines.append(f"\u26a0 {len(active_warnings)} active warning{'s' if len(active_warnings) != 1 else ''}")
+    if not active_criticals and not active_warnings:
+        lines.append("\u2705 All systems healthy")
+
+    lines.append(f"Dashboard: {dashboard_url}")
+
+    summary_text = "\n".join(lines)
+    log.info("Daily summary:\n%s", summary_text)
+
+    if tg_token and tg_chat:
+        html = html_lib.escape(summary_text)
+        send_telegram_html(tg_token, tg_chat, html)
+
+    state["_daily_summary"] = {"timestamp": now_ts}
+    return True
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -379,6 +515,10 @@ def main():
             "timestamp": now_ts,
             "message": message,
         }
+
+    # Daily summary (separate from threshold alerts)
+    if maybe_send_daily_summary(state, alerts, dashboard_url, tg_token, tg_chat):
+        notifications_sent += 1
 
     save_alert_state(state)
     log.info("Alert check complete: %d rules evaluated, %d notifications sent", len(alerts), notifications_sent)
