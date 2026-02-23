@@ -242,17 +242,10 @@ def evaluate_rules(thresholds):
             else:
                 alerts.append({"rule": "operational_pegin", "severity": HEALTHY, "message": ""})
 
-        # Operational status — peg-out
+        # Operational status — peg-out (informational only — logged but not alerted)
         op_pegout = lp.get("is_operational_pegout")
-        if op_pegout is not None:
-            if not op_pegout:
-                alerts.append({
-                    "rule": "operational_pegout",
-                    "severity": CRITICAL,
-                    "message": "LP is NOT operational for peg-out",
-                })
-            else:
-                alerts.append({"rule": "operational_pegout", "severity": HEALTHY, "message": ""})
+        if op_pegout is not None and not op_pegout:
+            log.info("Operational info: LP is NOT operational for peg-out")
 
         # Collateral below minimum (informational only — logged but not alerted)
         collateral = lp.get("pegout_collateral")
