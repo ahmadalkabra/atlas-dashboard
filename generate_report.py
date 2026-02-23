@@ -1722,36 +1722,21 @@ function renderHealth() {
   const pegoutDeliveries = DATA.flyover_pegouts.length;
   const penaltyCount = topLP ? topLP[1].penalties : 0;
 
-  // --- Balances ---
-  const peginBal = lp.pegin_rbtc != null ? parseFloat(lp.pegin_rbtc) : null;
+  // --- Balances (LPS API = actual available liquidity; on-chain = wallet only) ---
+  const peginOnChain = lp.pegin_rbtc != null ? parseFloat(lp.pegin_rbtc) : null;
+  const peginBal = lp.lps_pegin_rbtc != null ? parseFloat(lp.lps_pegin_rbtc) : peginOnChain;
   const peginStatus = peginBal != null
     ? assessStatus(peginBal, HEALTH_THRESHOLDS.peginBalance)
     : 'warning';
 
-  const pegoutBal = lp.pegout_btc != null ? parseFloat(lp.pegout_btc) : null;
-  const pegoutAvailable = lp.lps_pegout_btc != null ? parseFloat(lp.lps_pegout_btc) : pegoutBal;
-  const pegoutStatus = pegoutAvailable != null
-    ? assessStatus(pegoutAvailable, HEALTH_THRESHOLDS.pegoutBalance)
+  const pegoutOnChain = lp.pegout_btc != null ? parseFloat(lp.pegout_btc) : null;
+  const pegoutBal = lp.lps_pegout_btc != null ? parseFloat(lp.lps_pegout_btc) : pegoutOnChain;
+  const pegoutStatus = pegoutBal != null
+    ? assessStatus(pegoutBal, HEALTH_THRESHOLDS.pegoutBalance)
     : 'warning';
-
-  // --- In-flight peg-outs (deposited but LP hasn't claimed BTC delivery) ---
-  const refundedHashes = new Set(DATA.pegout_refund_hashes || []);
-  const userRefundedHashes = new Set((DATA.refunds || []).map(r => r.quote_hash).filter(Boolean));
-  let inFlightCount = 0;
-  let inFlightVolume = 0;
-  for (const po of DATA.flyover_pegouts) {
-    const qh = po.quote_hash || '';
-    if (qh && !refundedHashes.has(qh) && !userRefundedHashes.has(qh)) {
-      inFlightCount++;
-      inFlightVolume += po.value_rbtc || po.amount_rbtc || 0;
-    }
-  }
 
   // --- Mempool (pending BTC txs) ---
   const mempoolTxCount = lp.btc_mempool_tx_count != null ? parseInt(lp.btc_mempool_tx_count) : null;
-
-  // --- Reserved liquidity (on-chain minus available) ---
-  const reservedBtc = (pegoutBal != null && pegoutAvailable != null && pegoutBal > pegoutAvailable) ? pegoutBal - pegoutAvailable : null;
 
   // --- Last activity ---
   let lastPeginDate = null;
@@ -1846,7 +1831,7 @@ function renderHealth() {
       '</div>' +
       '<div class="health-indicator-label">Peg-In Balance</div>' +
       '<div class="health-indicator-value">' + (peginBal != null ? fmtRBTC(peginBal) : 'N/A') + '</div>' +
-      '<div class="health-indicator-sub">' + (peginBal != null ? 'RBTC on-chain' : 'No LP data') + '</div>' +
+      '<div class="health-indicator-sub">' + (peginBal != null ? 'RBTC available' : 'No LP data') + '</div>' +
       '<div class="health-indicator-status ' + peginStatus + '">' + statusLabels[peginStatus] + '</div>' +
     '</div>' +
     // Row 1, Col 2: Peg-Out Balance
@@ -1858,9 +1843,7 @@ function renderHealth() {
       '</div>' +
       '<div class="health-indicator-label">Peg-Out Balance</div>' +
       '<div class="health-indicator-value">' + (pegoutBal != null ? fmtRBTC(pegoutBal) : 'N/A') + '</div>' +
-      '<div class="health-indicator-sub">' + (pegoutBal != null ? 'BTC on-chain' : 'No LP data') + '</div>' +
-      (pegoutAvailable != null ? '<div class="health-indicator-sub" style="color:' + statusColors[pegoutStatus] + '">' + fmtRBTC(pegoutAvailable) + ' available</div>' : '') +
-      (reservedBtc != null && reservedBtc > 0.001 ? '<div class="health-indicator-sub">' + fmtRBTC(reservedBtc) + ' reserved</div>' : '') +
+      '<div class="health-indicator-sub">' + (pegoutBal != null ? 'BTC available' : 'No LP data') + '</div>' +
       '<div class="health-indicator-status ' + pegoutStatus + '">' + statusLabels[pegoutStatus] + '</div>' +
     '</div>' +
     // Row 1, Col 3: BTC UTXOs
@@ -1875,10 +1858,7 @@ function renderHealth() {
       '<div class="health-indicator-sub">' + (utxoCount != null ? (utxoCount === 1 ? '1 spendable output' : utxoCount + ' spendable outputs') : 'No data') + '</div>' +
       (mempoolTxCount > 0
         ? '<div class="health-indicator-sub" style="color:#EAB308">' + mempoolTxCount + ' pending tx' + (mempoolTxCount > 1 ? 's' : '') + ' in mempool</div>'
-        : (pegoutAvailable != null && pegoutBal != null && pegoutAvailable < pegoutBal * 0.5
-          ? '<div class="health-indicator-sub" style="color:var(--muted)">Liquidity locked — quote valid up to 2h</div>'
-          : '')) +
-      (inFlightCount > 0 ? '<div class="health-indicator-sub">' + inFlightCount + ' in-flight peg-out' + (inFlightCount > 1 ? 's' : '') + '</div>' : '') +
+        : '') +
       '<div class="health-indicator-status ' + utxoStatus + '">' + statusLabels[utxoStatus] + '</div>' +
     '</div>' +
     // Row 2, Col 1: Last Peg-In (under Peg-In Balance)

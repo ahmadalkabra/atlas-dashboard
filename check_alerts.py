@@ -173,40 +173,40 @@ def evaluate_rules(thresholds):
             except (ValueError, TypeError):
                 log.warning("Could not parse fetched_at: %s", fetched_at)
 
-        # Peg-in balance (RBTC)
-        pegin = lp.get("pegin_rbtc")
+        # Peg-in balance — LPS API value (actual available), fallback to on-chain
+        pegin = lp.get("lps_pegin_rbtc") or lp.get("pegin_rbtc")
         if pegin is not None:
             thresh = thresholds["pegin_balance"]
             if pegin < thresh["critical"]:
                 alerts.append({
                     "rule": "pegin_balance",
                     "severity": CRITICAL,
-                    "message": f"TeksCapital RBTC balance: {pegin:.4f} RBTC (threshold: <{thresh['critical']})",
+                    "message": f"TeksCapital peg-in available: {pegin:.4f} RBTC (threshold: <{thresh['critical']})",
                 })
             elif pegin < thresh["warning"]:
                 alerts.append({
                     "rule": "pegin_balance",
                     "severity": WARNING,
-                    "message": f"TeksCapital RBTC balance: {pegin:.4f} RBTC (threshold: <{thresh['warning']})",
+                    "message": f"TeksCapital peg-in available: {pegin:.4f} RBTC (threshold: <{thresh['warning']})",
                 })
             else:
                 alerts.append({"rule": "pegin_balance", "severity": HEALTHY, "message": ""})
 
-        # Peg-out balance (BTC)
-        pegout = lp.get("pegout_btc")
+        # Peg-out balance — LPS API value (actual available), fallback to on-chain
+        pegout = lp.get("lps_pegout_btc") or lp.get("pegout_btc")
         if pegout is not None:
             thresh = thresholds["pegout_balance"]
             if pegout < thresh["critical"]:
                 alerts.append({
                     "rule": "pegout_balance",
                     "severity": CRITICAL,
-                    "message": f"TeksCapital BTC balance: {pegout:.4f} BTC (threshold: <{thresh['critical']})",
+                    "message": f"TeksCapital peg-out available: {pegout:.4f} BTC (threshold: <{thresh['critical']})",
                 })
             elif pegout < thresh["warning"]:
                 alerts.append({
                     "rule": "pegout_balance",
                     "severity": WARNING,
-                    "message": f"TeksCapital BTC balance: {pegout:.4f} BTC (threshold: <{thresh['warning']})",
+                    "message": f"TeksCapital peg-out available: {pegout:.4f} BTC (threshold: <{thresh['warning']})",
                 })
             else:
                 alerts.append({"rule": "pegout_balance", "severity": HEALTHY, "message": ""})
