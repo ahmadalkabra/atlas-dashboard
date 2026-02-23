@@ -5641,5 +5641,27 @@
     "amount_rbtc": 0.0703027,
     "timestamp": 1744282618,
     "block_timestamp": "2025-04-10T10:56:58.000000Z"
+  },
+  {
+    "event": "PegOutDeposit",
+    "tx_hash": "0xa538ece23ae40cc45bea05cab12c48534e2f28c402aec9196a8311b935749d66",
+    "block_number": 8556388,
+    "quote_hash": "0xf250ce4fcdb51f38aa9e4a598cfb5d0704431e7912fe4d7ad21610a6b6fedb34",
+    "sender": "0xa197E51CED23fb39F0d5A6172f6809f0a2bCC5C3",
+    "amount_wei": "15756145000000000",
+    "amount_rbtc": 0.015756145,
+    "timestamp": 1771793756,
+    "block_timestamp": "2026-02-22T20:55:56.000000Z"
+  },
+  {
+    "event": "PegOutDeposit",
+    "tx_hash": "0x29bea3e9206973b0ebc68d8a9f703de0b828d693c385a4b72753b5ed6a9b25a0",
+    "block_number": 8551984,
+    "quote_hash": "0x1581cf6e77e1aef62a26f386837857b613a83ca6bf42402e6915a10eab00ee22",
+    "sender": "0xa380682204147122A32573FE369f53b8236C38c7",
+    "amount_wei": "13971027880000000000",
+    "amount_rbtc": 13.97102788,
+    "timestamp": 1771685070,
+    "block_timestamp": "2026-02-21T14:44:30.000000Z"
   }
 ]

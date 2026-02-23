@@ -3589,5 +3589,12 @@
     "block_number": 7435144,
     "quote_hash": "0x829e8e6324c28645c5382da5f986607147a43976442237d9b2d57dc70fb40ab1",
     "block_timestamp": "2025-04-10T11:43:42.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x2a3d89af3d638ffdd80697c4cb7151392b4d29929b7af570bd8fd968cc81fd2d",
+    "block_number": 8552312,
+    "quote_hash": "0x1581cf6e77e1aef62a26f386837857b613a83ca6bf42402e6915a10eab00ee22",
+    "block_timestamp": "2026-02-21T16:59:03.000000Z"
   }
 ]

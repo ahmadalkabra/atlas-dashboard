@@ -1,0 +1,17 @@
+{
+  "source": "clarity",
+  "updated_at": "2026-02-19",
+  "date_range": "all_time",
+  "sessions": 157,
+  "unique_users": 26,
+  "pages_per_session": 1.55,
+  "avg_active_time_min": 4.0,
+  "new_user_pct": 14.29,
+  "returning_user_pct": 85.71,
+  "funnel": [
+    {"step": "Landing", "url": "/", "sessions": 157},
+    {"step": "Review Quote", "url": "/confirm", "sessions": 29},
+    {"step": "BTC Deposit", "url": "/qrCode", "sessions": 11},
+    {"step": "Completed", "url": "/history", "sessions": 15}
+  ]
+}
