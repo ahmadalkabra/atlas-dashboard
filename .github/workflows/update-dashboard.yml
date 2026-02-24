@@ -50,6 +50,9 @@ jobs:
       - name: Fetch BTC locked stats
         run: python -u fetch_btc_locked.py
 
+      - name: Fetch route health
+        run: python -u fetch_route_health.py
+
       - name: Generate dashboard
         run: python -u generate_report.py
 

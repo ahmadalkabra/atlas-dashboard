@@ -3,7 +3,9 @@
     "pegin_balance": { "warning": 10, "critical": 5 },
     "pegout_balance": { "warning": 10, "critical": 5 },
     "btc_utxos": { "warning": 4, "critical": 2 },
-    "staleness_hours": { "warning": 25, "critical": 48 }
+    "staleness_hours": { "warning": 25, "critical": 48 },
+    "route_response_time_ms": { "warning": 5000, "critical": 10000 },
+    "route_staleness_hours": { "warning": 4, "critical": 8 }
   },
   "cooldown_minutes": { "warning": 240, "critical": 60 },
   "dashboard_url": "https://ahmadalkabra.github.io/atlas-dashboard/"

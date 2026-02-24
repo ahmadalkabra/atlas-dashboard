@@ -19,7 +19,7 @@ def load_json(filename: str) -> list | dict:
     path = os.path.join(DATA_DIR, filename)
     if not os.path.exists(path):
         print(f"  Warning: {path} not found, returning empty")
-        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json", "web_analytics.json")
+        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json", "web_analytics.json", "route_health.json")
         return {} if filename in dict_files else []
     with open(path) as f:
         return json.load(f)
@@ -47,6 +47,7 @@ def build_dashboard_data(
     lp_info: dict | None = None,
     btc_locked_stats: dict | None = None,
     web_analytics: dict | None = None,
+    route_health: dict | None = None,
 ) -> dict:
     """Build the full dashboard dataset for embedding in HTML."""
 
@@ -156,6 +157,7 @@ def build_dashboard_data(
         "lp_info": lp_info or {},
         "btc_locked": btc_locked_stats or {},
         "web_analytics": web_analytics or {},
+        "route_health": route_health or {},
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -633,6 +635,170 @@ def generate_html() -> str:
     padding: 4px 10px;
   }
 
+  /* --- Route Health Section --- */
+  .route-health-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .route-health-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .route-health-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .route-health-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 700px) {
+    .route-health-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 450px) {
+    .route-health-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .route-card {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border-left: 3px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .route-card.status-operational { border-left-color: #08FFD1; }
+  .route-card.status-degraded { border-left-color: #DEFF19; }
+  .route-card.status-down { border-left-color: #FF70E0; }
+  .route-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .route-card-name {
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .route-card-type {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  .route-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .route-status-dot.operational { background: #08FFD1; }
+  .route-status-dot.degraded { background: #DEFF19; }
+  .route-status-dot.down { background: #FF70E0; animation: healthPulse 2s ease-in-out infinite; }
+  .route-card-status {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 8px;
+  }
+  .route-card-status.operational { color: #08FFD1; }
+  .route-card-status.degraded { color: #DEFF19; }
+  .route-card-status.down { color: #FF70E0; }
+  .route-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .route-card-row .label { color: var(--muted); }
+  .route-card-row .value { color: var(--text); font-weight: 500; text-align: right; }
+  .route-card-row .value.dim { color: var(--muted); font-weight: 400; }
+  .route-card-divider {
+    border-top: 1px solid var(--border);
+    margin: 6px 0;
+  }
+  .route-card-details {
+    margin-top: 4px;
+  }
+  .route-card-detail-extra {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .route-card-detail-extra .up { color: var(--green); }
+  .route-card-detail-extra .warn { color: #EAB308; }
+  .route-card-detail-extra .err { color: #FF70E0; }
+  .route-asset-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .route-asset-tag {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: var(--surface-2);
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+  .route-pairs-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 6px 0 2px;
+    user-select: none;
+  }
+  .route-pairs-toggle:hover { color: var(--text); }
+  .route-pairs-toggle .arrow {
+    display: inline-block;
+    font-size: 9px;
+    transition: transform 0.2s ease;
+  }
+  .route-pairs-toggle.open .arrow { transform: rotate(90deg); }
+  .route-pairs-list {
+    display: none;
+    padding-top: 4px;
+  }
+  .route-pairs-list.open { display: block; }
+  .route-uptime-row {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+  .route-uptime-row span { color: var(--text); font-weight: 500; }
+
   /* --- Traffic Section --- */
   .traffic-stats {
     display: grid;
@@ -940,6 +1106,11 @@ def generate_html() -> str:
   <section class="health-section" id="health-section-wrapper">
     <div class="section-title">Flyover Liquidity Provider</div>
     <div id="health-panel" class="health-panel"></div>
+  </section>
+
+  <section class="health-section" id="route-health-section" style="display:none">
+    <div class="section-title">Route Health</div>
+    <div id="route-health-panel" class="route-health-panel"></div>
   </section>
 
   <section class="health-section" id="largest-tx-section">
@@ -1898,6 +2069,182 @@ document.addEventListener('click', () => {
   document.querySelectorAll('.health-popover.open').forEach(p => p.classList.remove('open'));
 });
 
+// ─── Route Health ───
+
+function renderRouteHealth() {
+  const section = document.getElementById('route-health-section');
+  const panel = document.getElementById('route-health-panel');
+  const rh = DATA.route_health;
+  if (!rh || !rh.swap_api) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+
+  const apiOk = rh.swap_api.status === 'operational';
+  const native = rh.native_routes || {};
+  const swapProviders = rh.swap_providers || {};
+  const providerIds = rh.swap_provider_ids || [];
+  const changes = rh.provider_changes || [];
+  const limits = rh.limits_btc_rbtc;
+  const history = rh.history || [];
+  const MIN_HISTORY_FOR_UPTIME = 12;
+
+  // Known providers that are expected (including upcoming)
+  const knownProviders = ['BOLTZ', 'CHANGELLY', 'SYMBIOSIS', 'LIFI'];
+  const enabledSet = new Set(providerIds);
+
+  // Overall: API up + count
+  const totalEnabled = providerIds.length;
+  const overallOk = apiOk && totalEnabled > 0;
+  const overallColor = apiOk ? '#08FFD1' : '#FF70E0';
+  const overallLabel = !apiOk ? 'Swap API Down' : totalEnabled + ' provider' + (totalEnabled !== 1 ? 's' : '') + ' enabled';
+
+  function computeUptime(key) {
+    if (history.length < MIN_HISTORY_FOR_UPTIME) return null;
+    let up = 0;
+    for (const h of history) { if (h[key] === 'up') up++; }
+    return Math.round((up / history.length) * 1000) / 10;
+  }
+
+  function row(label, value) {
+    return '<div class="route-card-row"><span class="label">' + label + '</span><span class="value">' + value + '</span></div>';
+  }
+
+  let html = '';
+
+  html += '<div class="route-health-grid">';
+
+  // --- Native routes: PowPeg ---
+  if (native.powpeg) {
+    const p = native.powpeg;
+    html += '<div class="route-card status-operational">' +
+      '<div class="route-card-header">' +
+        '<div class="route-card-name"><span class="route-status-dot operational"></span>' + p.name + '</div>' +
+        '<span class="route-card-type">Native</span>' +
+      '</div>' +
+      '<div class="route-card-status operational">ENABLED</div>' +
+      '<div class="route-card-details route-card-detail-extra">' +
+        row('Speed', p.estimated_speed) +
+        row('Fee', p.fee) +
+        row('Direction', 'BTC \\u2194 RBTC') +
+      '</div>' +
+      '<div class="route-card-divider"></div>' +
+      '<div class="route-asset-list">' +
+        (p.tokens || []).map(function(t) { return '<span class="route-asset-tag">' + t + '</span>'; }).join('') +
+      '</div>' +
+    '</div>';
+  }
+
+  // --- Native routes: Flyover ---
+  if (native.flyover) {
+    const f = native.flyover;
+    html += '<div class="route-card status-operational">' +
+      '<div class="route-card-header">' +
+        '<div class="route-card-name"><span class="route-status-dot operational"></span>' + f.name + '</div>' +
+        '<span class="route-card-type">LP Bridge</span>' +
+      '</div>' +
+      '<div class="route-card-status operational">ENABLED</div>' +
+      '<div class="route-card-details route-card-detail-extra">' +
+        row('Speed', f.estimated_speed) +
+        row('Fee', f.fee) +
+        row('Direction', 'BTC \\u2194 RBTC') +
+      '</div>' +
+      '<div class="route-card-divider"></div>' +
+      '<div class="route-asset-list">' +
+        (f.tokens || []).map(function(t) { return '<span class="route-asset-tag">' + t + '</span>'; }).join('') +
+      '</div>' +
+    '</div>';
+  }
+
+  // --- Swap providers (from API) ---
+  const netNames = { '30': 'RSK', '31': 'RSK Test', '1': 'Ethereum', '56': 'BSC', 'BTC': 'Bitcoin', 'LN': 'Lightning' };
+  function fmtPair(p) {
+    const fromParts = (p.from || '').split('(');
+    const toParts = (p.to || '').split('(');
+    const fromNetRaw = fromParts.length > 1 ? fromParts[1].replace(')', '') : '';
+    const toNetRaw = toParts.length > 1 ? toParts[1].replace(')', '') : '';
+    const fromNet = netNames[fromNetRaw] || fromNetRaw || '?';
+    const toNet = netNames[toNetRaw] || toNetRaw || '?';
+    const fromTok = (p.from_token || '?').replace(/</g, '&lt;');
+    const toTok = (p.to_token || '?').replace(/</g, '&lt;');
+    return fromTok + ' <span style="color:var(--muted)">(' + fromNet + ')</span> \\u2192 ' + toTok + ' <span style="color:var(--muted)">(' + toNet + ')</span>';
+  }
+
+  for (const pid of knownProviders) {
+    const key = pid.toLowerCase();
+    const p = swapProviders[key];
+    const enabled = enabledSet.has(pid);
+
+    if (enabled && p) {
+      // Provider is live — show pairs in collapsible
+      const pairId = 'route-pairs-' + key;
+      const pairsHtml = (p.pairs || []).map(function(pair) {
+        return '<div style="font-size:11px;line-height:1.8">' + fmtPair(pair) + '</div>';
+      }).join('');
+
+      html += '<div class="route-card status-operational">' +
+        '<div class="route-card-header">' +
+          '<div class="route-card-name"><span class="route-status-dot operational"></span>' + p.name + '</div>' +
+          '<span class="route-card-type">Swap</span>' +
+        '</div>' +
+        '<div class="route-card-status operational">ENABLED</div>' +
+        '<div class="route-card-details route-card-detail-extra">' +
+          row('Pairs', p.pair_count + ' (' + p.inbound_pairs + ' in, ' + p.outbound_pairs + ' out)') +
+        '</div>' +
+        '<div class="route-pairs-toggle" onclick="toggleRoutePairs(this, \\'' + pairId + '\\')">' +
+          '<span class="arrow">\\u25b6</span> Show pairs' +
+        '</div>' +
+        '<div class="route-pairs-list" id="' + pairId + '">' + pairsHtml + '</div>' +
+      '</div>';
+    } else {
+      // Provider not enabled — show as pending/upcoming
+      html += '<div class="route-card status-degraded">' +
+        '<div class="route-card-header">' +
+          '<div class="route-card-name"><span class="route-status-dot degraded"></span>' + pid.charAt(0) + pid.slice(1).toLowerCase() + '</div>' +
+          '<span class="route-card-type">Swap</span>' +
+        '</div>' +
+        '<div class="route-card-status degraded">NOT YET ENABLED</div>' +
+        '<div class="route-card-details route-card-detail-extra">' +
+          row('Status', '<span class="warn">Integration in progress</span>') +
+        '</div>' +
+      '</div>';
+    }
+  }
+
+  html += '</div>';
+
+  // --- Provider changes log ---
+  if (changes.length > 0) {
+    html += '<div class="route-uptime-row" style="flex-direction:column;gap:4px">' +
+      '<span style="color:var(--text);font-weight:600;font-size:11px">Recent provider changes</span>';
+    const recent = changes.slice(-5);
+    for (const c of recent) {
+      const icon = c.change === 'added' ? '<span class="up">+</span>' : '<span class="err">\\u2212</span>';
+      const date = new Date(c.t).toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      html += '<div style="font-size:11px">' + icon + ' ' + c.provider + ' ' + c.change + ' <span style="color:var(--muted)">' + date + '</span></div>';
+    }
+    html += '</div>';
+  }
+
+  // --- Swap API uptime ---
+  const apiUptime = computeUptime('swap_api');
+  if (apiUptime !== null) {
+    html += '<div class="route-uptime-row">Swap API uptime (7d): <span>' + apiUptime + '%</span></div>';
+  }
+
+  panel.innerHTML = html;
+}
+
+function toggleRoutePairs(toggle, listId) {
+  const list = document.getElementById(listId);
+  const isOpen = list.classList.contains('open');
+  list.classList.toggle('open');
+  toggle.classList.toggle('open');
+  toggle.querySelector('.arrow').style.transform = isOpen ? '' : 'rotate(90deg)';
+  toggle.childNodes[1].textContent = isOpen ? ' Show pairs' : ' Hide pairs';
+}
+
 function setChartMode(mode) {
   chartMode = mode;
   document.querySelectorAll('#vol-chart-toggle button').forEach(b => {
@@ -2009,6 +2356,7 @@ function renderAll() {
   renderBtcLocked();
   renderWallets();
   renderHealth();
+  renderRouteHealth();
   renderLargestTx();
   renderCharts();
   tablePage = 0;
@@ -2133,6 +2481,7 @@ def main():
     lp_info = load_json("flyover_lp_info.json")
     btc_locked_stats = load_json("btc_locked_stats.json")
     web_analytics = load_json("web_analytics.json")
+    route_health = load_json("route_health.json")
 
     print(f"  Flyover peg-ins: {len(flyover_pegins)}")
     print(f"  Flyover peg-outs: {len(flyover_pegouts)}")
@@ -2154,6 +2503,7 @@ def main():
         lp_info=lp_info if isinstance(lp_info, dict) else {},
         btc_locked_stats=btc_locked_stats if isinstance(btc_locked_stats, dict) else {},
         web_analytics=web_analytics if isinstance(web_analytics, dict) else {},
+        route_health=route_health if isinstance(route_health, dict) else {},
     )
 
     print("Writing dashboard JSON...")

@@ -42,7 +42,7 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%Y-%m-%dT%H:%M:%SZ",
 )
-log = logging.getLogger("check_alerts")
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Severity levels (ordered)
@@ -94,9 +94,9 @@ def load_config():
                 cooldowns.update(cfg["cooldown_minutes"])
             if "dashboard_url" in cfg:
                 dashboard_url = cfg["dashboard_url"]
-            log.info("Loaded config from %s", CONFIG_FILE)
+            logger.info("Loaded config from %s", CONFIG_FILE)
         except (json.JSONDecodeError, KeyError) as exc:
-            log.warning("Failed to parse %s, using defaults: %s", CONFIG_FILE, exc)
+            logger.warning("Failed to parse %s, using defaults: %s", CONFIG_FILE, exc)
 
     # Environment variable overrides for cooldowns
     cooldowns["warning"] = int(os.environ.get(
@@ -118,7 +118,7 @@ def load_json(path):
         with open(path) as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError) as exc:
-        log.warning("Could not load %s: %s", path, exc)
+        logger.warning("Could not load %s: %s", path, exc)
         return None
 
 # ---------------------------------------------------------------------------
@@ -171,7 +171,7 @@ def evaluate_rules(thresholds):
                 else:
                     alerts.append({"rule": "data_staleness", "severity": HEALTHY, "message": ""})
             except (ValueError, TypeError):
-                log.warning("Could not parse fetched_at: %s", fetched_at)
+                logger.warning("Could not parse fetched_at: %s", fetched_at)
 
         # Peg-in balance — LPS API value (actual available), fallback to on-chain
         pegin = lp.get("lps_pegin_rbtc") or lp.get("pegin_rbtc")
@@ -255,14 +255,14 @@ def evaluate_rules(thresholds):
         # Operational status — peg-out (informational only — logged but not alerted)
         op_pegout = lp.get("is_operational_pegout")
         if op_pegout is not None and not op_pegout:
-            log.info("Operational info: LP is NOT operational for peg-out")
+            logger.info("Operational info: LP is NOT operational for peg-out")
 
         # Collateral below minimum (informational only — logged but not alerted)
         collateral = lp.get("pegout_collateral")
         min_collateral = lp.get("min_collateral")
         if collateral is not None and min_collateral is not None:
             if collateral < min_collateral:
-                log.info(
+                logger.info(
                     "Collateral info: peg-out collateral (%.5f RBTC) below minimum (%.5f RBTC)",
                     collateral, min_collateral,
                 )
@@ -273,6 +273,101 @@ def evaluate_rules(thresholds):
             "severity": CRITICAL,
             "message": "flyover_lp_info.json is missing or unreadable",
         })
+
+    # -- Route health rules (RSK Swap API) --
+    route_health = load_json(DATA_DIR / "route_health.json")
+    if route_health:
+        # Route health data staleness
+        rh_fetched = route_health.get("fetched_at")
+        if rh_fetched:
+            try:
+                rh_time = datetime.fromisoformat(rh_fetched.replace("Z", "+00:00"))
+                rh_age_hours = (datetime.now(timezone.utc) - rh_time).total_seconds() / 3600
+                rh_thresh = thresholds.get("route_staleness_hours", {"warning": 4, "critical": 8})
+                if rh_age_hours >= rh_thresh["critical"]:
+                    alerts.append({
+                        "rule": "route_data_staleness",
+                        "severity": CRITICAL,
+                        "message": f"Route health data is {rh_age_hours:.1f}h old (threshold: >{rh_thresh['critical']}h)",
+                    })
+                elif rh_age_hours >= rh_thresh["warning"]:
+                    alerts.append({
+                        "rule": "route_data_staleness",
+                        "severity": WARNING,
+                        "message": f"Route health data is {rh_age_hours:.1f}h old (threshold: >{rh_thresh['warning']}h)",
+                    })
+                else:
+                    alerts.append({"rule": "route_data_staleness", "severity": HEALTHY, "message": ""})
+            except (ValueError, TypeError):
+                logger.warning("Could not parse route_health fetched_at: %s", rh_fetched)
+
+        # Swap API itself
+        swap_api = route_health.get("swap_api", {})
+        api_status = swap_api.get("status", "unknown")
+        if api_status == "down":
+            alerts.append({
+                "rule": "swap_api",
+                "severity": CRITICAL,
+                "message": "RSK Swap API is DOWN — all swap routes unavailable",
+            })
+        else:
+            alerts.append({"rule": "swap_api", "severity": HEALTHY, "message": ""})
+
+        # Swap API response time
+        api_response_ms = swap_api.get("response_ms")
+        if api_response_ms is not None and api_status != "down":
+            rt_thresh = thresholds.get("route_response_time_ms", {"warning": 5000, "critical": 10000})
+            if api_response_ms >= rt_thresh["critical"]:
+                alerts.append({
+                    "rule": "swap_api_response_time",
+                    "severity": CRITICAL,
+                    "message": f"RSK Swap API response time: {api_response_ms}ms (threshold: >{rt_thresh['critical']}ms)",
+                })
+            elif api_response_ms >= rt_thresh["warning"]:
+                alerts.append({
+                    "rule": "swap_api_response_time",
+                    "severity": WARNING,
+                    "message": f"RSK Swap API response time: {api_response_ms}ms (threshold: >{rt_thresh['warning']}ms)",
+                })
+            else:
+                alerts.append({"rule": "swap_api_response_time", "severity": HEALTHY, "message": ""})
+
+        # Provider changes (only from current run, not full history)
+        for change in route_health.get("new_provider_changes", []):
+            if change.get("change") == "removed":
+                alerts.append({
+                    "rule": f"provider_{change['provider'].lower()}_removed",
+                    "severity": WARNING,
+                    "message": f"Swap provider {change['provider']} was REMOVED from the API",
+                })
+            elif change.get("change") == "added":
+                # New provider added — informational, not an alert
+                logger.info("Provider added: %s", change["provider"])
+
+        # Provider with zero mainnet pairs (enabled but effectively dead)
+        for pid, pdata in route_health.get("swap_providers", {}).items():
+            pair_count = pdata.get("pair_count", 0)
+            provider_name = pdata.get("name", pid.upper())
+            if pair_count == 0:
+                alerts.append({
+                    "rule": f"provider_{pid}_zero_pairs",
+                    "severity": WARNING,
+                    "message": f"{provider_name} is enabled but has 0 mainnet pairs",
+                })
+            else:
+                alerts.append({"rule": f"provider_{pid}_zero_pairs", "severity": HEALTHY, "message": ""})
+
+        # Flyover peg-in availability (from route health native_routes)
+        flyover_rh = route_health.get("native_routes", {}).get("flyover", {})
+        pegin_avail_rh = flyover_rh.get("pegin_available")
+        if pegin_avail_rh is not None and not pegin_avail_rh:
+            alerts.append({
+                "rule": "flyover_pegin_down",
+                "severity": CRITICAL,
+                "message": "Flyover peg-in is NOT available — LP has disabled inbound transfers",
+            })
+        elif pegin_avail_rh is not None:
+            alerts.append({"rule": "flyover_pegin_down", "severity": HEALTHY, "message": ""})
 
     return alerts
 
@@ -338,9 +433,9 @@ def send_telegram(token, chat_id, rule, severity, message, dashboard_url, is_rec
     try:
         resp = requests.post(url, json=payload, timeout=10)
         resp.raise_for_status()
-        log.info("Telegram alert sent for %s (%s)", rule, severity)
+        logger.info("Telegram alert sent for %s (%s)", rule, severity)
     except requests.RequestException as exc:
-        log.error("Telegram send failed for %s: %s", rule, exc)
+        logger.error("Telegram send failed for %s: %s", rule, exc)
 
 def send_telegram_html(token, chat_id, html):
     """Send a pre-formatted HTML message to Telegram."""
@@ -349,9 +444,9 @@ def send_telegram_html(token, chat_id, html):
     try:
         resp = requests.post(url, json=payload, timeout=10)
         resp.raise_for_status()
-        log.info("Telegram daily summary sent")
+        logger.info("Telegram daily summary sent")
     except requests.RequestException as exc:
-        log.error("Telegram daily summary send failed: %s", exc)
+        logger.error("Telegram daily summary send failed: %s", exc)
 
 
 # ---------------------------------------------------------------------------
@@ -388,7 +483,7 @@ def maybe_send_daily_summary(state, alerts, dashboard_url, tg_token, tg_chat):
     summary_state = state.get("_daily_summary", {})
     last_sent = summary_state.get("timestamp", 0)
     if now_ts - last_sent < 86400:
-        log.info("Daily summary: skipped (last sent %.1fh ago)", (now_ts - last_sent) / 3600)
+        logger.info("Daily summary: skipped (last sent %.1fh ago)", (now_ts - last_sent) / 3600)
         return False
 
     # Load transaction data
@@ -448,6 +543,32 @@ def maybe_send_daily_summary(state, alerts, dashboard_url, tg_token, tg_chat):
             lines.append(utxo_line)
         lines.append("")
 
+    # Swap route status
+    route_health = load_json(DATA_DIR / "route_health.json")
+    if route_health:
+        swap_api = route_health.get("swap_api", {})
+        providers = route_health.get("swap_providers", {})
+        native = route_health.get("native_routes", {})
+
+        route_parts = []
+        # Native routes
+        for rid, rdata in native.items():
+            name = rdata.get("name", rid)
+            enabled = rdata.get("enabled", False)
+            route_parts.append(f"{name}: {'up' if enabled else 'down'}")
+        # Swap providers
+        for pid, pdata in providers.items():
+            name = pdata.get("name", pid)
+            pairs = pdata.get("pair_count", 0)
+            route_parts.append(f"{name}: {pairs} pairs")
+
+        lines.append("Swap Routes")
+        if swap_api.get("status") == "down":
+            lines.append("Swap API: DOWN")
+        else:
+            lines.append(" \u00b7 ".join(route_parts))
+        lines.append("")
+
     if active_criticals:
         lines.append(f"\U0001f534 {len(active_criticals)} active critical{'s' if len(active_criticals) != 1 else ''}")
     if active_warnings:
@@ -458,7 +579,7 @@ def maybe_send_daily_summary(state, alerts, dashboard_url, tg_token, tg_chat):
     lines.append(f"Dashboard: {dashboard_url}")
 
     summary_text = "\n".join(lines)
-    log.info("Daily summary:\n%s", summary_text)
+    logger.info("Daily summary:\n%s", summary_text)
 
     if tg_token and tg_chat:
         html = html_lib.escape(summary_text)
@@ -481,7 +602,7 @@ def main():
     has_telegram = bool(tg_token and tg_chat)
 
     if not has_telegram:
-        log.info("No Telegram credentials configured — alerts will log to stdout only")
+        logger.info("No Telegram credentials configured — alerts will log to stdout only")
 
     alerts = evaluate_rules(thresholds)
     state = load_alert_state()
@@ -499,9 +620,9 @@ def main():
             # Log to stdout always
             emoji = SEVERITY_EMOJI[severity]
             if is_recovery:
-                log.info("%s RECOVERED: %s", emoji, rule)
+                logger.info("%s RECOVERED: %s", emoji, rule)
             else:
-                log.info("%s %s: %s — %s", emoji, severity.upper(), rule, message)
+                logger.info("%s %s: %s — %s", emoji, severity.upper(), rule, message)
 
             # Send to Telegram
             if has_telegram:
@@ -509,10 +630,12 @@ def main():
 
             notifications_sent += 1
 
-        # Update state for this rule
+        # Update state — only reset timestamp when notification is sent,
+        # so cooldown accumulates correctly for repeat alerts.
+        prev_ts = state.get(rule, {}).get("timestamp", now_ts)
         state[rule] = {
             "severity": severity,
-            "timestamp": now_ts,
+            "timestamp": now_ts if send else prev_ts,
             "message": message,
         }
 
@@ -521,7 +644,7 @@ def main():
         notifications_sent += 1
 
     save_alert_state(state)
-    log.info("Alert check complete: %d rules evaluated, %d notifications sent", len(alerts), notifications_sent)
+    logger.info("Alert check complete: %d rules evaluated, %d notifications sent", len(alerts), notifications_sent)
 
 
 if __name__ == "__main__":
