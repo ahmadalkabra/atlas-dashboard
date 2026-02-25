@@ -51,21 +51,6 @@ def build_dashboard_data(
 ) -> dict:
     """Build the full dashboard dataset for embedding in HTML."""
 
-    def extract_events(events: list[dict], value_field: str, address_field: str, event_filter: str | None = None) -> list[dict]:
-        result = []
-        for e in events:
-            if event_filter and e.get("event") != event_filter:
-                continue
-            ts = parse_timestamp(e.get("block_timestamp", ""))
-            result.append({
-                "tx_hash": e.get("tx_hash", ""),
-                "block": e.get("block_number", 0),
-                "timestamp": ts.isoformat() if ts else "",
-                "value_rbtc": float(e.get(value_field, 0)),
-                "address": e.get(address_field, ""),
-            })
-        return result
-
     # Flyover peg-ins (CallForUser only — fetcher already filters)
     fp_pegins = []
     for e in flyover_pegins:
@@ -1118,6 +1103,11 @@ def generate_html() -> str:
     <div class="op-summary" id="largest-tx-cards"></div>
   </section>
 
+  <section class="health-section" id="avg-tx-section">
+    <div class="section-title">Average Transaction Size</div>
+    <div class="op-summary" id="avg-tx-cards"></div>
+  </section>
+
   <section class="chart-section">
     <div class="chart-panel" style="margin-bottom:20px">
       <div class="chart-panel-header">
@@ -1254,13 +1244,13 @@ function periodLabel() {
 const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function fmtPeriodKey(key) {
   // "2025-04" → "Apr 2025", "2025-Q2" → "Q2 2025", "2025-W08" → "W08 2025", "2025-04-10" → "Apr 10, 2025"
-  const mMatch = key.match(/^(\d{4})-(\d{2})$/);
+  const mMatch = key.match(/^(\\d{4})-(\\d{2})$/);
   if (mMatch) return MONTH_NAMES[parseInt(mMatch[2], 10) - 1] + ' ' + mMatch[1];
-  const qMatch = key.match(/^(\d{4})-(Q\d)$/);
+  const qMatch = key.match(/^(\\d{4})-(Q\\d)$/);
   if (qMatch) return qMatch[2] + ' ' + qMatch[1];
-  const wMatch = key.match(/^(\d{4})-(W\d{2})$/);
+  const wMatch = key.match(/^(\\d{4})-(W\\d{2})$/);
   if (wMatch) return wMatch[2] + ' ' + wMatch[1];
-  const dMatch = key.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const dMatch = key.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);
   if (dMatch) return MONTH_NAMES[parseInt(dMatch[2], 10) - 1] + ' ' + parseInt(dMatch[3], 10) + ', ' + dMatch[1];
   return key;
 }
@@ -1738,24 +1728,24 @@ function renderCharts() {
   }, cfg);
 
   // --- Avg Transaction Size chart ---
-  const flyoverAvg = keys.map(k => {
-    const evts = [...(fpG[k] || []), ...(foG[k] || [])];
-    return evts.length > 0 ? sumField(evts, 'value_rbtc') / evts.length : 0;
-  });
-  const powpegAvg = keys.map(k => {
-    const evts = [...(ppG[k] || []), ...(poG[k] || [])];
-    return evts.length > 0 ? sumField(evts, 'value_rbtc') / evts.length : 0;
-  });
+  const fpAvg = keys.map(k => { const e = fpG[k] || []; return e.length > 0 ? sumField(e, 'value_rbtc') / e.length : 0; });
+  const foAvg = keys.map(k => { const e = foG[k] || []; return e.length > 0 ? sumField(e, 'value_rbtc') / e.length : 0; });
+  const ppAvg = keys.map(k => { const e = ppG[k] || []; return e.length > 0 ? sumField(e, 'value_rbtc') / e.length : 0; });
+  const poAvg = keys.map(k => { const e = poG[k] || []; return e.length > 0 ? sumField(e, 'value_rbtc') / e.length : 0; });
 
   Plotly.newPlot('chart-avg-tx', [
-    { x: keys, y: flyoverAvg, name: 'Flyover', type: 'scatter', mode: 'lines+markers',
-      line: { color: '#DEFF19', width: 2 }, marker: { size: 5, color: '#DEFF19' },
-      hovertext: flyoverAvg.map(v => 'Flyover avg: ' + fmtRBTC(v)),
-      hoverinfo: 'text' },
-    { x: keys, y: powpegAvg, name: 'PowPeg', type: 'scatter', mode: 'lines+markers',
-      line: { color: '#FF9100', width: 2 }, marker: { size: 5, color: '#FF9100' },
-      hovertext: powpegAvg.map(v => 'PowPeg avg: ' + fmtRBTC(v)),
-      hoverinfo: 'text' },
+    { x: keys, y: fpAvg, name: 'Flyover In', type: 'scatter', mode: 'lines+markers',
+      line: { color: '#DEFF19', width: 2 }, marker: { size: 4, color: '#DEFF19' },
+      hovertext: fpAvg.map(v => 'Flyover In avg: ' + fmtRBTC(v)), hoverinfo: 'text' },
+    { x: keys, y: foAvg, name: 'Flyover Out', type: 'scatter', mode: 'lines+markers',
+      line: { color: '#F0FF96', width: 2 }, marker: { size: 4, color: '#F0FF96' },
+      hovertext: foAvg.map(v => 'Flyover Out avg: ' + fmtRBTC(v)), hoverinfo: 'text' },
+    { x: keys, y: ppAvg, name: 'PowPeg In', type: 'scatter', mode: 'lines+markers',
+      line: { color: '#FF9100', width: 2 }, marker: { size: 4, color: '#FF9100' },
+      hovertext: ppAvg.map(v => 'PowPeg In avg: ' + fmtRBTC(v)), hoverinfo: 'text' },
+    { x: keys, y: poAvg, name: 'PowPeg Out', type: 'scatter', mode: 'lines+markers',
+      line: { color: '#FED8A7', width: 2 }, marker: { size: 4, color: '#FED8A7' },
+      hovertext: poAvg.map(v => 'PowPeg Out avg: ' + fmtRBTC(v)), hoverinfo: 'text' },
   ], {
     ...baseLayout,
   }, cfg);
@@ -1890,7 +1880,9 @@ function renderHealth() {
   const topLP = Object.entries(lpData).sort((a,b) => b[1].peginVol - a[1].peginVol)[0];
   const lpName = (lp && lp.lp_name) ? lp.lp_name : (topLP ? shortHash(topLP[0]) : 'Unknown');
   const peginDeliveries = topLP ? topLP[1].pegins : 0;
-  const pegoutDeliveries = DATA.flyover_pegouts.length;
+  const pegoutInitiations = DATA.flyover_pegouts.length;
+  const refundHashes = new Set(DATA.pegout_refund_hashes || []);
+  const pegoutCompleted = DATA.flyover_pegouts.filter(e => refundHashes.has(e.quote_hash)).length;
   const penaltyCount = topLP ? topLP[1].penalties : 0;
 
   // --- Balances (LPS API = actual available liquidity; on-chain = wallet only) ---
@@ -2049,8 +2041,8 @@ function renderHealth() {
     // Row 2, Col 3: Operations (Deliveries + Penalties)
     '<div class="health-indicator">' +
       '<div class="health-indicator-label">Operations</div>' +
-      '<div class="health-indicator-value">' + (peginDeliveries + pegoutDeliveries) + '</div>' +
-      '<div class="health-indicator-sub">' + peginDeliveries + ' peg-in · ' + pegoutDeliveries + ' peg-out</div>' +
+      '<div class="health-indicator-value">' + (peginDeliveries + pegoutCompleted) + '</div>' +
+      '<div class="health-indicator-sub">' + peginDeliveries + ' peg-in · ' + pegoutCompleted + '/' + pegoutInitiations + ' peg-out</div>' +
       '<div class="health-indicator-sub">' + penaltyCount + ' penalt' + (penaltyCount === 1 ? 'y' : 'ies') + '</div>' +
     '</div>' +
   '</div>';
@@ -2253,70 +2245,6 @@ function setChartMode(mode) {
   renderCharts();
 }
 
-function renderTraffic() {
-  const section = document.getElementById('traffic-section');
-  const wa = DATA.web_analytics;
-  if (!wa || !wa.sessions) {
-    section.style.display = 'none';
-    return;
-  }
-  section.style.display = '';
-
-  const funnel = wa.funnel || [];
-  const maxSessions = funnel.length > 0 ? funnel[0].sessions : 1;
-
-  let statsHtml = '<div class="traffic-stats">' +
-    '<div class="traffic-stat">' +
-      '<div class="traffic-stat-label">Sessions</div>' +
-      '<div class="traffic-stat-value">' + wa.sessions + '</div>' +
-      '<div class="traffic-stat-sub">' + (wa.date_range || '').replace('_', ' ') + '</div>' +
-    '</div>' +
-    '<div class="traffic-stat">' +
-      '<div class="traffic-stat-label">Unique Users</div>' +
-      '<div class="traffic-stat-value">' + wa.unique_users + '</div>' +
-      '<div class="traffic-stat-sub">' + wa.returning_user_pct + '% returning</div>' +
-    '</div>' +
-    '<div class="traffic-stat">' +
-      '<div class="traffic-stat-label">Pages / Session</div>' +
-      '<div class="traffic-stat-value">' + wa.pages_per_session + '</div>' +
-      '<div class="traffic-stat-sub">avg depth</div>' +
-    '</div>' +
-    '<div class="traffic-stat">' +
-      '<div class="traffic-stat-label">Active Time</div>' +
-      '<div class="traffic-stat-value">' + wa.avg_active_time_min + 'm</div>' +
-      '<div class="traffic-stat-sub">avg per session</div>' +
-    '</div>' +
-  '</div>';
-
-  let funnelHtml = '';
-  if (funnel.length > 0) {
-    funnelHtml = '<div style="margin-top:4px">';
-    for (const step of funnel) {
-      const pct = maxSessions > 0 ? (step.sessions / maxSessions * 100) : 0;
-      const pctLabel = pct === 100 ? '100%' : pct.toFixed(1) + '%';
-      const barWidth = Math.max(pct, 8);
-      funnelHtml += '<div class="funnel-step">' +
-        '<div class="funnel-step-label">' + step.step + '</div>' +
-        '<div class="funnel-step-bar-wrapper">' +
-          '<div class="funnel-step-bar">' +
-            '<div class="funnel-step-bar-fill" style="width:' + barWidth + '%">' +
-              '<span class="funnel-step-bar-text">' + step.sessions + '</span>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="funnel-step-meta">' + pctLabel + '</div>' +
-      '</div>';
-    }
-    funnelHtml += '</div>';
-  }
-
-  const sourceNote = wa.updated_at
-    ? '<div class="traffic-source">Source: Microsoft Clarity · Updated ' + wa.updated_at + '</div>'
-    : '';
-
-  document.getElementById('traffic-panel').innerHTML = statsHtml + funnelHtml + sourceNote;
-}
-
 function renderLargestTx() {
   const ops = [
     { name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc', unit: 'RBTC' },
@@ -2351,6 +2279,52 @@ function renderLargestTx() {
   document.getElementById('largest-tx-cards').innerHTML = html;
 }
 
+function renderAvgTxSize() {
+  const ops = [
+    { name: 'Flyover Peg-In', data: DATA.flyover_pegins, color: '#DEFF19', field: 'value_rbtc', fontColor: '#000' },
+    { name: 'Flyover Peg-Out', data: DATA.flyover_pegouts, color: '#F0FF96', field: 'value_rbtc', fontColor: '#000' },
+    { name: 'PowPeg Peg-In', data: DATA.powpeg_pegins, color: '#FF9100', field: 'value_rbtc', fontColor: '#fff' },
+    { name: 'PowPeg Peg-Out', data: DATA.powpeg_pegouts, color: '#FED8A7', field: 'value_rbtc', fontColor: '#000' },
+  ];
+
+  const now = Date.now();
+  const periods = [
+    { label: '7d', ms: 7 * 86400000 },
+    { label: '30d', ms: 30 * 86400000 },
+    { label: '90d', ms: 90 * 86400000 },
+  ];
+
+  let html = '';
+  for (const op of ops) {
+    let lines = '';
+    for (const period of periods) {
+      const cutoff = now - period.ms;
+      let sum = 0, count = 0;
+      for (const e of op.data) {
+        const ts = e.timestamp;
+        if (!ts) continue;
+        const t = new Date(ts).getTime();
+        if (t >= cutoff) {
+          sum += (e[op.field] || 0);
+          count++;
+        }
+      }
+      const avg = count > 0 ? (sum / count) : 0;
+      lines += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px">' +
+        '<span style="color:var(--muted);font-size:11px">' + period.label + ' (' + count + ' txs)</span>' +
+        '<span style="font-size:16px;font-weight:600">' + (count > 0 ? fmtRBTC(avg) : '—') + '</span>' +
+      '</div>';
+    }
+
+    html += '<div class="op-card" style="border-top-color:' + op.color + '">' +
+      '<div class="op-card-name" style="color:' + op.color + '">' + op.name + '</div>' +
+      '<div style="margin-top:4px">' + lines + '</div>' +
+    '</div>';
+  }
+
+  document.getElementById('avg-tx-cards').innerHTML = html;
+}
+
 function renderAll() {
   renderSummary();
   renderBtcLocked();
@@ -2358,6 +2332,7 @@ function renderAll() {
   renderHealth();
   renderRouteHealth();
   renderLargestTx();
+  renderAvgTxSize();
   renderCharts();
   tablePage = 0;
   renderTable();
