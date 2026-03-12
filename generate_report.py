@@ -1269,6 +1269,31 @@ function getLatestTwo(events, period) {
   };
 }
 
+// Compute a global reference period from all 4 datasets so all summary cards,
+// donuts, and deltas use the same time bucket (prevents mixing months when one
+// operation type has no data in the latest period).
+function getGlobalRefKeys(period) {
+  const allEvents = [
+    ...DATA.flyover_pegins, ...DATA.flyover_pegouts,
+    ...DATA.powpeg_pegins, ...DATA.powpeg_pegouts,
+  ];
+  const groups = groupBy(allEvents, period);
+  const keys = Object.keys(groups).filter(k => k !== 'unknown').sort();
+  const currentKey = keys.length > 0 ? keys[keys.length - 1] : '';
+  const prevKey = keys.length > 1 ? keys[keys.length - 2] : '';
+  return { currentKey, prevKey };
+}
+
+function getForPeriod(events, period, refCurrentKey, refPrevKey) {
+  const groups = groupBy(events, period);
+  return {
+    current: groups[refCurrentKey] || [],
+    previous: refPrevKey ? (groups[refPrevKey] || []) : [],
+    currentKey: refCurrentKey,
+    prevKey: refPrevKey,
+  };
+}
+
 // ─── BTC Locked ───
 
 function renderBtcLocked() {
@@ -1523,11 +1548,12 @@ function renderSummary() {
   ];
 
   const period = currentPeriod;
+  const ref = getGlobalRefKeys(period);
   let totalTxs = 0, totalVol = 0;
 
   let cards = '';
   for (const op of ops) {
-    const latest = getLatestTwo(op.data, period);
+    const latest = getForPeriod(op.data, period, ref.currentKey, ref.prevKey);
     const curTxs = latest.current.length;
     const prevTxs = latest.previous.length;
     const curVol = sumField(latest.current, op.field);
@@ -1630,11 +1656,12 @@ function renderCharts() {
   };
   Plotly.newPlot('chart-volume-trend', volTraces, volLayout, cfg);
 
-  // Volume donut — filtered by period
-  const latestFp = getLatestTwo(DATA.flyover_pegins, period);
-  const latestFo = getLatestTwo(DATA.flyover_pegouts, period);
-  const latestPp = getLatestTwo(DATA.powpeg_pegins, period);
-  const latestPo = getLatestTwo(DATA.powpeg_pegouts, period);
+  // Volume donut — filtered by period (uses global reference period)
+  const ref = getGlobalRefKeys(period);
+  const latestFp = getForPeriod(DATA.flyover_pegins, period, ref.currentKey, ref.prevKey);
+  const latestFo = getForPeriod(DATA.flyover_pegouts, period, ref.currentKey, ref.prevKey);
+  const latestPp = getForPeriod(DATA.powpeg_pegins, period, ref.currentKey, ref.prevKey);
+  const latestPo = getForPeriod(DATA.powpeg_pegouts, period, ref.currentKey, ref.prevKey);
 
   const fpVol = sumField(latestFp.current, 'value_rbtc');
   const foVol = sumField(latestFo.current, 'value_rbtc');

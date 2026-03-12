@@ -3596,5 +3596,292 @@
     "block_number": 8552312,
     "quote_hash": "0x1581cf6e77e1aef62a26f386837857b613a83ca6bf42402e6915a10eab00ee22",
     "block_timestamp": "2026-02-21T16:59:03.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x35cdcce3d36ac4d81a0de6499158902d0555de2029e4e538e0a35532b0042ab4",
+    "block_number": 8617576,
+    "quote_hash": "0x320f3c0058a8f841225a42bc5ec0acd36a7ac310aaa962fd83f0daf2dc154bad",
+    "block_timestamp": "2026-03-12T14:07:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xe93122b4f2958aa3b23cc6ab1995330950f2eb563a26f34116cf7347960a64e4",
+    "block_number": 8614478,
+    "quote_hash": "0x9683b667622401c6eb4743962b4204786c536b98006e16364888b22c1212fdd0",
+    "block_timestamp": "2026-03-11T16:37:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x95f717c0e57908be77bd9ab2d621a9d0c07ea84833e5548b8bae8e404c4458b8",
+    "block_number": 8612477,
+    "quote_hash": "0x717a7094e2ab1cd19f882bc64a06ff3b1ff235aa7c6b5527946566b3d1a06c55",
+    "block_timestamp": "2026-03-11T02:53:12.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x8d1bfe14ce4a51a4b938adc2ab91930693ffe5b692e64374557e3c9970ae76e7",
+    "block_number": 8610302,
+    "quote_hash": "0xc821f3d1b356db9634bd09abf82ad5fa74ca6466df3ec49a504600a431a41ff3",
+    "block_timestamp": "2026-03-10T11:37:57.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xf344043edaaba5137d6b800d8435c094cc8463b4529038f61486d679adf6c2cf",
+    "block_number": 8609922,
+    "quote_hash": "0x5b347a9c5fec8ef39f3db51881cf9849a8d27d277c097f6cce816ca3991e091c",
+    "block_timestamp": "2026-03-10T08:58:58.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xc9b91af99e6a709f0c4d999a03440d3ed7983959d29c7e16e53aa3209ed42b2a",
+    "block_number": 8609776,
+    "quote_hash": "0xf68828347341a7ea0f6423e56489875e2e7afb2eeb4d67d2fad51dde4eb51717",
+    "block_timestamp": "2026-03-10T07:59:38.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xe195632afe0c9321b0d484d3e65e228b192fad1fa8fc90753671fda327a72c75",
+    "block_number": 8607475,
+    "quote_hash": "0xa1b18f8db57900262a03797aaab0bf5a46d3e2549fbb2ae6bce5694c042f1a36",
+    "block_timestamp": "2026-03-09T16:06:05.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xf0d31cae3fa43256982651a26085f71d3f0f1972590b431c7918104d0ed4ab21",
+    "block_number": 8607473,
+    "quote_hash": "0xeda36b43e3631a79c49899cfb01b3bc81651fa205e904cc06ff3fe6c2414d82e",
+    "block_timestamp": "2026-03-09T16:05:26.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xdef870e88c03bc1bd4ab0af270c822ec3382894306c7dbfffc7e69a2008d55cd",
+    "block_number": 8606572,
+    "quote_hash": "0x8b909023345a06ef7fe547215fa2f0061f03d2b83c789b2b237b0ec2609eb11d",
+    "block_timestamp": "2026-03-09T09:47:17.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x2bc65d0952698181c01a50ec4b80029978928cd8905aeb5abcc8861d83b9f2e7",
+    "block_number": 8602600,
+    "quote_hash": "0xd5b9a047d08821f76f7e9301966f9f35cdfd8f2464bf96b38005f6046df5975c",
+    "block_timestamp": "2026-03-08T06:44:12.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x562424ac6279b8ef7294a7778cc74c432c1a6fbb520c873a907622bddb198f50",
+    "block_number": 8602571,
+    "quote_hash": "0x0a87efe7c8ed31171786c876795d9932c69272f8c1fa50eccd0d49975e1c7d82",
+    "block_timestamp": "2026-03-08T06:31:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x8a3841d1bd1500916858779db2a5ec29eecf8019eed8962e6b34613690434c68",
+    "block_number": 8602492,
+    "quote_hash": "0x7b300a013a3b15a6a2496da2a010ec6654955d9e621c3eac8935e595e4a1fd7d",
+    "block_timestamp": "2026-03-08T05:58:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x80cce0961fa7645d2ba1bf5065a105ea707df08b146daf25f3baf5dccd9eeae6",
+    "block_number": 8599558,
+    "quote_hash": "0x723f9881c8974520470c117a52bd69dba3db4cee3922c30c47f0010e928083dd",
+    "block_timestamp": "2026-03-07T09:24:32.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x073770511ab8f09621633dde1e65c8c8b57212c2e00ca30e7de76c47a0aa0d16",
+    "block_number": 8599556,
+    "quote_hash": "0x0c79b5fd65859ebb767e9c156ad69b87751c3174394ec1263c0560cdf75ed607",
+    "block_timestamp": "2026-03-07T09:23:29.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xa5fbe89025b171d081a690bfdd67bbce561bd59e300a6ce93f4d2c6925d1de6f",
+    "block_number": 8598689,
+    "quote_hash": "0x913542051b915be6dd6bd1d6364ef186dbd685c2a8ab32d46f97dc5dd8bc19c2",
+    "block_timestamp": "2026-03-07T03:25:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x9e4ead1f5c266820d443034a8bb23dd06caf5df9880ed752d03935d501264621",
+    "block_number": 8594694,
+    "quote_hash": "0xc906faed3d430baa1a2b870dba9933969b064be3bc92d6868de221a9533c3bd8",
+    "block_timestamp": "2026-03-05T23:19:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xd5bf1a2176388e0b73b050245c9d8d2fbfc898e2a5828fc8a039a110aa6aa17a",
+    "block_number": 8593137,
+    "quote_hash": "0x1510c84ca87dd215284a7f8ac192e66a65917b81871d132205811bd4bda87cfc",
+    "block_timestamp": "2026-03-05T12:44:14.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xacf5f319c11e5c7ad133402597c45546cbef6ee31beaabb7677a590d8e12ed2f",
+    "block_number": 8588999,
+    "quote_hash": "0x125456862b7fc8d9bfa74bd7489bb0531e0ce7182e0371f2fbd7b2de103389b1",
+    "block_timestamp": "2026-03-04T07:59:03.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x4325a66ad3250607c2129e7e686d2d36b2f21715260be692df77f4630ea09515",
+    "block_number": 8588562,
+    "quote_hash": "0x59c26b80bfcb7bac98f09f3f8aae461cda470ea63075e92291f8a124ab060437",
+    "block_timestamp": "2026-03-04T05:01:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x637aee4aedd5b2c178eeb21f2c6b7c9affc0242d7d56e52918a538e5d7b9cf63",
+    "block_number": 8587454,
+    "quote_hash": "0x090d7892a313ba522102b44feece81d0d4c692f735ade37f1d4e819b9d97cd3b",
+    "block_timestamp": "2026-03-03T21:11:04.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x665087628d8d50fe14ad64ac312f29e6069c6838df7de01f90eda798bcec986d",
+    "block_number": 8584941,
+    "quote_hash": "0x1e22d69eb7fe38df8f26dd1f629e173f1299319fdadf13ca83b94721864905cb",
+    "block_timestamp": "2026-03-03T03:23:01.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xae5a4422a7d217585972462b41cf4668ca6c67432d8978bebbd38d9f5fe3c61a",
+    "block_number": 8584279,
+    "quote_hash": "0x0d70c2ddd89171fcf9c1b2a8a6b672640361809eb6acf5666c7c7375dba05358",
+    "block_timestamp": "2026-03-02T22:49:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x3e132b72466b4de0ceff05fdd0f14d47d76b667ba29d195105c7fe10230d4d39",
+    "block_number": 8582111,
+    "quote_hash": "0x1cefe772128fe2d4f39bcca93524ef9d0cfe6ee43a363b017a5976507fe6b953",
+    "block_timestamp": "2026-03-02T07:55:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x1a494b04acee1e6f4680d5d090a418faf1023d88bdd59b1d08e2083eaf1909f8",
+    "block_number": 8580575,
+    "quote_hash": "0xca810d972a02bcc82935c075fa4cb611276f19396c84c3b935aba29c63ca8177",
+    "block_timestamp": "2026-03-01T21:37:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xcc05d2144663efb62694edb79006093e48c7b93746e8ff5db4e12afd28ec684d",
+    "block_number": 8580105,
+    "quote_hash": "0x5af8241daee1f59f173e97eae3be662271d909cc772c8f29b3c25bc7f5cd1b1d",
+    "block_timestamp": "2026-03-01T18:25:59.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xe8f8d06445698ca8ab5c7b5aa819859fc54654d5914a3635cd531829183428c6",
+    "block_number": 8579923,
+    "quote_hash": "0xc67902a3f73601042c516b8b596d530648f10c7efa74b271bd3de5c638c57a72",
+    "block_timestamp": "2026-03-01T17:05:07.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xac52d597dca0f5fcc529a29f7ddbd01cf88f6468ca6d992db44ba404a4d7d7e6",
+    "block_number": 8579642,
+    "quote_hash": "0xedaad90fc223cfb727f23d8465717e57c75e97af2573f712bb9444fd1bad7df7",
+    "block_timestamp": "2026-03-01T15:05:29.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xc7024e5d1f9d69f1570e408973a07a09f252a447a5d27538f182bf5db8284331",
+    "block_number": 8579361,
+    "quote_hash": "0xc5358bd205e531930bde85994b405a9a6de5f2ac184463364dd3b880c359221f",
+    "block_timestamp": "2026-03-01T13:05:23.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x06c56e72a62ffc53253ddf276220a87383bedceda0e528f3b7634c45cb9bc540",
+    "block_number": 8578178,
+    "quote_hash": "0xad7714b512d4e620d407b43469b412692d7cef70ef513c2a5b60103fc310d4f8",
+    "block_timestamp": "2026-03-01T04:55:57.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x7ff141ddf4837b0e793b895bea4c6c1ecb680fbb603631aa20861b7d9eda118c",
+    "block_number": 8573670,
+    "quote_hash": "0xa9e363f5aacb179b3bea5404a98e75b922868d526d61de20f7c513ec35a3f495",
+    "block_timestamp": "2026-02-27T21:47:12.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xd9c4c251cf902e50ad9d68950f64fa2a210b95ae76536c49481bdc6aa09a92b7",
+    "block_number": 8572737,
+    "quote_hash": "0xe290d96dd55b70fbf95f0fb874ce658d5f9286579f61216dd7936f24b4066ead",
+    "block_timestamp": "2026-02-27T15:10:58.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x672b53b4c194ac2c84e4451f87aec95c1e3e4ff283e2d84bd86c235123e337b5",
+    "block_number": 8568960,
+    "quote_hash": "0x5da2114f196b7fbb10a9b2600d303a1ee010ec35173180ca7727fdd8dba58211",
+    "block_timestamp": "2026-02-26T12:43:55.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x157bd679b982c861727164cfaed57b9bca74f17828d485f0913d27e48e1c3dc1",
+    "block_number": 8567676,
+    "quote_hash": "0x841fdeb036daa6d2a86e2aa8be04e37b23d0e6d7471fa8dfbd65ecc6ee9d391a",
+    "block_timestamp": "2026-02-26T03:33:04.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x3cd1ac446c8e33e49d74b52373ecddfc8fa1750ea776602385948ddc44022b91",
+    "block_number": 8567579,
+    "quote_hash": "0x040fb77c7aeaf7866c32081e392ab9f67319ae86521676b52717e8f9a7e1661d",
+    "block_timestamp": "2026-02-26T02:53:06.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xca720af49aaea0bc72f457f3224202b112604844a7a0500cde3a82f42780ddf8",
+    "block_number": 8567081,
+    "quote_hash": "0xbd9bc0074b21df02ecbae1d6d6987006fd68122a3759a16be6984d5aee9cb2d9",
+    "block_timestamp": "2026-02-25T23:25:53.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x3c208e2dd5d7be0bc4c87beb4462dfcc5e5bb4b94002bc2472b827f4124902ca",
+    "block_number": 8566362,
+    "quote_hash": "0xe5c7f738b69f5898fb30b411ff610658e5287b3a7a810d6d7d5c251c9243a8a0",
+    "block_timestamp": "2026-02-25T18:23:28.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xa7990021429ade0cf7675011601c331278fca7a4b01e1084e9ab1896c7b098d7",
+    "block_number": 8563384,
+    "quote_hash": "0xe271133a98479127bd38d9e33243312e4754b137ffb682ec886d3d82e387cac4",
+    "block_timestamp": "2026-02-24T21:53:26.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xb443c7b63a35ba6e844beddf9371cdeb2db2ebb04be5212f74b2bc10e67eebb3",
+    "block_number": 8558793,
+    "quote_hash": "0x6362d287e412cc41dfad4bcad341c1c1d7dbd555faa899507ddfed288b020e3e",
+    "block_timestamp": "2026-02-23T13:32:28.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0x48da1f7d93c792f724a2b15d425afe636bac84994aaada9889f4f095326bc25e",
+    "block_number": 8558582,
+    "quote_hash": "0x9ce96f6bcf253ded494d04d8ac5fbedbef0aef0b4363dbd88d6a330f97c883de",
+    "block_timestamp": "2026-02-23T11:58:57.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xc68a6cbcfb1b250e46e977f0ca4873ab206a9b071655817c9e60c4d935b160a7",
+    "block_number": 8556860,
+    "quote_hash": "0x2a5546b3316ef04741e2e161f903992e4e3d3c07a5d5c45a2a0a03cd7c04b3d7",
+    "block_timestamp": "2026-02-23T00:11:09.000000Z"
+  },
+  {
+    "event": "PegOutRefunded",
+    "tx_hash": "0xdfa2aa8f75dc1b2e6fad894caaa19e010b1e77052a77e97e56d2b655d663df0a",
+    "block_number": 8556593,
+    "quote_hash": "0xf250ce4fcdb51f38aa9e4a598cfb5d0704431e7912fe4d7ad21610a6b6fedb34",
+    "block_timestamp": "2026-02-22T22:17:28.000000Z"
   }
 ]
