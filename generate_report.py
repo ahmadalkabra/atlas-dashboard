@@ -19,7 +19,7 @@ def load_json(filename: str) -> list | dict:
     path = os.path.join(DATA_DIR, filename)
     if not os.path.exists(path):
         print(f"  Warning: {path} not found, returning empty")
-        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json", "web_analytics.json", "route_health.json")
+        dict_files = ("flyover_lp_info.json", "btc_locked_stats.json", "route_health.json")
         return {} if filename in dict_files else []
     with open(path) as f:
         return json.load(f)
@@ -46,7 +46,6 @@ def build_dashboard_data(
     powpeg_pegouts: list[dict],
     lp_info: dict | None = None,
     btc_locked_stats: dict | None = None,
-    web_analytics: dict | None = None,
     route_health: dict | None = None,
 ) -> dict:
     """Build the full dashboard dataset for embedding in HTML."""
@@ -141,7 +140,6 @@ def build_dashboard_data(
         "refunds": refunds,
         "lp_info": lp_info or {},
         "btc_locked": btc_locked_stats or {},
-        "web_analytics": web_analytics or {},
         "route_health": route_health or {},
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -2482,7 +2480,6 @@ def main():
     powpeg_pegouts = load_json("powpeg_pegouts.json")
     lp_info = load_json("flyover_lp_info.json")
     btc_locked_stats = load_json("btc_locked_stats.json")
-    web_analytics = load_json("web_analytics.json")
     route_health = load_json("route_health.json")
 
     print(f"  Flyover peg-ins: {len(flyover_pegins)}")
@@ -2504,7 +2501,6 @@ def main():
         powpeg_pegins, powpeg_pegouts,
         lp_info=lp_info if isinstance(lp_info, dict) else {},
         btc_locked_stats=btc_locked_stats if isinstance(btc_locked_stats, dict) else {},
-        web_analytics=web_analytics if isinstance(web_analytics, dict) else {},
         route_health=route_health if isinstance(route_health, dict) else {},
     )
 
